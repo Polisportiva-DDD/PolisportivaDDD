@@ -9,6 +9,8 @@ include  "Recensione.php";
 	private  DateTime $data;
 	private float $mediaRecensioni;
 	private array  $recensioni=array() ;
+	private CartadiCredito $carta;
+	private array $cartedicredito;
 
 
 	  public function __construct(String $u,String $n,String $c,String $e,String $p,DateTime $d,array $arr){
@@ -170,9 +172,36 @@ include  "Recensione.php";
 		}
 	}
 
+	public function aggiungiCarta(CartadiCredito $carta):bool{
+        if($carta!=null){
+        	$numerocarta = $this -> carta -> getNumero();
+        	foreach ($this->cartedicredito as $valore){
+        		if(is_a($valore, CartadiCredito::class)){
+					if($numerocarta!=($valore->getNumero())){
+						array_push($this->cartedicredito,$carta);
+						return true;
+					}
+					else{
+						return false;
+					}
+				}
+        		else{
+        			return false;
+				}
+			}
+		}
+        else{
+        	return false;
+		}
+    }
 
+	public function rimuoviCarta(CartadiCredito $carta)
+	{
+		//da completare
+	}
 
 }
+
 $r1=new Recensione(1,2.4,"Natale","ciao",new DateTime("2011-01-01T15:03:01.012345Z"));
 $r2=new Recensione(1,4.4,"Natale","ciao",new DateTime("2011-01-01T15:03:01.012345Z"));
 $r3=4;
@@ -180,4 +209,6 @@ $arr=array($r1,$r2,$r3);
 
 $u=new Utente("lor","lorenzo","Diella","ccc","pass",new DateTime("2012-01-01T15:03:01.012345Z"),$arr);
 print $u->calcolaMediaRecensioni();
+
+
 ?>
