@@ -11,6 +11,17 @@ class CartadiCredito
     private string $CVC;
     private DateTime $scadenza;
 
+    //constructors
+
+    public function __construct(string $numero,string $nome_titolare,string $cognome_titolare,string $CVC,DateTime $scadenza)
+    {
+        $this -> numero = $numero;
+        $this -> nome_titolare = $nome_titolare;
+        $this -> cognome_titolare = $cognome_titolare;
+        $this -> CVC = $CVC;
+        $this -> scadenza = $scadenza;
+    }
+
     //methods
 
     /**
