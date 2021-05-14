@@ -4,7 +4,7 @@
 	private int $numeroMinimo;
 	private int $numeroMassimo;
 	private string $descrizione;
-	private Double $prezzo;
+	private float $prezzo;
 	
 	public function __construct($n,$nMin,$nMax,$d,$p){
         $this->nome=$n;
@@ -13,46 +13,86 @@
         $this->descrizione=$d;
 		$this->prezzo=$p;
     }
-	
-	public function getNome():String{
+
+     /**
+      * Restituisce il nome del campo
+      * @return String
+      */
+     public function getNome():String{
 		return $this->nome;
 	}
-	
-	public function getNumeroMinimo():int{
+
+     /**
+      * Restituisce il numero minimo di giocatori del campo
+      * @return int
+      */
+     public function getNumeroMinimo():int{
 		return $this->numeroMinimo;
 	}
-	
-	public function getNumeroMassimo():int{
+
+     /**
+      * Restituisce il numero massimo di giocatori del campo
+      * @return int
+      */
+     public function getNumeroMassimo():int{
 		return $this->numeroMassimo;
 	}
-	
-	public function getDescrizione():String{
+
+     /**
+      * Restituisce la descrizione del campo
+      * @return String
+      */
+     public function getDescrizione():String{
 		return $this->descrizione;
 	}
-	
-	public function getPrezzo(Double $p):Double{
+
+     /**
+      * Restituisce il prezzo del campo
+      * @param float $p
+      * @return float
+      */
+     public function getPrezzo(float $p):float{
 		 return $this->prezzo;
 	}
-	
-	
-	
-	
-	public function setNome(string $n):void{
+
+
+     /**
+      * Imposta il nome del campo
+      * @param string $n
+      */
+     public function setNome(string $n):void{
 		 $this->nome=$n;
 	}
-	
-	public function setNumeroMinimo(int $nMin):void{
-		this->numeroMinimo=$nMin;
+
+     /**
+      * Imposta il numero minimo di giocatori del campo
+      * @param int $nMin
+      */
+     public function setNumeroMinimo(int $nMin):void{
+		$this->numeroMinimo=$nMin;
 	}
-	public function setNumeroMassimo(int $nMax):void{
-		this->numeroMassimo=$nMax;
+
+     /**
+      * Imposta il numero massimo di giocatori del campo
+      * @param int $nMax
+      */
+     public function setNumeroMassimo(int $nMax):void{
+		$this->numeroMassimo=$nMax;
 	}
-	
-	public function setDescrizione(string $d):void{
+
+     /**
+      * Imposta la descrizione del campo
+      * @param string $d
+      */
+     public function setDescrizione(string $d):void{
 		 $this->descrizione=$d;
 	}
-	
-	public function setPrezzo(Double $p):void{
+
+     /**
+      * Imposta il prezzo del campo
+      * @param float $p
+      */
+     public function setPrezzo(float $p):void{
 		 $this->prezzo=$p;
 	}
 	
