@@ -1,4 +1,5 @@
 <?php
+include  "Recensione.php";
  class Utente{
 	private string $username;
 	private string $nome;
@@ -7,18 +8,27 @@
 	private string $password;
 	private  DateTime $data;
 	private float $mediaRecensioni;
+	private array  $recensioni=array() ;
 
-	
-	  public function __construct($u,$n,$c,$e,$p,$d,$m){
+
+	  public function __construct(String $u,String $n,String $c,String $e,String $p,DateTime $d,array $arr){
 		$this->username=$u;
         $this->nome=$n;
         $this->cognome=$c;
         $this->email=$e;
 		$this->password=$p;
         $this->data=$d;
-        $this->mediaRecensioni=$m;
+        $this->recensioni=$arr;
     }
 
+	 /**
+      * Restituisce l'array delle recensioni
+      * @return array
+      */
+     public function getRecensioni():array{
+		return $this->recensioni;
+	}
+	
      /**
       * Restituisce l'username dell'utente
       * @return String
@@ -26,6 +36,7 @@
      public function getUsername():String{
 		return $this->username;
 	}
+	
 
      /**
       * Restituisce il nome dell'utente
@@ -83,6 +94,14 @@
      public function setUsername(String $u):void{
 		 $this->username=$u;
 	}
+	
+	/**
+      * Imposta l'array delle recensioni
+      * @param array arr
+      */
+	 public function setRecensioni(array $arr):void{
+		 $this->recensioni=$arr;
+	}
 
      /**
       * Imposta il nome dell'utente
@@ -131,6 +150,34 @@
      public function setMediaRecensioni(float $m):void{
 		 $this->mediaRecensioni=$m;
 	}
-	
+
+     public function calcolaMediaRecensioni():float{
+		 $totale=0;
+		 $c=0;
+         if($this->recensioni!=null) {
+             foreach ($this->recensioni as $valore) {
+                 if(is_a($valore,Recensione::class)){//solo se è un' oggetto recensione vado a prendere il voto
+                 $totale = $totale + $valore->getVoto();
+                 $c++;
+             }
+             }
+         }
+		if($c>0){
+			return $totale/$c;
+		}
+		else{
+			return 0;
+		}
+	}
+
+
+
 }
+$r1=new Recensione(1,2.4,"Natale","ciao",new DateTime("2011-01-01T15:03:01.012345Z"));
+$r2=new Recensione(1,4.4,"Natale","ciao",new DateTime("2011-01-01T15:03:01.012345Z"));
+$r3=4;
+$arr=array($r1,$r2,$r3);
+
+$u=new Utente("lor","lorenzo","Diella","ccc","pass",new DateTime("2012-01-01T15:03:01.012345Z"),$arr);
+print $u->calcolaMediaRecensioni();
 ?>
