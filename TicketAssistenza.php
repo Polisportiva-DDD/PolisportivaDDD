@@ -7,7 +7,6 @@ class TicketAssistenza
     private String $oggetto;
     private String $messaggio;
     private DateTime $data;
-    private Utente $autore;
 
     /**
      * TicketAssistenza constructor.
@@ -16,12 +15,12 @@ class TicketAssistenza
      * @param String $messaggio
      * @param DateTime $data
      */
-    public function __construct(string $oggetto, string $messaggio, Utente $autore)
+    public function __construct(int $id, string $oggetto, string $messaggio)
     {
+        $this->id = $id;
         $this->oggetto = $oggetto;
         $this->messaggio = $messaggio;
         $this->data = new DateTime("now");
-        $this->autore = $autore;
     }
 
     /**
