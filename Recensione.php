@@ -11,6 +11,17 @@ class Recensione
     private string $testo;
     private DateTime $data;
 
+    //constructors
+
+    public function __construct(int $id,float $voto,string $titolo,string $testo,DateTime $data)
+    {
+        $this -> id = $id;
+        $this -> voto = $voto;
+        $this -> titolo = $titolo;
+        $this -> testo = $testo;
+        $this -> data = $data;
+    }
+
     //methods
 
     /**
