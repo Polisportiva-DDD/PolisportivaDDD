@@ -6,73 +6,129 @@
 	private string $email;
 	private string $password;
 	private  DateTime $data;
-	private double $mediaRecensioni;
+	private float $mediaRecensioni;
 
 	
 	  public function __construct($u,$n,$c,$e,$p,$d,$m){
-		$this->username=$n;
+		$this->username=$u;
         $this->nome=$n;
         $this->cognome=$c;
         $this->email=$e;
 		$this->password=$p;
         $this->data=$d;
-        $this->mediaRecensioni=$d;
+        $this->mediaRecensioni=$m;
     }
-	
-	public function getUsername():String{
+
+     /**
+      * Restituisce l'username dell'utente
+      * @return String
+      */
+     public function getUsername():String{
 		return $this->username;
 	}
-	
-	public function getNome():String{
+
+     /**
+      * Restituisce il nome dell'utente
+      * @return String
+      */
+     public function getNome():String{
 		return $this->nome;
 	}
-	
-	public function getCognome():String{
+
+     /**
+      * Restituisce il cognome dell'utente
+      * @return String
+      */
+     public function getCognome():String{
 		return $this->cognome;
 	}
-	
-	public function getEmail():String{
+
+     /**
+      * Restituisce l'email dell'utente
+      * @return String
+      */
+     public function getEmail():String{
 		return $this->email;
 	}
-	
-	public function getPassword():String{
+
+     /**
+      * Restituisce la password dell'utente
+      * @return String
+      */
+     public function getPassword():String{
 		return $this->password;
 	}
-	
-	public function getData():DateTime{
+
+     /**
+      * Restituisce la data dell'utente
+      * @return DateTime
+      */
+     public function getData():DateTime{
 		return $this->data;
 	}
-	
-	public function getMediaRecensioni():Double{
+
+     /**
+      * Restituisce la media delle recensioni dell'utente
+      * @return float
+      */
+     public function getMediaRecensioni():float{
 		return $this->mediaRecensioni;
 	}
-	
-	
-	public function setUsername(String $u):void{
+
+
+     /**
+      * Imposta l'username dell'utente
+      * @param String $u
+      */
+     public function setUsername(String $u):void{
 		 $this->username=$u;
 	}
-	
-	public function setNome(String $n):void{
+
+     /**
+      * Imposta il nome dell'utente
+      * @param String $n
+      */
+     public function setNome(String $n):void{
 		 $this->nome=$n;
 	}
-	
-	public function setCognome(String $c):void{
+
+     /**
+      * Imposta il cognome dell'utente
+      * @param String $c
+      */
+     public function setCognome(String $c):void{
 		 $this->cognome=$c;
 	}
-	
-	public function setEmail(String $e):void{
+
+     /**
+      * Imposta l'email dell'utente
+      * @param String $e
+      */
+     public function setEmail(String $e):void{
 		 $this->email=$e;
 	}
-	
-	public function setPassword(String $p):void{
+
+     /**
+      * Imposta la password dell'utente
+      * @param String $p
+      */
+     public function setPassword(String $p):void{
 		 $this->password=$p;
 	}
-	
-	public function setData(DateTime $d):void{
+
+     /**
+      * Imposta la data dell'utente
+      * @param DateTime $d
+      */
+     public function setData(DateTime $d):void{
 		 $this->data=$d;
 	}
-	
-	public function setMediaRecensioni(Double $m):void{
+
+     /**
+      * Imposta la media delle recensioni dell'utente
+      * @param float $m
+      */
+     public function setMediaRecensioni(float $m):void{
 		 $this->mediaRecensioni=$m;
 	}
 	
