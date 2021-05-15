@@ -1,8 +1,8 @@
 <?php
 include "Campo.php";
-include  "Gruppo.php";
-include  "CartadiCredito.php";
-include  "Recensione.php";
+include "Gruppo.php";
+include "CartadiCredito.php";
+include "Recensione.php";
  class Utente{
 	private string $username;
 	private string $nome;
@@ -224,26 +224,106 @@ include  "Recensione.php";
      	return true;
 	}
 
+	 /**
+	  * Aggiunge la carta di credito passata come parametro alla lista delle carte di credito dell'utente.
+	  * Restituisce true se l'operazione è andata a buon fine, false altrimenti.
+	  * @param CartadiCredito $carta
+	  * @return bool
+	  */
 	public function aggiungiCarta(CartadiCredito $carta):bool
 	{
-        array_push($this->cartedicredito,$carta);
-        return true;
-    }
-
-
-	public function rimuoviCarta(CartadiCredito $carta):bool
-	{
-		$numero = $carta ->getNumero();
-		foreach($this->cartedicredito as $chiave => $valore)
+		try
 		{
-			if($numero==$valore->getNumero())
+			if($carta != null)
 			{
-				unset($this->cartedicredito[$chiave]);
+				array_push($this->cartedicredito,$carta);
 				return true;
 			}
+			else {
+				return false;
+			}
 		}
-		return false;
+		catch (Exception $exception){
+			//Gestione dell'eccezione
+			return false;
+		}
+
+    }
+
+	 /**
+	  * Rimuove la carta di credito passata come parametro alla lista delle carte di credito dell'utente.
+	  * Restituisce true se l'operazione è andata a buon fine, false altrimenti.
+	  * @param CartadiCredito $carta
+	  * @return bool
+	  */
+	public function rimuoviCarta(CartadiCredito $carta):bool
+	{
+		try
+		{
+			$numero = $carta ->getNumero();
+			foreach($this->cartedicredito as $chiave => $valore)
+			{
+				if($numero==$valore->getNumero())
+				{
+					unset($this->cartedicredito[$chiave]);
+					return true;
+				}
+			}
+			return false;
+		}
+		catch(Exception $exception){
+			//Errore
+			return false;
+		}
+
 	}
+
+	 /**
+	  * Aggiunge la recensione passata come parametro alla lista delle recensioni dell'utente. Restituisce true se
+	  * l'operazione è andata a buon fine, false altrimenti.
+	  * @return bool
+	  */
+	 public function aggiungiRecensione(Recensione $recensione): bool{
+
+		 try{
+			 if ($recensione != null){
+				 array_push($this->recensioni, $recensione);
+				 return true;
+			 }
+			 else{
+				 return false;
+			 }
+		 }
+		 catch (Exception $exception){
+			 //Gestione dell'eccezione
+			 return false;
+		 }
+	 }
+
+	 /**
+	  * Rimuove la recensione passata come parametro alla lista delle recensioni dell'utente. Restituisce true se
+	  * l'operazione è andata a buon fine, false altrimenti.
+	  * @return bool
+	  */
+	 public function rimuoviRecensione(int $idRecensione): bool{
+		 $offset = 0;
+		 $found = false;
+		 try{
+			 foreach($this->recensioni as $recensione)
+			 {
+				 if($recensione->getId == $idRecensione) {
+					 //rimuovi la recensione trovata
+					 array_splice($this->recensioni, $offset, 1);
+				 }
+				 $offset++;
+			 }
+			 return $found;
+		 }
+		 catch(Exception $exception){
+			 //Errore
+			 return false;
+		 }
+	 }
 
 }
 
