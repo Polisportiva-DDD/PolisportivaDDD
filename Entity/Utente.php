@@ -1,5 +1,5 @@
 <?php
-include "Recensione.php";
+include  "Recensione.php";
  class Utente{
 	private string $username;
 	private string $nome;
@@ -9,6 +9,8 @@ include "Recensione.php";
 	private  DateTime $data;
 	private float $mediaRecensioni;
 	private array  $recensioni=array() ;
+	private CartadiCredito $carta;
+	private array $cartedicredito;
 
 
 	  public function __construct(String $u,String $n,String $c,String $e,String $p,DateTime $d,array $arr){
@@ -151,10 +153,6 @@ include "Recensione.php";
 		 $this->mediaRecensioni=$m;
 	}
 
-     /**
-      * Restituisce la media delle recensioni dell'utente.
-      * @return float
-      */
      public function calcolaMediaRecensioni():float{
 		 $totale=0;
 		 $c=0;
@@ -174,56 +172,36 @@ include "Recensione.php";
 		}
 	}
 
-     /**
-      * Aggiunge la recensione passata come parametro alla lista delle recensioni dell'utente. Restituisce true se
-      * l'operazione è andata a buon fine, false altrimenti.
-      * @return bool
-      */
-	public function aggiungiRecensione(Recensione $recensione): bool{
-
-         try{
-             if ($recensione != null){
-                 array_push($this->recensioni, $recensione);
-                 return true;
-             }
-             else{
-                 return false;
-             }
-         }
-         catch (Exception $exception){
-             //Gestione dell'eccezione
-             return false;
-        }
+	public function aggiungiCarta(CartadiCredito $carta):bool{
+        if($carta!=null){
+        	$numerocarta = $this -> carta -> getNumero();
+        	foreach ($this->cartedicredito as $valore){
+        		if(is_a($valore, CartadiCredito::class)){
+					if($numerocarta!=($valore->getNumero())){
+						array_push($this->cartedicredito,$carta);
+						return true;
+					}
+					else{
+						return false;
+					}
+				}
+        		else{
+        			return false;
+				}
+			}
+		}
+        else{
+        	return false;
+		}
     }
 
-     /**
-      * Rimuove la recensione passata come parametro alla lista delle recensioni dell'utente. Restituisce true se
-      * l'operazione è andata a buon fine, false altrimenti.
-      * @return bool
-      */
-    public function rimuoviRecensione(int $idRecensione): bool{
-         $offset = 0;
-         $found = false;
-         try{
-             foreach($this->recensioni as $recensione)
-             {
-                 if($recensione->getId == $idRecensione) {
-                     //rimuovi la recensione trovata
-                     array_splice($this->recensioni, $offset, 1);
-                 }
-                 $offset++;
-             }
-             return $found;
-         }
-         catch(Exception $exception){
-             //Errore
-             return false;
-         }
-    }
-
-
+	public function rimuoviCarta(CartadiCredito $carta)
+	{
+		//da completare
+	}
 
 }
+
 $r1=new Recensione(1,2.4,"Natale","ciao",new DateTime("2011-01-01T15:03:01.012345Z"));
 $r2=new Recensione(1,4.4,"Natale","ciao",new DateTime("2011-01-01T15:03:01.012345Z"));
 $r3=4;
@@ -231,4 +209,6 @@ $arr=array($r1,$r2,$r3);
 
 $u=new Utente("lor","lorenzo","Diella","ccc","pass",new DateTime("2012-01-01T15:03:01.012345Z"),$arr);
 print $u->calcolaMediaRecensioni();
+
+
 ?>
