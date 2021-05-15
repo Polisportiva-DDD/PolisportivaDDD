@@ -195,82 +195,10 @@ include  "Recensione.php";
 		}
     }
 
-	public function rimuoviCarta(CartadiCredito $carta):bool
+	public function rimuoviCarta(CartadiCredito $carta)
 	{
-		$numero = $carta ->getNumero();
-		foreach($this->cartedicredito as $chiave => $valore)
-		try
-		{
-			if($numero==$valore->getNumero())
-			$numero = $carta ->getNumero();
-			foreach($this->cartedicredito as $chiave => $valore)
-			{
-				unset($this->cartedicredito[$chiave]);
-				return true;
-				if($numero==$valore->getNumero())
-				{
-					unset($this->cartedicredito[$chiave]);
-					return true;
-				}
-			}
-			return false;
-		}
-		catch(Exception $exception){
-			//Errore
-			return false;
-		}
-		return false;
-
+		//da completare
 	}
-
-	 /**
-	  * Aggiunge la recensione passata come parametro alla lista delle recensioni dell'utente. Restituisce true se
-	  * l'operazione è andata a buon fine, false altrimenti.
-	  * @return bool
-	  */
-	 public function aggiungiRecensione(Recensione $recensione): bool{
-
-		 try{
-			 if ($recensione != null){
-				 array_push($this->recensioni, $recensione);
-				 return true;
-			 }
-			 else{
-				 return false;
-			 }
-		 }
-		 catch (Exception $exception){
-			 //Gestione dell'eccezione
-			 return false;
-		 }
-	 }
-
-	 /**
-	  * Rimuove la recensione passata come parametro alla lista delle recensioni dell'utente. Restituisce true se
-	  * l'operazione è andata a buon fine, false altrimenti.
-	  * @return bool
-	  */
-	 public function rimuoviRecensione(int $idRecensione): bool{
-		 $offset = 0;
-		 $found = false;
-		 try{
-			 foreach($this->recensioni as $recensione)
-			 {
-				 if($recensione->getId == $idRecensione) {
-					 //rimuovi la recensione trovata
-					 array_splice($this->recensioni, $offset, 1);
-				 }
-				 $offset++;
-			 }
-			 return $found;
-		 }
-		 catch(Exception $exception){
-			 //Errore
-			 return false;
-		 }
-	 }
-
-}
 
 }
 
