@@ -361,5 +361,5 @@ $u->rimuoviCarta($carta2);
 
 //$u->setCartedicredito($carta);
 print(count($u->getCartedicredito()));
-//ciao
+
 ?>
