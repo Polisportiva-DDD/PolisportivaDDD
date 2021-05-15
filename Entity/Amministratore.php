@@ -16,7 +16,7 @@ class Amministratore extends Utente
         //Da implementare
     }
 
-    public function aggiungiGettoni(array $quantita): bool {
+    public function aggiungiGettoni(array $quantita, Wallet $wallet): bool {
         //Da implementare
     }
 
