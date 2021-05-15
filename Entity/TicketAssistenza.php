@@ -15,9 +15,8 @@ class TicketAssistenza
      * @param String $messaggio
      * @param DateTime $data
      */
-    public function __construct(int $id, string $oggetto, string $messaggio)
+    public function __construct(string $oggetto, string $messaggio)
     {
-        $this->id = $id;
         $this->oggetto = $oggetto;
         $this->messaggio = $messaggio;
         $this->data = new DateTime("now");
