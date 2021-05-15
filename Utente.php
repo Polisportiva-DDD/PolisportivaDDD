@@ -1,4 +1,7 @@
 <?php
+include "Campo.php";
+include  "Gruppo.php";
+include  "CartadiCredito.php";
 include  "Recensione.php";
  class Utente{
 	private string $username;
@@ -6,21 +9,41 @@ include  "Recensione.php";
 	private string $cognome;
 	private string $email;
 	private string $password;
-	private  DateTime $data;
+	private DateTime $data;
 	private float $mediaRecensioni;
 	private array  $recensioni=array() ;
 	private CartadiCredito $carta;
 	private array $cartedicredito;
+	private array $gruppo=array();
+
+	 /**
+	  * @return array
+	  */
+	 public function getGruppo(): array
+	 {
+		 return $this->gruppo;
+	 }
+
+	 /**
+	  * @param array $gruppo
+	  */
+	 public function setGruppo(array $gruppo): void
+	 {
+		 $this->gruppo = $gruppo;
+	 }
 
 
-	  public function __construct(String $u,String $n,String $c,String $e,String $p,DateTime $d,array $arr){
-		$this->username=$u;
-        $this->nome=$n;
-        $this->cognome=$c;
-        $this->email=$e;
-		$this->password=$p;
-        $this->data=$d;
-        $this->recensioni=$arr;
+	  public function __construct(String $username,String $nome,
+								  String $cognome,String $email,
+								  String $password,DateTime $dataDiNascita,
+								  array $recensioni){
+		$this->username=$username;
+        $this->nome=$nome;
+        $this->cognome=$cognome;
+        $this->email=$email;
+		$this->password=$password;
+        $this->data=$dataDiNascita;
+        $this->recensioni=$recensioni;
     }
 
 	 /**
@@ -172,6 +195,21 @@ include  "Recensione.php";
 		}
 	}
 
+	public function rimuoviGruppo(int $id):bool{
+     	foreach($this->gruppo as $chiave => $valore){
+     		if($id==$valore->getId()){
+				unset($this->gruppo[$chiave]);
+     			return true;
+			}
+		}
+     	return false;
+	}
+
+	public function aggiungiGruppo(Gruppo $gruppo):bool{
+			array_push($this->gruppo, $gruppo);
+     	return true;
+	}
+
 	public function aggiungiCarta(CartadiCredito $carta):bool{
         if($carta!=null){
         	$numerocarta = $this -> carta -> getNumero();
@@ -208,7 +246,18 @@ $r3=4;
 $arr=array($r1,$r2,$r3);
 
 $u=new Utente("lor","lorenzo","Diella","ccc","pass",new DateTime("2012-01-01T15:03:01.012345Z"),$arr);
-print $u->calcolaMediaRecensioni();
+$arr=array($u);
+$c=new Campo("c5", 5,6,"Ciao",1.5);
+$g1=new Gruppo(1,"g",10,11,4,"ciao",new DateTime("2011-01-01T15:03:01.012345Z"),$arr,$u,$c);
+$g2=new Gruppo(2,"g",10,11,4,"ciao",new DateTime("2011-01-01T15:03:01.012345Z"),$arr,$u,$c);
+$g3=new Gruppo(3,"g",10,11,4,"ciao",new DateTime("2011-01-01T15:03:01.012345Z"),$arr,$u,$c);
+$g4=new Gruppo(4,"g",10,11,4,"ciao",new DateTime("2011-01-01T15:03:01.012345Z"),$arr,$u,$c);
 
+$u->aggiungiGruppo($g4);
+//print(count($u->getGruppo()));
+$g=array($g1,$g4,$g3);
+$u->setGruppo($g);
+
+print(count($u->getGruppo()));
 
 ?>

@@ -6,12 +6,12 @@
 	private string $descrizione;
 	private float $prezzo;
 	
-	public function __construct($n,$nMin,$nMax,$d,$p){
-        $this->nome=$n;
-        $this->numeroMinimo=$nMin;
-		$this->numeroMassimo=$nMax;
-        $this->descrizione=$d;
-		$this->prezzo=$p;
+	public function __construct(String $nome,int $numeroMinimo,int $numeroMassimo,String $descrizione,float $prezzo){
+        $this->nome=$nome;
+        $this->numeroMinimo=$numeroMinimo;
+		$this->numeroMassimo=$numeroMassimo;
+        $this->descrizione=$descrizione;
+		$this->prezzo=$prezzo;
     }
 
      /**
