@@ -11,9 +11,8 @@ include  "Recensione.php";
 	private string $password;
 	private DateTime $data;
 	private float $mediaRecensioni;
-	private array  $recensioni=array() ;
-	private CartadiCredito $carta;
-	private array $cartedicredito;
+	private array  $recensioni=array();
+	private array $cartedicredito=array();
 	private array $gruppo=array();
 
 	 /**
@@ -32,6 +31,21 @@ include  "Recensione.php";
 		 $this->gruppo = $gruppo;
 	 }
 
+	 /**
+	  * @return array
+	  */
+	 public function getCartedicredito(): array
+	 {
+		 return $this->cartedicredito;
+	 }
+
+	 /**
+	  * @param array $cartedicredito
+	  */
+	 public function setCartedicredito(array $cartedicredito): void
+	 {
+		 $this->cartedicredito = $cartedicredito;
+	 }
 
 	  public function __construct(String $username,String $nome,
 								  String $cognome,String $email,
@@ -53,7 +67,7 @@ include  "Recensione.php";
      public function getRecensioni():array{
 		return $this->recensioni;
 	}
-	
+
      /**
       * Restituisce l'username dell'utente
       * @return String
@@ -61,7 +75,7 @@ include  "Recensione.php";
      public function getUsername():String{
 		return $this->username;
 	}
-	
+
 
      /**
       * Restituisce il nome dell'utente
@@ -119,7 +133,7 @@ include  "Recensione.php";
      public function setUsername(String $u):void{
 		 $this->username=$u;
 	}
-	
+
 	/**
       * Imposta l'array delle recensioni
       * @param array arr
@@ -210,32 +224,25 @@ include  "Recensione.php";
      	return true;
 	}
 
-	public function aggiungiCarta(CartadiCredito $carta):bool{
-        if($carta!=null){
-        	$numerocarta = $this -> carta -> getNumero();
-        	foreach ($this->cartedicredito as $valore){
-        		if(is_a($valore, CartadiCredito::class)){
-					if($numerocarta!=($valore->getNumero())){
-						array_push($this->cartedicredito,$carta);
-						return true;
-					}
-					else{
-						return false;
-					}
-				}
-        		else{
-        			return false;
-				}
-			}
-		}
-        else{
-        	return false;
-		}
+	public function aggiungiCarta(CartadiCredito $carta):bool
+	{
+        array_push($this->cartedicredito,$carta);
+        return true;
     }
 
-	public function rimuoviCarta(CartadiCredito $carta)
+
+	public function rimuoviCarta(CartadiCredito $carta):bool
 	{
-		//da completare
+		$numero = $carta ->getNumero();
+		foreach($this->cartedicredito as $chiave => $valore)
+		{
+			if($numero==$valore->getNumero())
+			{
+				unset($this->cartedicredito[$chiave]);
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
@@ -245,19 +252,34 @@ $r2=new Recensione(1,4.4,"Natale","ciao",new DateTime("2011-01-01T15:03:01.01234
 $r3=4;
 $arr=array($r1,$r2,$r3);
 
+$carta1 = new CartadiCredito("0000111122223333","Giorgio","Di Nunzio","222",new DateTime('now'));
+$carta2 = new CartadiCredito("0000111122224444","luca","bo","333",new DateTime('now'));
+$carta3 = new CartadiCredito("0000111122225555","lorenzo","forse","444",new DateTime('now'));
+$carta4 = new CartadiCredito("0000111122226666","franco","ma si","555",new DateTime('now'));
+
 $u=new Utente("lor","lorenzo","Diella","ccc","pass",new DateTime("2012-01-01T15:03:01.012345Z"),$arr);
 $arr=array($u);
 $c=new Campo("c5", 5,6,"Ciao",1.5);
-$g1=new Gruppo(1,"g",10,11,4,"ciao",new DateTime("2011-01-01T15:03:01.012345Z"),$arr,$u,$c);
-$g2=new Gruppo(2,"g",10,11,4,"ciao",new DateTime("2011-01-01T15:03:01.012345Z"),$arr,$u,$c);
-$g3=new Gruppo(3,"g",10,11,4,"ciao",new DateTime("2011-01-01T15:03:01.012345Z"),$arr,$u,$c);
-$g4=new Gruppo(4,"g",10,11,4,"ciao",new DateTime("2011-01-01T15:03:01.012345Z"),$arr,$u,$c);
+$g1 = new Gruppo("Ciao",1,10,11,"forse",new DateTime('now'),$arr,$u,$c);
+$g2 = new Gruppo("izo",1,10,11,"si",new DateTime('now'),$arr,$u,$c);
+$g3 = new Gruppo("Giorgio",1,10,11,"no",new DateTime('now'),$arr,$u,$c);
+$g4 = new Gruppo("Franco",1,10,11,"dino",new DateTime('now'),$arr,$u,$c);
 
 $u->aggiungiGruppo($g4);
 //print(count($u->getGruppo()));
 $g=array($g1,$g4,$g3);
 $u->setGruppo($g);
+//print(count($u->getGruppo()));
 
-print(count($u->getGruppo()));
+
+$u->aggiungiCarta($carta1);
+$u->aggiungiCarta($carta2);
+$u->aggiungiCarta($carta3);
+$u->aggiungiCarta($carta4);
+$u->rimuoviCarta($carta2);
+//print(count($u->getCartedicredito()));
+
+//$u->setCartedicredito($carta);
+print(count($u->getCartedicredito()));
 
 ?>
