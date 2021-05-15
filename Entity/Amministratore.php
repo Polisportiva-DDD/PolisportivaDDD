@@ -12,7 +12,7 @@ class Amministratore extends Utente
         //Da implementare
     }
 
-    public function risponsiSegnalazione(TicketAssistenza $ticketAssistenza): bool{
+    public function rispondiSegnalazione(TicketAssistenza $ticketAssistenza): bool{
         //Da implementare
     }
 
