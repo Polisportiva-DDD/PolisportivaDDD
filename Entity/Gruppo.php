@@ -16,7 +16,6 @@ class Gruppo
 
     /**
      * Gruppo constructor.
-     * @param int $id
      * @param String $nome
      * @param int $etaMinima
      * @param int $etaMassima

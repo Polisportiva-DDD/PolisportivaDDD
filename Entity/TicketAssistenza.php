@@ -10,10 +10,8 @@ class TicketAssistenza
 
     /**
      * TicketAssistenza constructor.
-     * @param int $id
      * @param String $oggetto
      * @param String $messaggio
-     * @param DateTime $data
      */
     public function __construct(string $oggetto, string $messaggio)
     {
