@@ -14,7 +14,7 @@ include "Recensione.php";
 	private array  $recensioni=array();
 	private array $cartedicredito=array();
 	private array $gruppo=array();
-
+	private array $gettoni = array();
 	 /**
 	  * @return array
 	  */

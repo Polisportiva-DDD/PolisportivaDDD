@@ -6,13 +6,12 @@ class Wallet
     //attributes
 
     private int $id;
-    private array $gettoni;
+    private array $gettoni = array();
 
     //constructor
 
-    public function __construct(int $id,array $gettoni)
+    public function __construct(array $gettoni)
     {
-        $this -> id = $id;
         $this -> gettoni = $gettoni;
     }
 
@@ -48,13 +47,50 @@ class Wallet
         $this->gettoni = $gettoni;
     }
 
-    public function aggiungiGettoni(string $key, int $quantita)
+    public function aggiungiGettoni(string $key, int $quantita):bool
     {
-
+        try
+        {
+            if($key != null && $quantita != null)
+            {
+                $this -> gettoni[$key] = $quantita;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        catch (Exception $exception){
+            //Gestione dell'eccezione
+            return false;
+        }
     }
 
-    public function rimuoviGettoni(string $key, int $quantita)
+    public function aggiungiGettoni2(Campo $campo, int $quantita):bool
     {
+        try
+        {
 
+            if($campo != null && $quantita != null)
+            {
+                $nomecampo = $campo -> getNome();
+                $this -> gettoni[$nomecampo] = $quantita;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        catch (Exception $exception){
+            //Gestione dell'eccezione
+            return false;
+        }
+    }
+
+    public function rimuoviGettoni(string $key, int $quantita):bool
+    {
+        //da completare
     }
 }
