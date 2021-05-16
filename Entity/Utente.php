@@ -220,8 +220,19 @@ include "Recensione.php";
 	}
 
 	public function aggiungiGruppo(Gruppo $gruppo):bool{
-			array_push($this->gruppo, $gruppo);
-     	return true;
+		try{
+			if ($gruppo != null){
+				array_push($this->gruppo, $gruppo);
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+		catch (Exception $exception){
+			echo("Server error");
+			return false;
+		}
 	}
 
 	 /**
@@ -320,7 +331,7 @@ include "Recensione.php";
 			 return $found;
 		 }
 		 catch(Exception $exception){
-			 //Errore
+			 echo("Server error");
 			 return false;
 		 }
 	 }

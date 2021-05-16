@@ -224,8 +224,25 @@ class Gruppo
         //Da implementare
     }
 
+    /**
+     * Controlla se il gruppo rispetta il numero minimo di partecipanti per poter giocare
+     * @return bool
+     */
     public function isPronto(): bool{
-        //Da implementare
+        try {
+            $numeroMinimo = $this->campo->getNumeroMinimo();
+            $numeroPartecipanti = count($this->partecipanti);
+            if ($numeroPartecipanti >= $numeroMinimo) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        catch(Exception $e){
+            echo("Server error");
+            return false;
+        }
+
     }
 
 
