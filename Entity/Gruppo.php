@@ -1,5 +1,7 @@
 <?php
-
+//include "Utente.php";
+//include "Campo.php";
+//include "Recensione.php";
 
 class Gruppo
 {
@@ -221,7 +223,13 @@ class Gruppo
     }
 
     public function rimuoviPartecipante(Utente $utente): bool{
-        //Da implementare
+        foreach($this->partecipanti as $chiave => $valore){
+            if($utente->getUsername()==$valore->getUsername()){
+                unset($this->partecipanti[$chiave]);
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -249,3 +257,19 @@ class Gruppo
 
 
 }
+/*
+$r1=new Recensione(1,2.4,"Natale","ciao",new DateTime("2011-01-01T15:03:01.012345Z"));
+$r2=new Recensione(1,4.4,"Natale","ciao",new DateTime("2011-01-01T15:03:01.012345Z"));
+$r3=4;
+$arr=array($r1,$r2,$r3);
+$u=new Utente("lor","lorenzo","Diella","ccc","pass",new DateTime("2012-01-01T15:03:01.012345Z"),$arr);
+$u1=new Utente("lor1","lorenzo","Diella","ccc","pass",new DateTime("2012-01-01T15:03:01.012345Z"),$arr);
+$arr=array($u,$u1);
+$c=new Campo("c5", 5,6,"Ciao",1.5);
+$g1 = new Gruppo("Ciao",1,10,11,"forse",new DateTime('now'),$arr,$u,$c);
+print(count($g1->getPartecipanti()));
+
+$g1->rimuoviPartecipante($u1);
+print(count($g1->getPartecipanti()));
+*/
+?>
