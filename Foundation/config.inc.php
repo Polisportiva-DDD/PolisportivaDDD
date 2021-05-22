@@ -1,0 +1,1 @@
+<?php $host= 'localhost'; $database= 'progettoweb'; $username= 'root'; $password= '';?>
