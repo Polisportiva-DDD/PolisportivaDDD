@@ -95,13 +95,14 @@ class FUtente
      * @param bool $bannato  (flag che indica se è bisogna bannare o sbandire l'utente)
      * @return bool (restituisce true se va tutto a buon fine false altrimenti)
      */
+     /*
 		//quando facciamo db aggiornato si prova
     public static function UpdateBannato($username,$bannato){
         $colonna="bannato";//collonna da modificare
         if(FUtente::update($username,$field,$bannato)) return true;
         else return false;
     }
-
+       */
     
 
      /** 
@@ -145,7 +146,7 @@ class FUtente
 
 
     public static function EsisteMail($email){
-        $sql="SELECT * FROM ".static::getTables()." WHERE email='".$mail."';";
+        $sql="SELECT * FROM ".static::getTables()." WHERE email='".$email."';";
         $db=FDatabase::getInstance();
         $result=$db->exist($sql);
         if($result!=null) return true;

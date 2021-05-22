@@ -6,9 +6,9 @@ if(file_exists('config.inc.php')) require_once 'config.inc.php';
 
 
 /** Qui vi è l'implementazione del modello Singleton ovvero si crea un'unica instanza della classe
- *  In questo caso tale classe ha lo scopo di fornire un unico accesso al dbms 
- 
+ *  In questo caso tale classe ha lo scopo di fornire un unico accesso al dbms
  */
+
 class FDatabase
 {
     /**istanza della classe (l'unica) */
@@ -71,8 +71,6 @@ class FDatabase
             return null;
         }
     }
-
-    
 
 
 
