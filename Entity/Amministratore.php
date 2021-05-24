@@ -24,7 +24,7 @@ class Amministratore extends Utente
         //Da implementare
     }
 
-    public function eliminaGruppo(Gruppo $gruppo): bool{
+    public function eliminaGruppo(EGruppo $gruppo): bool{
         //Da implementare
     }
 

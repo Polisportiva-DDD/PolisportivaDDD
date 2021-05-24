@@ -7,7 +7,7 @@ require_once 'FDatabase.php';
 class FUtente
 {
     private static $tables="utente";
-    private static $values="(:username,:nome,:cognome,:email,:password,:dataDiNascita,:amministratore)";
+    private static $values="(:username,:nome,:cognome,:email,:password,:dataDiNascita)";
     
     public function __construct(){}
 
@@ -24,7 +24,6 @@ class FUtente
         $stmt->bindValue(':cognome', $user->getCognome(), PDO::PARAM_STR);
         $stmt->bindValue(':dataDiNascita', $user->getData()->format('Y-m-d'), PDO::PARAM_STR);
         $stmt->bindValue(':email', $user->getEmail(), PDO::PARAM_STR);
-		$stmt->bindValue(':amministratore', "amministatore", PDO::PARAM_STR);
      
     }
   /**
@@ -63,6 +62,7 @@ class FUtente
      * @return oggetto Utente 
      */
 
+    /*
     public static function loadByUsername($username){
         $sql="SELECT * FROM ".static::getTables()." WHERE username='".$username."';";
         $db=FDatabase::getInstance();
@@ -75,6 +75,7 @@ class FUtente
         else return null;
     }
 
+    */
     /** 
      * Funzione che permette la delete dell'utente in base all'username
      * @param string $username dell'utente che si vuole eliminare

@@ -1,8 +1,8 @@
 <?php
-include "Campo.php";
-include "Gruppo.php";
-include "CartadiCredito.php";
-include "Recensione.php";
+include_once "Campo.php";
+include_once "EGruppo.php";
+include_once "CartadiCredito.php";
+include_once "Recensione.php";
  class Utente{
 	private string $username;
 	private string $nome;
@@ -13,22 +13,22 @@ include "Recensione.php";
 	private float $mediaRecensioni;
 	private array  $recensioni=array();
 	private array $cartedicredito=array();
-	private array $gruppo=array();
-	private array $gettoni = array();
+	private array $listaGruppi = array();
+	private array $wallet = array();
 	 /**
 	  * @return array
 	  */
-	 public function getGruppo(): array
+	 public function getListaGruppi(): array
 	 {
-		 return $this->gruppo;
+		 return $this->listaGruppi;
 	 }
 
 	 /**
-	  * @param array $gruppo
+	  * @param array $listaGruppi
 	  */
-	 public function setGruppo(array $gruppo): void
+	 public function setListaGruppi(array $listaGruppi): void
 	 {
-		 $this->gruppo = $gruppo;
+		 $this->listaGruppi = $listaGruppi;
 	 }
 
 	 /**
@@ -49,7 +49,7 @@ include "Recensione.php";
 
 	  public function __construct(String $username,String $nome,
 								  String $cognome,String $email,
-								  String $password,DateTime $dataDiNascita,
+								  String $password, DateTime $dataDiNascita,
 								  array $recensioni){
 		$this->username=$username;
         $this->nome=$nome;
@@ -210,19 +210,19 @@ include "Recensione.php";
 	}
 
 	public function rimuoviGruppo(int $id):bool{
-     	foreach($this->gruppo as $chiave => $valore){
+     	foreach($this->listaGruppi as $chiave => $valore){
      		if($id==$valore->getId()){
-				unset($this->gruppo[$chiave]);
+				unset($this->listaGruppi[$chiave]);
      			return true;
 			}
 		}
      	return false;
 	}
 
-	public function aggiungiGruppo(Gruppo $gruppo):bool{
+	public function aggiungiGruppo(EGruppo $gruppo):bool{
 		try{
 			if ($gruppo != null){
-				array_push($this->gruppo, $gruppo);
+				array_push($this->listaGruppi, $gruppo);
 				return true;
 			}
 			else{
@@ -351,15 +351,15 @@ $carta4 = new CartadiCredito("0000111122226666","franco","ma si","555",new DateT
 $u=new Utente("lor","lorenzo","Diella","ccc","pass",new DateTime("2012-01-01T15:03:01.012345Z"),$arr);
 $arr=array($u);
 $c=new Campo("c5", 5,6,"Ciao",1.5);
-$g1 = new Gruppo("Ciao",1,10,11,"forse",new DateTime('now'),$arr,$u,$c);
-$g2 = new Gruppo("izo",1,10,11,"si",new DateTime('now'),$arr,$u,$c);
-$g3 = new Gruppo("Giorgio",1,10,11,"no",new DateTime('now'),$arr,$u,$c);
-$g4 = new Gruppo("Franco",1,10,11,"dino",new DateTime('now'),$arr,$u,$c);
+$g1 = new EGruppo("Ciao",1,10,11,"forse",new DateTime('now'),$arr,$u,$c);
+$g2 = new EGruppo("izo",1,10,11,"si",new DateTime('now'),$arr,$u,$c);
+$g3 = new EGruppo("Giorgio",1,10,11,"no",new DateTime('now'),$arr,$u,$c);
+$g4 = new EGruppo("Franco",1,10,11,"dino",new DateTime('now'),$arr,$u,$c);
 
 $u->aggiungiGruppo($g4);
 //print(count($u->getGruppo()));
 $g=array($g1,$g4,$g3);
-$u->setGruppo($g);
+$u->setListaGruppi($g);
 //print(count($u->getGruppo()));
 
 

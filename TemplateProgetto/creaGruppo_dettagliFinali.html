@@ -52,7 +52,7 @@
     </ol>
 
     <form method="post">
-      <div class="row">
+      <div class="row mb-3">
         <div class="col-md-3">
           <label for="nomeGruppo" class="form-label">Nome</label>
           <input type="text" class="form-control" id="nomeGruppo">
@@ -60,6 +60,26 @@
         <div class="col-md-3">
           <label for="etaMinima" class="form-label">Età minima</label>
           <input type="number" class="form-control" id="etaMinima" min="10" max="99">
+        </div>
+        <div class="col-md-3">
+          <label for="etaMassima" class="form-label">Età minima</label>
+          <input type="number" class="form-control" id="etaMassima" min="10" max="99">
+        </div>
+        <div class="col-md-3">
+          <label for="tipologiaCampo" class="form-label">Tipologia Campo</label>
+          <select class="form-control w-100" aria-label="Default-select example" id="tipologiaCampo">
+            <option selected>Open this select menu</option>
+            <option value="1">Calcio a 5</option>
+            <option value="2">Calcio a 7</option>
+            <option value="3">Calcio a 8</option>
+            <option value="3">Calcio a 11</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <label for="descrizione" class="form-label">Descrizione</label>
+          <textarea type="text" class="form-control" id="descrizione" rows="5"></textarea>
         </div>
       </div>
     </form>

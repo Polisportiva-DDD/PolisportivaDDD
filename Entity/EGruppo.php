@@ -3,7 +3,7 @@
 //include "Campo.php";
 //include "Recensione.php";
 
-class Gruppo
+class EGruppo
 {
     private int $id;
     private String $nome;
@@ -17,7 +17,7 @@ class Gruppo
     private Campo $campo;
 
     /**
-     * Gruppo constructor.
+     * EGruppo constructor.
      * @param String $nome
      * @param int $etaMinima
      * @param int $etaMassima
@@ -266,7 +266,7 @@ $u=new Utente("lor","lorenzo","Diella","ccc","pass",new DateTime("2012-01-01T15:
 $u1=new Utente("lor1","lorenzo","Diella","ccc","pass",new DateTime("2012-01-01T15:03:01.012345Z"),$arr);
 $arr=array($u,$u1);
 $c=new Campo("c5", 5,6,"Ciao",1.5);
-$g1 = new Gruppo("Ciao",1,10,11,"forse",new DateTime('now'),$arr,$u,$c);
+$g1 = new EGruppo("Ciao",1,10,11,"forse",new DateTime('now'),$arr,$u,$c);
 print(count($g1->getPartecipanti()));
 
 $g1->rimuoviPartecipante($u1);

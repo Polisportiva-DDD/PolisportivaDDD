@@ -1,6 +1,6 @@
 <?php
-require_once 'EUtente.php';
-require_once 'FUtente.php';
+require_once '../Utility/autoload.php';
+require_once 'config.inc.php';
 
 if(file_exists('config.inc.php')) require_once 'config.inc.php';
 
@@ -17,21 +17,18 @@ class FDatabase
     /** oggetto PDO che effettua la connessione al dbms */
     private $db;
 
-	
-	
-	
-
     /** costruttore privato poichè l'unico accesso è dato dal metodo getInstance() */
     private function __construct()
-    {                              
+    {
         global $host,$database,$username,$password;
         try{
+            $dsn = "mysql:host=". $host . ";" . " dbname=" . $database;
 			//connessione a mysql database a cui si passano nome dell'host, del db, username, password
-            $this->db=new PDO("mysql:host=$host; dbname=$database", $username,$password);
+            $this->db=new PDO($dsn , $username, $password);
         }
         catch(PDOException $e)
         {
-          echo "ERRORE: ".$e->getMessage();
+          echo "ERROR: ".$e->getMessage();
           die;
         }
     }
@@ -48,7 +45,7 @@ class FDatabase
     }
      /**
      * Metodo che permette di memorizzare le informazioni contenute in un oggetto
-	 * $query da eseguire 
+	 * @param String $query è la query da eseguire
 	 * $classe nome della classe dell'oggetto
 	 * $EOggetto oggetto di $classe va memorizza
      * Entity sul database.
