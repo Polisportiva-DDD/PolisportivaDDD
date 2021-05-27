@@ -1,9 +1,10 @@
 <?php
-include_once "Campo.php";
+include_once "ECampo.php";
 include_once "EGruppo.php";
-include_once "CartadiCredito.php";
-include_once "Recensione.php";
- class Utente{
+include_once "ECartadiCredito.php";
+include_once "ERecensione.php";
+include_once "ECalcioAUndici.php";
+ class EUtente{
 	private string $username;
 	private string $nome;
 	private string $cognome;
@@ -195,7 +196,7 @@ include_once "Recensione.php";
 		 $c=0;
          if($this->recensioni!=null) {
              foreach ($this->recensioni as $valore) {
-                 if(is_a($valore,Recensione::class)){//solo se è un' oggetto recensione vado a prendere il voto
+                 if(is_a($valore,ERecensione::class)){//solo se è un' oggetto recensione vado a prendere il voto
                  $totale = $totale + $valore->getVoto();
                  $c++;
              }
@@ -238,10 +239,10 @@ include_once "Recensione.php";
 	 /**
 	  * Aggiunge la carta di credito passata come parametro alla lista delle carte di credito dell'utente.
 	  * Restituisce true se l'operazione è andata a buon fine, false altrimenti.
-	  * @param CartadiCredito $carta
+	  * @param ECartadiCredito $carta
 	  * @return bool
 	  */
-	public function aggiungiCarta(CartadiCredito $carta):bool
+	public function aggiungiCarta(ECartadiCredito $carta):bool
 	{
 		try
 		{
@@ -264,10 +265,10 @@ include_once "Recensione.php";
 	 /**
 	  * Rimuove la carta di credito passata come parametro alla lista delle carte di credito dell'utente.
 	  * Restituisce true se l'operazione è andata a buon fine, false altrimenti.
-	  * @param CartadiCredito $carta
+	  * @param ECartadiCredito $carta
 	  * @return bool
 	  */
-	public function rimuoviCarta(CartadiCredito $carta):bool
+	public function rimuoviCarta(ECartadiCredito $carta):bool
 	{
 		try
 		{
@@ -294,7 +295,7 @@ include_once "Recensione.php";
 	  * l'operazione è andata a buon fine, false altrimenti.
 	  * @return bool
 	  */
-	 public function aggiungiRecensione(Recensione $recensione): bool{
+	 public function aggiungiRecensione(ERecensione $recensione): bool{
 
 		 try{
 			 if ($recensione != null){
@@ -338,23 +339,27 @@ include_once "Recensione.php";
 
 }
 
-$r1=new Recensione(1,2.4,"Natale","ciao",new DateTime("2011-01-01T15:03:01.012345Z"));
-$r2=new Recensione(1,4.4,"Natale","ciao",new DateTime("2011-01-01T15:03:01.012345Z"));
+$r1=new ERecensione(1,2.4,"Natale","ciao",new DateTime("2011-01-01T15:03:01.012345Z"));
+$r2=new ERecensione(1,4.4,"Natale","ciao",new DateTime("2011-01-01T15:03:01.012345Z"));
 $r3=4;
 $arr=array($r1,$r2,$r3);
 
-$carta1 = new CartadiCredito("0000111122223333","Giorgio","Di Nunzio","222",new DateTime('now'));
-$carta2 = new CartadiCredito("0000111122224444","luca","bo","333",new DateTime('now'));
-$carta3 = new CartadiCredito("0000111122225555","lorenzo","forse","444",new DateTime('now'));
-$carta4 = new CartadiCredito("0000111122226666","franco","ma si","555",new DateTime('now'));
+$carta1 = new ECartadiCredito("0000111122223333","Giorgio","Di Nunzio","222",new DateTime('now'));
+$carta2 = new ECartadiCredito("0000111122224444","luca","bo","333",new DateTime('now'));
+$carta3 = new ECartadiCredito("0000111122225555","lorenzo","forse","444",new DateTime('now'));
+$carta4 = new ECartadiCredito("0000111122226666","franco","ma si","555",new DateTime('now'));
 
-$u=new Utente("lor","lorenzo","Diella","ccc","pass",new DateTime("2012-01-01T15:03:01.012345Z"),$arr);
+$u=new EUtente("lor","lorenzo","Diella","ccc","pass",new DateTime("2012-01-01T15:03:01.012345Z"),$arr);
 $arr=array($u);
-$c=new Campo("c5", 5,6,"Ciao",1.5);
-$g1 = new EGruppo("Ciao",1,10,11,"forse",new DateTime('now'),$arr,$u,$c);
-$g2 = new EGruppo("izo",1,10,11,"si",new DateTime('now'),$arr,$u,$c);
-$g3 = new EGruppo("Giorgio",1,10,11,"no",new DateTime('now'),$arr,$u,$c);
-$g4 = new EGruppo("Franco",1,10,11,"dino",new DateTime('now'),$arr,$u,$c);
+
+$c11 = new ECalcioAUndici('c11', 22,44,'Ciao',15);
+
+//print(ECampo.getNome($c11));
+
+$g1 = new EGruppo("Ciao",1,10,11,"forse",new DateTime('now'),$arr,$u,$c11);
+$g2 = new EGruppo("izo",1,10,11,"si",new DateTime('now'),$arr,$u,$c11);
+$g3 = new EGruppo("Giorgio",1,10,11,"no",new DateTime('now'),$arr,$u,$c11);
+$g4 = new EGruppo("Franco",1,10,11,"dino",new DateTime('now'),$arr,$u,$c11);
 
 $u->aggiungiGruppo($g4);
 //print(count($u->getGruppo()));
@@ -371,6 +376,8 @@ $u->rimuoviCarta($carta2);
 //print(count($u->getCartedicredito()));
 
 //$u->setCartedicredito($carta);
-print(count($u->getCartedicredito()));
+//print(count($u->getCartedicredito()));
+
+
 
 ?>

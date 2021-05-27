@@ -1,7 +1,7 @@
 <?php
 
 
-class TicketAssistenza
+class ETicketAssistenza
 {
     private int $id;
     private String $oggetto;
@@ -9,7 +9,7 @@ class TicketAssistenza
     private DateTime $data;
 
     /**
-     * TicketAssistenza constructor.
+     * ETicketAssistenza constructor.
      * @param int $id
      * @param String $oggetto
      * @param String $messaggio

@@ -70,14 +70,14 @@ class FGruppo
 								  String $cognome,String $email,
 								  String $password,DateTime $dataDiNascita,
 								  array $recensioni){*/
-$r1=new Recensione(1,2.4,"Natale","ciao",new DateTime("2011-01-01T15:03:01.012345Z"));
-$r2=new Recensione(1,4.4,"Natale","ciao",new DateTime("2011-01-01T15:03:01.012345Z"));
+$r1=new ERecensione(1,2.4,"Natale","ciao",new DateTime("2011-01-01T15:03:01.012345Z"));
+$r2=new ERecensione(1,4.4,"Natale","ciao",new DateTime("2011-01-01T15:03:01.012345Z"));
 $r3=4;
 $d = new DateTime("1999-07-16");
 
 $arr=array($r1,$r2,$r3);
-$u=new Utente("lollo1","lorenzo","Diella","ccc","pass", $d, $arr);
-$c = new Campo("calcio a 5", 3, 10, "descrizione campo", 11.5);
+$u=new EUtente("lollo1","lorenzo","Diella","ccc","pass", $d, $arr);
+$c = new ECampo("calcio a 5", 3, 10, "descrizione campo", 11.5);
 $g1 = new EGruppo("Ciao",1,10,11,"forse",new DateTime('now'),$arr,$u,$c);
 
 $row = FGruppo::loadById(3);
