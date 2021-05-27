@@ -7,20 +7,39 @@ class ETicketAssistenza
     private String $oggetto;
     private String $messaggio;
     private DateTime $data;
+    private string $autore;
 
     /**
-     * ETicketAssistenza constructor.
+     * TicketAssistenza constructor.
      * @param int $id
      * @param String $oggetto
      * @param String $messaggio
      * @param DateTime $data
+     *  @param String $a
      */
-    public function __construct(int $id, string $oggetto, string $messaggio)
+    public function __construct(string $a,string $messaggio, string $oggetto,DateTime $data,int $id=-1 )
     {
         $this->id = $id;
         $this->oggetto = $oggetto;
         $this->messaggio = $messaggio;
-        $this->data = new DateTime("now");
+        $this->data = $data;
+        $this->autore=$a;
+    }
+
+    /**
+     * @return EUtente
+     */
+    public function getAutore(): string
+    {
+        return $this->autore;
+    }
+
+    /**
+     * @param EUtente $autore
+     */
+    public function setAutore(string $autore): void
+    {
+        $this->autore = $autore;
     }
 
     /**
