@@ -1,7 +1,7 @@
 <?php
 
 
-class Recensione
+class ERecensione
 {
     //attributes
 

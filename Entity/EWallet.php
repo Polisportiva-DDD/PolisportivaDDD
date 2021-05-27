@@ -1,7 +1,7 @@
 <?php
 
 
-class Wallet
+class EWallet
 {
     //attributes
 
@@ -67,7 +67,7 @@ class Wallet
         }
     }
 
-    public function aggiungiGettoni2(Campo $campo, int $quantita):bool
+    public function aggiungiGettoni2(ECampo $campo, int $quantita):bool
     {
         try
         {

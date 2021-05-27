@@ -1,7 +1,7 @@
 <?php
-//include "Utente.php";
-//include "Campo.php";
-//include "Recensione.php";
+//include "EUtente.php";
+//include "ECampo.php";
+//include "ERecensione.php";
 
 class EGruppo
 {
@@ -13,8 +13,8 @@ class EGruppo
     private String $descrizione;
     private DateTime $dataEOra;
     private array $partecipanti;
-    private Utente $admin;
-    private Campo $campo;
+    private EUtente $admin;
+    private ECampo $campo;
 
     /**
      * EGruppo constructor.
@@ -25,13 +25,13 @@ class EGruppo
      * @param String $descrizione
      * @param DateTime $dataEOra
      * @param array $partecipanti
-     * @param Utente $admin
-     * @param Campo $campo
+     * @param EUtente $admin
+     * @param ECampo $campo
      */
     public function __construct(?int $id, string $nome, int $etaMinima,
                                 int $etaMassima, float $votoMinimo, string $descrizione,
                                 DateTime $dataEOra, array $partecipanti,
-                                Utente $admin, Campo $campo)
+                                EUtente $admin, ECampo $campo)
     {
         $this->id = $id;
         $this->nome = $nome;
@@ -175,38 +175,38 @@ class EGruppo
     }
 
     /**
-     * @return Utente
+     * @return EUtente
      */
-    public function getAdmin(): Utente
+    public function getAdmin(): EUtente
     {
         return $this->admin;
     }
 
     /**
-     * @param Utente $admin
+     * @param EUtente $admin
      */
-    public function setAdmin(Utente $admin): void
+    public function setAdmin(EUtente $admin): void
     {
         $this->admin = $admin;
     }
 
     /**
-     * @return Campo
+     * @return ECampo
      */
-    public function getCampo(): Campo
+    public function getCampo(): ECampo
     {
         return $this->campo;
     }
 
     /**
-     * @param Campo $campo
+     * @param ECampo $campo
      */
-    public function setCampo(Campo $campo): void
+    public function setCampo(ECampo $campo): void
     {
         $this->campo = $campo;
     }
 
-    public function aggiungiPartecipante(Utente $utente): bool{
+    public function aggiungiPartecipante(EUtente $utente): bool{
 
         $numeroMaxPartecipanti = $this->campo->getNumeroMassimo();
 
@@ -223,7 +223,7 @@ class EGruppo
         }
     }
 
-    public function rimuoviPartecipante(Utente $utente): bool{
+    public function rimuoviPartecipante(EUtente $utente): bool{
         foreach($this->partecipanti as $chiave => $valore){
             if($utente->getUsername()==$valore->getUsername()){
                 unset($this->partecipanti[$chiave]);
@@ -259,14 +259,14 @@ class EGruppo
 
 }
 /*
-$r1=new Recensione(1,2.4,"Natale","ciao",new DateTime("2011-01-01T15:03:01.012345Z"));
-$r2=new Recensione(1,4.4,"Natale","ciao",new DateTime("2011-01-01T15:03:01.012345Z"));
+$r1=new ERecensione(1,2.4,"Natale","ciao",new DateTime("2011-01-01T15:03:01.012345Z"));
+$r2=new ERecensione(1,4.4,"Natale","ciao",new DateTime("2011-01-01T15:03:01.012345Z"));
 $r3=4;
 $arr=array($r1,$r2,$r3);
-$u=new Utente("lor","lorenzo","Diella","ccc","pass",new DateTime("2012-01-01T15:03:01.012345Z"),$arr);
-$u1=new Utente("lor1","lorenzo","Diella","ccc","pass",new DateTime("2012-01-01T15:03:01.012345Z"),$arr);
+$u=new EUtente("lor","lorenzo","Diella","ccc","pass",new DateTime("2012-01-01T15:03:01.012345Z"),$arr);
+$u1=new EUtente("lor1","lorenzo","Diella","ccc","pass",new DateTime("2012-01-01T15:03:01.012345Z"),$arr);
 $arr=array($u,$u1);
-$c=new Campo("c5", 5,6,"Ciao",1.5);
+$c=new ECampo("c5", 5,6,"Ciao",1.5);
 $g1 = new EGruppo("Ciao",1,10,11,"forse",new DateTime('now'),$arr,$u,$c);
 print(count($g1->getPartecipanti()));
 

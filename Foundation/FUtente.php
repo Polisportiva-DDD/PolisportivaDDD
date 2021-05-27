@@ -14,10 +14,10 @@ class FUtente
     /**
      * Questo metodo lega gli attributi dell'user da inserire con i parametri della INSERT
      * @param PDOStatement $stmt 
-     * @param Utente $user l'utente i cui dati devono essere inseriti nel DB
+     * @param EUtente $user l'utente i cui dati devono essere inseriti nel DB
      */
     
-    public static function bind($stmt,Utente $user){
+    public static function bind($stmt, EUtente $user){
         $stmt->bindValue(':username', $user->getUsername(), PDO::PARAM_STR); 
         $stmt->bindValue(':password', $user->getPassword(), PDO::PARAM_STR); //ricorda di "collegare" la giusta variabile al bind
         $stmt->bindValue(':nome', $user->getNome(), PDO::PARAM_STR);
@@ -59,7 +59,7 @@ class FUtente
     /**
      * Carica l'utente in base all'username passato
      * @param string $username dell'utente
-     * @return oggetto Utente 
+     * @return oggetto EUtente
      */
 
     /*
@@ -68,7 +68,7 @@ class FUtente
         $db=FDatabase::getInstance();
         $result=$db->load($sql);
         if($result!=null){
-            $user=new Utente($result['username'], $result['nome'], $result['cognome'],$result['email'],$result['password'],new DateTime($result['dataDiNascita']));
+            $user=new EUtente($result['username'], $result['nome'], $result['cognome'],$result['email'],$result['password'],new DateTime($result['dataDiNascita']));
 
             return $user;
         }
@@ -110,7 +110,7 @@ class FUtente
      * Metodo che verifica l'esistenza di un utente con quell'username e password
      * @param string $username username dell'utente che vuole effettuare la modifica
      * @param  string $password
-     * @return Oggetto Utente altrimenti false se non esiste l'utente
+     * @return Oggetto EUtente altrimenti false se non esiste l'utente
      */
 
 
