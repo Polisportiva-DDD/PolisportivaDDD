@@ -135,7 +135,39 @@ class FDatabase
 
 	
 	
-	public function load($sql){
+
+	
+	/**
+     * Metodo usato quando ci si aspetta che la query produca più di un risultato.
+     * 
+     * @param $sql query da eseguire
+     */
+    public function loadMultiple($sql){
+        try{
+            $rows=array();
+            $this->db->beginTransaction();
+            $stmt=$this->db->prepare($sql);
+            $stmt->execute();
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            while($row=$stmt->fetch()){
+                $rows[]=$row;
+            }
+            $this->closeDbConnection();
+            return $rows;
+        }
+        catch(PDOException $e){
+            echo "Errore: ".$e->getMessage();
+            die;
+            return null;
+        }
+    }
+
+       /**
+     * Metodo usato quando ci si aspetta che la query produca un solo risultato
+     * 
+     * @param $sql query da eseguire
+     */
+    public function loadSingle($sql){
         try{
             $this->db->beginTransaction();
             $stmt=$this->db->prepare($sql);
