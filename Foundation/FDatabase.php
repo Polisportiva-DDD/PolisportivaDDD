@@ -176,7 +176,7 @@ class FDatabase
             $this->db->beginTransaction();
             $stmt=$this->db->prepare($sql);
             $stmt->execute();
-            $row=$stmt->fetch(PDO::FETCH_ASSOC);
+            $row=$stmt->fetch(PDO::FETCH_ASSOC); //Restituisce un array associativo con chiave il nome della colonna nel DB
             $this->closeDbConnection();
             return $row;
         }

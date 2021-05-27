@@ -28,11 +28,12 @@ class EGruppo
      * @param Utente $admin
      * @param Campo $campo
      */
-    public function __construct(string $nome, int $etaMinima,
+    public function __construct(?int $id, string $nome, int $etaMinima,
                                 int $etaMassima, float $votoMinimo, string $descrizione,
                                 DateTime $dataEOra, array $partecipanti,
                                 Utente $admin, Campo $campo)
     {
+        $this->id = $id;
         $this->nome = $nome;
         $this->etaMinima = $etaMinima;
         $this->etaMassima = $etaMassima;

@@ -153,7 +153,10 @@ class FUtente
         if($result!=null) return true;
         else return false;
     }
-	
+
+    public static function loadUtenteByUsername(String $username){
+
+    }
 
    
     
