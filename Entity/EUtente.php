@@ -1,21 +1,53 @@
 <?php
-include_once "ECampo.php";
-include_once "EGruppo.php";
-include_once "ECartadiCredito.php";
-include_once "ERecensione.php";
-include_once "ECalcioAUndici.php";
+require_once '../Utility/autoload.php';
  class EUtente{
 	private string $username;
 	private string $nome;
 	private string $cognome;
 	private string $email;
 	private string $password;
-	private DateTime $data;
-	private float $mediaRecensioni;
-	private array  $recensioni=array();
+	private DateTime $dataDiNascita;
+	private string $immagine;
 	private array $cartedicredito=array();
 	private array $listaGruppi = array();
-	private array $wallet = array();
+	private EWallet $wallet ;
+
+
+
+
+
+
+
+	  public function __construct(String $username,String $nome,
+								  String $cognome,String $email,
+								  String $password, DateTime $dataDiNascita,String $immagine,EWallet $wallet){
+		$this->username=$username;
+        $this->nome=$nome;
+        $this->cognome=$cognome;
+        $this->email=$email;
+		$this->password=$password;
+        $this->dataDiNascita=$dataDiNascita;
+        $this->immagine=$immagine;
+        $this->wallet=$wallet;
+
+    }
+
+	 /**
+	  * @return EWallet
+	  */
+	 public function getWallet(): EWallet
+	 {
+		 return $this->wallet;
+	 }
+
+	 /**
+	  * @param EWallet $wallet
+	  */
+	 public function setWallet(EWallet $wallet): void
+	 {
+		 $this->wallet = $wallet;
+	 }
+
 	 /**
 	  * @return array
 	  */
@@ -48,26 +80,23 @@ include_once "ECalcioAUndici.php";
 		 $this->cartedicredito = $cartedicredito;
 	 }
 
-	  public function __construct(String $username,String $nome,
-								  String $cognome,String $email,
-								  String $password, DateTime $dataDiNascita,
-								  array $recensioni){
-		$this->username=$username;
-        $this->nome=$nome;
-        $this->cognome=$cognome;
-        $this->email=$email;
-		$this->password=$password;
-        $this->data=$dataDiNascita;
-        $this->recensioni=$recensioni;
-    }
+	 /**
+	  * @return string
+	  */
+	 public function getImmagine(): string
+	 {
+		 return $this->immagine;
+	 }
 
 	 /**
-      * Restituisce l'array delle recensioni
-      * @return array
-      */
-     public function getRecensioni():array{
-		return $this->recensioni;
-	}
+	  * @param string $immagine
+	  */
+	 public function setImmagine(string $immagine): void
+	 {
+		 $this->immagine = $immagine;
+	 }
+
+
 
      /**
       * Restituisce l'username dell'utente
@@ -114,8 +143,8 @@ include_once "ECalcioAUndici.php";
       * Restituisce la data dell'utente
       * @return DateTime
       */
-     public function getData():DateTime{
-		return $this->data;
+     public function getDataDiNascita():DateTime{
+		return $this->dataDiNascita;
 	}
 
      /**
@@ -135,13 +164,7 @@ include_once "ECalcioAUndici.php";
 		 $this->username=$u;
 	}
 
-	/**
-      * Imposta l'array delle recensioni
-      * @param array arr
-      */
-	 public function setRecensioni(array $arr):void{
-		 $this->recensioni=$arr;
-	}
+
 
      /**
       * Imposta il nome dell'utente
@@ -179,8 +202,8 @@ include_once "ECalcioAUndici.php";
       * Imposta la data dell'utente
       * @param DateTime $d
       */
-     public function setData(DateTime $d):void{
-		 $this->data=$d;
+     public function setDataDiNascita(DateTime $d):void{
+		 $this->dataDiNascita=$d;
 	}
 
      /**
@@ -191,12 +214,12 @@ include_once "ECalcioAUndici.php";
 		 $this->mediaRecensioni=$m;
 	}
 
-     public function calcolaMediaRecensioni():float{
+     public function calcolaMediaRecensioni(array $recensioni):float{
 		 $totale=0;
 		 $c=0;
-         if($this->recensioni!=null) {
-             foreach ($this->recensioni as $valore) {
-                 if(is_a($valore,ERecensione::class)){//solo se è un' oggetto recensione vado a prendere il voto
+         if($recensioni!=null) {
+             foreach ($recensioni as $valore) {
+                 if(is_a($valore,Recensione::class)){//solo se è un' oggetto recensione vado a prendere il voto
                  $totale = $totale + $valore->getVoto();
                  $c++;
              }
@@ -239,10 +262,10 @@ include_once "ECalcioAUndici.php";
 	 /**
 	  * Aggiunge la carta di credito passata come parametro alla lista delle carte di credito dell'utente.
 	  * Restituisce true se l'operazione è andata a buon fine, false altrimenti.
-	  * @param ECartadiCredito $carta
+	  * @param CartadiCredito $carta
 	  * @return bool
 	  */
-	public function aggiungiCarta(ECartadiCredito $carta):bool
+	public function aggiungiCarta(CartadiCredito $carta):bool
 	{
 		try
 		{
@@ -265,10 +288,10 @@ include_once "ECalcioAUndici.php";
 	 /**
 	  * Rimuove la carta di credito passata come parametro alla lista delle carte di credito dell'utente.
 	  * Restituisce true se l'operazione è andata a buon fine, false altrimenti.
-	  * @param ECartadiCredito $carta
+	  * @param CartadiCredito $carta
 	  * @return bool
 	  */
-	public function rimuoviCarta(ECartadiCredito $carta):bool
+	public function rimuoviCarta(CartadiCredito $carta):bool
 	{
 		try
 		{
@@ -290,12 +313,15 @@ include_once "ECalcioAUndici.php";
 
 	}
 
+
+
+
 	 /**
 	  * Aggiunge la recensione passata come parametro alla lista delle recensioni dell'utente. Restituisce true se
 	  * l'operazione è andata a buon fine, false altrimenti.
 	  * @return bool
-	  */
-	 public function aggiungiRecensione(ERecensione $recensione): bool{
+	  *//*
+	 public function aggiungiRecensione(Recensione $recensione): bool{
 
 		 try{
 			 if ($recensione != null){
@@ -311,12 +337,13 @@ include_once "ECalcioAUndici.php";
 			 return false;
 		 }
 	 }
-
+*/
 	 /**
 	  * Rimuove la recensione passata come parametro alla lista delle recensioni dell'utente. Restituisce true se
 	  * l'operazione è andata a buon fine, false altrimenti.
 	  * @return bool
 	  */
+	 /*
 	 public function rimuoviRecensione(int $idRecensione): bool{
 		 $offset = 0;
 		 $found = false;
@@ -336,30 +363,26 @@ include_once "ECalcioAUndici.php";
 			 return false;
 		 }
 	 }
-
+*/
 }
 
-$r1=new ERecensione(1,2.4,"Natale","ciao",new DateTime("2011-01-01T15:03:01.012345Z"));
-$r2=new ERecensione(1,4.4,"Natale","ciao",new DateTime("2011-01-01T15:03:01.012345Z"));
+/*$r1=new Recensione(1,2.4,"Natale","ciao",new DateTime("2011-01-01T15:03:01.012345Z"));
+$r2=new Recensione(1,4.4,"Natale","ciao",new DateTime("2011-01-01T15:03:01.012345Z"));
 $r3=4;
 $arr=array($r1,$r2,$r3);
 
-$carta1 = new ECartadiCredito("0000111122223333","Giorgio","Di Nunzio","222",new DateTime('now'));
-$carta2 = new ECartadiCredito("0000111122224444","luca","bo","333",new DateTime('now'));
-$carta3 = new ECartadiCredito("0000111122225555","lorenzo","forse","444",new DateTime('now'));
-$carta4 = new ECartadiCredito("0000111122226666","franco","ma si","555",new DateTime('now'));
+$carta1 = new CartadiCredito("0000111122223333","Giorgio","Di Nunzio","222",new DateTime('now'));
+$carta2 = new CartadiCredito("0000111122224444","luca","bo","333",new DateTime('now'));
+$carta3 = new CartadiCredito("0000111122225555","lorenzo","forse","444",new DateTime('now'));
+$carta4 = new CartadiCredito("0000111122226666","franco","ma si","555",new DateTime('now'));
 
-$u=new EUtente("lor","lorenzo","Diella","ccc","pass",new DateTime("2012-01-01T15:03:01.012345Z"),$arr);
+$u=new Utente("lor","lorenzo","Diella","ccc","pass",new DateTime("2012-01-01T15:03:01.012345Z"),$arr);
 $arr=array($u);
-
-$c11 = new ECalcioAUndici('c11', 22,44,'Ciao',15);
-
-//print(ECampo.getNome($c11));
-
-$g1 = new EGruppo("Ciao",1,10,11,"forse",new DateTime('now'),$arr,$u,$c11);
-$g2 = new EGruppo("izo",1,10,11,"si",new DateTime('now'),$arr,$u,$c11);
-$g3 = new EGruppo("Giorgio",1,10,11,"no",new DateTime('now'),$arr,$u,$c11);
-$g4 = new EGruppo("Franco",1,10,11,"dino",new DateTime('now'),$arr,$u,$c11);
+$c=new Campo("c5", 5,6,"Ciao",1.5);
+$g1 = new EGruppo("Ciao",1,10,11,"forse",new DateTime('now'),$arr,$u,$c);
+$g2 = new EGruppo("izo",1,10,11,"si",new DateTime('now'),$arr,$u,$c);
+$g3 = new EGruppo("Giorgio",1,10,11,"no",new DateTime('now'),$arr,$u,$c);
+$g4 = new EGruppo("Franco",1,10,11,"dino",new DateTime('now'),$arr,$u,$c);
 
 $u->aggiungiGruppo($g4);
 //print(count($u->getGruppo()));
@@ -376,8 +399,9 @@ $u->rimuoviCarta($carta2);
 //print(count($u->getCartedicredito()));
 
 //$u->setCartedicredito($carta);
-//print(count($u->getCartedicredito()));
-
-
-
+print(count($u->getCartedicredito()));
+*/
+$w=new EWallet("1",array());
+$u=new EUtente("lor","lorenzo","Diella","ccc","pass",new DateTime("2012-01-01T15:03:01.012345Z"),"imm",$w);
+print_r(FUtente::loadByUsername("lor"));
 ?>
