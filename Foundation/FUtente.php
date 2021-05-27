@@ -7,7 +7,7 @@ require_once 'FDatabase.php';
 class FUtente
 {
     private static $tables="utente";
-    private static $values="(:username,:nome,:cognome,:email,:password,:dataDiNascita)";
+    private static $values="(:username,:nome,:cognome,:email,:password,:dataDiNascita,:immagine,:wallet)";
     
     public function __construct(){}
 
@@ -22,8 +22,10 @@ class FUtente
         $stmt->bindValue(':password', $user->getPassword(), PDO::PARAM_STR); //ricorda di "collegare" la giusta variabile al bind
         $stmt->bindValue(':nome', $user->getNome(), PDO::PARAM_STR);
         $stmt->bindValue(':cognome', $user->getCognome(), PDO::PARAM_STR);
-        $stmt->bindValue(':dataDiNascita', $user->getData()->format('Y-m-d'), PDO::PARAM_STR);
+        $stmt->bindValue(':dataDiNascita', $user->getDataDiNascita()->format('Y-m-d'), PDO::PARAM_STR);
         $stmt->bindValue(':email', $user->getEmail(), PDO::PARAM_STR);
+        $stmt->bindValue(':immagine', $user->getImmagine(), PDO::PARAM_STR);
+        $stmt->bindValue(':wallet', $user->getWallet()->getId(), PDO::PARAM_INT);
      
     }
   /**
@@ -49,7 +51,7 @@ class FUtente
     public static function store($user){
         $sql="INSERT INTO ".static::getTables()." VALUES ".static::getValues();
         $db=FDatabase::getInstance();
-        $id=$db->store($sql,"FUtente",$user);
+        $id=$db->store($sql,$user);
         if($id) return $id;
         else return null;
     }
@@ -59,23 +61,23 @@ class FUtente
     /**
      * Carica l'utente in base all'username passato
      * @param string $username dell'utente
-     * @return oggetto EUtente
+     * @return EUtente Utente
      */
 
-    /*
+
     public static function loadByUsername($username){
         $sql="SELECT * FROM ".static::getTables()." WHERE username='".$username."';";
         $db=FDatabase::getInstance();
-        $result=$db->load($sql);
+        $result=$db->loadSingle($sql);
         if($result!=null){
-            $user=new EUtente($result['username'], $result['nome'], $result['cognome'],$result['email'],$result['password'],new DateTime($result['dataDiNascita']));
-
+            $wallet=new EWallet($result['wallet'],array());
+            $user=new EUtente($result['username'], $result['nome'], $result['cognome'],$result['email'],$result['password'],new DateTime($result['dataDiNascita']),$result['immagine'],$wallet);
             return $user;
         }
         else return null;
     }
 
-    */
+
     /** 
      * Funzione che permette la delete dell'utente in base all'username
      * @param string $username dell'utente che si vuole eliminare
@@ -90,27 +92,14 @@ class FUtente
     }
 
      
-     /** 
-     * Metodo che permette di bandire, sbandire utente
-     * @param String username (utente che bisogna bannare,sbandire)
-     * @param bool $bannato  (flag che indica se è bisogna bannare o sbandire l'utente)
-     * @return bool (restituisce true se va tutto a buon fine false altrimenti)
-     */
-     /*
-		//quando facciamo db aggiornato si prova
-    public static function UpdateBannato($username,$bannato){
-        $colonna="bannato";//collonna da modificare
-        if(FUtente::update($username,$field,$bannato)) return true;
-        else return false;
-    }
-       */
+
     
 
      /** 
      * Metodo che verifica l'esistenza di un utente con quell'username e password
      * @param string $username username dell'utente che vuole effettuare la modifica
      * @param  string $password
-     * @return Oggetto EUtente altrimenti false se non esiste l'utente
+     * @return EUtente Utente altrimenti false se non esiste l'utente
      */
 
 
@@ -118,11 +107,8 @@ class FUtente
         $sql="SELECT * FROM ".static::getTables()." WHERE username='".$username."' AND "."password='".$password."';";
         $db=FDatabase::getInstance();
         $result=$db->exist($sql);
-        if($result!=null){
-             $user=new EUtente($result['username'],$result['password'], $result['nome'], $result['cognome'],$result['dataDiNascita'], $result['email'],$result['amministratore']);
-             return $user;
-        }
-        else return false;
+        return $result;
+
     }
 
      /** 
@@ -131,7 +117,7 @@ class FUtente
      * @return bool 
      */
 
-    public static function EsisteUsername($username){
+    public static function esisteUsername($username){
         $sql="SELECT * FROM ".static::getTables()." WHERE username='".$username."';";
         $db=FDatabase::getInstance();
         $result=$db->exist($sql);
@@ -146,7 +132,7 @@ class FUtente
      */
 
 
-    public static function EsisteMail($email){
+    public static function esisteMail($email){
         $sql="SELECT * FROM ".static::getTables()." WHERE email='".$email."';";
         $db=FDatabase::getInstance();
         $result=$db->exist($sql);
@@ -154,9 +140,7 @@ class FUtente
         else return false;
     }
 
-    public static function loadUtenteByUsername(String $username){
 
-    }
 
    
     
