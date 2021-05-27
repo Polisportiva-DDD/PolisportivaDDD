@@ -50,11 +50,15 @@ class FDatabase
 	 * $EOggetto oggetto di $classe va memorizza
      * Entity sul database.
      */
-    public function store($query,$classe,$EOggetto){
+
+
+    public function store($query,$EOggetto){
         try{
             $this->db->beginTransaction();  //Disattiva la modalità autocommit e quindi le  modifiche apportate al database tramite l'istanza dell'oggetto PDO non vengono salvate fino a quando non si termina la transazione chiamando PDO :: commit () . La chiamata a PDO :: rollBack () 
             $stmt=$this->db->prepare($query);  //Prepara un'istruzione per l'esecuzione e restituisce un PDOStatement
-            $classe::bind($stmt,$EOggetto); 
+            $Eclass = get_class($EOggetto);
+            $Fclass = "F" . substr($Eclass, 1);
+            $Fclass::bind($stmt,$EOggetto);
             $stmt->execute(); //Esegue un'istruzione preparata
             $id=$this->db->lastInsertId(); //Restituisce l'ID dell'ultima riga o valore di sequenza inseriti
             $this->db->commit(); //Effettua la transizione
