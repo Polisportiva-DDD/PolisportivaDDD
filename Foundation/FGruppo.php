@@ -6,27 +6,29 @@ require_once 'config.inc.php';
 class FGruppo
 {
     private static $tableName="gruppo";
-    private static $values="(:admin,:nomeCampo,:nome,:etaMinima,:etaMassima,:votoMinimo, :descrizione, :partecipanti, :dataEOra)";
+    private static $tablePartecipanti = "partecipazionegruppo";
+    private static $values="(:id, :admin,:idCampo,:nome,:etaMinima,:etaMassima,:votoMinimo, :descrizione, :dataEOra)";
 
     public function __construct(){}
 
-    public static function bind($stmt, EGruppo $gruppo){
+    public static function bind(PDO $stmt, EGruppo $gruppo){
+        $stmt->bindValue(':id', null,  PDO::PARAM_INT);
         $stmt->bindValue(':admin', $gruppo->getAdmin()->getUsername(), PDO::PARAM_STR);
-        $stmt->bindValue(':nomeCampo', $gruppo->getCampo()->getNome(), PDO::PARAM_STR);
+        $stmt->bindValue(':idCampo', $gruppo->getCampo()->getId(), PDO::PARAM_INT);
         $stmt->bindValue(':nome', $gruppo->getNome(), PDO::PARAM_STR);
         $stmt->bindValue(':etaMinima', $gruppo->getEtaMinima(), PDO::PARAM_INT);
         $stmt->bindValue(':etaMassima', $gruppo->getEtaMassima(), PDO::PARAM_INT);
         $stmt->bindValue(':votoMinimo', $gruppo->getVotoMinimo(), PDO::PARAM_STR);
         $stmt->bindValue(':descrizione', $gruppo->getDescrizione(), PDO::PARAM_STR);
-        $stmt->bindValue(':partecipanti', $gruppo->getPartecipanti()->serialize(), PDO::PARAM_STR);
         $stmt->bindValue(':dataEOra', $gruppo->getDataEOra()->format("Y-m-d"), PDO::PARAM_STR);
     }
+
 
     public static function store(EGruppo $gruppo){
         try {
             $db = FDatabase::getInstance();
             $sql = "INSERT INTO " . static::$tableName .
-                "(admin, campo, nome, etaMinima, etaMassima, votoMinimo, descrizione, partecipanti, dataEOra) VALUES" .
+                "VALUES" .
                 static::$values;
             $id = $db->store($sql, "FGruppo", $gruppo);
             if ($id) return $id;
@@ -49,17 +51,141 @@ class FGruppo
         }
     }
 
-    public static function loadById(int $idGruppo){
+    /*
+     * public function __construct(?int $id, string $nome, int $etaMinima,
+                                int $etaMassima, float $votoMinimo, string $descrizione,
+                                DateTime $dataEOra, array $partecipanti,
+                                Utente $admin, Campo $campo)
+     */
+    public static function loadGruppoById(int $idGruppo){
         try{
-            $sql = "SELECT * FROM " . static::$tableName . " WHERE id=" . $idGruppo;
-            $db=FDatabase::getInstance();
-            return $db->load($sql);
+            $sql = "SELECT * FROM " . static::$tableName . " WHERE id=" . $idGruppo; //Query per ottenere un gruppo dall'id
+            $db=FDatabase::getInstance(); //Ottieni il DB
+            $row = $db->loadSingle($sql); //Ottieni la riga corrispondente dal DB
+            if ($row){ //Se row non è vuoto
+                $admin = FUtente::loadUtenteByUsername($row['admin']); //Load dell'utente con id dell'admin
+                $campo = FCampo::loadCampoById($row['campo']); //Load del campo con id corrispondente
+                $partecipanti = self::loadPartecipanti($row['id']); //Carica i partecipanti del gruppo che stiamo caricando
+                $gruppo = new EGruppo($row['id'], $row['nome'], $row['etaMinima'],$row['etaMassima'],
+                                        $row['votoMinimo'], $row['descrizione'], $row['dataEOra'],
+                                        $partecipanti, $admin, $campo);
+                return $gruppo;
+            }
+            else{
+                return null;
+            }
+
         }
         catch(Exception $e){
             echo ("Error");
         }
     }
 
+
+    public static function loadPartecipanti(int $idGruppo){
+        try {
+            $partecipanti = array();
+            $sql = "SELECT utente FROM " . static::$tablePartecipanti . " WHERE idGruppo=" . $idGruppo; //Query per prendere gli username degli utenti che partecipano a questo gruppo
+            $db = FDatabase::getInstance();
+            $rows = $db->loadMultiple($sql);
+            foreach ($rows as $row) { //Per ogni row
+                $utente = FUtente::loadUtenteByUsername($row['utente']); //Carica l'utente corrispondente all'username ottenuto
+                array_push($partecipanti, $utente); //Mettilo nell'array
+            }
+            return $partecipanti;
+        }
+        catch (Exception $e){
+            echo("ERROR"); //Da gestire
+        }
+
+    }
+
+
+    public static function loadGruppi(?string $nomeGruppo, ?string $admin, ?DateTime $data, ?string $tipoCampo,
+                                      ?int $etaMin, ?int $etaMax, ?float $valMin){
+        try{
+            $sql = "SELECT * FROM " . static::$tableName; //Prendi tutti i gruppi
+            $conditions = array(); //Array delle condizioni
+
+            if (isset($nomeGruppo)){ //Se nomegruppo != null
+                $conditions[] = "nome=".$nomeGruppo; //Aggiungi nome=nomeGruppo per poi aggiungerlo alla query
+            }
+
+            if (isset($admin)){
+                $conditions[] = "admin=".$admin;
+            }
+
+            if (isset($data)){
+                $conditions[] = "dataEOra > ".data;
+            }
+
+            if (isset($tipoCampo)){
+                $campi = FCampo::loadCampi();
+                foreach($campi as $campo){
+                    $nomec = $campo->getNome();
+                    if ($tipoCampo = $nomec)
+                    {
+                        $conditions[] = "campo=" . $campo->getId();
+                    }
+                }
+            }
+
+            if (isset($etaMin)){
+                $conditions[] = "etaMinima > ".$etaMin;
+            }
+
+            if (isset($etaMax)){
+                $conditions[] = "etaMassima < ".$etaMax;
+            }
+
+            if (isset($valMin)){
+                $conditions[] = "votoMinimo > ".$valMin;
+            }
+
+            if (count($conditions) > 0) {
+                $sql .= " WHERE " . implode(' AND ', $conditions);
+            }
+
+            $db = FDatabase::getInstance();
+            $rows = $db->loadMultiple($sql);
+            $gruppi = array();
+            foreach($rows as $row){
+                $admin = FUtente::loadUtenteByUsername($row['admin']); //Load dell'utente con id dell'admin
+                $campo = FCampo::loadCampoById($row['campo']); //Load del campo con id corrispondente
+                $partecipanti = self::loadPartecipanti($row['id']); //Carica i partecipanti del gruppo che stiamo caricando
+                $gruppo = new EGruppo($row['id'], $row['nome'], $row['etaMinima'],$row['etaMassima'],
+                    $row['votoMinimo'], $row['descrizione'], $row['dataEOra'],
+                    $partecipanti, $admin, $campo);
+                array_push($gruppi, $gruppo);
+            }
+
+
+
+
+        }
+        catch (Exception $e)
+        {
+            echo("ERROR"); //Da gestire
+        }
+    }
+
+    public function addPartecipante(String $username, int $idGruppo ){
+        try {
+            $db = FDatabase::getInstance();
+            $db->beginTransaction();
+            $sql = "INSEERT INTO " . static::$tablePartecipanti . "VALUES (:idGruppo, :utente)";
+            $stmt=$this->db->prepare($sql);
+            $stmt->bindValue(':idGruppo', $idGruppo , PDO::PARAM_INT);
+            $stmt->bindValue(':utente', $username, PDO::PARAM_STR);
+            $stmt->execute();
+            $db->commit();
+            $db->closeConnection();
+
+        }
+        catch (Exception $exception){
+            echo ("ERRORE"); //Da gestire
+        }
+    }
 
 
 
