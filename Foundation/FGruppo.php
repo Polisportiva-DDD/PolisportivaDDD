@@ -8,6 +8,7 @@ class FGruppo
     private static $tableName="gruppo";
     private static $tablePartecipanti = "partecipazionegruppo";
     private static $values="(:id, :admin,:idCampo,:nome,:etaMinima,:etaMassima,:votoMinimo, :descrizione, :dataEOra)";
+    private static $classeEntity = "EUtente";
 
     public function __construct(){}
 
@@ -30,7 +31,7 @@ class FGruppo
             $sql = "INSERT INTO " . static::$tableName .
                 "VALUES" .
                 static::$values;
-            $id = $db->store($sql, "FGruppo", $gruppo);
+            $id = $db->store($sql, $gruppo);
             if ($id) return $id;
             else return null;
         }
@@ -61,7 +62,7 @@ class FGruppo
         try{
             $sql = "SELECT * FROM " . static::$tableName . " WHERE id=" . $idGruppo; //Query per ottenere un gruppo dall'id
             $db=FDatabase::getInstance(); //Ottieni il DB
-            $row = $db->loadSingle($sql); //Ottieni la riga corrispondente dal DB
+            $row = $db->loadSingle($sql, static::$classeEntity); //Ottieni la riga corrispondente dal DB
             if ($row){ //Se row non è vuoto
                 $admin = FUtente::loadUtenteByUsername($row['admin']); //Load dell'utente con id dell'admin
                 $campo = FCampo::loadCampoById($row['campo']); //Load del campo con id corrispondente
@@ -203,8 +204,8 @@ $d = new DateTime("1999-07-16");
 
 $arr=array($r1,$r2,$r3);
 $u=new EUtente("lollo1","lorenzo","Diella","ccc","pass", $d, $arr);
-$c = new ECampo("calcio a 5", 3, 10, "descrizione campo", 11.5);
-$g1 = new EGruppo("Ciao",1,10,11,"forse",new DateTime('now'),$arr,$u,$c);
+//$c = new ECampo("calcio a 5", 3, 10, "descrizione campo", 11.5);
+//$g1 = new EGruppo("Ciao",1,10,11,"forse",new DateTime('now'),$arr,$u,$c);
 
 $row = FGruppo::loadById(3);
 print_r($row);

@@ -2,7 +2,7 @@
  Interface ECampo{
 
 
-     public function __construct($n, $nMin, $nMax, $d, $p);
+     public function __construct($id, $n, $nMin, $nMax, $d, $p);
 
      /**
       * Restituisce il nome del campo

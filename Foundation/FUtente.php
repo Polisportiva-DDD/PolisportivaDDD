@@ -108,7 +108,6 @@ class FUtente
         $db=FDatabase::getInstance();
         $result=$db->exist($sql);
         return $result;
-
     }
 
      /** 

@@ -12,7 +12,7 @@ class EGruppo
     private float $votoMinimo;
     private String $descrizione;
     private DateTime $dataEOra;
-    private array $partecipanti;
+    private array $partecipanti = array();
     private EUtente $admin;
     private ECampo $campo;
 
@@ -206,6 +206,12 @@ class EGruppo
         $this->campo = $campo;
     }
 
+
+    /**
+     * Aggiunge un partecipante al gruppo
+     * @param EUtente $utente
+     * @return bool
+     */
     public function aggiungiPartecipante(EUtente $utente): bool{
 
         $numeroMaxPartecipanti = $this->campo->getNumeroMassimo();
@@ -223,6 +229,11 @@ class EGruppo
         }
     }
 
+    /**
+     * Rimuove un partecipante dal gruppo
+     * @param EUtente $utente
+     * @return bool
+     */
     public function rimuoviPartecipante(EUtente $utente): bool{
         foreach($this->partecipanti as $chiave => $valore){
             if($utente->getUsername()==$valore->getUsername()){
