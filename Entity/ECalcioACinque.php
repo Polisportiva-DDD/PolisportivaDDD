@@ -3,15 +3,16 @@
 
 class ECalcioACinque implements ECampo
 {
-
+    private int $id;
     private string $nome;
     private int $numeroMinimo;
     private int $numeroMassimo;
     private string $descrizione;
     private float $prezzo;
 
-    public function __construct($n, $nMin, $nMax, $d, $p)
+    public function __construct($id, $n, $nMin, $nMax, $d, $p)
     {
+        $this->id=$id;
         $this->nome=$n;
         $this->numeroMinimo=$nMin;
         $this->numeroMassimo=$nMax;
