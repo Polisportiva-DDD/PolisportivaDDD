@@ -78,6 +78,25 @@ class FCartaDiCredito
         else return null;
     }
 
+    public static function loadCarteUtente(string $username){
+        try{
+            $sql="SELECT * FROM " . static::$tableName . " WHERE username=" . $username;
+            $db=FDatabase::getInstance();
+            $result=$db->loadMultiple($sql);
+            if($result!=null){
+                $carteUtente = array();
+                for($i=0; $i<count($result); $i++){
+                    $carteUtente[] = new ECartadiCredito($result[$i]['numero'],$result[$i]['nomeTitolare'],$result[$i]['cognomeTitolare'],$result[$i]['cvc'],new DateTime($result[$i]['scadenza']));
+                }
+                return $carteUtente;
+            }
+            else return null;
+        }
+        catch(Exception $e){
+            echo ("Error");
+        }
+
+    }
 
 
 }

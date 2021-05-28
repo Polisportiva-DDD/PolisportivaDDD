@@ -10,19 +10,69 @@ class ERecensione
     private string $titolo;
     private string $testo;
     private DateTime $data;
+    private EUtente $autore;
+    private EUtente $possessore;
 
-    //constructors
 
-    public function __construct(int $id,float $voto,string $titolo,string $testo,DateTime $data)
+    /**
+     * ERecensione constructor.
+     * @param int|null $id
+     * @param float $voto
+     * @param string $titolo
+     * @param string $testo
+     * @param DateTime $data
+     * @param EUtente $autore
+     * @param EUtente $possessore
+     */
+    public function __construct(?int $id,EUtente $autore,float $voto,string $titolo,string $testo,DateTime $data,
+                                EUtente $possessore)
     {
         $this -> id = $id;
+        $this -> autore = $autore;
         $this -> voto = $voto;
         $this -> titolo = $titolo;
         $this -> testo = $testo;
         $this -> data = $data;
+        $this -> possessore = $possessore;
     }
 
     //methods
+
+    /**
+     * Restituisce chi ha fatto la recensione
+     * @return EUtente
+     */
+    public function getAutore(): EUtente
+    {
+        return $this->autore;
+    }
+
+    /**
+     * Restituisce a chi è stata fatta la recensione
+     * @return EUtente
+     */
+    public function getPossessore(): EUtente
+    {
+        return $this->possessore;
+    }
+
+    /**
+     * Imposta chi ha fatto la recensione
+     * @param EUtente $autore
+     */
+    public function setAutore(EUtente $autore): void
+    {
+        $this->autore = $autore;
+    }
+
+    /**
+     * Imposta a chi è stata fatta la recensione
+     * @param EUtente $possessore
+     */
+    public function setPossessore(EUtente $possessore): void
+    {
+        $this->possessore = $possessore;
+    }
 
     /**
      * Restituisce l'ID della recensione
