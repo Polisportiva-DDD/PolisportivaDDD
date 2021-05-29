@@ -38,9 +38,9 @@ class FRecensione
 
     public static function store(ERecensione $recensione) {
         try {
-            $db = FDatabase::getInstance();
             $sql = "INSERT INTO ". static::$tableName . " VALUES " . static::$values;
-            $id = $db->store($sql,'FRecensione', $recensione);
+            $db=FDatabase::getInstance();
+            $id=$db->store($sql,$recensione);
             if($id)
                 return $id;
             else

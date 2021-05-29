@@ -34,9 +34,10 @@ class FCartaDiCredito
      */
     public static function store(ECartadiCredito $carta) {
         try{
-            $db = FDatabase::getInstance();
+
             $sql = "INSERT INTO ". static::$tableName . " VALUES " . static::$values;
-            $id = $db->store($sql,'FCartaDiCredito', $carta);
+            $db = FDatabase::getInstance();
+            $id = $db->store($sql, $carta);
             if($id)
                 return $id;
             else
@@ -66,10 +67,15 @@ class FCartaDiCredito
         }
     }
 
+    /**
+     * @param string $numero
+     * @return ECartadiCredito|null
+     * @throws Exception
+     */
     public static function loadCarta(string $numero){
-        $sql="SELECT * FROM ".static::getTables()." WHERE numero=" . $numero;
+        $sql="SELECT * FROM ".static::$tableName." WHERE numero='" . $numero . "';";
         $db=FDatabase::getInstance();
-        $result=$db->load($sql);
+        $result=$db->loadSingle($sql);
         if($result!=null){
             $carta=new ECartadiCredito($result['numero'],$result['nomeTitolare'],$result['cognomeTitolare'],$result['cvc'],new DateTime($result['scadenza']));
 
@@ -80,7 +86,7 @@ class FCartaDiCredito
 
     public static function loadCarteUtente(string $username){
         try{
-            $sql="SELECT * FROM " . static::$tableName . " WHERE username=" . $username;
+            $sql="SELECT * FROM " . static::$tableName . " WHERE username='" . $username . "';";
             $db=FDatabase::getInstance();
             $result=$db->loadMultiple($sql);
             if($result!=null){
