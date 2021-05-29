@@ -30,10 +30,15 @@
 
      /**
       * Restituisce il prezzo del campo
-      * @param float $p
       * @return float
       */
-     public function getPrezzo(float $p):float;
+     public function getPrezzo():float;
+
+     /**
+      * Restituisce l'id del campo
+      * @return int
+      */
+     public function getId(): int;
 
 
      /**
@@ -65,5 +70,10 @@
       * @param float $p
       */
      public function setPrezzo(float $p):void;
-	
+
+     /**
+      * Imposta l'id del campo
+      * @param int $id
+      */
+     public function setId(int $id): void;
 }

@@ -7,12 +7,12 @@ class FGruppo
 {
     private static $tableName="gruppo";
     private static $tablePartecipanti = "partecipazionegruppo";
-    private static $values="(:id, :admin,:idCampo,:nome,:etaMinima,:etaMassima,:votoMinimo, :descrizione, :dataEOra)";
+    private static $values="(:id,:admin,:idCampo,:nome,:etaMinima,:etaMassima,:votoMinimo,:descrizione, :dataEOra)";
     private static $classeEntity = "EUtente";
 
     public function __construct(){}
 
-    public static function bind(PDO $stmt, EGruppo $gruppo){
+    public static function bind($stmt, EGruppo $gruppo){
         $stmt->bindValue(':id', null,  PDO::PARAM_INT);
         $stmt->bindValue(':admin', $gruppo->getAdmin()->getUsername(), PDO::PARAM_STR);
         $stmt->bindValue(':idCampo', $gruppo->getCampo()->getId(), PDO::PARAM_INT);
@@ -28,9 +28,7 @@ class FGruppo
     public static function store(EGruppo $gruppo){
         try {
             $db = FDatabase::getInstance();
-            $sql = "INSERT INTO " . static::$tableName .
-                "VALUES" .
-                static::$values;
+            $sql="INSERT INTO ". static::$tableName ." VALUES ".static::$values;
             $id = $db->store($sql, $gruppo);
             if ($id) return $id;
             else return null;
@@ -64,11 +62,12 @@ class FGruppo
             $db=FDatabase::getInstance(); //Ottieni il DB
             $row = $db->loadSingle($sql, static::$classeEntity); //Ottieni la riga corrispondente dal DB
             if ($row){ //Se row non è vuoto
-                $admin = FUtente::loadUtenteByUsername($row['admin']); //Load dell'utente con id dell'admin
-                $campo = FCampo::loadCampoById($row['campo']); //Load del campo con id corrispondente
+                $admin = FUtente::loadByUsername($row['admin']); //Load dell'utente con id dell'admin
+                $campo = FCampo::loadCampo($row['idcampo']); //Load del campo con id corrispondente
                 $partecipanti = self::loadPartecipanti($row['id']); //Carica i partecipanti del gruppo che stiamo caricando
+                $date = DateTime::createFromFormat('Y-m-d H:i:s', $row['dataEOra']); //Ricrea la data dalla stringa recuperata dal DB
                 $gruppo = new EGruppo($row['id'], $row['nome'], $row['etaMinima'],$row['etaMassima'],
-                                        $row['votoMinimo'], $row['descrizione'], $row['dataEOra'],
+                                        $row['votoMinimo'], $row['descrizione'], $date,
                                         $partecipanti, $admin, $campo);
                 return $gruppo;
             }
@@ -151,14 +150,16 @@ class FGruppo
             $rows = $db->loadMultiple($sql);
             $gruppi = array();
             foreach($rows as $row){
-                $admin = FUtente::loadUtenteByUsername($row['admin']); //Load dell'utente con id dell'admin
-                $campo = FCampo::loadCampoById($row['campo']); //Load del campo con id corrispondente
+                $admin = FUtente::loadByUsername($row['admin']); //Load dell'utente con id dell'admin
+                $campo = FCampo::loadCampo($row['idcampo']); //Load del campo con id corrispondente
                 $partecipanti = self::loadPartecipanti($row['id']); //Carica i partecipanti del gruppo che stiamo caricando
+                $date = DateTime::createFromFormat('Y-m-d H:i:s', $row['dataEOra']);
                 $gruppo = new EGruppo($row['id'], $row['nome'], $row['etaMinima'],$row['etaMassima'],
-                    $row['votoMinimo'], $row['descrizione'], $row['dataEOra'],
+                    $row['votoMinimo'], $row['descrizione'], $date,
                     $partecipanti, $admin, $campo);
                 array_push($gruppi, $gruppo);
             }
+            return $gruppi;
 
 
 
@@ -170,12 +171,12 @@ class FGruppo
         }
     }
 
-    public function addPartecipante(String $username, int $idGruppo ){
+    public static function addPartecipante(String $username, int $idGruppo ){
         try {
             $db = FDatabase::getInstance();
             $db->beginTransaction();
             $sql = "INSEERT INTO " . static::$tablePartecipanti . "VALUES (:idGruppo, :utente)";
-            $stmt=$this->db->prepare($sql);
+            $stmt=$db->prepare($sql);
             $stmt->bindValue(':idGruppo', $idGruppo , PDO::PARAM_INT);
             $stmt->bindValue(':utente', $username, PDO::PARAM_STR);
             $stmt->execute();
@@ -192,11 +193,7 @@ class FGruppo
 
 }
 
-
-/*	  public function __construct(String $username,String $nome,
-								  String $cognome,String $email,
-								  String $password,DateTime $dataDiNascita,
-								  array $recensioni){*/
+/*
 $r1=new ERecensione(1,2.4,"Natale","ciao",new DateTime("2011-01-01T15:03:01.012345Z"));
 $r2=new ERecensione(1,4.4,"Natale","ciao",new DateTime("2011-01-01T15:03:01.012345Z"));
 $r3=4;
@@ -209,5 +206,5 @@ $u=new EUtente("lollo1","lorenzo","Diella","ccc","pass", $d, $arr);
 
 $row = FGruppo::loadById(3);
 print_r($row);
-
+*/
 ?>

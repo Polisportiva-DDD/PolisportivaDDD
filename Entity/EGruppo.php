@@ -5,7 +5,7 @@
 
 class EGruppo
 {
-    private int $id;
+    private ?int $id;
     private String $nome;
     private int $etaMinima;
     private int $etaMassima;

@@ -21,6 +21,24 @@ class ECalcioACinque implements ECampo
     }
 
     /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
+
+
+    /**
      * Restituisce il nome del campo
      * @return String
      */
@@ -57,7 +75,7 @@ class ECalcioACinque implements ECampo
      * @param float $p
      * @return float
      */
-    public function getPrezzo(float $p):float{
+    public function getPrezzo():float{
         return $this->prezzo;
     }
 
