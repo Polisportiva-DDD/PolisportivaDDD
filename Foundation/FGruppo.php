@@ -173,19 +173,20 @@ class FGruppo
 
     public static function addPartecipante(String $username, int $idGruppo ){
         try {
-            $db = FDatabase::getInstance();
+            $db1 = FDatabase::getInstance();
+            $db=$db1->getDb();
             $db->beginTransaction();
-            $sql = "INSEERT INTO " . static::$tablePartecipanti . "VALUES (:idGruppo, :utente)";
+            $sql = "INSERT INTO " . static::$tablePartecipanti . " VALUES (:idGruppo, :utente)";
             $stmt=$db->prepare($sql);
             $stmt->bindValue(':idGruppo', $idGruppo , PDO::PARAM_INT);
             $stmt->bindValue(':utente', $username, PDO::PARAM_STR);
             $stmt->execute();
             $db->commit();
-            $db->closeConnection();
+            //$db->closeConnection();
 
         }
-        catch (Exception $exception){
-            echo ("ERRORE"); //Da gestire
+        catch (PDOException $e){
+            echo "ERROR: ".$e->getMessage();
         }
     }
 

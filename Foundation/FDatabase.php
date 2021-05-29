@@ -18,6 +18,14 @@ class FDatabase
     /** oggetto PDO che effettua la connessione al dbms */
     private $db;
 
+    /**
+     * @return PDO
+     */
+    public function getDb(): PDO
+    {
+        return $this->db;
+    }
+
 
 
     /** costruttore privato poichè l'unico accesso è dato dal metodo getInstance() */
