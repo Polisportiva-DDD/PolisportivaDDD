@@ -10,8 +10,9 @@ class EWallet
 
     //constructor
 
-    public function __construct(array $gettoni)
+    public function __construct(array $gettoni,int $id=-1)
     {
+        $this -> id=$id;
         $this -> gettoni = $gettoni;
     }
 
@@ -47,35 +48,17 @@ class EWallet
         $this->gettoni = $gettoni;
     }
 
-    public function aggiungiGettoni(string $key, int $quantita):bool
-    {
-        try
-        {
-            if($key != null && $quantita != null)
-            {
-                $this -> gettoni[$key] = $quantita;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        catch (Exception $exception){
-            //Gestione dell'eccezione
-            return false;
-        }
-    }
 
-    public function aggiungiGettoni2(ECampo $campo, int $quantita):bool
+
+    public function aggiungiGettoni(ECampo $campo, int $quantita):bool
     {
         try
         {
 
             if($campo != null && $quantita != null)
             {
-                $nomecampo = $campo -> getNome();
-                $this -> gettoni[$nomecampo] = $quantita;
+                $idcampo = $campo -> getId();
+                $this -> gettoni[$idcampo] += $quantita;
                 return true;
             }
             else
@@ -84,13 +67,31 @@ class EWallet
             }
         }
         catch (Exception $exception){
-            //Gestione dell'eccezione
             return false;
         }
     }
 
-    public function rimuoviGettoni(string $key, int $quantita):bool
+
+    public function rimuoviGettoni(ECampo $campo, int $quantita):bool
     {
-        //da completare
+        try
+        {
+
+            if($campo != null && $quantita != null)
+            {
+                $idcampo = $campo -> getId();
+                $this -> gettoni[$idcampo] -=  $quantita;//sottrago la quantita di gettoni relativa a quel campo
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        catch (Exception $exception){
+            return false;
+        }
     }
+
 }
+
