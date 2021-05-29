@@ -10,12 +10,12 @@ $c8 = new ECalcioACinque(0, "calcio a otto", 1, 10, "desc", 12.2);
 $c11 = new ECalcioACinque(0, "calcio a undici", 1, 10, "desc", 12.2);
 
 $gettoni = array($c5->getId()=>1, $c7->getId()=>4, $c8->getId()=>3, $c11->getId()=>9);
-$wallet = new EWallet(1, $gettoni);
+$wallet = new EWallet($gettoni, 1);
 
-$utente = new EAmministratore("usern", "lo", "da", "em", "pass", new DateTime("now"), "aa", $wallet);
+$utente = new EAmministratore("aaaaaaaaaaaaaaa", "lo", "da", "em", "pass", new DateTime("now"), "aa", $wallet);
 
-$gruppo = new EGruppo(null , "GruppoNome", 15, 22, 2.5, "Descr", new DateTime("now"), array(), $utente, $c5);
+//$gruppo = new EGruppo(null , "GruppoNome", 15, 22, 2.5, "Descr", new DateTime("now"), array(), $utente, $c5);
 
-
+FGruppo::addPartecipante('usern', 3);
 
 ?>

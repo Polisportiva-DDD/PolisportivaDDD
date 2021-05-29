@@ -6,7 +6,7 @@ require_once '../Foundation/config.inc.php';
 class FAmministratore
 {
     private static $tableName = "amministratore";
-    private static $values = (":username");
+    private static $values = "(:username)";
 
     public static function bind($stmt, EAmministratore $amministratore){
         $stmt->bindValue(":username", $amministratore->getUsername(), PDO::PARAM_STR);

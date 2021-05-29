@@ -81,7 +81,9 @@ class FRecensione
             if($result!=null){
                 $recensioniUtente = array();
                 for($i=0; $i<count($result); $i++){
-                    $recensioniUtente[] = new ERecensione($result[$i]['id'],$result[$i]['autore'],$result[$i]['voto'],$result[$i]['titolo'],$result[$i]['testo'],new DateTime($result[$i]['data']),$result[$i]['possessore']);
+                    $possessore = FUtente::loadByUsername($result[$i]['possessore']);
+                    $autore = FUtente::loadByUsername($result[$i]['autore']);
+                    $recensioniUtente[] = new ERecensione($result[$i]['id'],$autore,$result[$i]['voto'],$result[$i]['titolo'],$result[$i]['testo'],new DateTime($result[$i]['data']),$possessore);
                 }
                 return $recensioniUtente;
             }
@@ -105,7 +107,9 @@ class FRecensione
             if($result!=null){
                 $recensioniEffettuate = array();
                 for($i=0; $i<count($result); $i++){
-                    $recensioniEffettuate[] = new ERecensione($result[$i]['id'],$result[$i]['autore'],$result[$i]['voto'],$result[$i]['titolo'],$result[$i]['testo'],new DateTime($result[$i]['data']),$result[$i]['possessore']);
+                    $possessore = FUtente::loadByUsername($result[$i]['possessore']);
+                    $autore = FUtente::loadByUsername($result[$i]['autore']);
+                    $recensioniEffettuate[] = new ERecensione($result[$i]['id'],$autore,$result[$i]['voto'],$result[$i]['titolo'],$result[$i]['testo'],new DateTime($result[$i]['data']),$possessore);
                 }
                 return $recensioniEffettuate;
             }

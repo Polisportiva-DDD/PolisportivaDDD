@@ -69,7 +69,7 @@ class FUtente
         $db=FDatabase::getInstance();
         $result=$db->loadSingle($sql);
         if($result!=null){
-            $wallet=new EWallet($result['wallet'],array());
+            $wallet=new EWallet(array(), $result['wallet']);
             $user=new EUtente($result['username'], $result['nome'], $result['cognome'],$result['email'],$result['password'],new DateTime($result['dataDiNascita']),$result['immagine'],$wallet);
             return $user;
         }

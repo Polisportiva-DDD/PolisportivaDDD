@@ -1,5 +1,6 @@
 <?php
 require_once '../Utility/autoload.php';
+
  class EUtente{
 	private string $username;
 	private string $nome;
@@ -424,6 +425,5 @@ $r3 = new ERecensione(3,$utente3,2.5,'certo','tante',new DateTime('now'),$utente
 $r4 = new ERecensione(4,$utente2,4.8,'bo o no','forse si ',new DateTime('now'),$utente1);
 
 
-print_r(FRecensione::loadRecensioniEffettuate('Urwen99'));
-print_r(FRecensione::loadRecensioniUtente('Lorediel'));
+print_r(FRecensione::loadRecensioniEffettuate('usern'));
 ?>
