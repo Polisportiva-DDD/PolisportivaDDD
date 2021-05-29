@@ -97,7 +97,7 @@ class FUtenteRegistrato
      * @return bool (restituisce true se va tutto a buon fine false altrimenti)
      */
 
-    public static function updateBannato($username, $field1, $field2, bool $bannato, String $motivazione){
+    public static function updateBannato($username, bool $bannato, String $motivazione){
         $sql="UPDATE ".static::getTables()." SET bannato='".$bannato."', motivazione='".$motivazione."' WHERE username='".$username."';";
         $db=FDatabase::getInstance();
         if($db->update($sql)) return true;
