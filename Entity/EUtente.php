@@ -401,7 +401,7 @@ $u->rimuoviCarta($carta2);
 //$u->setCartedicredito($carta);
 print(count($u->getCartedicredito()));
 */
-$w=new EWallet("1",array());
-$u=new EUtente("lor","lorenzo","Diella","ccc","pass",new DateTime("2012-01-01T15:03:01.012345Z"),"imm",$w);
-print_r(FUtente::loadByUsername("lor"));
+//$w=new EWallet("1",array());
+//$u=new EUtente("lor","lorenzo","Diella","ccc","pass",new DateTime("2012-01-01T15:03:01.012345Z"),"imm",$w);
+//print_r(FUtente::loadByUsername("lor"));
 ?>
