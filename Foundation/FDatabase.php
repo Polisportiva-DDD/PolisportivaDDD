@@ -1,6 +1,7 @@
 <?php
+
 require_once '../Utility/autoload.php';
-require_once 'config.inc.php';
+require_once '../Foundation/config.inc.php';
 
 if(file_exists('config.inc.php')) require_once 'config.inc.php';
 

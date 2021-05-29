@@ -1,8 +1,7 @@
 <?php
 
-require_once 'EUtente.php';
-require_once 'FDatabase.php';
-
+require_once '../Utility/autoload.php';
+require_once '../Foundation/config.inc.php';
 
 class FTicketAssistenza
 {

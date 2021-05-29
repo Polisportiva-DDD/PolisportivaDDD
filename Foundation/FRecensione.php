@@ -1,7 +1,7 @@
 <?php
 
 require_once("../Utility/autoload.php");
-require_once 'config.inc.php';
+require_once '../Foundation/config.inc.php';
 
 class FRecensione
 {
@@ -75,7 +75,7 @@ class FRecensione
      */
     public static function loadRecensioniUtente(string $username){
         try{
-            $sql="SELECT * FROM " . static::$tableName . " WHERE possessore=" . $username;
+            $sql="SELECT * FROM " . static::$tableName . " WHERE possessore='" . $username . "';";
             $db=FDatabase::getInstance();
             $result=$db->loadMultiple($sql);
             if($result!=null){
@@ -99,7 +99,7 @@ class FRecensione
      */
     public static function loadRecensioniEffettuate(string $username){
         try{
-            $sql="SELECT * FROM " . static::$tableName . " WHERE autore=" . $username;
+            $sql="SELECT * FROM " . static::$tableName . " WHERE autore='" . $username . "';";
             $db=FDatabase::getInstance();
             $result=$db->loadMultiple($sql);
             if($result!=null){
@@ -118,24 +118,4 @@ class FRecensione
     }
 
 }
-$w1=new EWallet(array(),1);
-$w2=new EWallet(array(),2);
-$w3=new EWallet(array(),3);
-
-
-$datadinascita = new DateTime('1999-11-22');
-$datadinascita2 = new DateTime("1999-07-16");
-$datadinascita3 = new DateTime("1999-06-20");
-
-$utente1 = new EUtente('Urwen99','Giorgio','Di Nunzio','dinunziogiorgio.99@gmail.com','pippo',$datadinascita,'imm',$w1);
-$utente2 = new EUtente('Lorediel','Lorenzo',"D'Amico",'nonsapreiproprio@gmial.com','pippo',$datadinascita2,'imm2',$w2);
-$utente3 = new EUtente('Andreinho','Andrea','Franco','bo@gmail.com','pippo',$datadinascita3,'imm3',$w3);
-
-$r1 = new ERecensione(1,$utente1,2.5,'Bravissimo','tante belle cose',new DateTime('now'),$utente2);
-$r2 = new ERecensione(2,$utente2,4.8,'bo','forse si dai',new DateTime('now'),$utente3);
-$r3 = new ERecensione(3,$utente3,2.5,'certo','tante',new DateTime('now'),$utente1);
-$r4 = new ERecensione(4,$utente2,4.8,'bo o no','forse si ',new DateTime('now'),$utente1);
-
-
-print_r(FRecensione::loadRecensioniEffettuate('Urwen99'));
 

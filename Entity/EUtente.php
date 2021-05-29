@@ -401,7 +401,29 @@ $u->rimuoviCarta($carta2);
 //$u->setCartedicredito($carta);
 print(count($u->getCartedicredito()));
 */
-//$w=new EWallet("1",array());
+//$w=new EWallet(array(),1);
 //$u=new EUtente("lor","lorenzo","Diella","ccc","pass",new DateTime("2012-01-01T15:03:01.012345Z"),"imm",$w);
 //print_r(FUtente::loadByUsername("lor"));
+
+$w1=new EWallet(array(),1);
+$w2=new EWallet(array(),2);
+$w3=new EWallet(array(),3);
+
+
+$datadinascita = new DateTime('1999-11-22');
+$datadinascita2 = new DateTime("1999-07-16");
+$datadinascita3 = new DateTime("1999-06-20");
+
+$utente1 = new EUtente('Urwen99','Giorgio','Di Nunzio','dinunziogiorgio.99@gmail.com','pippo',$datadinascita,'imm',$w1);
+$utente2 = new EUtente('Lorediel','Lorenzo',"D'Amico",'nonsapreiproprio@gmial.com','pippo',$datadinascita2,'imm2',$w2);
+$utente3 = new EUtente('Andreinho','Andrea','Franco','bo@gmail.com','pippo',$datadinascita3,'imm3',$w3);
+
+$r1 = new ERecensione(1,$utente1,2.5,'Bravissimo','tante belle cose',new DateTime('now'),$utente2);
+$r2 = new ERecensione(2,$utente2,4.8,'bo','forse si dai',new DateTime('now'),$utente3);
+$r3 = new ERecensione(3,$utente3,2.5,'certo','tante',new DateTime('now'),$utente1);
+$r4 = new ERecensione(4,$utente2,4.8,'bo o no','forse si ',new DateTime('now'),$utente1);
+
+
+print_r(FRecensione::loadRecensioniEffettuate('Urwen99'));
+print_r(FRecensione::loadRecensioniUtente('Lorediel'));
 ?>

@@ -1,5 +1,6 @@
 <?php
 
+require_once '../Utility/autoload.php';
 
 class EWallet
 {
