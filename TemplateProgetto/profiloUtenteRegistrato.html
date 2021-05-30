@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="description" content="" />
   <meta name="author" content="" />
-  <title>Modern Business - Start Bootstrap Template</title>
+  <title>Polisportiva DDD</title>
   <!-- Favicon-->
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
   <!-- Font Awesome icons (free version)-->
@@ -15,19 +15,16 @@
   <link href="css/ourStyle.css" rel="stylesheet" />
 </head>
 <body>
-<!-- Navigation-->
-<div class="container">
-  <div class="d-flex flex-row-reverse">
-    <div class="p-2">
-      <a href="#"><button type="button" class="btn btn-secondary">Profilo</button></a>
-    </div>
-    <div class="p-2"><a href="#">  <button type="button" class="btn btn-primary">Logout</button></a></div>
-    <div class="p-2 mt-1">
-      <form>
-        <input type="text" placeholder="Cerca" name="search">
-        <a href="#" class="fas fa-search ml-1"></a>
-      </form>
-    </div>
+<div class="container mb-2 mt-2" dir="rtl" >
+  <div class="table-responsive" >
+    <table>
+      <tr >
+        <th scope="col" class="padTh"><a href="#">  <button type="button" class="btn btn-primary">Logout</button></a></th>
+        <th scope="col" class="padTh"><a href="#"><button type="button" class="btn btn-secondary">Profilo</button></a></th>
+        <th scope="col" class="padTh"  dir="ltr"><input type="text" placeholder="Cerca" name="search"></th>
+        <th scope="col" class="padTh"><span class="fas fa-search ml-1"></span></th>
+      </tr>
+    </table>
   </div>
 </div>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -50,61 +47,98 @@
 <section class="py-5">
   <div class="container">
     <!-- Page heading-->
-    <h1>Il tuo profilo</h1>
-    <ol class="breadcrumb mb-4 h-100">
-
+    <h1>Profilo Utente</h1>
+    <ol class="breadcrumb mb-4">
+      <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+      <li class="breadcrumb-item active">Profilo Utente</li>
     </ol>
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-md-12">
       <div class="text-center mb-2">
         <!-- Profilo -->
           <img src="https://via.placeholder.com/250" class="rounded-circle" alt="Immagine utente">
       </div>
       <div class="text-center">
-        <h4 class="mb-2">Username: user</h4>
-        <h4 class="mb-2">Nome: nome</h4>
-        <h4 class="mb-2">Cognome: cognome</h4>
-        <h4 class="mb-2">Età: 20</h4>
-        <h4 class="mb-2">Valutazione media:
+        <h6 class="mb-2">Username: user</h6>
+        <h6 class="mb-2">Nome: nome</h6>
+        <h6 class="mb-2">Cognome: cognome</h6>
+        <h6 class="mb-2">Età: 20</h6>
+        <h6 class="mb-2">Valutazione media:
           <span class="fa fa-star checkedStar"></span>
           <span class="fa fa-star checkedStar"></span>
           <span class="fa fa-star checkedStar"></span>
           <span class="fa fa-star"></span>
           <span class="fa fa-star"></span>
-        </h4>
+        </h6>
       </div>
       </div>
 
-
-      <!-- Sidebar Widgets Column-->
-      <div class="col-md-4">
-        <div class="list-group mb-4">
-          <a class="list-group-item" href="#">Profilo personale</a>
-          <a class="list-group-item" href="#">I tuoi gruppi</a>
-          <a class="list-group-item" href="#">Le tue carte</a>
-          <a class="list-group-item" href="#">Recensione</a>
-        </div>
-        <div class="card">
-          <div class="card-body rounded">
-            <h5 class="card-title">Wallet</h5>
-            <p class="card-text">Questo è il tuo wallet</p>
-          </div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">Calcio a 5 <span class="float-right">0</span></li>
-            <li class="list-group-item">Calcio a 7 <span class="float-right">0</span></li>
-            <li class="list-group-item">Calcio a 8 <span class="float-right">0</span></li>
-            <li class="list-group-item">Calcio a 11 <span class="float-right">0</span></li>
-          </ul>
-          <div class="card-body m-auto">
-            <a href="#" class="btn btn-primary btn-lg">Acquista gettoni</a>
-          </div>
-        </div>
-
-
-      </div>
     </div>
+
+
+    <div class="row mb-2 ">
+
+      <div class="col-md-12 text-right">
+
+        <button class="btn btn-primary  " type="submit">Recensisci</button>
+    </div>
+
+  </div>
+    <h10>Recensioni:</h10>
+    <hr>
+
+
+
+
+
+
+
+    <div class="row">
+      <div class="container">
+        <div class="text-left mb-2">
+          <!-- Profilo -->
+          <img src="https://via.placeholder.com/75" class="rounded-circle" alt="Immagine utente">
+          <h4 >Francesco2000</h4>
+        </div>
+        <div class="text-left">
+          <b><h10 class="mb-2">Valutazione:
+            <span class="fa fa-star checkedStar"></span>
+            <span class="fa fa-star checkedStar"></span>
+            <span class="fa fa-star checkedStar"></span>
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
+          </h10></b>
+          <br>
+          <b><h10 class="mb-2">Giocatore Discreto</h10><br></b>
+          <h10 class="mb-2">12/4/2021</h10><br>
+          <p >Descrizione della recensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensionee</p><br>
+
+        </div>
+      </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   </div>
 </section>
+
+
+
+
+
+
+
 <!-- Footer-->
 <footer class="py-5 bg-dark">
   <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
