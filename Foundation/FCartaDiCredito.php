@@ -5,13 +5,30 @@ require_once '../Foundation/config.inc.php';
 
 class FCartaDiCredito
 {
-    //tabella con la quale opera
+
+    /**
+     * tabella con la quale opera
+     * @var string
+     */
     private static $tableName="cartadicredito";
 
-    //valori della tabella
+    /**
+     * tabella relazionale tra utente e carte
+     * @var string
+     */
+    private static $tablePossessoCarta = "possessocarta";
+
+
+    /**
+     * valori della tabella
+     * @var string
+     */
     private static $values="(:numero,:nomeTitolare,:cognomeTitolare,:cvc,:scadenza)";
 
-    //costruttore
+
+    /**
+     * FCartaDiCredito constructor.
+     */
     public function __construct(){}
 
     /**
@@ -28,9 +45,9 @@ class FCartaDiCredito
     }
 
     /**
-     * Metodo che permette di salvare una Recensione
-     * @param $rec Recensione da salvare
-     * @return $id della Recensione salvata
+     * Metodo che permette di salvare una Recensione sul db
+     * @param ECartadiCredito $carta
+     * @return string|null
      */
     public static function store(ECartadiCredito $carta) {
         try{
@@ -68,11 +85,12 @@ class FCartaDiCredito
     }
 
     /**
+     * Carica una carta dal db in base al numero passatogli per parametro
      * @param string $numero
      * @return ECartadiCredito|null
      * @throws Exception
      */
-    public static function loadCarta(string $numero){
+    public static function loadCartaByNumero(string $numero){
         $sql="SELECT * FROM ".static::$tableName." WHERE numero='" . $numero . "';";
         $db=FDatabase::getInstance();
         $result=$db->loadSingle($sql);
@@ -84,15 +102,21 @@ class FCartaDiCredito
         else return null;
     }
 
+    /**
+     * Carica tutte le carte dell'utente in base all'username passatogli per parametro
+     * @param string $username
+     * @return array|null
+     */
     public static function loadCarteUtente(string $username){
         try{
-            $sql="SELECT * FROM " . static::$tableName . " WHERE username='" . $username . "';";
+            $sql="SELECT carta FROM " . static::$tablePossessoCarta . " WHERE utente='" . $username . "';"; //Query per prendere le carte degli utenti
             $db=FDatabase::getInstance();
-            $result=$db->loadMultiple($sql);
-            if($result!=null){
+            $rows=$db->loadMultiple($sql);
+            if($rows!=null){
                 $carteUtente = array();
-                for($i=0; $i<count($result); $i++){
-                    $carteUtente[] = new ECartadiCredito($result[$i]['numero'],$result[$i]['nomeTitolare'],$result[$i]['cognomeTitolare'],$result[$i]['cvc'],new DateTime($result[$i]['scadenza']));
+                foreach ($rows as $row) { //Per ogni row
+                    $carta = FCartaDiCredito::loadCartaByNumero($row['carta']); //Carica la carta corrispondente al numero ottenuto
+                    array_push($carteUtente, $carta); //Mettilo nell'array
                 }
                 return $carteUtente;
             }
@@ -104,5 +128,28 @@ class FCartaDiCredito
 
     }
 
+    /**
+     * Aggiunge una carta di credito all'utente, in base all'username passatogli
+     * @param String $username
+     * @param string $numero
+     */
+    public static function addCartaDiCredito(String $username, string $numero ){
+        try {
+            $db1 = FDatabase::getInstance();
+            $db=$db1->getDb();
+            $db->beginTransaction();
+            $sql = "INSERT INTO " . static::$tablePossessoCarta . " VALUES (:carta, :utente)";
+            $stmt=$db->prepare($sql);
+            $stmt->bindValue(':carta', $numero , PDO::PARAM_STR);
+            $stmt->bindValue(':utente', $username, PDO::PARAM_STR);
+            $stmt->execute();
+            $db->commit();
+            //$db->closeConnection();
+
+        }
+        catch (PDOException $e){
+            echo "ERROR: ".$e->getMessage();
+        }
+    }
 
 }

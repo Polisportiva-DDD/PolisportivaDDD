@@ -41,8 +41,15 @@ $r4 = new ERecensione(4,$utente2,4.8,'bo o no','forse si ',new DateTime('now'),$
 
 
 $carta1 = new ECartadiCredito('5555555555','Giorgio','Di Nunzio','111',new DateTime('now'));
+$carta2 = new ECartadiCredito('0000000000','Giorgio','Di Nunzio','111',new DateTime('now'));
+$carta3 = new ECartadiCredito('1111111111','Giorgio','Di Nunzio','111',new DateTime('now'));
+$carta4 = new ECartadiCredito('2222222222','Giorgio','Di Nunzio','111',new DateTime('now'));
 
 //print_r(FCartaDiCredito::loadCarta('5555555555'));
-//FCartaDiCredito::store($carta1);
+//FCartaDiCredito::store($carta3);
 //FCartaDiCredito::delete($carta1);
+//print_r(FCartaDiCredito::loadCarteUtente('Urwen99'));
+
+//FCartaDiCredito::addCartaDiCredito('lor','1111111111');
+
 //print_r(FCartaDiCredito::loadCarteUtente('Urwen99'));

@@ -5,13 +5,22 @@ require_once '../Foundation/config.inc.php';
 
 class FRecensione
 {
-    /** tabella con la quale opera */
+    /**
+     * tabella con la quale opera
+     * @var string
+     */
     private static $tableName = "recensione";
 
-    /** valori della tabella */
+    /**
+     * valori della tabella
+     * @var string
+     */
     private static $values="(:id,:autore,:voto,:titolo,:testo,:data,:possessore)";
 
-    /** costruttore */
+
+    /**
+     * FRecensione constructor.
+     */
     public function __construct() {}
 
     /**
@@ -33,9 +42,8 @@ class FRecensione
     /**
      * Metodo che permette di salvare una Recensione
      * @param ERecensione $recensione Recensione da salvare
-     * @return $id della Recensione salvata
+     * @return string|null della Recensione salvata
      */
-
     public static function store(ERecensione $recensione) {
         try {
             $sql = "INSERT INTO ". static::$tableName . " VALUES " . static::$values;
@@ -70,6 +78,7 @@ class FRecensione
     }
 
     /**
+     * Carica tutte le recensioni che sono state fatte all'utente
      * @param string $username
      * @return array|null
      */
@@ -96,7 +105,8 @@ class FRecensione
     }
 
     /**
-     * @param ERecensione $recensione
+     * Carica tutte le recensioni che ha fatto l'utente
+     * @param string $username
      * @return array|null
      */
     public static function loadRecensioniEffettuate(string $username){
