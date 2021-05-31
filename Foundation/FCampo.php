@@ -21,7 +21,7 @@ class FCampo
         $stmt->bindValue(':id', null,  PDO::PARAM_INT);
     }
 
-
+/*
     public static function store(ECampo $campo){
         $sql="INSERT INTO " . static::$tableName . " VALUES " . static::$values;
         $db=FDatabase::getInstance();
@@ -29,7 +29,7 @@ class FCampo
         if($id) return $id;
         else return null;
     }
-
+*/
     public static function load(){ //Carica tutti i campi presenti
         try {
             $sql = "SELECT * FROM " . static::$tableName;
