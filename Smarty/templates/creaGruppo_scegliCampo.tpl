@@ -47,46 +47,18 @@
     <h1>Scegli campo</h1>
     <hr>
 
-    <div class="row">
+      {section name=nr loop=$results}
+        <div {if $smarty.section.nr.iteration is even} class="row mt-4"}{/if}>
       <div class="col-lg-6 mb-4 mb-lg-0">
-
         <div class="card h-100">
-          <h4 class="card-header">Campo calcio a cinque</h4>
+          <h4 class="card-header">{$results[nr].nome}</h4>
           <img class="card-img-top" src="https://via.placeholder.com/1400x700" alt="Immagine campo">
-          <div class="card-body"><p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p></div>
+          <div class="card-body"><p class="card-text">{$results[nr].descrizione}</p></div>
           <div class="card-footer"><a class="btn btn-primary float-right" href="#!">Scegli</a></div>
         </div>
       </div>
-      <div class="col-lg-6 mb-4 mb-lg-0">
-        <div class="card h-100">
-          <h4 class="card-header">Campo calcio a sette</h4>
-          <img class="card-img-top" src="https://via.placeholder.com/1400x700" alt="Immagine campo">
-          <div class="card-body"><p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ipsam eos, nam perspiciatis natus commodi similique totam consectetur praesentium molestiae atque exercitationem ut consequuntur, sed eveniet, magni nostrum sint fuga.</p></div>
-          <div class="card-footer"><a class="btn btn-primary float-right" href="#!">Scegli</a></div>
-        </div>
-      </div>
+      {/section}
     </div>
-    <div class="row mt-4">
-      <div class="col-lg-6 mb-4 mb-lg-0">
-        <div class="card h-100">
-          <h4 class="card-header">Campo calcio a otto</h4>
-          <img class="card-img-top" src="https://via.placeholder.com/1400x700" alt="Immagine campo">
-          <div class="card-body"><p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p></div>
-          <div class="card-footer"><a class="btn btn-primary float-right" href="#!">Scegli</a></div>
-        </div>
-      </div>
-      <div class="col-lg-6 mb-4 mb-lg-0">
-        <div class="card h-100">
-          <h4 class="card-header">Campo calcio a undici</h4>
-          <img class="card-img-top" src="https://via.placeholder.com/1400x700" alt="Immagine campo">
-          <div class="card-body"><p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ipsam eos, nam perspiciatis natus commodi similique totam consectetur praesentium molestiae atque exercitationem ut consequuntur, sed eveniet, magni nostrum sint fuga.</p></div>
-          <div class="card-footer"><a class="btn btn-primary float-right" href="#!">Scegli</a></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  </div>
 </section>
 <!-- Footer-->
 <footer class="py-5 bg-dark">

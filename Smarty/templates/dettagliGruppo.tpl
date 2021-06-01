@@ -6,7 +6,9 @@
   <meta name="description" content="" />
   <meta name="author" content="" />
   <title>Polisportiva DDD</title>
-
+  <!-- Favicon-->
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <!-- Font Awesome icons (free version)-->
   <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
   <!-- Core theme CSS (includes Bootstrap)-->
   <link href="../css/styles.css" rel="stylesheet" />
@@ -41,61 +43,64 @@
     </div>
   </div>
 </nav>
+<!-- Page Content-->
 <section class="py-5">
   <div class="container">
-    <!-- Page heading-->
-    <h1>Scegli campo</h1>
+    <!-- Page Heading/Breadcrumbs-->
+    <h1>
+      Nome Gruppo
+    </h1>
     <hr>
-
+    <!-- Content Row-->
     <div class="row">
-      <div class="col-lg-6 mb-4 mb-lg-0">
-
-        <div class="card h-100">
-          <h4 class="card-header">Campo calcio a cinque</h4>
-          <img class="card-img-top" src="https://via.placeholder.com/1400x700" alt="Immagine campo">
-          <div class="card-body"><p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p></div>
-          <div class="card-footer"><a class="btn btn-primary float-right" href="#!">Scegli</a></div>
+      <!-- Sidebar Column-->
+      <div class="col-lg-3 mb-4">
+        <div class="list-group">
+          <h2>Partecipanti</h2>
+          {section name=nr loop=$invitati}
+          <a class="list-group-item" href="#">{$invitati[nr]}</a>
+          {/section}
         </div>
       </div>
-      <div class="col-lg-6 mb-4 mb-lg-0">
-        <div class="card h-100">
-          <h4 class="card-header">Campo calcio a sette</h4>
-          <img class="card-img-top" src="https://via.placeholder.com/1400x700" alt="Immagine campo">
-          <div class="card-body"><p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ipsam eos, nam perspiciatis natus commodi similique totam consectetur praesentium molestiae atque exercitationem ut consequuntur, sed eveniet, magni nostrum sint fuga.</p></div>
-          <div class="card-footer"><a class="btn btn-primary float-right" href="#!">Scegli</a></div>
+      <!-- Content Column-->
+      <div class="col-lg-9 mb-5 mt-5">
+        <h2>Dettagli gruppo</h2>
+        <div class="col-lg-9 mb-4 mt-4">
+          Admin: {$admin}
+        </div>
+        <div class="col-lg-9 mb-4">
+          Tipologia campo: {$campo}
+        </div>
+        <div class="col-lg-9 mb-4">
+          Data e ora: {$dataEOra}
+        </div>
+        <div class="col-lg-9 mb-4">
+          Posti disponibili: {$postiDisponibili}
+        </div>
+        <div class="col-lg-9 mb-4">
+          Limiti di età: {$etaMinima}-{$etaMassima}
+        </div>
+        <div class="col-lg-9 mb-4">
+          Limite livello: {$votoMinimo}
+        </div>
+        <div class="col-lg-9 mb-4">
+          Descrizione: {$descrizione}
+        </div>
+        <div class="float-right mt-5">
+          <div class="btn btn-primary btn-lg" href="#">Chiedi di partecipare</div>
         </div>
       </div>
     </div>
-    <div class="row mt-4">
-      <div class="col-lg-6 mb-4 mb-lg-0">
-        <div class="card h-100">
-          <h4 class="card-header">Campo calcio a otto</h4>
-          <img class="card-img-top" src="https://via.placeholder.com/1400x700" alt="Immagine campo">
-          <div class="card-body"><p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p></div>
-          <div class="card-footer"><a class="btn btn-primary float-right" href="#!">Scegli</a></div>
-        </div>
-      </div>
-      <div class="col-lg-6 mb-4 mb-lg-0">
-        <div class="card h-100">
-          <h4 class="card-header">Campo calcio a undici</h4>
-          <img class="card-img-top" src="https://via.placeholder.com/1400x700" alt="Immagine campo">
-          <div class="card-body"><p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ipsam eos, nam perspiciatis natus commodi similique totam consectetur praesentium molestiae atque exercitationem ut consequuntur, sed eveniet, magni nostrum sint fuga.</p></div>
-          <div class="card-footer"><a class="btn btn-primary float-right" href="#!">Scegli</a></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   </div>
 </section>
 <!-- Footer-->
 <footer class="py-5 bg-dark">
   <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
 </footer>
-
-</body>
+<!-- Bootstrap core JS-->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
 <script src="../js/scripts.js"></script>
+</body>
 </html>

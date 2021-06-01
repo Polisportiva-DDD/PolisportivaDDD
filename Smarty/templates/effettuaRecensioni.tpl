@@ -57,7 +57,7 @@
                 <!-- In order to set the email address and subject line for the contact form go to the assets/mail/contact_me.php file.-->
                 <div class="row">
                     <div class="col-lg-8 mb-4">
-                        <h3>Invia recensione a: Diella Lorenzo</h3>
+                        <h3>Invia recensione a: {$username}</h3>
                         <form id="contactForm" name="sentMessage" novalidate>
 
                             <p>Valutazione:</p>

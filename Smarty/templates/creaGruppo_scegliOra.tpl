@@ -62,7 +62,7 @@
 
                         <div class="card-body">
                             <br>
-                            <h4 class="card-title">12 Novembre 2021</h4>
+                            <h4 class="card-title">{$dataScelta}</h4>
                             <br>
                         </div>
                     </div>
@@ -78,11 +78,9 @@
                             <br>
 
                             <select class="form-control w-100" aria-label="Default-select example" id="tipologiaCampo">
-                                <option selected>9:00-10:00</option>
-                                <option value="1">10:00-11:00</option>
-                                <option value="2">11:00-12:00</option>
-                                <option value="3">13:00-14:00</option>
-                                <option value="3">15:00-16:00</option>
+                                {section name=nr loop=$ore}
+                                <option value=$smarty.section.nr.iteration+1>{$ore[nr]}</option>
+                                {/section}
                             </select>
                             <br>
                         </div>

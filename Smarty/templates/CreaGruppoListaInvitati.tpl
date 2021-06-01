@@ -56,12 +56,12 @@
       {section name=nr loop=$results}
       <div class="col-lg-4 mb-4 mt-4 mb-lg-0">
         <div class="card h-80">
-          <h6 class="card-header">{$username}</h6>
+          <h6 class="card-header">{$results[nr].username}</h6>
           <div class="card-body text-center">
             <img src="https://via.placeholder.com/75" class="rounded-circle" alt="Immagine utente">
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">Età: {$eta}</li>
+            <li class="list-group-item">Età: {$results[nr].eta}</li>
             <li class="list-group-item">
               <h10 class="mb-2">Valutazione media:
                 {for $start=1 to $end=$valutazione}

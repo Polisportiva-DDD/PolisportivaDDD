@@ -5,8 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="description" content="" />
   <meta name="author" content="" />
-  <title>Polisportiva DDD</title>
-
+  <title>Home</title>
+  <!-- Favicon-->
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <!-- Font Awesome icons (free version)-->
   <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
   <!-- Core theme CSS (includes Bootstrap)-->
   <link href="../css/styles.css" rel="stylesheet" />
@@ -41,57 +43,73 @@
     </div>
   </div>
 </nav>
+<!-- Page header-->
+<header>
+  <div class="carousel slide" id="carouselExampleIndicators" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li class="active" data-target="#carouselExampleIndicators" data-slide-to="0"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img class="d-block w-100" src="https://via.placeholder.com/1900x600" alt="..." />
+        <div class="carousel-caption d-none d-md-block">
+          <h3>First Slide</h3>
+          <p>This is a description for the first slide.</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="https://via.placeholder.com/1900x600" alt="..." />
+        <div class="carousel-caption d-none d-md-block">
+          <h3>Second Slide</h3>
+          <p>This is a description for the second slide.</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="https://via.placeholder.com/1900x600" alt="..." />
+        <div class="carousel-caption d-none d-md-block">
+          <h3>Third Slide</h3>
+          <p>This is a description for the third slide.</p>
+        </div>
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</header>
+<!-- Page Content-->
 <section class="py-5">
   <div class="container">
-    <!-- Page heading-->
-    <h1>Scegli campo</h1>
-    <hr>
-
-    <div class="row">
+    <h1 class="mb-4">I nostri campi</h1>
+    <!-- Marketing Icons Section-->
+    {section name=nr loop=$results}
+    <div {if $smarty.section.nr.iteration is even} class="row mt-4"}{/if}>
       <div class="col-lg-6 mb-4 mb-lg-0">
-
         <div class="card h-100">
-          <h4 class="card-header">Campo calcio a cinque</h4>
+          <h4 class="card-header">{$results[nr].nome}</h4>
           <img class="card-img-top" src="https://via.placeholder.com/1400x700" alt="Immagine campo">
-          <div class="card-body"><p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p></div>
+          <div class="card-body"><p class="card-text">{$results[nr].descrizione}</p></div>
           <div class="card-footer"><a class="btn btn-primary float-right" href="#!">Scegli</a></div>
         </div>
       </div>
-      <div class="col-lg-6 mb-4 mb-lg-0">
-        <div class="card h-100">
-          <h4 class="card-header">Campo calcio a sette</h4>
-          <img class="card-img-top" src="https://via.placeholder.com/1400x700" alt="Immagine campo">
-          <div class="card-body"><p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ipsam eos, nam perspiciatis natus commodi similique totam consectetur praesentium molestiae atque exercitationem ut consequuntur, sed eveniet, magni nostrum sint fuga.</p></div>
-          <div class="card-footer"><a class="btn btn-primary float-right" href="#!">Scegli</a></div>
-        </div>
-      </div>
+      {/section}
     </div>
-    <div class="row mt-4">
-      <div class="col-lg-6 mb-4 mb-lg-0">
-        <div class="card h-100">
-          <h4 class="card-header">Campo calcio a otto</h4>
-          <img class="card-img-top" src="https://via.placeholder.com/1400x700" alt="Immagine campo">
-          <div class="card-body"><p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p></div>
-          <div class="card-footer"><a class="btn btn-primary float-right" href="#!">Scegli</a></div>
-        </div>
-      </div>
-      <div class="col-lg-6 mb-4 mb-lg-0">
-        <div class="card h-100">
-          <h4 class="card-header">Campo calcio a undici</h4>
-          <img class="card-img-top" src="https://via.placeholder.com/1400x700" alt="Immagine campo">
-          <div class="card-body"><p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ipsam eos, nam perspiciatis natus commodi similique totam consectetur praesentium molestiae atque exercitationem ut consequuntur, sed eveniet, magni nostrum sint fuga.</p></div>
-          <div class="card-footer"><a class="btn btn-primary float-right" href="#!">Scegli</a></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  </div>
 </section>
-<!-- Footer-->
+<hr class="my-0" />
+
+
+</body>
 <footer class="py-5 bg-dark">
   <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
 </footer>
+
 
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
