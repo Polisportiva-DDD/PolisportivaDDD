@@ -43,39 +43,51 @@
     </div>
   </div>
 </nav>
-<section class="py-5">
+<!-- Page Content-->
+<section class="py-5 mb-5">
   <div class="container">
-    <!-- Page heading-->
-    <h1>Segnalazioni</h1>
-    <ol class="breadcrumb mb-4 h-100">
-    </ol>
-
+    <!-- Page Heading/Breadcrumbs-->
+    <h1 class="mb-5">Riepilogo acquisto</h1>
     <div class="row rounded border col-md-12 mb-5 py-4">
-      <div class="col-lg-3 col-md-3 col-sm-12 m-auto">
-        <p>Username: urwen</p>
+      <div class="col-lg-6 col-md-6 col-sm-12">
+        <h4>Gettoni calcio a cinque</h4>
       </div>
-      <div class="col-lg-9 col-md-9 col-sm-12 m-auto">
-        <h4>Segnalazione</h4>
-        <div style="height: 100px" class="border mt-3">
-          <p>Testo segnalazione</p>
-        </div>
-        <button class="btn btn-secondary float-right mt-3">
-          Rispondi
-        </button>
+      <div class="col-lg-3 col-md-3 col-sm-12 m-auto">
+        <p>Prezzo: {$prezzo}€</p>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-12 m-auto">
+        <p>Quantità: {$quantita}</p>
+      </div>
+    </div>
+    <div class="row rounded border col-md-12 mb-5 py-4">
+      <div class="col-lg-3 col-md-3 col-sm-12">
+        <p>{$numeroCarta}</p>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-12 m-auto">
+        <p>{$nomeTitolare}</p>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-12 m-auto">
+        <p>{$cognomeTitolare}</p>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-12 m-auto">
+        <p>{$scadenza}</p>
       </div>
     </div>
 
-  </div>
-</section>
+    <h4>Prezzo totale: {$prezzoTotale}€</h4>
+    <button class="btn btn-primary btn-lg float-right mt-2">Paga</button>
 
+  </div>
+
+</section>
+<!-- Footer-->
 <footer class="py-5 bg-dark">
   <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
 </footer>
-
-
-</body>
+<!-- Bootstrap core JS-->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
 <script src="../js/scripts.js"></script>
+</body>
 </html>

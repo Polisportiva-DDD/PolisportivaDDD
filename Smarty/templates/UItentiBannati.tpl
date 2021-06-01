@@ -43,39 +43,47 @@
     </div>
   </div>
 </nav>
+<!-- Page Content-->
 <section class="py-5">
   <div class="container">
-    <!-- Page heading-->
-    <h1>Segnalazioni</h1>
-    <ol class="breadcrumb mb-4 h-100">
-    </ol>
+    <!-- Page Heading/Breadcrumbs-->
+    <h1>Utenti bannati</h1>
+    <ol class="breadcrumb mb-4 h-100"></ol>
 
+    {section name=nr loop=$results}
     <div class="row rounded border col-md-12 mb-5 py-4">
-      <div class="col-lg-3 col-md-3 col-sm-12 m-auto">
-        <p>Username: urwen</p>
+      <div class="col-lg-3 col-md-3 col-sm-12">
+        <img src="https://via.placeholder.com/150" class="rounded-circle" alt="Immagine utente">
       </div>
-      <div class="col-lg-9 col-md-9 col-sm-12 m-auto">
-        <h4>Segnalazione</h4>
-        <div style="height: 100px" class="border mt-3">
-          <p>Testo segnalazione</p>
-        </div>
-        <button class="btn btn-secondary float-right mt-3">
-          Rispondi
-        </button>
+      <div class="col-lg-3 col-md-3 col-sm-12 m-auto">
+        <p>Username: {$results[nr].username}</p>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-12 m-auto">
+        <p>Motivo ban: {$results[nr].motivoBan}</p>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-12 m-auto text-center">
+        <button class="btn btn-primary float-md-none float-sm-right float-right">Rimuovi ban</button>
       </div>
     </div>
+    {sectionelse}
+    <h2>Nessun utente bannato.</h2>
+    {/section}
 
   </div>
+  <!-- Pagination-->
+  <ul class="pagination justify-content-center mb-4">
+    <li class="page-item"><a class="page-link" href="#!">← Precedente</a></li>
+    <li class="page-item"><a class="page-link" href="#!">Successivo →</a></li>
+  </ul>
 </section>
-
+<!-- Footer-->
 <footer class="py-5 bg-dark">
   <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
 </footer>
-
-
-</body>
+<!-- Bootstrap core JS-->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
 <script src="../js/scripts.js"></script>
+</body>
 </html>

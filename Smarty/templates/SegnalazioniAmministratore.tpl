@@ -49,22 +49,24 @@
     <h1>Segnalazioni</h1>
     <ol class="breadcrumb mb-4 h-100">
     </ol>
-
+    {section name=nr loop=$results}
     <div class="row rounded border col-md-12 mb-5 py-4">
       <div class="col-lg-3 col-md-3 col-sm-12 m-auto">
-        <p>Username: urwen</p>
+        <p>Username: {$results[nr].username}</p>
       </div>
       <div class="col-lg-9 col-md-9 col-sm-12 m-auto">
         <h4>Segnalazione</h4>
         <div style="height: 100px" class="border mt-3">
-          <p>Testo segnalazione</p>
+          <p>{$results[nr].testoSegnalazione}</p>
         </div>
         <button class="btn btn-secondary float-right mt-3">
           Rispondi
         </button>
       </div>
     </div>
-
+    {sectionelse}
+    <h2>Nessuna segnalazione presente.</h2>
+    {/section}
   </div>
 </section>
 
