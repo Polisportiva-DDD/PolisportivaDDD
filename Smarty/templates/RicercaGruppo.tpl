@@ -57,117 +57,38 @@
                     <button class="btn btn-lg btn-primary mb-4">Crea Gruppo</button>
                 </div>
                 <!-- Blog Post-->
+                {section name="nr" loop="$results"}
                 <div class="card mb-4">
                     <div class="card-body">
-                        <h2 class="card-title">Nome Gruppo</h2>
+                        <h2 class="card-title">{$results[nr].nomeGruppo}</h2>
                         <div class="row mb-2">
                             <div class="col-sm">
-                                Admin
+                                {$results[nr].admin}
                             </div>
                             <div class="col-sm">
-                                Tipologia
+                                {$results[nr].tipologia}
                             </div>
                             <div class="col-sm">
-                                Data e ora
+                                {$results[nr].dataEOra}
                             </div>
                         </div>
                         <div class="row mb-2">
                             <div class="col-sm">
-                                Limite età
+                                {$results[nr].limiteEtà}
                             </div>
                             <div class="col-sm">
-                                Limite valutazione
+                                {$results[nr].limiteValutazione}
                             </div>
                             <div class="col-sm">
-                                Posti disponibili
+                                {$results[nr].postiDisponibili}
                             </div>
                         </div>
                         <a class="btn btn-primary float-right mt-2" href="#!">Vai al gruppo</a>
                     </div>
                 </div>
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h2 class="card-title">Nome Gruppo</h2>
-                        <div class="row mb-2">
-                            <div class="col-sm">
-                                Admin
-                            </div>
-                            <div class="col-sm">
-                                Tipologia
-                            </div>
-                            <div class="col-sm">
-                                Data e ora
-                            </div>
-                        </div>
-                        <div class="row mb-2">
-                            <div class="col-sm">
-                                Limite età
-                            </div>
-                            <div class="col-sm">
-                                Limite valutazione
-                            </div>
-                            <div class="col-sm">
-                                Posti disponibili
-                            </div>
-                        </div>
-                        <a class="btn btn-primary float-right mt-2" href="#!">Vai al gruppo</a>
-                    </div>
-                </div>
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h2 class="card-title">Nome Gruppo</h2>
-                        <div class="row mb-2">
-                            <div class="col-sm">
-                                Admin
-                            </div>
-                            <div class="col-sm">
-                                Tipologia
-                            </div>
-                            <div class="col-sm">
-                                Data e ora
-                            </div>
-                        </div>
-                        <div class="row mb-2">
-                            <div class="col-sm">
-                                Limite età
-                            </div>
-                            <div class="col-sm">
-                                Limite valutazione
-                            </div>
-                            <div class="col-sm">
-                                Posti disponibili
-                            </div>
-                        </div>
-                        <a class="btn btn-primary float-right mt-2" href="#!">Vai al gruppo</a>
-                    </div>
-                </div>
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h2 class="card-title">Nome Gruppo</h2>
-                        <div class="row mb-2">
-                            <div class="col-sm">
-                                Admin
-                            </div>
-                            <div class="col-sm">
-                                Tipologia
-                            </div>
-                            <div class="col-sm">
-                                Data e ora
-                            </div>
-                        </div>
-                        <div class="row mb-2">
-                            <div class="col-sm">
-                                Limite età
-                            </div>
-                            <div class="col-sm">
-                                Limite valutazione
-                            </div>
-                            <div class="col-sm">
-                                Posti disponibili
-                            </div>
-                        </div>
-                        <a class="btn btn-primary float-right mt-2" href="#!">Vai al gruppo</a>
-                    </div>
+                {sectionelse}
+                    <h2>Nessun Gruppo presente</h2>
+                {/section}
                 </div>
                 <!-- Pagination-->
                 <ul class="pagination justify-content-center mb-4">

@@ -44,86 +44,41 @@
     </div>
   </div>
 </nav>
+
+<!-- Page Content-->
 <section class="py-5">
   <div class="container">
-    <!-- Page heading-->
-    <h1>Profilo Utente</h1>
-    <ol class="breadcrumb mb-4">
-      <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-      <li class="breadcrumb-item active">Profilo Utente</li>
-    </ol>
-    <div class="row">
-      <div class="col-md-12">
-      <div class="text-center mb-2">
-        <!-- Profilo -->
-          <img src="https://via.placeholder.com/250" class="rounded-circle" alt="Immagine utente">
-      </div>
-      <div class="text-center">
-        <h6 class="mb-2">Username: user</h6>
-        <h6 class="mb-2">Nome: nome</h6>
-        <h6 class="mb-2">Cognome: cognome</h6>
-        <h6 class="mb-2">Età: 20</h6>
-        <h6 class="mb-2">Valutazione media:
-          <span class="fa fa-star checkedStar"></span>
-          <span class="fa fa-star checkedStar"></span>
-          <span class="fa fa-star checkedStar"></span>
-          <span class="fa fa-star"></span>
-          <span class="fa fa-star"></span>
-        </h6>
-      </div>
-      </div>
-
-    </div>
-
-
-    <div class="row mb-2 ">
-
-      <div class="col-md-12 text-right">
-
-        <button class="btn btn-primary  " type="submit">Recensisci</button>
-    </div>
-
-  </div>
-    <h6>Recensioni:</h6>
-    <hr>
-
-
-
-
-
-
-
-    <div class="row">
-      <div class="container">
-        <div class="text-left mb-2">
-          <!-- Profilo -->
-          <img src="https://via.placeholder.com/75" class="rounded-circle" alt="Immagine utente">
-          <h4 >Francesco2000</h4>
-        </div>
-        <div class="text-left">
-          <b><h10 class="mb-2">Valutazione:
-            <span class="fa fa-star checkedStar"></span>
-            <span class="fa fa-star checkedStar"></span>
-            <span class="fa fa-star checkedStar"></span>
-            <span class="fa fa-star"></span>
-            <span class="fa fa-star"></span>
-          </h10></b>
-          <br>
-          <b><h10 class="mb-2">Giocatore Discreto</h10><br></b>
-          <b><h10 class="mb-2">12/4/2021</h10><br></b>
-          <p >Descrizione della recensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensionee</p><br>
-
+    <!-- Page Heading/Breadcrumbs-->
+    <h1 class="mb-5">Recensioni Effetuate</h1>
+    {section name="nr" loop="$results"}
+      <div class="row rounded border col-md-12 mb-5 py-4">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+          <img src="https://image-placeholder.com/images/actual-size/57x57.png" class="rounded-circle" alt="Immagine utente">
+          {$results[nr].username}
+          <h6>
+            {for $start=1 to $end=$valutazione}
+              <span class="fa fa-star checkedStar"></span>
+            {/for}
+            {for $start=$valutazione+1 to 5}
+              <span class="fa fa-star"></span>
+            {/for}
+          </h6>
+          <h6>{$results[nr].titoloRecensione}</h6>
+          <h6>{$results[nr].dataRecensione}</h6>
+          <p>{$results[nr].descrizioneRecensione}</p>
+          <a class="btn btn-primary float-right" href="#!">Elimina Recensione</a>
         </div>
       </div>
-      </div>
-  </div>
+      {sectionelse}
+      <h2>Nessuna recensione presente</h2>
+    {/section}
+    </div>
+  <!-- Pagination-->
+  <ul class="pagination justify-content-center mb-4">
+    <li class="page-item"><a class="page-link" href="#!">← Precedente</a></li>
+    <li class="page-item"><a class="page-link" href="#!">Successivo →</a></li>
+  </ul>
 </section>
-
-
-
-
-
-
 
 <!-- Footer-->
 <footer class="py-5 bg-dark">

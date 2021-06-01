@@ -2,11 +2,16 @@
 
 require_once("../Utility/autoload.php");
 require_once '../Foundation/config.inc.php';
+require_once "../Utility/StartSmarty.php";
 
 
-$w1=new EWallet(array(),35);
-$w2=new EWallet(array(),34);
-$w3=new EWallet(array(),36);
+
+
+
+
+$w1=new EWallet(array(),37);
+$w2=new EWallet(array(),38);
+$w3=new EWallet(array(),39);
 
 //FWallet::store($w1);
 //FWallet::store($w2);
@@ -46,10 +51,18 @@ $carta3 = new ECartadiCredito('1111111111','Giorgio','Di Nunzio','111',new DateT
 $carta4 = new ECartadiCredito('2222222222','Giorgio','Di Nunzio','111',new DateTime('now'));
 
 //print_r(FCartaDiCredito::loadCarta('5555555555'));
-//FCartaDiCredito::store($carta3);
+//FCartaDiCredito::store($carta4);
 //FCartaDiCredito::delete($carta1);
 //print_r(FCartaDiCredito::loadCarteUtente('Urwen99'));
 
-//FCartaDiCredito::addCartaDiCredito('lor','1111111111');
+//FCartaDiCredito::addCartaDiCredito('Andreinho','1111111111');
 
 //print_r(FCartaDiCredito::loadCarteUtente('Urwen99'));
+
+$smarty = StartSmarty::configuration();
+$smarty -> assign('username',$utente2->getUsername());
+$smarty -> assign('nome',$utente2->getNome());
+$smarty -> assign('cognome',$utente2->getCognome());
+$smarty -> assign('eta',$utente2->getDataDiNascita());
+//$smarty -> assign('valutazione',$utente2->getMediaRecensioni());
+$smarty -> display('profiloUtenteRegistrato.tpl');

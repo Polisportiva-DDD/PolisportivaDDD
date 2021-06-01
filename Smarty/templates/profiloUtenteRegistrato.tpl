@@ -59,71 +59,62 @@
           <img src="https://via.placeholder.com/250" class="rounded-circle" alt="Immagine utente">
       </div>
       <div class="text-center">
-        <h6 class="mb-2">Username: user</h6>
-        <h6 class="mb-2">Nome: nome</h6>
-        <h6 class="mb-2">Cognome: cognome</h6>
-        <h6 class="mb-2">Età: 20</h6>
+        <h6 class="mb-2">Username: {$username}</h6>
+        <h6 class="mb-2">Nome: {$nome}</h6>
+        <h6 class="mb-2">Cognome: {$cognome}</h6>
+        <h6 class="mb-2">Età: {$eta}</h6>
         <h6 class="mb-2">Valutazione media:
-          <span class="fa fa-star checkedStar"></span>
-          <span class="fa fa-star checkedStar"></span>
-          <span class="fa fa-star checkedStar"></span>
-          <span class="fa fa-star"></span>
-          <span class="fa fa-star"></span>
+{*          {for $start=1 to $end=$valutazione}*}
+{*            <span class="fa fa-star checkedStar"></span>*}
+{*          {/for}*}
+{*          {for $start=$valutazione+1 to 5}*}
+{*            <span class="fa fa-star"></span>*}
+{*          {/for}*}
         </h6>
       </div>
       </div>
-
     </div>
 
-
     <div class="row mb-2 ">
-
       <div class="col-md-12 text-right">
-
         <button class="btn btn-primary  " type="submit">Recensisci</button>
     </div>
 
   </div>
     <h6>Recensioni:</h6>
+
     <hr>
 
+    {section name="nr" loop="$results"}
+      <div class="row">
+        <div class="container">
+          <div class="text-left mb-2">
+            <!-- Profilo -->
+            <img src="https://via.placeholder.com/75" class="rounded-circle" alt="Immagine utente">
+            <h4 >{$results[nr].username}</h4>
+          </div>
+          <div class="text-left">
+            <b><h6 class="mb-2">Valutazione:
+{*                {for $start=1 to $valutazione}*}
+{*                  <span class="fa fa-star checkedStar"></span>*}
+{*                {/for}*}
+{*                {for $start=$valutazione+1 to 5}*}
+{*                  <span class="fa fa-star"></span>*}
+{*                {/for}*}
+              </h6></b>
+            <br>
+            <b><h6 class="mb-2">{$results[nr].titoloRecensione}</h6><br></b>
+            <b><h6 class="mb-2">{$results[nr].dataRecensione}</h6><br></b>
+            <p >{$results[nr].descrizioneRecensione}</p><br>
 
-
-
-
-
-
-    <div class="row">
-      <div class="container">
-        <div class="text-left mb-2">
-          <!-- Profilo -->
-          <img src="https://via.placeholder.com/75" class="rounded-circle" alt="Immagine utente">
-          <h4 >Francesco2000</h4>
-        </div>
-        <div class="text-left">
-          <b><h10 class="mb-2">Valutazione:
-            <span class="fa fa-star checkedStar"></span>
-            <span class="fa fa-star checkedStar"></span>
-            <span class="fa fa-star checkedStar"></span>
-            <span class="fa fa-star"></span>
-            <span class="fa fa-star"></span>
-          </h10></b>
-          <br>
-          <b><h10 class="mb-2">Giocatore Discreto</h10><br></b>
-          <b><h10 class="mb-2">12/4/2021</h10><br></b>
-          <p >Descrizione della recensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensioneerecensionee</p><br>
-
+          </div>
         </div>
       </div>
-      </div>
+      {sectionelse}
+      <h2>Nessuna recensione presente</h2>
+    {/section}
   </div>
 </section>
-
-
-
-
-
-
 
 <!-- Footer-->
 <footer class="py-5 bg-dark">
