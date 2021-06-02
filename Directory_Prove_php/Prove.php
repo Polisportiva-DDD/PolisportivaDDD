@@ -1,6 +1,6 @@
 <?php
-require_once("../Utility/autoload.php");
-require_once '../Foundation/config.inc.php';
+require_once('../Utility/autoload.php');
+require_once ('../Foundation/config.inc.php');
 require('../Smarty/Smarty.class.php');
 
 
@@ -10,17 +10,38 @@ $smarty->setTemplateDir('../Smarty/templates');
 $smarty->setCompileDir('../Smarty/templates_c');
 $smarty->setCacheDir('../Smarty/cache');
 $smarty->setConfigDir('../Smarty/configs');
-
-
+/*
 $campi = FCampo::load();
-$nomi_campi = array();
+
+$results=array();
 foreach($campi as $campo){
-    $nomi_campi[] = $campo->getNome();
+    $row=array();
+    $row['nome'] = $campo->getNome();
+    $row['descrizione'] = $campo->getDescrizione();
+    $results[] = $row;
 }
-//$smarty->assign('results', $nomi_campi);
-//$smarty->display('creaGruppo_dettagliFinali.tpl');
+*/
+/*
+$invitati=array('Utente1', 'Utente2');
 
 
+$gruppo = array('admin'=>'urwen', 'nome'=>'aa', 'campo'=>'calcio a cinque', 'dataEOra' => '11/11/11',
+    'postiDisponibili'=>3, 'etaMinima'=>16, 'etaMassima'=>25, 'limiteLivello'=>2, 'descrizione'=>'Siamo una squadra fortissimi');
+$gruppo2 = array('admin'=>'aaaa', 'nome'=>'vb', 'campo'=>'calcio a aaaa', 'dataEOra' => '1111/11/11',
+    'postiDisponibili'=>5, 'etaMinima'=>122, 'etaMassima'=>354, 'limiteLivello'=>3, 'descrizione'=>'Siamo una squadra fordasdstissimi');
+
+$gruppi=array($gruppo, $gruppo2);
+$smarty->error_reporting= 0;
+*/
+
+$isRegistrato=true;
+$isUtente=true;
+$isAmministratore=true;
+
+$smarty->assign('isRegistrato', $isRegistrato);
+$smarty->assign('isUtente', $isUtente);
+$smarty->assign('isAmministratore', $isAmministratore);
+$smarty->display('navBar.tpl');
 
 
 
