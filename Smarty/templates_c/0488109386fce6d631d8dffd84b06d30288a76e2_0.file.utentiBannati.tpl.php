@@ -1,4 +1,27 @@
-<!DOCTYPE html>
+<?php
+/* Smarty version 3.1.39, created on 2021-06-02 19:31:21
+  from 'C:\Users\dinun\PhpstormProjects\ProgettoWeb\Smarty\templates\utentiBannati.tpl' */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.39',
+  'unifunc' => 'content_60b7c0691f2ec5_92420674',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '0488109386fce6d631d8dffd84b06d30288a76e2' => 
+    array (
+      0 => 'C:\\Users\\dinun\\PhpstormProjects\\ProgettoWeb\\Smarty\\templates\\utentiBannati.tpl',
+      1 => 1622627368,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_60b7c0691f2ec5_92420674 (Smarty_Internal_Template $_smarty_tpl) {
+?><!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="utf-8" />
@@ -9,9 +32,11 @@
   <!-- Favicon-->
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
   <!-- Font Awesome icons (free version)-->
-  <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+  <?php echo '<script'; ?>
+ src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"><?php echo '</script'; ?>
+>
   <!-- Core theme CSS (includes Bootstrap)-->
-  <link href="../css/styles.css" rel="stylesheet" />
+  <link href="/ProgettoWeb/Smarty/css/styles.css" rel="stylesheet" />
 </head>
 <body>
 <!-- Navigation-->
@@ -50,24 +75,35 @@
     <h1>Utenti bannati</h1>
     <ol class="breadcrumb mb-4 h-100"></ol>
 
-    {section name=nr loop=$results}
+    <?php
+$__section_nr_0_loop = (is_array(@$_loop=$_smarty_tpl->tpl_vars['results']->value) ? count($_loop) : max(0, (int) $_loop));
+$__section_nr_0_total = $__section_nr_0_loop;
+$_smarty_tpl->tpl_vars['__smarty_section_nr'] = new Smarty_Variable(array());
+if ($__section_nr_0_total !== 0) {
+for ($__section_nr_0_iteration = 1, $_smarty_tpl->tpl_vars['__smarty_section_nr']->value['index'] = 0; $__section_nr_0_iteration <= $__section_nr_0_total; $__section_nr_0_iteration++, $_smarty_tpl->tpl_vars['__smarty_section_nr']->value['index']++){
+?>
     <div class="row rounded border col-md-12 mb-5 py-4">
       <div class="col-lg-3 col-md-3 col-sm-12">
         <img src="https://via.placeholder.com/150" class="rounded-circle" alt="Immagine utente">
       </div>
       <div class="col-lg-3 col-md-3 col-sm-12 m-auto">
-        <p>Username: {$results[nr].username}</p>
+        <p>Username: <?php echo $_smarty_tpl->tpl_vars['results']->value[(isset($_smarty_tpl->tpl_vars['__smarty_section_nr']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_section_nr']->value['index'] : null)]['username'];?>
+</p>
       </div>
       <div class="col-lg-3 col-md-3 col-sm-12 m-auto">
-        <p>Motivo ban: {$results[nr].motivoBan}</p>
+        <p>Motivo ban: <?php echo $_smarty_tpl->tpl_vars['results']->value[(isset($_smarty_tpl->tpl_vars['__smarty_section_nr']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_section_nr']->value['index'] : null)]['motivoBan'];?>
+</p>
       </div>
       <div class="col-lg-3 col-md-3 col-sm-12 m-auto text-center">
         <button class="btn btn-primary float-md-none float-sm-right float-right">Rimuovi ban</button>
       </div>
     </div>
-    {sectionelse}
+    <?php }} else {
+ ?>
     <h2>Nessun utente bannato.</h2>
-    {/section}
+    <?php
+}
+?>
 
   </div>
   <!-- Pagination-->
@@ -81,9 +117,16 @@
   <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
 </footer>
 <!-- Bootstrap core JS-->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+<?php echo '<script'; ?>
+ src="https://code.jquery.com/jquery-3.5.1.slim.min.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"><?php echo '</script'; ?>
+>
 <!-- Core theme JS-->
-<script src="../js/scripts.js"></script>
+<?php echo '<script'; ?>
+ src="../js/scripts.js"><?php echo '</script'; ?>
+>
 </body>
-</html>
+</html><?php }
+}

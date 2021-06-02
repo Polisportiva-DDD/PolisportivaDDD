@@ -11,9 +11,10 @@
   <!-- Font Awesome icons (free version)-->
   <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
   <!-- Core theme CSS (includes Bootstrap)-->
-  <link href="../css/styles.css" rel="stylesheet" />
-  <link href="../css/ourStyle.css" rel="stylesheet" />
+  <link href="/ProgettoWeb/Smarty/css/styles.css" rel="stylesheet" type="text/css"/>
+  <link href="/ProgettoWeb/Smarty/css/ourStyle.css" rel="stylesheet" type="text/css"/>
 </head>
+
 <body>
 <!-- Navigation-->
 <div class="container mb-2 mt-2" dir="rtl" >
@@ -64,12 +65,12 @@
         <h6 class="mb-2">Cognome: {$cognome}</h6>
         <h6 class="mb-2">Età: {$eta}</h6>
         <h6 class="mb-2">Valutazione media:
-{*          {for $start=1 to $end=$valutazione}*}
-{*            <span class="fa fa-star checkedStar"></span>*}
-{*          {/for}*}
-{*          {for $start=$valutazione+1 to 5}*}
-{*            <span class="fa fa-star"></span>*}
-{*          {/for}*}
+          {for $start=1 to $valutazioneMedia}
+            <span class="fa fa-star checkedStar"></span>
+          {/for}
+          {for $start=$valutazioneMedia+1 to 5}
+            <span class="fa fa-star"></span>
+          {/for}
         </h6>
       </div>
       </div>
@@ -85,7 +86,7 @@
 
     <hr>
 
-    {section name="nr" loop="$results"}
+    {section name=nr loop=$results}
       <div class="row">
         <div class="container">
           <div class="text-left mb-2">
@@ -95,16 +96,15 @@
           </div>
           <div class="text-left">
             <b><h6 class="mb-2">Valutazione:
-{*                {for $start=1 to $valutazione}*}
-{*                  <span class="fa fa-star checkedStar"></span>*}
-{*                {/for}*}
-{*                {for $start=$valutazione+1 to 5}*}
-{*                  <span class="fa fa-star"></span>*}
-{*                {/for}*}
+                {for $start=1 to $results[nr].valutazione}
+                  <span class="fa fa-star checkedStar"></span>
+                {/for}
+                {for $start=($results[nr].valutazione)+1 to 5}
+                  <span class="fa fa-star"></span>
+                {/for}
               </h6></b>
-            <br>
-            <b><h6 class="mb-2">{$results[nr].titoloRecensione}</h6><br></b>
-            <b><h6 class="mb-2">{$results[nr].dataRecensione}</h6><br></b>
+            <b><h6>{$results[nr].titoloRecensione}</h6></b>
+            <b><h6>{$results[nr].dataRecensione}</h6></b>
             <p >{$results[nr].descrizioneRecensione}</p><br>
 
           </div>

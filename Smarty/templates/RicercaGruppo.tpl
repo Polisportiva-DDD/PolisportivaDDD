@@ -11,7 +11,7 @@
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="../css/styles.css" rel="stylesheet" />
+    <link href="/ProgettoWeb/Smarty/css/styles.css" rel="stylesheet" />
 </head>
 <body>
 <!-- Navigation-->
@@ -57,7 +57,7 @@
                     <button class="btn btn-lg btn-primary mb-4">Crea Gruppo</button>
                 </div>
                 <!-- Blog Post-->
-                {section name="nr" loop="$results"}
+                {section name=nr loop=$results}
                 <div class="card mb-4">
                     <div class="card-body">
                         <h2 class="card-title">{$results[nr].nomeGruppo}</h2>

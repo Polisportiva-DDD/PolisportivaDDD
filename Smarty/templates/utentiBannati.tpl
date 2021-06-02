@@ -6,7 +6,9 @@
   <meta name="description" content="" />
   <meta name="author" content="" />
   <title>Polisportiva DDD</title>
-
+  <!-- Favicon-->
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <!-- Font Awesome icons (free version)-->
   <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
   <!-- Core theme CSS (includes Bootstrap)-->
   <link href="/ProgettoWeb/Smarty/css/styles.css" rel="stylesheet" />
@@ -41,60 +43,47 @@
     </div>
   </div>
 </nav>
+<!-- Page Content-->
 <section class="py-5">
   <div class="container">
-    <!-- Page heading-->
-    <h1>Crea gruppo</h1>
-    <hr>
+    <!-- Page Heading/Breadcrumbs-->
+    <h1>Utenti bannati</h1>
+    <ol class="breadcrumb mb-4 h-100"></ol>
 
-    <form method="post">
-      <div class="row mb-3">
-        <div class="col-md-3">
-          <label for="nomeGruppo" class="form-label">Nome</label>
-          <input type="text" class="form-control" id="nomeGruppo">
-        </div>
-        <div class="col-md-3">
-          <label for="etaMinima" class="form-label">Età minima</label>
-          <input type="number" class="form-control" id="etaMinima" min="10" max="99">
-        </div>
-        <div class="col-md-3">
-          <label for="etaMassima" class="form-label">Età massima</label>
-          <input type="number" class="form-control" id="etaMassima" min="10" max="99">
-        </div>
-        <div class="col-md-3">
-          <label for="tipologiaCampo" class="form-label">Campo</label>
-          <select class="form-control w-100" aria-label="Default-select example" id="tipologiaCampo">
-            <option selected>Scegli il campo</option>
-            {section name=nr loop=$results}
-              <option>{$results[nr]}</option>
-            {/section}
-          </select>
-        </div>
+    {section name=nr loop=$results}
+    <div class="row rounded border col-md-12 mb-5 py-4">
+      <div class="col-lg-3 col-md-3 col-sm-12">
+        <img src="https://via.placeholder.com/150" class="rounded-circle" alt="Immagine utente">
       </div>
-      <div class="row">
-        <div class="col-md-12">
-          <label for="descrizione" class="form-label">Descrizione</label>
-          <textarea type="text" class="form-control" id="descrizione" rows="5"></textarea>
-        </div>
+      <div class="col-lg-3 col-md-3 col-sm-12 m-auto">
+        <p>Username: {$results[nr].username}</p>
       </div>
-    </form>
-
-
-
-
-
-
+      <div class="col-lg-3 col-md-3 col-sm-12 m-auto">
+        <p>Motivo ban: {$results[nr].motivoBan}</p>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-12 m-auto text-center">
+        <button class="btn btn-primary float-md-none float-sm-right float-right">Rimuovi ban</button>
+      </div>
+    </div>
+    {sectionelse}
+    <h2>Nessun utente bannato.</h2>
+    {/section}
 
   </div>
+  <!-- Pagination-->
+  <ul class="pagination justify-content-center mb-4">
+    <li class="page-item"><a class="page-link" href="#!">← Precedente</a></li>
+    <li class="page-item"><a class="page-link" href="#!">Successivo →</a></li>
+  </ul>
 </section>
 <!-- Footer-->
 <footer class="py-5 bg-dark">
   <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
 </footer>
-
-</body>
+<!-- Bootstrap core JS-->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
-<script src="js/scripts.js"></script>
+<script src="../js/scripts.js"></script>
+</body>
 </html>

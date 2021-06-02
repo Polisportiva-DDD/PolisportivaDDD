@@ -11,8 +11,8 @@
   <!-- Font Awesome icons (free version)-->
   <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
   <!-- Core theme CSS (includes Bootstrap)-->
-  <link href="../css/styles.css" rel="stylesheet" />
-  <link href="../css/ourStyle.css" rel="stylesheet" />
+  <link href="/ProgettoWeb/Smarty/css/styles.css" rel="stylesheet" />
+  <link href="/ProgettoWeb/Smarty/css/ourStyle.css" rel="stylesheet" />
 </head>
 <body>
 <!-- Navigation-->
@@ -63,10 +63,10 @@
         <h5 class="mb-2">Cognome: {$cognome}</h5>
         <h5 class="mb-2">Età: {$eta}</h5>
         <h5 class="mb-2">Valutazione media:
-          {for $start=1 to $end=$valutazione}
+          {for $start=1 to $valutazioneMedia}
             <span class="fa fa-star checkedStar"></span>
           {/for}
-          {for $start=$valutazione+1 to 5}
+          {for $start=$valutazioneMedia+1 to 5}
             <span class="fa fa-star"></span>
           {/for}
         </h5>
@@ -88,7 +88,7 @@
             <p class="card-text">Questo è il tuo wallet</p>
           </div>
           <ul class="list-group list-group-flush">
-            {section name="nr" loop="$results"}
+            {section name=nr loop=$results}
               <li class="list-group-item">{$results[nr].nomeCampo} <span class="float-right">{$results[nr].quantitaGettoni}</span></li>
             {/section}
           </ul>

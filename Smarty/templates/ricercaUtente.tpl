@@ -11,7 +11,7 @@
   <!-- Font Awesome icons (free version)-->
   <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
   <!-- Core theme CSS (includes Bootstrap)-->
-  <link href="../css/styles.css" rel="stylesheet" />
+  <link href="/ProgettoWeb/Smarty/css/styles.css" rel="stylesheet" />
 </head>
 <body>
 <!-- Navigation-->
@@ -49,7 +49,7 @@
     <!-- Page Heading/Breadcrumbs-->
     <h1 class="mb-5">Ricerca utente</h1>
 
-    {section name="nr" loop="$results"}
+    {section name=nr loop=$results}
       <div class="row rounded border col-md-12 mb-5 py-4">
         <div class="col-lg-3 col-md-3 col-sm-12">
           <img src="https://via.placeholder.com/150" class="rounded-circle" alt="Immagine utente">

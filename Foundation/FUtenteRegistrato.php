@@ -66,7 +66,7 @@ class FUtenteRegistrato
         $db=FDatabase::getInstance();
         $result=$db->loadSingle($sql);
         if($result!=null){
-            $wallet=new EWallet(-1,array());
+            $wallet=new EWallet(array(),-1);
             $user=new EUtenteRegistrato( $result['bannato'], $result['motivazione'],$result['username'],"","","","",new DateTime(),"",$wallet);
 
             return $user;
@@ -74,6 +74,26 @@ class FUtenteRegistrato
         else return null;
     }
 
+
+
+    /**
+     * Carica tutti gli utenti bannati
+     * @return array|null
+     */
+    public static function loadBannati(){
+        $sql = "SELECT * FROM " . static::$tables;
+        $db=FDatabase::getInstance();
+        $result=$db->loadMultiple($sql);
+        if($result!=null){
+            $bannati = array();
+            foreach($result as $row){
+                $bannato = FUtenteRegistrato::loadByUsername($row['username']);
+                array_push($bannati, $bannato);
+            }
+            return $bannati;
+        }
+        else return null;
+    }
 
     /** 
      * Funzione che permette la delete dell'utente in base all'username

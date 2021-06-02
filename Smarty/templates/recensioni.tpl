@@ -11,8 +11,8 @@
   <!-- Font Awesome icons (free version)-->
   <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
   <!-- Core theme CSS (includes Bootstrap)-->
-  <link href="../css/styles.css" rel="stylesheet" />
-  <link href="../css/ourStyle.css" rel="stylesheet" />
+  <link href="/ProgettoWeb/Smarty/css/styles.css" rel="stylesheet" />
+  <link href="/ProgettoWeb/Smarty/css/ourStyle.css" rel="stylesheet" />
 </head>
 <body>
 <!-- Navigation-->
@@ -50,16 +50,16 @@
   <div class="container">
     <!-- Page Heading/Breadcrumbs-->
     <h1 class="mb-5">Recensioni Effetuate</h1>
-    {section name="nr" loop="$results"}
+    {section name=nr loop=$results}
       <div class="row rounded border col-md-12 mb-5 py-4">
         <div class="col-lg-12 col-md-12 col-sm-12">
           <img src="https://image-placeholder.com/images/actual-size/57x57.png" class="rounded-circle" alt="Immagine utente">
           {$results[nr].username}
           <h6>
-            {for $start=1 to $end=$valutazione}
+            {for $start=1 to $results[nr].valutazione}
               <span class="fa fa-star checkedStar"></span>
             {/for}
-            {for $start=$valutazione+1 to 5}
+            {for $start=($results[nr].valutazione)+1 to 5}
               <span class="fa fa-star"></span>
             {/for}
           </h6>

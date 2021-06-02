@@ -11,8 +11,8 @@
   <!-- Font Awesome icons (free version)-->
   <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
   <!-- Core theme CSS (includes Bootstrap)-->
-  <link href="../css/styles.css" rel="stylesheet" />
-  <link href="../css/ourStyle.css" rel="stylesheet" />
+  <link href="/ProgettoWeb/Smarty/css/styles.css" rel="stylesheet" />
+  <link href="/ProgettoWeb/Smarty/css/ourStyle.css" rel="stylesheet" />
 </head>
 <body>
 <!-- Navigation-->
