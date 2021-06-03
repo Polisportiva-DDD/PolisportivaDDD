@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2021-06-03 10:59:03
-  from 'C:\Users\dinun\PhpstormProjects\ProgettoWeb\Smarty\templates\utentiBannati.tpl' */
+/* Smarty version 3.1.39, created on 2021-06-03 11:23:04
+  from 'C:\Users\dinun\PhpstormProjects\ProgettoWeb\Smarty\templates\le_tue_carte.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_60b899d7f36456_63742952',
+  'unifunc' => 'content_60b89f78434925_91243311',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    '0488109386fce6d631d8dffd84b06d30288a76e2' => 
+    'a77fb50550bda13c994bb02d17f0f0a9a28a4c03' => 
     array (
-      0 => 'C:\\Users\\dinun\\PhpstormProjects\\ProgettoWeb\\Smarty\\templates\\utentiBannati.tpl',
-      1 => 1622710742,
+      0 => 'C:\\Users\\dinun\\PhpstormProjects\\ProgettoWeb\\Smarty\\templates\\le_tue_carte.tpl',
+      1 => 1622711533,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_60b899d7f36456_63742952 (Smarty_Internal_Template $_smarty_tpl) {
+function content_60b89f78434925_91243311 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="it">
 <head>
@@ -68,55 +68,83 @@ function content_60b899d7f36456_63742952 (Smarty_Internal_Template $_smarty_tpl)
     </div>
   </div>
 </nav>
+
 <!-- Page Content-->
 <section class="py-5">
   <div class="container">
-    <!-- Page Heading/Breadcrumbs-->
-    <h1>Utenti bannati</h1>
-    <ol class="breadcrumb mb-4 h-100"></ol>
+    <!-- Page heading-->
+    <h1>Le tue carte</h1>
+    <div class="row">
+      <!-- Blog Entries Column-->
+        <div class="col-md-12 mb-2 py-2">
+          <button class="btn btn-lg btn-primary mb-4">Aggiungi carta</button>
+        </div>
 
-    <?php
+
+        <!-- Blog Post-->
+        <?php
 $__section_nr_0_loop = (is_array(@$_loop=$_smarty_tpl->tpl_vars['results']->value) ? count($_loop) : max(0, (int) $_loop));
 $__section_nr_0_total = $__section_nr_0_loop;
 $_smarty_tpl->tpl_vars['__smarty_section_nr'] = new Smarty_Variable(array());
 if ($__section_nr_0_total !== 0) {
 for ($__section_nr_0_iteration = 1, $_smarty_tpl->tpl_vars['__smarty_section_nr']->value['index'] = 0; $__section_nr_0_iteration <= $__section_nr_0_total; $__section_nr_0_iteration++, $_smarty_tpl->tpl_vars['__smarty_section_nr']->value['index']++){
 ?>
-    <div class="row rounded border col-md-12 mb-5 py-4">
-      <div class="col-lg-3 col-md-3 col-sm-12">
-        <img src="https://via.placeholder.com/150" class="rounded-circle" alt="Immagine utente">
-      </div>
-      <div class="col-lg-3 col-md-3 col-sm-12 m-auto">
-        <p>Username: <?php echo $_smarty_tpl->tpl_vars['results']->value[(isset($_smarty_tpl->tpl_vars['__smarty_section_nr']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_section_nr']->value['index'] : null)]['username'];?>
-</p>
-      </div>
-      <div class="col-lg-3 col-md-3 col-sm-12 m-auto">
-        <p>Motivo ban: <?php echo $_smarty_tpl->tpl_vars['results']->value[(isset($_smarty_tpl->tpl_vars['__smarty_section_nr']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_section_nr']->value['index'] : null)]['motivoBan'];?>
-</p>
-      </div>
-      <div class="col-lg-3 col-md-3 col-sm-12 m-auto text-center">
-        <button class="btn btn-primary float-md-none float-sm-right float-right">Rimuovi ban</button>
-      </div>
-    </div>
-    <?php }} else {
+          <div class="row rounded border col-md-12 mb-5 py-4">
+            <div class="card-body">
+              <div class="row mb-2">
+                <div class="col-sm">
+                  Numero della carta
+                  <div style="width:100%;max-width:250px;border:1px red solid;overflow:hidden">
+                    <div style="background-color:#eeeeee;padding:5px">
+                      <?php echo $_smarty_tpl->tpl_vars['results']->value[(isset($_smarty_tpl->tpl_vars['__smarty_section_nr']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_section_nr']->value['index'] : null)]['numeroCarta'];?>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm">
+                  Titolare della carta
+                  <div style="width:100%;max-width:250px;border:1px red solid;overflow:hidden">
+                    <div style="background-color:#eeeeee;padding:5px">
+                      <?php echo $_smarty_tpl->tpl_vars['results']->value[(isset($_smarty_tpl->tpl_vars['__smarty_section_nr']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_section_nr']->value['index'] : null)]['titolareCarta'];?>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm">
+                  Data di scadenza
+                  <div style="width:100%;max-width:250px;border:1px red solid;overflow:hidden">
+                    <div style="background-color:#eeeeee;padding:5px">
+                      <?php echo $_smarty_tpl->tpl_vars['results']->value[(isset($_smarty_tpl->tpl_vars['__smarty_section_nr']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_section_nr']->value['index'] : null)]['dataScadenza'];?>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <a class="btn btn-primary float-right mt-2" href="#!">Rimuovi carta</a>
+            </div>
+          </div>
+          <?php }} else {
  ?>
-    <h2>Nessun utente bannato.</h2>
-    <?php
+          <h2>Nessun utente bannato.</h2>
+        <?php
 }
 ?>
-
+    </div>
   </div>
+
   <!-- Pagination-->
   <ul class="pagination justify-content-center mb-4">
     <li class="page-item"><a class="page-link" href="#!">← Precedente</a></li>
     <li class="page-item"><a class="page-link" href="#!">Successivo →</a></li>
   </ul>
 </section>
+
 <!-- Footer-->
 <footer class="py-5 bg-dark">
   <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
 </footer>
-<!-- Bootstrap core JS-->
+
+</body>
 <?php echo '<script'; ?>
  src="https://code.jquery.com/jquery-3.5.1.slim.min.js"><?php echo '</script'; ?>
 >
@@ -127,6 +155,5 @@ for ($__section_nr_0_iteration = 1, $_smarty_tpl->tpl_vars['__smarty_section_nr'
 <?php echo '<script'; ?>
  src="/ProgettoWeb/Smarty/js/scripts.js"><?php echo '</script'; ?>
 >
-</body>
 </html><?php }
 }

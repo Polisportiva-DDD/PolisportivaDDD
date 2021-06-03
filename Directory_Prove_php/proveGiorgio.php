@@ -172,5 +172,21 @@ $carta4 = new ECartadiCredito('2222222222','Giorgio','Di Nunzio','111',new DateT
 //
 //$smarty -> display("utentiBannati.tpl");
 
+//prova per il template di le_tue_carte
+$smarty = StartSmarty::configuration();
 
+$results = array();
+$carteUtente = FCartaDiCredito::loadCarteUtente($utente1->getUsername());
+for ($i=0;$i<count($carteUtente); $i++){
+    $tmp = array(
+      'numeroCarta' => $carteUtente[$i]->getNumero(),
+      'titolareCarta' => $carteUtente[$i]->getNomeTitolare(). " " . $carteUtente[$i]->getCognomeTitolare(),
+      'dataScadenza' => $carteUtente[$i]->getScadenza()->format('d-m-y')
+    );
+    $results[]=$tmp;
+}
+
+$smarty -> assign('results', $results);
+
+$smarty ->display("le_tue_carte.tpl");
 ?>

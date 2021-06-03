@@ -12,7 +12,6 @@
   <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
   <!-- Core theme CSS (includes Bootstrap)-->
   <link href="/ProgettoWeb/Smarty/css/styles.css" rel="stylesheet" />
-  <link href="/ProgettoWeb/Smarty/css/ourStyle.css" rel="stylesheet" />
 </head>
 <body>
 <!-- Navigation-->
@@ -44,68 +43,70 @@
     </div>
   </div>
 </nav>
+
+<!-- Page Content-->
 <section class="py-5">
   <div class="container">
     <!-- Page heading-->
-    <h1>Il tuo profilo</h1>
-    <ol class="breadcrumb mb-4 h-100">
-
-    </ol>
+    <h1>Le tue carte</h1>
     <div class="row">
-      <div class="col-md-8">
-      <div class="text-center mb-2">
-        <!-- Profilo -->
-          <img src="https://via.placeholder.com/250" class="rounded-circle" alt="Immagine utente">
-      </div>
-      <div class="text-center">
-        <h5 class="mb-2">Username: {$username}</h5>
-        <h5 class="mb-2">Nome: {$nome}</h5>
-        <h5 class="mb-2">Cognome: {$cognome}</h5>
-        <h5 class="mb-2">Età: {$eta}</h5>
-        <h5 class="mb-2">Valutazione media:
-          {for $start=1 to $valutazioneMedia}
-            <span class="fa fa-star checkedStar"></span>
-          {/for}
-          {for $start=$valutazioneMedia+1 to 5}
-            <span class="fa fa-star"></span>
-          {/for}
-        </h5>
-      </div>
-      </div>
-
-
-      <!-- Sidebar Widgets Column-->
-      <div class="col-md-4">
-        <div class="list-group mb-4">
-          <a class="list-group-item" href="#">Profilo personale</a>
-          <a class="list-group-item" href="#">I tuoi gruppi</a>
-          <a class="list-group-item" href="#">Le tue carte</a>
-          <a class="list-group-item" href="#">Recensione</a>
-        </div>
-        <div class="card">
-          <div class="card-body rounded">
-            <h5 class="card-title">Wallet</h5>
-            <p class="card-text">Questo è il tuo wallet</p>
-          </div>
-          <ul class="list-group list-group-flush">
-            {section name=nr loop=$results}
-              <li class="list-group-item">{$results[nr].nomeCampo} <span class="float-right">{$results[nr].quantitaGettoni}</span></li>
-            {/section}
-          </ul>
-          <div class="card-body m-auto">
-            <a href="#" class="btn btn-primary btn-lg">Acquista gettoni</a>
-          </div>
+      <!-- Blog Entries Column-->
+        <div class="col-md-12 mb-2 py-2">
+          <button class="btn btn-lg btn-primary mb-4">Aggiungi carta</button>
         </div>
 
 
-      </div>
+        <!-- Blog Post-->
+        {section name=nr loop=$results}
+          <div class="row rounded border col-md-12 mb-5 py-4">
+            <div class="card-body">
+              <div class="row mb-2">
+                <div class="col-sm">
+                  Numero della carta
+                  <div style="width:100%;max-width:250px;border:1px red solid;overflow:hidden">
+                    <div style="background-color:#eeeeee;padding:5px">
+                      {$results[nr].numeroCarta}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm">
+                  Titolare della carta
+                  <div style="width:100%;max-width:250px;border:1px red solid;overflow:hidden">
+                    <div style="background-color:#eeeeee;padding:5px">
+                      {$results[nr].titolareCarta}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm">
+                  Data di scadenza
+                  <div style="width:100%;max-width:250px;border:1px red solid;overflow:hidden">
+                    <div style="background-color:#eeeeee;padding:5px">
+                      {$results[nr].dataScadenza}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <a class="btn btn-primary float-right mt-2" href="#!">Rimuovi carta</a>
+            </div>
+          </div>
+          {sectionelse}
+          <h2>Nessun utente bannato.</h2>
+        {/section}
     </div>
   </div>
+
+  <!-- Pagination-->
+  <ul class="pagination justify-content-center mb-4">
+    <li class="page-item"><a class="page-link" href="#!">← Precedente</a></li>
+    <li class="page-item"><a class="page-link" href="#!">Successivo →</a></li>
+  </ul>
 </section>
+
 <!-- Footer-->
 <footer class="py-5 bg-dark">
   <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
 </footer>
+
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>

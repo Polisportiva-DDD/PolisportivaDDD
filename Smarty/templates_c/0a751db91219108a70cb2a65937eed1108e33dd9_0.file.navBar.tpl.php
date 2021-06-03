@@ -1,4 +1,27 @@
-<!DOCTYPE html>
+<?php
+/* Smarty version 3.1.39, created on 2021-06-03 10:21:43
+  from 'C:\Users\dinun\PhpstormProjects\ProgettoWeb\Smarty\templates\navBar.tpl' */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.39',
+  'unifunc' => 'content_60b89117de6523_85355994',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '0a751db91219108a70cb2a65937eed1108e33dd9' => 
+    array (
+      0 => 'C:\\Users\\dinun\\PhpstormProjects\\ProgettoWeb\\Smarty\\templates\\navBar.tpl',
+      1 => 1622708435,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_60b89117de6523_85355994 (Smarty_Internal_Template $_smarty_tpl) {
+?><!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="utf-8" />
@@ -7,13 +30,15 @@
     <meta name="author" content="" />
     <title>Polisportiva DDD</title>
 
-    <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+    <?php echo '<script'; ?>
+ src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"><?php echo '</script'; ?>
+>
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="/ProgettoWeb/Smarty/css/styles.css" rel="stylesheet" />
 </head>
 <body>
 <!-- Navigation-->
-{if $isRegistrato}
+<?php if ($_smarty_tpl->tpl_vars['isRegistrato']->value) {?>
 <div class="container mb-2 mt-2" dir="rtl" >
     <div class="table-responsive" >
         <table>
@@ -37,7 +62,7 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link" href="home-utente-registrato.html">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="RicercaGruppo.html">Gruppi</a></li>
-                {if $isAmministratore}
+                <?php if ($_smarty_tpl->tpl_vars['isAmministratore']->value) {?>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdownGestione" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Gestione</a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownGestione">
@@ -46,14 +71,14 @@
                         <a class="dropdown-item" href="#">Modifica prezzi</a>
                     </div>
                 </li>
-                {elseif $isUtente}
+                <?php } elseif ($_smarty_tpl->tpl_vars['isUtente']->value) {?>
                 <li class="nav-item"><a class="nav-link" href="assistenza.html">Informazioni</a></li>
-                {/if}
+                <?php }?>
             </ul>
         </div>
     </div>
 </nav>
-    {else}
+    <?php } else { ?>
     <div class="container mb-2 mt-2" dir="rtl" >
         <div class="table-responsive" >
             <table>
@@ -72,13 +97,20 @@
             </div>
         </div>
     </nav>
-{/if}
+<?php }?>
 
 
 
 </body>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+<?php echo '<script'; ?>
+ src="https://code.jquery.com/jquery-3.5.1.slim.min.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"><?php echo '</script'; ?>
+>
 <!-- Core theme JS-->
-<script src="/ProgettoWeb/Smarty/js/scripts.js"></script>
-</html>
+<?php echo '<script'; ?>
+ src="../js/scripts.js"><?php echo '</script'; ?>
+>
+</html><?php }
+}
