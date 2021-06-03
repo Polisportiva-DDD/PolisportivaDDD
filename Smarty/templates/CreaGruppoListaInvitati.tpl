@@ -64,11 +64,11 @@
             <li class="list-group-item">Età: {$results[nr].eta}</li>
             <li class="list-group-item">
               <h10 class="mb-2">Valutazione media:
-                {for $start=1 to $end=$valutazione}
-                <span class="fa fa-star checkedStar"></span>
+                {for $start=1 to $results[nr].valutazione}
+                  <span class="fa fa-star checkedStar"></span>
                 {/for}
-                {for $start=$valutazione+1 to 5}
-                <span class="fa fa-star"></span>
+                {for $start=($results[nr].valutazione)+1 to 5}
+                  <span class="fa fa-star"></span>
                 {/for}
               </h10>
             </li>

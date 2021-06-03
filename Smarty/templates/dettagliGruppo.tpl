@@ -87,8 +87,13 @@
           Descrizione: {$descrizione}
         </div>
         <div class="float-right mt-5">
-          <div class="btn btn-primary btn-lg" href="#">Chiedi di partecipare</div>
+          <button class="btn btn-primary" href="#">Chiedi di partecipare</button>
         </div>
+        {if $isAmministratore}
+          <div class="float-right mt-5 mx-3">
+            <button class="btn btn-danger" href="#">Elimina gruppo</button>
+          </div>
+        {/if}
       </div>
     </div>
   </div>

@@ -265,6 +265,20 @@ class EGruppo
 
     }
 
+    public function toArray(): array{
+        $objArray = array();
+        $objArray["id"] = $this->id;
+        $objArray["nome"] = $this->nome;
+        $objArray["admin"] = $this->admin;
+        $objArray["etaMinima"] = $this->etaMinima;
+        $objArray["etaMassima"] = $this->etaMassima;
+        $objArray["votoMinimo"] = $this->votoMinimo;
+        $objArray["descrizione"] = $this->descrizione;
+        $objArray["dataEOra"] = $this->dataEOra;
+        $objArray["partecipanti"] = $this->partecipanti;
+        $objArray["campo"] = $this->campo;
+    }
+
 
 
 

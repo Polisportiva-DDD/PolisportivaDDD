@@ -41,7 +41,7 @@
     </div>
   </div>
 </nav>
-<section class="py-5">
+<section class="py-5 mb-5">
   <div class="container">
     <!-- Page heading-->
     <h1>Crea gruppo</h1>
@@ -64,9 +64,8 @@
         <div class="col-md-3">
           <label for="tipologiaCampo" class="form-label">Campo</label>
           <select class="form-control w-100" aria-label="Default-select example" id="tipologiaCampo">
-            <option selected>Scegli il campo</option>
             {section name=nr loop=$results}
-              <option>{$results[nr]}</option>
+              <option {if $smarty.section.nr.iteration == 1}selected {/if}>{$results[nr]}</option>
             {/section}
           </select>
         </div>
@@ -77,14 +76,11 @@
           <textarea type="text" class="form-control" id="descrizione" rows="5"></textarea>
         </div>
       </div>
+      <div class="d-flex flex-row-reverse my-5" >
+        <div class="p-2"><button type="submit" class="btn btn-primary">Crea Gruppo</button></div>
+        <div class="p-2"><a href="#">  <button type="button" class="btn btn-primary">Torna Indietro</button></a></div>
+      </div>
     </form>
-
-
-
-
-
-
-
   </div>
 </section>
 <!-- Footer-->

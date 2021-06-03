@@ -33,15 +33,60 @@ $gruppo2 = array('admin'=>'aaaa', 'nome'=>'vb', 'campo'=>'calcio a aaaa', 'dataE
 $gruppi=array($gruppo, $gruppo2);
 $smarty->error_reporting= 0;
 */
-
+/*
 $isRegistrato=true;
 $isUtente=true;
 $isAmministratore=true;
+*/
+$campi = FCampo::load();
+$nomi=array();
+foreach($campi as $campo){
+    $nome = $campo->getNome();
+    $nomi[] = $nome;
+}
 
-$smarty->assign('isRegistrato', $isRegistrato);
-$smarty->assign('isUtente', $isUtente);
+$dataScelta = "15/07/2021";
+$ore=array("09:00-10:00", "10:00-11:00", "14:00-15:00");
+
+$u1 = array("username"=>"urwen", "eta"=>22, "valutazione"=>2);
+$u2 = array("username"=>"u22rwen", "eta"=>21, "valutazione"=>4);
+$u3 = array("username"=>"pit", "eta"=>18, "valutazione"=>1);
+$u4 = array("username"=>"errrr", "eta"=>30, "valutazione"=>0);
+$results = array($u1,$u2,$u3,$u4);
+
+$invitati=array("urwen","rrrr","cambioCanale");
+$admin="adddd";
+$campo="calcio a cinque";
+$dataEOra = "10/08/20 15:00-16:00";
+$postiDisponibili=8;
+$etaMinima=15;
+$etaMassima=20;
+$votoMinimo=3;
+$descrizione="prove prove prove prove";
+$isAmministratore=true;
+
+
+/*
 $smarty->assign('isAmministratore', $isAmministratore);
-$smarty->display('navBar.tpl');
+$smarty->assign('invitati', $invitati);
+$smarty->assign('admin', $admin);
+$smarty->assign('campo', $campo);
+$smarty->assign('dataEOra', $dataEOra);
+$smarty->assign('postiDisponibili', $postiDisponibili);
+$smarty->assign('etaMinima', $etaMinima);
+$smarty->assign('etaMassima', $etaMassima);
+$smarty->assign('votoMinimo', $votoMinimo);
+$smarty->assign('descrizione', $descrizione);
+*/
+
+/*
+$gruppo1 = array("nome"=>"gruppo 1", "admin"=>"urwen", "campo"=>"calcio a cinque", "dataEOra"=>"10/07/21 15:00-16:00");
+$gruppo2 = array("nome"=>"gruppo 2", "admin"=>"urwen2", "campo"=>"calcio a sette", "dataEOra"=>"10/07/21 12:00-13:00");
+$gruppo3 = array("nome"=>"gruppo 3", "admin"=>"urwen3", "campo"=>"calcio a cinque", "dataEOra"=>"12/07/21 11:00-12:00");
+*/
+//$gruppiDetails = array($gruppo1, $gruppo2, $gruppo3);
+//$smarty->assign("gruppiDetails",$gruppiDetails);
+//$smarty->display('i_tuoi_gruppi.tpl');
 
 
 
