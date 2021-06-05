@@ -44,7 +44,7 @@ class FTicketAssistenza
     }
 
 
-    public static function store($ticket){
+    public static function store(ETicketAssistenza  $ticket){
         $sql="INSERT INTO ".static::getTables()." VALUES ".static::getValues();
         $db=FDatabase::getInstance();
         $id=$db->store($sql,$ticket);
@@ -61,7 +61,7 @@ class FTicketAssistenza
      */
 
 
-    public static function loadById($id){
+    public static function load($id){
         $sql="SELECT * FROM ".static::getTables()." WHERE id='".$id."';";
         $db=FDatabase::getInstance();
         $result=$db->loadSingle($sql);
@@ -79,7 +79,7 @@ class FTicketAssistenza
      */
 
 
-    public static function load(){
+    public static function loadList(){
         $sql="SELECT * FROM ".static::getTables();
         $db=FDatabase::getInstance();
         $result=$db->loadMultiple($sql);

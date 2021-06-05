@@ -79,14 +79,32 @@ class FDatabase
         catch(PDOException $e){
             echo "Errore: ".$e->getMessage();
             $this->db->rollBack();//Rolls back a transaction
-            die;
             return null;
         }
     }
 
 
+    public function store3($query,$classe,$valuesAssociazione){
+        try{
+            $this->db->beginTransaction();  //Disattiva la modalità autocommit e quindi le  modifiche apportate al database tramite l'istanza dell'oggetto PDO non vengono salvate fino a quando non si termina la transazione chiamando PDO :: commit () . La chiamata a PDO :: rollBack ()
+            $stmt=$this->db->prepare($query);  //Prepara un'istruzione per l'esecuzione e restituisce un PDOStatement
+            $classe::bindAssociazione($stmt,$valuesAssociazione);
+            $stmt->execute(); //Esegue un'istruzione preparata
+            $id=$this->db->lastInsertId(); //Restituisce l'ID dell'ultima riga o valore di sequenza inseriti
+            $this->db->commit(); //Effettua la transizione
+            $this->closeDbConnection();
+            return $id;
+        }
+        catch(PDOException $e){
+            echo "Errore: ".$e->getMessage();
+            $this->db->rollBack();//Rolls back a transaction
+            return null;
+        }
+
+    }
 
 
+/*
     public function store2(EWallet $wallet,$table,$value){
         try {
             $this->db->beginTransaction();  //Disattiva la modalità autocommit e quindi le  modifiche apportate al database tramite l'istanza dell'oggetto PDO non vengono salvate fino a quando non si termina la transazione chiamando PDO :: commit () . La chiamata a PDO :: rollBack ()
@@ -112,7 +130,7 @@ class FDatabase
         }
     }
 
-
+*/
 
 
 
@@ -137,7 +155,6 @@ class FDatabase
         catch(PDOException $e){
             echo "Errore: ".$e->getMessage();
             $this->db->rollBack();
-            die;
             return false;
         }
     }
@@ -148,8 +165,7 @@ class FDatabase
              $this->db->beginTransaction();
               $stmt=$this->db->prepare($sql);
               $stmt->execute();
-              $b=$stmt->closeCursor();
-              print ($b);
+              $stmt->closeCursor();
               $this->db->commit();
               $this->closeDbConnection();
               return true;
@@ -157,7 +173,6 @@ class FDatabase
         catch(PDOException $e){
             echo "Errore: ".$e->getMessage();
             $this->db->rollBack();
-            die;
             return false;
         }
     }
@@ -168,17 +183,17 @@ class FDatabase
             $stmt=$this->db->prepare($sql);
             $stmt->execute();
             $rows=$stmt->fetchAll(PDO::FETCH_ASSOC);
+            $this->closeDbConnection();
             if(count($rows)>=1){
 				return true;
 			}
             else {
 				return false;
 			}
-            $this->closeDbConnection();
+
         }
         catch(PDOException $e){
             echo "Errore: ".$e->getMessage();
-            die;
             return null;
         }
     }
@@ -213,7 +228,6 @@ class FDatabase
         }
         catch(PDOException $e){
             echo "Errore: ".$e->getMessage();
-            die;
             return null;
         }
     }
@@ -221,7 +235,7 @@ class FDatabase
        /**
      * Metodo usato quando ci si aspetta che la query produca un solo risultato
      * 
-     * @param $sql query da eseguire
+     * @param $sql String query da eseguire
      */
     public function loadSingle($sql){
         try{
@@ -234,7 +248,6 @@ class FDatabase
         }
         catch(PDOException $e){
             echo "Errore: ".$e->getMessage();
-            die;
             return null;
         }
     }

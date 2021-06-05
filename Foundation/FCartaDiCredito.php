@@ -49,16 +49,35 @@ class FCartaDiCredito
      * @param ECartadiCredito $carta
      * @return string|null
      */
-    public static function store(ECartadiCredito $carta) {
+    public static function bindAssociazione($stmt,$valuesAssociazione){
+        $stmt->bindValue(':carta', $valuesAssociazione[0] , PDO::PARAM_STR);
+        $stmt->bindValue(':utente', $valuesAssociazione[1], PDO::PARAM_STR);
+    }
+
+
+
+
+    public static function store(ECartadiCredito $carta,$username) {
         try{
 
             $sql = "INSERT INTO ". static::$tableName . " VALUES " . static::$values;
             $db = FDatabase::getInstance();
             $id = $db->store($sql, $carta);
-            if($id)
-                return $id;
-            else
-                return null;
+            if($id){
+                $db=FDatabase::getInstance();
+                 $sql = "INSERT INTO ". static::$tablePossessoCarta . " VALUES (:carta, :utente) " ;
+                 $valuesAsscoiazione=array($id,$username);
+                 $id2 = $db->store3($sql,get_class($carta),$valuesAsscoiazione );
+                 if($id2==null){
+                     return false;
+                 }
+                 else return true;
+            }
+            else{
+                return false;
+            }
+
+
         }
         catch (Exception $e){
             echo "Error";

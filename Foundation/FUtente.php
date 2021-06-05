@@ -5,7 +5,7 @@ require_once '../Foundation/config.inc.php';
 
 class FUtente
 {
-    private static $tables="utente";
+    private static $tableName="utente";
     private static $values="(:username,:nome,:cognome,:email,:password,:dataDiNascita,:immagine,:wallet)";
     
     public function __construct(){}
@@ -33,8 +33,8 @@ class FUtente
      * @return string $tables nome della tabella
      */
 
-    public static function getTables(){
-        return static::$tables;
+    public static function getTableName(){
+        return static::$tableName;
     }
 
      /** 
@@ -48,7 +48,7 @@ class FUtente
 
 
     public static function store($user){
-        $sql="INSERT INTO ".static::getTables()." VALUES ".static::getValues();
+        $sql="INSERT INTO ".static::getTableName()." VALUES ".static::getValues();
         $db=FDatabase::getInstance();
         $id=$db->store($sql,$user);
         if($id) return $id;
@@ -65,11 +65,11 @@ class FUtente
 
 
     public static function loadByUsername($username){
-        $sql="SELECT * FROM ".static::getTables()." WHERE username='".$username."';";
+        $sql="SELECT * FROM ".static::getTableName()." WHERE username='".$username."';";
         $db=FDatabase::getInstance();
         $result=$db->loadSingle($sql);
         if($result!=null){
-            $wallet=new EWallet(array(), $result['wallet']);
+            $wallet=FWallet::load($result['wallet']);
             $user=new EUtente($result['username'], $result['nome'], $result['cognome'],$result['email'],$result['password'],new DateTime($result['dataDiNascita']),$result['immagine'],$wallet);
             return $user;
         }
@@ -84,7 +84,7 @@ class FUtente
      */
 
     public static function delete($username){
-        $sql="DELETE FROM ".static::getTables()." WHERE username='".$username."';";
+        $sql="DELETE FROM ".static::getTableName()." WHERE username='".$username."';";
         $db=FDatabase::getInstance();
         if($db->delete($sql)) return true;
         else return false;
@@ -103,7 +103,7 @@ class FUtente
 
 
     public static function Login($username,$password){
-        $sql="SELECT * FROM ".static::getTables()." WHERE username='".$username."' AND "."password='".$password."';";
+        $sql="SELECT * FROM ".static::getTableName()." WHERE username='".$username."' AND "."password='".$password."';";
         $db=FDatabase::getInstance();
         $result=$db->exist($sql);
         return $result;
@@ -116,7 +116,7 @@ class FUtente
      */
 
     public static function esisteUsername($username){
-        $sql="SELECT * FROM ".static::getTables()." WHERE username='".$username."';";
+        $sql="SELECT * FROM ".static::getTableName()." WHERE username='".$username."';";
         $db=FDatabase::getInstance();
         $result=$db->exist($sql);
         if($result!=null) return true;
@@ -131,7 +131,7 @@ class FUtente
 
 
     public static function esisteMail($email){
-        $sql="SELECT * FROM ".static::getTables()." WHERE email='".$email."';";
+        $sql="SELECT * FROM ".static::getTableName()." WHERE email='".$email."';";
         $db=FDatabase::getInstance();
         $result=$db->exist($sql);
         if($result!=null) return true;

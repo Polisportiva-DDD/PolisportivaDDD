@@ -12,6 +12,13 @@ class FGruppo
 
     public function __construct(){}
 
+    public static function bindAssociazione($stmt,$valuesAssociazione){
+
+        $stmt->bindValue(':idGruppo', $valuesAssociazione[0] , PDO::PARAM_INT);
+        $stmt->bindValue(':utente', $valuesAssociazione[1] , PDO::PARAM_STR);
+
+    }
+
     public static function bind($stmt, EGruppo $gruppo){
         $stmt->bindValue(':id', null,  PDO::PARAM_INT);
         $stmt->bindValue(':admin', $gruppo->getAdmin()->getUsername(), PDO::PARAM_STR);
@@ -30,6 +37,7 @@ class FGruppo
             $db = FDatabase::getInstance();
             $sql="INSERT INTO ". static::$tableName ." VALUES ".static::$values;
             $id = $db->store($sql, $gruppo);
+
             if ($id) return $id;
             else return null;
         }
@@ -178,8 +186,10 @@ class FGruppo
             $db->beginTransaction();
             $sql = "INSERT INTO " . static::$tablePartecipanti . " VALUES (:idGruppo, :utente)";
             $stmt=$db->prepare($sql);
-            $stmt->bindValue(':idGruppo', $idGruppo , PDO::PARAM_INT);
-            $stmt->bindValue(':utente', $username, PDO::PARAM_STR);
+            $values=array($idGruppo,$username);
+
+            //$stmt->bindValue(':idGruppo', $idGruppo , PDO::PARAM_INT);
+            //$stmt->bindValue(':utente', $username, PDO::PARAM_STR);
             $stmt->execute();
             $db->commit();
             //$db->closeConnection();

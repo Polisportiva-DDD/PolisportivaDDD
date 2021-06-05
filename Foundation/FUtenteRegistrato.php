@@ -24,7 +24,7 @@ class FUtenteRegistrato
      
     }
   /**
-     * 
+     *
      *  restituisce il nome della tabella sul DB per la costruzione delle Query
      * @return string $tables nome della tabella
      */
@@ -33,11 +33,11 @@ class FUtenteRegistrato
         return static::$tables;
     }
 
-     /** 
+     /**
      * restituisce la stringa dei valori della tabella sul DB per la costruzione delle Query
      * @return string $values valori della tabella
      */
-    
+
     public static function getValues(){
         return static::$values;
     }
@@ -61,11 +61,13 @@ class FUtenteRegistrato
 
 
     //SERVE?????????????????????????????????????????????????????????????
-    public static function loadByUsername($username){
+
+    public static function load($username){
         $sql="SELECT * FROM ".static::getTables()." WHERE username='".$username."';";
         $db=FDatabase::getInstance();
         $result=$db->loadSingle($sql);
         if($result!=null){
+
             $wallet=new EWallet(array(),-1);
             $user=new EUtenteRegistrato( $result['bannato'], $result['motivazione'],$result['username'],"","","","",new DateTime(),"",$wallet);
 
@@ -80,14 +82,14 @@ class FUtenteRegistrato
      * Carica tutti gli utenti bannati
      * @return array|null
      */
-    public static function loadBannati(){
+    public static function loadList(){
         $sql = "SELECT * FROM " . static::$tables;
         $db=FDatabase::getInstance();
         $result=$db->loadMultiple($sql);
         if($result!=null){
             $bannati = array();
             foreach($result as $row){
-                $bannato = FUtenteRegistrato::loadByUsername($row['username']);
+                $bannato = FUtenteRegistrato::load($row['username']);
                 array_push($bannati, $bannato);
             }
             return $bannati;
