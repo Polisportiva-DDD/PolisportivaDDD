@@ -7,15 +7,34 @@ class EWallet
     //attributes
 
     private int $id;
-    private array $gettoni = array();
+    private array $listaCampiWallet = array();
 
-    //constructor
 
-    public function __construct(array $gettoni,int $id=-1)
+    public function __construct(array $listaCampiWallet,int $id=-1)
     {
         $this -> id=$id;
-        $this -> gettoni = $gettoni;
+        $this -> listaCampiWallet = $listaCampiWallet;
+
     }
+
+
+    /**
+     * @return array
+     */
+    public function getListaCampiWallet(): array
+    {
+        return $this->listaCampiWallet;
+    }
+
+    /**
+     * @param array $listaCampiWallet
+     */
+    public function setListaCampiWallet(array $listaCampiWallet): void
+    {
+        $this->listaCampiWallet = $listaCampiWallet;
+    }
+
+
 
     /**
      * @return int
@@ -25,13 +44,7 @@ class EWallet
         return $this->id;
     }
 
-    /**
-     * @return array
-     */
-    public function getGettoni(): array
-    {
-        return $this->gettoni;
-    }
+
 
     /**
      * @param int $id
@@ -41,57 +54,30 @@ class EWallet
         $this->id = $id;
     }
 
-    /**
-     * @param array $gettoni
-     */
-    public function setGettoni(array $gettoni): void
-    {
-        $this->gettoni = $gettoni;
-    }
 
 
 
     public function aggiungiGettoni(ECampo $campo, int $quantita):bool
     {
-        try
-        {
-
-            if($campo != null && $quantita != null)
-            {
-                $idcampo = $campo -> getId();
-                $this -> gettoni[$idcampo] += $quantita;
+        foreach ($this->listaCampiWallet as $valore){
+            if($valore->getId()==$campo->getId()){
+                $valore::aggiungiGettoni($quantita);
                 return true;
             }
-            else
-            {
-                return false;
-            }
         }
-        catch (Exception $exception){
-            return false;
-        }
+        return false;
     }
 
 
     public function rimuoviGettoni(ECampo $campo, int $quantita):bool
     {
-        try
-        {
-
-            if($campo != null && $quantita != null)
-            {
-                $idcampo = $campo -> getId();
-                $this -> gettoni[$idcampo] -=  $quantita;//sottrago la quantita di gettoni relativa a quel campo
+        foreach ($this->listaCampiWallet as $valore){
+            if($valore->getId()==$campo->getId()){
+                $valore::aggiungiGettoni($quantita);
                 return true;
             }
-            else
-            {
-                return false;
-            }
         }
-        catch (Exception $exception){
-            return false;
-        }
+        return false;
     }
 
 }
