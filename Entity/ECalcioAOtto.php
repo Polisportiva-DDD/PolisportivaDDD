@@ -10,8 +10,9 @@ class ECalcioAOtto implements ECampo
     private int $numeroMassimo;
     private string $descrizione;
     private float $prezzo;
+    private string $immagine;
 
-    public function __construct($id, $n, $nMin, $nMax, $d, $p)
+    public function __construct($id, $n, $nMin, $nMax, $d, $p, $immagine)
     {
         $this->id=$id;
         $this->nome=$n;
@@ -19,6 +20,7 @@ class ECalcioAOtto implements ECampo
         $this->numeroMassimo=$nMax;
         $this->descrizione=$d;
         $this->prezzo=$p;
+        $this->immagine=$immagine;
     }
 
 
@@ -118,5 +120,15 @@ class ECalcioAOtto implements ECampo
      */
     public function setPrezzo(float $p):void{
         $this->prezzo=$p;
+    }
+
+    public function getImmagine(): string
+    {
+        return $this->immagine;
+    }
+
+    public function setImmagine(string $immagine): void
+    {
+        $this->immagine=$immagine;
     }
 }

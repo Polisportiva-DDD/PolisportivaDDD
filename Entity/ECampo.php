@@ -2,7 +2,7 @@
  Interface ECampo{
 
 
-     public function __construct($id, $n, $nMin, $nMax, $d, $p);
+     public function __construct($id, $n, $nMin, $nMax, $d, $p, $immagine);
 
      /**
       * Restituisce il nome del campo
@@ -76,4 +76,9 @@
       * @param int $id
       */
      public function setId(int $id): void;
+
+     public function getImmagine(): string;
+
+
+     public function setImmagine(string $immagine): void;
 }

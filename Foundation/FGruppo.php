@@ -8,7 +8,6 @@ class FGruppo
     private static $tableName="gruppo";
     private static $tablePartecipanti = "partecipazionegruppo";
     private static $values="(:id,:admin,:idCampo,:nome,:etaMinima,:etaMassima,:votoMinimo,:descrizione, :dataEOra)";
-    private static $classeEntity = "EUtente";
 
     public function __construct(){}
 
@@ -64,7 +63,7 @@ class FGruppo
                                 DateTime $dataEOra, array $partecipanti,
                                 Utente $admin, Campo $campo)
      */
-    public static function loadGruppoById(int $idGruppo){
+    public static function load(int $idGruppo){
         try{
             $sql = "SELECT * FROM " . static::$tableName . " WHERE id=" . $idGruppo; //Query per ottenere un gruppo dall'id
             $db=FDatabase::getInstance(); //Ottieni il DB
@@ -181,18 +180,12 @@ class FGruppo
 
     public static function addPartecipante(String $username, int $idGruppo ){
         try {
-            $db1 = FDatabase::getInstance();
-            $db=$db1->getDb();
-            $db->beginTransaction();
             $sql = "INSERT INTO " . static::$tablePartecipanti . " VALUES (:idGruppo, :utente)";
-            $stmt=$db->prepare($sql);
-            $values=array($idGruppo,$username);
-
-            //$stmt->bindValue(':idGruppo', $idGruppo , PDO::PARAM_INT);
-            //$stmt->bindValue(':utente', $username, PDO::PARAM_STR);
-            $stmt->execute();
-            $db->commit();
-            //$db->closeConnection();
+            $valuesAssociazione = array($idGruppo, $username);
+            $db = FDatabase::getInstance();
+            $result = $db->store3($sql, __CLASS__, $valuesAssociazione );
+            if($result) return true;
+            else return false;
 
         }
         catch (PDOException $e){

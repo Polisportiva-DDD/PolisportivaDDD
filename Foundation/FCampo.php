@@ -8,7 +8,8 @@ class FCampo
 {
 
     private static $tableName = "campo";
-    private static $values="(:nome, :numeroMinimo,:numeroMassimo,:descrizione,:prezzo,:id)";
+    private static $values="(:nome, :numeroMinimo,:numeroMassimo,:descrizione,:prezzo,:id, :discriminante, :immagine)";
+
 
     public function __construct() {}
 
@@ -19,9 +20,10 @@ class FCampo
         $stmt->bindValue(':descrizione', $campo->getDescrizione(), PDO::PARAM_STR);
         $stmt->bindValue(':prezzo', $campo->getPrezzo(), PDO::PARAM_STR);
         $stmt->bindValue(':id', null,  PDO::PARAM_INT);
+        $stmt->bindValue(":immagine", $campo->getImmagine(), PDO::PARAM_STR);
     }
 
-/*
+
     public static function store(ECampo $campo){
         $sql="INSERT INTO " . static::$tableName . " VALUES " . static::$values;
         $db=FDatabase::getInstance();
@@ -29,8 +31,8 @@ class FCampo
         if($id) return $id;
         else return null;
     }
-*/
-    public static function load(){ //Carica tutti i campi presenti
+
+    public static function loadList(){ //Carica tutti i campi presenti
         try {
             $sql = "SELECT * FROM " . static::$tableName;
             $db = FDatabase::getInstance();
@@ -48,7 +50,7 @@ class FCampo
         }
     }
 
-    public static function loadCampo(int $idCampo)
+    public static function load(int $idCampo)
     {
         try {
             $sql = "SELECT * FROM " . static::$tableName . " WHERE id=" . $idCampo;
@@ -85,22 +87,12 @@ class FCampo
         return $response;
     }
 
+
+
     private static function buildCampo(array $row){
         if ($row){
-            switch($row['nome']){
-                case "calcio a cinque":
-                    $campo = new ECalcioACinque($row['id'], $row['nome'], $row['numeroMinimo'], $row['numeroMassimo'], $row['descrizione'], $row['prezzo'] );
-                    return $campo;
-                case "calcio a sette":
-                    $campo = new ECalcioASette($row['id'], $row['nome'], $row['numeroMinimo'], $row['numeroMassimo'], $row['descrizione'], $row['prezzo'] );
-                    return $campo;
-                case "calcio a otto":
-                    $campo = new ECalcioAOtto($row['id'], $row['nome'], $row['numeroMinimo'], $row['numeroMassimo'], $row['descrizione'], $row['prezzo'] );
-                    return $campo;
-                case "calcio a undici":
-                    $campo = new ECalcioAUndici($row['id'], $row['nome'], $row['numeroMinimo'], $row['numeroMassimo'], $row['descrizione'], $row['prezzo'] );
-                    return $campo;
-            }
+            $class = $row['discriminante'];
+            $campo = new $class($row['id'], $row['nome'], $row['numeroMinimo'], $row['numeroMassimo'], $row['descrizione'], $row['prezzo'], $row['immagine']);
         }
 
     }
