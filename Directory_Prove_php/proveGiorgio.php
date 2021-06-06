@@ -116,7 +116,7 @@ $carta4 = new ECartadiCredito('2222222222','Giorgio','Di Nunzio','111',new DateT
 //$smarty -> display('profiloUtenteRegistrato.tpl');
 
 
-//prova per il template di utenteRegistratoHome
+//prova per il template di MioProfilo
 //$smarty = StartSmarty::configuration();
 //$smarty -> assign('username',$utente2->getUsername());
 //$smarty -> assign('nome',$utente2->getNome());
