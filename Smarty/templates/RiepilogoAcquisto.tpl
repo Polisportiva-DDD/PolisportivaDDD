@@ -5,13 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="description" content="" />
   <meta name="author" content="" />
-  <title>Calcio a 5</title>
-  <!-- Favicon-->
-  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <title>Polisportiva DDD</title>
+
   <!-- Font Awesome icons (free version)-->
   <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
   <!-- Core theme CSS (includes Bootstrap)-->
-  <link href="../css/styles.css" rel="stylesheet" />
+  <link href="/ProgettoWeb/Smarty/css/styles.css" rel="stylesheet" />
 </head>
 <body>
 <!-- Navigation-->
@@ -43,37 +42,43 @@
     </div>
   </div>
 </nav>
-
 <!-- Page Content-->
-
-</body>
-<div class="container col-xxl-8 px-4 py-5">
-  <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
-    <div class="col-10 col-sm-8 col-lg-6">
-      <img src="../assets/img/700x500.png" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
-    </div>
-    <div class="col-lg-6">
-      <h1 class="display-5 fw-bold lh-1 mb-3">Calcio a Cinque</h1>
-      <p class="lead">La polisportiva DDD è dotata di 3 campi da calcio a cinque con porte e tracciature regolamentari.</p>
-
-      <p class="lead">Il manto in erba sintetica di ultima generazione offre performance e sicurezza.</p>
-
-      <p class="lead">Sono presenti panchine a bordo campo per allenatori e giocatori, posti a sedere esterni per eventuali spettatori e un parcheggio esterno molto ampio.</p>
-
-      <p class="lead">Dimensioni campo : 18 x 38 metri</p>
-      <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+<section class="py-5 mb-5">
+  <div class="container">
+    <!-- Page Heading/Breadcrumbs-->
+    <h1 class="mb-5">Riepilogo acquisto</h1>
+    <div class="row rounded border col-md-12 mb-5 py-4">
+      <div class="col-lg-6 col-md-6 col-sm-12">
+        <h4>Gettoni calcio a cinque</h4>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-12 m-auto">
+        <p>Prezzo: {$prezzo}€</p>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-12 m-auto">
+        <p>Quantità: {$quantita}</p>
       </div>
     </div>
-  </div>
-  <div style="width:100%;max-width:750px;border-radius:10px;border:1px red solid;overflow:hidden">
-    <div style="background-color:#0d6efd;padding:10px">
-      <strong>
-        Per la prenotazione del campo creare un gruppo o chiedi di partecipare ad uno già esistente.
-      </strong>
+    <div class="row rounded border col-md-12 mb-5 py-4">
+      <div class="col-lg-3 col-md-3 col-sm-12">
+        <p>{$numeroCarta}</p>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-12 m-auto">
+        <p>{$nomeTitolare}</p>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-12 m-auto">
+        <p>{$cognomeTitolare}</p>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-12 m-auto">
+        <p>{$scadenza}</p>
+      </div>
     </div>
-  </div>
-</div>
 
+    <h4>Prezzo totale: {$prezzoTotale}€</h4>
+    <button class="btn btn-primary btn-lg float-right mt-2">Paga</button>
+
+  </div>
+
+</section>
 <!-- Footer-->
 <footer class="py-5 bg-dark">
   <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
@@ -82,6 +87,6 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
-<script src="../js/scripts.js"></script>
+<script src="/ProgettoWeb/Smarty/js/scripts.js"></script>
 </body>
 </html>

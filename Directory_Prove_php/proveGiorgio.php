@@ -153,7 +153,7 @@ $carta4 = new ECartadiCredito('2222222222','Giorgio','Di Nunzio','111',new DateT
 ////print_r($results);
 //$smarty->assign('results', $results);
 //
-//$smarty -> display('utenteRegistratoHome.tpl');
+//$smarty -> display('MioProfilo.tpl');
 
 
 //prova per il template di UtentiBannati

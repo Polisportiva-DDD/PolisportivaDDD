@@ -111,10 +111,7 @@
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
-        <script src="../js/scripts.js"></script>
-        <!-- Contact form JavaScript-->
-        <!-- Do not edit these files! In order to set the email address and subject line for the contact form go to the assets/mail/contact_me.php file.-->
-        <script src="../assets/mail/jqBootstrapValidation.js"></script>
-        <script src="../assets/mail/contact_me.js"></script>
+        <script src="/ProgettoWeb/Smarty/js/scripts.js"></script>
+
     </body>
 </html>

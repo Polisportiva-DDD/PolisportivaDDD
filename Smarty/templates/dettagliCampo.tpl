@@ -6,13 +6,12 @@
   <meta name="description" content="" />
   <meta name="author" content="" />
   <title>Polisportiva DDD</title>
-  <!-- Favicon-->
-  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+
   <!-- Font Awesome icons (free version)-->
   <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
   <!-- Core theme CSS (includes Bootstrap)-->
-  <link href="/ProgettoWeb/Smarty/css/styles.css" rel="stylesheet" />
-  <link href="/ProgettoWeb/Smarty/css/ourStyle.css" rel="stylesheet" />
+  <link href="/ProgettoWeb/Smarty/css/styles.css" rel="stylesheet" type="text/css"/>
+  
 </head>
 <body>
 <!-- Navigation-->
@@ -32,7 +31,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
 
-
     <a class="navbar-brand" href="index.html">Polisportiva DDD</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -44,71 +42,33 @@
     </div>
   </div>
 </nav>
-<section class="py-5">
-  <div class="container">
-    <!-- Page heading-->
-    <h1>Il tuo profilo</h1>
-    <ol class="breadcrumb mb-4 h-100">
-
-    </ol>
-    <div class="row">
-      <div class="col-md-8">
-      <div class="text-center mb-2">
-        <!-- Profilo -->
-          <img src="https://via.placeholder.com/250" class="rounded-circle" alt="Immagine utente">
-      </div>
-      <div class="text-center">
-        <h5 class="mb-2">Username: {$username}</h5>
-        <h5 class="mb-2">Nome: {$nome}</h5>
-        <h5 class="mb-2">Cognome: {$cognome}</h5>
-        <h5 class="mb-2">Età: {$eta}</h5>
-        <h5 class="mb-2">Valutazione media:
-          {for $start=1 to $valutazioneMedia}
-            <span class="fa fa-star checkedStar"></span>
-          {/for}
-          {for $start=$valutazioneMedia+1 to 5}
-            <span class="fa fa-star"></span>
-          {/for}
-        </h5>
-      </div>
-      </div>
 
 
-      <!-- Sidebar Widgets Column-->
-      <div class="col-md-4">
-        <div class="list-group mb-4">
-          <a class="list-group-item" href="#">Profilo personale</a>
-          <a class="list-group-item" href="#">I tuoi gruppi</a>
-          <a class="list-group-item" href="#">Le tue carte</a>
-          <a class="list-group-item" href="#">Recensione</a>
-        </div>
-        <div class="card">
-          <div class="card-body rounded">
-            <h5 class="card-title">Wallet</h5>
-            <p class="card-text">Questo è il tuo wallet</p>
-          </div>
-          <ul class="list-group list-group-flush">
-            {section name=nr loop=$results}
-              <li class="list-group-item">{$results[nr].nomeCampo} <span class="float-right">{$results[nr].quantitaGettoni}</span></li>
-            {/section}
-          </ul>
-          <div class="card-body m-auto">
-            <a href="#" class="btn btn-primary btn-lg">Acquista gettoni</a>
-          </div>
-        </div>
 
-
-      </div>
+<div class="container  py-5">
+  <div class="row flex-lg-row-reverse  py-5">
+    <div class="col-lg-6">
+      <img src="assets/img/500x500.png" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="500" height="500" loading="lazy">
     </div>
+    <div class="col-lg-6">
+      <h1 class="mb-3">{$nomeCampo}</h1>
+      <p class="lead ">{$descrizione}</p>
+    </div>
+
   </div>
-</section>
+  <ul class="list-group text-center">
+    <li class="list-group-item">Per la prenotazione del campo creare un gruppo o chiedi di partecipare ad uno già esistente.</li>
+  </ul>
+</div>
+
 <!-- Footer-->
 <footer class="py-5 bg-dark">
   <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
 </footer>
-</body>
+<!-- Bootstrap core JS-->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
 <script src="/ProgettoWeb/Smarty/js/scripts.js"></script>
+</body>
 </html>

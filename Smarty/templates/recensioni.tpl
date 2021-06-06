@@ -6,8 +6,7 @@
   <meta name="description" content="" />
   <meta name="author" content="" />
   <title>Polisportiva DDD</title>
-  <!-- Favicon-->
-  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+
   <!-- Font Awesome icons (free version)-->
   <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
   <!-- Core theme CSS (includes Bootstrap)-->
@@ -49,7 +48,7 @@
 <section class="py-5">
   <div class="container">
     <!-- Page Heading/Breadcrumbs-->
-    <h1 class="mb-5">Recensioni Effetuate</h1>
+    <h1 class="mb-5">Recensioni Effettuate</h1>
     {section name=nr loop=$results}
       <div class="row rounded border col-md-12 mb-5 py-4">
         <div class="col-lg-12 col-md-12 col-sm-12">

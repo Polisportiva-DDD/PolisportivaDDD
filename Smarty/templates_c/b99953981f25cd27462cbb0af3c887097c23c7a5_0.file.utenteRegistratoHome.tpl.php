@@ -1,6 +1,6 @@
 <?php
 /* Smarty version 3.1.39, created on 2021-06-02 17:33:19
-  from 'C:\Users\dinun\PhpstormProjects\ProgettoWeb\Smarty\templates\utenteRegistratoHome.tpl' */
+  from 'C:\Users\dinun\PhpstormProjects\ProgettoWeb\Smarty\templates\MioProfilo.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
@@ -11,7 +11,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
     'b99953981f25cd27462cbb0af3c887097c23c7a5' => 
     array (
-      0 => 'C:\\Users\\dinun\\PhpstormProjects\\ProgettoWeb\\Smarty\\templates\\utenteRegistratoHome.tpl',
+      0 => 'C:\\Users\\dinun\\PhpstormProjects\\ProgettoWeb\\Smarty\\templates\\MioProfilo.tpl',
       1 => 1622643431,
       2 => 'file',
     ),
