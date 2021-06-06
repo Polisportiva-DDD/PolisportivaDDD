@@ -1,7 +1,7 @@
 <?php
 
 
-class VCarta
+class VRecensione
 {
     private $smarty;
 
@@ -9,14 +9,13 @@ class VCarta
         $this->smarty = StartSmarty::configuration();
     }
 
-    public function showLeTueCarte($isAmministratore, $isUtente, $carte){
+    public function showEffettuaRecensioni($isAmministratore, $isUtente, $username){
         $this->smarty->assign("isAmministratore", $isAmministratore);
         $this->smarty->assign("isUtente", $isUtente);
-        $this->smarty->assign("results", $carte);
+        $this->smarty->assign("username", $username);
 
-        $this->smarty->display("le_tue_carte.tpl");
-
-
+        $this->smarty->display("effettuaRecensioni.tpl");
     }
+
 
 }

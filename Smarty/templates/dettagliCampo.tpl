@@ -79,7 +79,7 @@
 <div class="container  py-5">
   <div class="row flex-lg-row-reverse  py-5">
     <div class="col-lg-6">
-      <img src="assets/img/500x500.png" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="500" height="500" loading="lazy">
+      <img src="data:{$type};base64,{$pic64}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="500" height="500" loading="lazy">
     </div>
     <div class="col-lg-6">
       <h1 class="mb-3">{$nomeCampo}</h1>
