@@ -46,12 +46,6 @@
         <!-- Page heading-->
         <h1>Scegli Ora</h1>
         <hr>
-
-
-
-
-
-
         <div class="row">
             <div class="col-lg-6">
                 <div class="text-center mb-2">

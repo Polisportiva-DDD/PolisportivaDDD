@@ -51,21 +51,21 @@
     <hr>
     <!-- Content Row-->
     <div class="row">
-      {section name=nr loop=$results}
+      {section name=nr loop=$utenti}
       <div class="col-lg-4 mb-4 mt-4 mb-lg-0">
         <div class="card h-80">
-          <h6 class="card-header">{$results[nr].username}</h6>
+          <h6 class="card-header">{$utenti[nr].username}</h6>
           <div class="card-body text-center">
             <img src="https://via.placeholder.com/75" class="rounded-circle" alt="Immagine utente">
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">Età: {$results[nr].eta}</li>
+            <li class="list-group-item">Età: {$utenti[nr].eta}</li>
             <li class="list-group-item">
               <h10 class="mb-2">Valutazione media:
-                {for $start=1 to $results[nr].valutazione}
+                {for $start=1 to $utenti[nr].valutazione}
                   <span class="fa fa-star checkedStar"></span>
                 {/for}
-                {for $start=($results[nr].valutazione)+1 to 5}
+                {for $start=($utenti[nr].valutazione)+1 to 5}
                   <span class="fa fa-star"></span>
                 {/for}
               </h10>
