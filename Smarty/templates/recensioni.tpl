@@ -70,11 +70,6 @@
       <h2>Nessuna recensione presente</h2>
     {/section}
     </div>
-  <!-- Pagination-->
-  <ul class="pagination justify-content-center mb-4">
-    <li class="page-item"><a class="page-link" href="#!">← Precedente</a></li>
-    <li class="page-item"><a class="page-link" href="#!">Successivo →</a></li>
-  </ul>
 </section>
 
 <!-- Footer-->

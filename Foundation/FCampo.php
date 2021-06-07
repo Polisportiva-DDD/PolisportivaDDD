@@ -93,8 +93,9 @@ class FCampo
         if ($row){
             $class = $row['discriminante'];
             $campo = new $class($row['id'], $row['nome'], $row['numeroMinimo'], $row['numeroMassimo'], $row['descrizione'], $row['prezzo'], $row['immagine']);
+            return $campo;
         }
-
+        else return null;
     }
 
 }

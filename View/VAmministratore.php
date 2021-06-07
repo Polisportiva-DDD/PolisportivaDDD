@@ -2,7 +2,7 @@
 
 
 class VAmministratore{
-    private $smarty;
+    private Smarty $smarty;
 
     /**
      * Funzione che inizializza e configura smarty.
@@ -26,4 +26,19 @@ class VAmministratore{
         $this -> smarty -> display("utentiBannati.tpl");
     }
 
+    /**
+     * Funzione che si occupa di gestire la visualizzazione di tutte le segnalazioni dall'account amministratore
+     * @param array $listaSegnalazioni lista di tutte le segnalazioni
+     * @param bool $isAmministratore sei amministratore?
+     * @param bool $isUtente sei utente?
+     * @throws SmartyException
+     */
+    public function showSegnalazioniAmministratore(array $listaSegnalazioni,bool $isAmministratore,bool $isUtente){
+        $this -> smarty -> assign('results', $listaSegnalazioni);
+        $this -> smarty -> assign("isAmministratore", $isAmministratore);
+        $this -> smarty -> assign("isUtente", $isUtente);
+
+        $this -> smarty -> display("SegnalazioniAmministratore.tpl");
+
+    }
 }

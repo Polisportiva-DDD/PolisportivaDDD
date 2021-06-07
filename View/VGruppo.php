@@ -4,7 +4,7 @@
 class VGruppo
 {
 
-    private $smarty;
+    private Smarty $smarty;
 
     /**
      * Funzione che inizializza e configura smarty.
@@ -63,13 +63,21 @@ class VGruppo
         $this->smarty->display("i_tuoi_gruppi.tpl");
     }
 
+    /**
+     * Funzione che si occupa di gestire la visualizzazione della ricerca di tutti i gruppi
+     * @param array $listaGruppi lista dei gruppi presenti
+     * @param array $listaCampi lista dei campi presenti
+     * @param $isAmministratore bool che controlla se è loggato un amministratore
+     * @param $isUtente bool che controlla se è loggato un utente
+     * @throws SmartyException
+     */
+    public function showRicercaGruppo(array $listaGruppi,array $listaCampi,bool $isAmministratore,bool $isUtente){
+        $this -> smarty -> assign('results',$listaGruppi);
+        $this -> smarty -> assign('results',$listaCampi);
+        $this -> smarty -> assign("isAmministratore", $isAmministratore);
+        $this -> smarty -> assign("isUtente", $isUtente);
 
-
-
-
-
-
-
-
+        $this -> smarty -> display('RicercaGruppo.tpl');
+    }
 
 }

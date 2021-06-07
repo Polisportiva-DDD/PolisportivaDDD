@@ -43,7 +43,7 @@
       <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
 
       <label for="floatingPassword">Password</label>
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Password"required>
+      <input type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
 
       <label for="floatingPasswordConfirm">Conferma Password</label>
       <input type="password" class="form-control" id="floatingPasswordConfirm" placeholder="Conferma Password" required>

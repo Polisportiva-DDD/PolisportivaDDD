@@ -7,7 +7,7 @@ class FCampiWallet
 {
 
 
-    private static $tablesName="campiwallet";
+    private static $tableName="campiwallet";
     private static $values="(:idCampo,:idWallet,:gettoni)";
     
     public function __construct(){}
@@ -49,7 +49,7 @@ class FCampiWallet
 
             $sql1="";
             foreach ($campiwallet as  $valore) {//per ogni campo, aggiorno la quantità di gettoni
-            $sql = "UPDATE " . static::$tablesName . " SET gettoni='" . $valore->getGettoni() . "' WHERE idCampo='" . $id . "' and idWallet='" . $id . "';";
+            $sql = "UPDATE " . static::$tableName . " SET gettoni='" . $valore->getGettoni() . "' WHERE idCampo='" . $id . "' and idWallet='" . $id . "';";
             $sql1.=$sql;//creo un un'unica query da eseguire
             }
             $db=FDatabase::getInstance();
@@ -68,7 +68,7 @@ class FCampiWallet
 
     public static function update2($idCampo, $idWallet, $quantita)
     {
-        $sql = "UPDATE " . static::$tablesName . " SET gettoni='" . $quantita . "' WHERE idCampo='" . $idCampo . "' and idWallet='" . $idWallet . "';";
+        $sql = "UPDATE " . static::$tableName . " SET gettoni='" . $quantita . "' WHERE idCampo='" . $idCampo . "' and idWallet='" . $idWallet . "';";
         $db=FDatabase::getInstance();
         if($db->update($sql)) return true;
         else return false;
@@ -89,7 +89,7 @@ class FCampiWallet
 
 
     public static function load($id){
-        $sql="SELECT * FROM ".static::$tablesName." WHERE idWallet='".$id."';";
+        $sql="SELECT * FROM ".static::$tableName." WHERE idWallet='".$id."';";
         $db=FDatabase::getInstance();
         $result=$db->loadMultiple($sql);
         $campiWallet=array();

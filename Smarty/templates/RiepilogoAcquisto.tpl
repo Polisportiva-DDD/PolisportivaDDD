@@ -45,29 +45,43 @@
   <div class="container">
     <!-- Page Heading/Breadcrumbs-->
     <h1 class="mb-5">Riepilogo acquisto</h1>
+    {section name=nr loop=$results}
+      <div class="row rounded border col-md-12 mb-5 py-4">
+        <div class="col-lg-6 col-md-6 col-sm-12">
+          <h4>Gettoni {$results[nr].nomeCampo}</h4>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-12 m-auto">
+          <p>Prezzo per gettone: {$results[nr].prezzo}€</p>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-12 m-auto">
+          <p>Quantità gettoni: {$results[nr].quantita}</p>
+        </div>
+      </div>
+    {/section}
     <div class="row rounded border col-md-12 mb-5 py-4">
-      <div class="col-lg-6 col-md-6 col-sm-12">
-        <h4>Gettoni calcio a cinque</h4>
+      <div class="col-sm">
+        Numero della carta
+        <div style="width:100%;max-width:250px;border:1px red solid;overflow:hidden">
+          <div style="background-color:#eeeeee;padding:5px">
+            {$numeroCarta}
+          </div>
+        </div>
       </div>
-      <div class="col-lg-3 col-md-3 col-sm-12 m-auto">
-        <p>Prezzo: {$prezzo}€</p>
+      <div class="col-sm">
+        Titolare della carta
+        <div style="width:100%;max-width:250px;border:1px red solid;overflow:hidden">
+          <div style="background-color:#eeeeee;padding:5px">
+            {$titolareCarta}
+          </div>
+        </div>
       </div>
-      <div class="col-lg-3 col-md-3 col-sm-12 m-auto">
-        <p>Quantità: {$quantita}</p>
-      </div>
-    </div>
-    <div class="row rounded border col-md-12 mb-5 py-4">
-      <div class="col-lg-3 col-md-3 col-sm-12">
-        <p>{$numeroCarta}</p>
-      </div>
-      <div class="col-lg-3 col-md-3 col-sm-12 m-auto">
-        <p>{$nomeTitolare}</p>
-      </div>
-      <div class="col-lg-3 col-md-3 col-sm-12 m-auto">
-        <p>{$cognomeTitolare}</p>
-      </div>
-      <div class="col-lg-3 col-md-3 col-sm-12 m-auto">
-        <p>{$scadenza}</p>
+      <div class="col-sm">
+        Data di scadenza
+        <div style="width:100%;max-width:250px;border:1px red solid;overflow:hidden">
+          <div style="background-color:#eeeeee;padding:5px">
+            {$dataScadenza}
+          </div>
+        </div>
       </div>
     </div>
 

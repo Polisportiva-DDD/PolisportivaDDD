@@ -3,7 +3,7 @@
 
 class VUtente
 {
-    private $smarty;
+    private Smarty $smarty;
 
     /**
      * Funzione che inizializza e configura smarty.
@@ -47,9 +47,9 @@ class VUtente
      * @throws SmartyException
      */
     public function showMioProfilo(string $username,string $nome,string $cognome,int $eta,int $media_recensioni,array $gettoni,bool $isAmministratore,bool $isUtente){
-        $this -> smarty -> assign('username',$username());
-        $this -> smarty -> assign('nome',$nome());
-        $this -> smarty -> assign('cognome',$cognome());
+        $this -> smarty -> assign('username',$username);
+        $this -> smarty -> assign('nome',$nome);
+        $this -> smarty -> assign('cognome',$cognome);
         $this -> smarty -> assign('eta',$eta);
         $this -> smarty -> assign('valutazioneMedia',$media_recensioni);
         $this -> smarty -> assign('results', $gettoni);
@@ -59,5 +59,67 @@ class VUtente
         $this -> smarty -> display('MioProfilo.tpl');
     }
 
+    /**
+     * Funzione che si occupa di gestire la visualizzazione del profilo dell'utente cercato
+     * @param string $username username dell'utente loggato
+     * @param string $nome nome dell'utente loggato
+     * @param string $cognome cognome dell'utente loggato
+     * @param int $eta età dell'utente loggato
+     * @param int $media_recensioni media delle recensioni dell'utente loggato
+     * @param array $recensioni contiene tutte le recensioni relative all'utente
+     * @param $isAmministratore bool che controlla se è loggato un amministratore
+     * @param $isUtente bool che controlla se è loggato un utente
+     * @throws SmartyException
+     */
+    public function showProfiloUtenteRegistrato(string $username, string $nome, string $cognome, int $eta, int $media_recensioni, array $recensioni, bool $isAmministratore, bool $isUtente){
 
+        $this -> smarty -> assign('username',$username);
+        $this -> smarty -> assign('nome',$nome);
+        $this -> smarty -> assign('cognome',$cognome);
+        $this -> smarty -> assign('eta',$eta);
+        $this -> smarty -> assign('valutazioneMedia',$media_recensioni);
+        $this -> smarty -> assign('results', $recensioni);
+        $this -> smarty -> assign("isAmministratore", $isAmministratore);
+        $this -> smarty -> assign("isUtente", $isUtente);
+
+        $this -> smarty -> display('profiloUtenteRegistrato.tpl');
+    }
+
+    /**
+     * Funzione che si occupa di gestire la visualizzazione della ricerca di tutti gli utenti
+     * @param array $listaUtenti lista di tutti gli utenti
+     * @param $isAmministratore bool che controlla se è loggato un amministratore
+     * @param $isUtente bool che controlla se è loggato un utente
+     * @throws SmartyException
+     */
+    public function showRicercaUtente(array $listaUtenti,bool $isAmministratore,bool $isUtente){
+        $this -> smarty -> assign('results',$listaUtenti);
+        $this -> smarty -> assign("isAmministratore", $isAmministratore);
+        $this -> smarty -> assign("isUtente", $isUtente);
+
+        $this -> smarty -> display('ricercaUtente.tpl');
+    }
+
+    /**
+     * Funzione che si occupa di gestire la visualizzazione delle recensioni effettuate dall'utente
+     * @param array $listaRecensioni lista di tutte le recensioni
+     * @param $isAmministratore bool che controlla se è loggato un amministratore
+     * @param $isUtente bool che controlla se è loggato un utente
+     * @throws SmartyException
+     */
+    public function showRecensioni(array $listaRecensioni,bool $isAmministratore,bool $isUtente){
+        $this -> smarty -> assign('results',$listaRecensioni);
+        $this -> smarty -> assign("isAmministratore", $isAmministratore);
+        $this -> smarty -> assign("isUtente", $isUtente);
+
+        $this -> smarty -> display('recensioni.tpl');
+    }
+
+    /**
+     * Funzione che si occupa di gestire la visualizzazione del form di registrazione
+     * @throws SmartyException
+     */
+    public function showRegistrazioneUtente(){
+        $this -> smarty -> display('registrazione.tpl');
+    }
 }

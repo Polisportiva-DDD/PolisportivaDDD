@@ -5,17 +5,17 @@ require_once '../Foundation/config.inc.php';
 require_once "../Utility/StartSmarty.php";
 
 
-$c5 = new ECalcioACinque(1, "calcio a cinque", 1, 10, "desc", 12.2);
-$c7 = new ECalcioACinque(2, "calcio a sette", 1, 10, "desc", 12.2);
-$c8 = new ECalcioACinque(3, "calcio a otto", 1, 10, "desc", 12.2);
-$c11 = new ECalcioACinque(4, "calcio a undici", 1, 10, "desc", 12.2);
+$c5 = new ECalcioACinque(1, "calcio a cinque", 1, 10, "desc", 12.2,'imm1');
+$c7 = new ECalcioACinque(2, "calcio a sette", 1, 10, "desc", 12.2,'imm2');
+$c8 = new ECalcioACinque(3, "calcio a otto", 1, 10, "desc", 12.2,'imm3');
+$c11 = new ECalcioACinque(4, "calcio a undici", 1, 10, "desc", 12.2,'imm4');
 
 $gettoni = array($c5->getId()=>1, $c7->getId()=>4, $c8->getId()=>3, $c11->getId()=>9);
 
-$w1=new EWallet($gettoni,37);
-$w2=new EWallet($gettoni,38);
-$w3=new EWallet($gettoni,39);
-$w4 = new EWallet($gettoni,50);
+$w1=new EWallet($gettoni,1);
+$w2=new EWallet($gettoni,2);
+$w3=new EWallet($gettoni,3);
+$w4 = new EWallet($gettoni,33);
 
 
 //FWallet::store($w1);
@@ -140,8 +140,9 @@ $carta4 = new ECartadiCredito('2222222222','Giorgio','Di Nunzio','111',new DateT
 //
 //$smarty -> assign('valutazioneMedia',$media_recensioni);
 //
-//$walletUtente2 = FWallet::loadById($utente2->getWallet()->getId());
-//$arrayGettoni = $walletUtente2->getGettoni();
+$walletUtente2 = FWallet::load($utente2->getWallet()->getId());
+$arrayGettoni = FCampiWallet::load($walletUtente2->getId());
+print_r($arrayGettoni);
 //$results = array();
 //foreach($arrayGettoni as $chiave => $valore){
 //    $tmp = array(
@@ -173,20 +174,20 @@ $carta4 = new ECartadiCredito('2222222222','Giorgio','Di Nunzio','111',new DateT
 //$smarty -> display("utentiBannati.tpl");
 
 //prova per il template di le_tue_carte
-$smarty = StartSmarty::configuration();
-
-$results = array();
-$carteUtente = FCartaDiCredito::loadCarteUtente($utente1->getUsername());
-for ($i=0;$i<count($carteUtente); $i++){
-    $tmp = array(
-      'numeroCarta' => $carteUtente[$i]->getNumero(),
-      'titolareCarta' => $carteUtente[$i]->getNomeTitolare(). " " . $carteUtente[$i]->getCognomeTitolare(),
-      'dataScadenza' => $carteUtente[$i]->getScadenza()->format('d-m-y')
-    );
-    $results[]=$tmp;
-}
-
-$smarty -> assign('results', $results);
-
-$smarty ->display("le_tue_carte.tpl");
+//$smarty = StartSmarty::configuration();
+//
+//$results = array();
+//$carteUtente = FCartaDiCredito::loadCarteUtente($utente1->getUsername());
+//for ($i=0;$i<count($carteUtente); $i++){
+//    $tmp = array(
+//      'numeroCarta' => $carteUtente[$i]->getNumero(),
+//      'titolareCarta' => $carteUtente[$i]->getNomeTitolare(). " " . $carteUtente[$i]->getCognomeTitolare(),
+//      'dataScadenza' => $carteUtente[$i]->getScadenza()->format('d-m-y')
+//    );
+//    $results[]=$tmp;
+//}
+//
+//$smarty -> assign('results', $results);
+//
+//$smarty ->display("le_tue_carte.tpl");
 ?>

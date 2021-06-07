@@ -87,11 +87,6 @@
                     <h2>Nessun Gruppo presente</h2>
                 {/section}
                 </div>
-                <!-- Pagination-->
-                <ul class="pagination justify-content-center mb-4">
-                    <li class="page-item"><a class="page-link" href="#!">← Precedente</a></li>
-                    <li class="page-item"><a class="page-link" href="#!">Successivo →</a></li>
-                </ul>
             </div>
             <!-- Sidebar Widgets Column-->
             <div class="col-md-4">
@@ -127,11 +122,11 @@
                             <div class="mb-3">
                                 <label for="tipologiaCampo" class="form-label">Tipologia Campo</label>
                                 <select class="form-control w-100" aria-label="Default-select example" id="tipologiaCampo">
-                                    <option selected>Open this select menu</option>
-                                    <option value="1">Calcio a 5</option>
-                                    <option value="2">Calcio a 7</option>
-                                    <option value="3">Calcio a 8</option>
-                                    <option value="3">Calcio a 11</option>
+                                    {section name=nr loop=$campi}
+                                        <option selected>Open this select menu</option>
+                                        <option value=nr>{$campi[nr].nomeCampo}</option>
+                                    {/section}
+
                                 </select>
                             </div>
                             <div class="mb-3">
@@ -139,15 +134,10 @@
                                 <select class="form-control w-100" aria-label="Default-select example" id="valMin">
                                     <option selected>Open this select menu</option>
                                     <option value="1">0 stelle</option>
-                                    <option value="2">0.5 stelle</option>
                                     <option value="1">1 stelle</option>
-                                    <option value="2">1.5 stelle</option>
                                     <option value="1">2 stelle</option>
-                                    <option value="2">2.5 stelle</option>
                                     <option value="1">3 stelle</option>
-                                    <option value="2">3.5 stelle</option>
                                     <option value="1">4 stelle</option>
-                                    <option value="2">4.5 stelle</option>
                                     <option value="1">5 stelle</option>
                                 </select>
                             </div>
