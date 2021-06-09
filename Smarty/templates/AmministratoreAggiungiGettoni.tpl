@@ -35,7 +35,15 @@
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item"><a class="nav-link" href="home-utente-registrato.html">Home</a></li>
 					<li class="nav-item"><a class="nav-link" href="RicercaGruppo.html">Gruppi</a></li>
-					<li class="nav-item"><a class="nav-link" href="assistenza.html">Informazioni</a></li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" id="navbarDropdownGestione" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Gestione</a>
+							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownGestione">
+								<a class="dropdown-item" href="UItentiBannati.html">Utenti Bannati</a>
+								<a class="dropdown-item" href="SegnalazioniAmministratore.html">Segnalazioni</a>
+								<a class="dropdown-item" href="#">Modifica prezzi</a>
+							</div>
+						</li>
+
 				</ul>
 			</div>
 		</div>
@@ -68,7 +76,7 @@
 					  <tbody>
 					  {section name=campi loop=$results}
 						<tr>
-						  <th scope="row" class="image" data-title="No"><img src="https://via.placeholder.com/100x100" alt="#"></th>
+						  <th scope="row" class="image" data-title="No"><img src="data:{$results[campi].type};base64,{$results[campi].pic64}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="100" height="100" loading="lazy"></th>
 						  <td >{$results[campi].nome}</td>
 						  <td>{$results[campi].prezzo}</td>
 						  <td>  <label for="quantity{$smarty.section.campi.iteration}">Inserisci quantita:</label>

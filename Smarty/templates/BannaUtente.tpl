@@ -36,7 +36,15 @@
       <ul class="navbar-nav ml-auto">
         <li class="nav-item"><a class="nav-link" href="home-utente-registrato.html">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="RicercaGruppo.html">Gruppi</a></li>
-        <li class="nav-item"><a class="nav-link" href="assistenza.html">Informazioni</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdownGestione" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Gestione</a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownGestione">
+            <a class="dropdown-item" href="UItentiBannati.html">Utenti Bannati</a>
+            <a class="dropdown-item" href="SegnalazioniAmministratore.html">Segnalazioni</a>
+            <a class="dropdown-item" href="#">Modifica prezzi</a>
+          </div>
+        </li>
+
       </ul>
     </div>
   </div>
@@ -51,7 +59,7 @@
       <div class="col-md-12">
         <div class="text-center mb-2">
           <!-- Profilo -->
-          <img src="https://via.placeholder.com/250" class="rounded-circle" alt="Immagine utente">
+          <img src="data:{$type};base64,{$pic64}" class="rounded-circle" alt="Immagine utente" width="250" height="150">
         </div>
         <div class="text-center">
 			<h6 class="mb-2">Username: {$username}</h6>

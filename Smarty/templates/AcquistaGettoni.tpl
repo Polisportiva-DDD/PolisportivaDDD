@@ -71,7 +71,7 @@
 					  {section name=campi loop=$results}
 						<tr>
 						
-						  <th scope="row" class="image" data-title="No"><img src="https://via.placeholder.com/100x100" alt="#"></th>
+						  <th scope="row" class="image" data-title="No"><img src="data:{$results[campi].type};base64,{$results[campi].pic64}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="100" height="100" loading="lazy"></th>
 						  <td >{$results[campi].nome}</td>
 						  <td>{$results[campi].prezzo}</td>
 						  <td>  <label for="quantity{$smarty.section.campi.iteration}">Inserisci quantita:</label>

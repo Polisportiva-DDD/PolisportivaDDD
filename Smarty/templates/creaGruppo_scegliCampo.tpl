@@ -51,7 +51,7 @@
       <div class="col-lg-6 mb-4 mb-lg-0">
         <div class="card h-100">
           <h4 class="card-header">{$results[nr].nome}</h4>
-          <img class="card-img-top" src="https://via.placeholder.com/1400x700" alt="Immagine campo">
+          <img class="card-img-top" src="data:{$type};base64,{$pic64}" width="1400" height="700" alt="Immagine campo">
           <div class="card-body"><p class="card-text">{$results[nr].descrizione}</p></div>
           <div class="card-footer"><input type="submit" class="btn btn-primary float-right" name="idCampo" value={$results[nr].idCampo}>Scegli</input></div>
         </div>
