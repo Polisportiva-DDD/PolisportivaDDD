@@ -1,5 +1,7 @@
 <?php
 
+require_once '../Utility/autoload.php';
+require_once '../Foundation/config.inc.php';
 
 class VGruppo
 {
@@ -12,6 +14,8 @@ class VGruppo
     function __construct(){
         $this->smarty = StartSmarty::configuration();
     }
+
+
 
     public function showScegliDataPage($nomeCampo, $isAmministratore, $isUtente){
         $this->smarty->assign("nomeCampo", $nomeCampo);

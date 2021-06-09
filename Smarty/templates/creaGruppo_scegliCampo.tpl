@@ -47,14 +47,16 @@
 
       {section name=nr loop=$results}
       {if $smarty.section.nr.iteration is odd}<div class="row mt-4">{/if}
+      <form method="POST" action = "/ProgettoWeb/CreGruppo/Data">
       <div class="col-lg-6 mb-4 mb-lg-0">
         <div class="card h-100">
           <h4 class="card-header">{$results[nr].nome}</h4>
           <img class="card-img-top" src="https://via.placeholder.com/1400x700" alt="Immagine campo">
           <div class="card-body"><p class="card-text">{$results[nr].descrizione}</p></div>
-          <div class="card-footer"><a class="btn btn-primary float-right" href="#!">Scegli</a></div>
+          <div class="card-footer"><input type="submit" class="btn btn-primary float-right" name="idCampo" value={$results[nr].idCampo}>Scegli</input></div>
         </div>
       </div>
+      </form>
       {/section}
       {if $smarty.section.nr.iteration is odd}</div>{/if}
 </section>
