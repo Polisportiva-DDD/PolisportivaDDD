@@ -41,4 +41,24 @@ class VAmministratore{
         $this -> smarty -> display("SegnalazioniAmministratore.tpl");
 
     }
+
+    public function showBannaUtente(string $username,string $nome,string $cognome,int $eta,string $valutazioneMedia,$pic64, $type){
+        $this -> smarty -> assign('nome',$nome);
+        $this -> smarty -> assign('cognome',$cognome);
+        $this -> smarty -> assign('username',$username);
+        $this -> smarty -> assign('eta',$eta);
+        $this -> smarty -> assign('valutazioneMedia',$valutazioneMedia);
+        $this->smarty->assign("type", $type);
+        $this->smarty->assign("pic64", $pic64);
+        $this->smarty->display("bannaUtente.tpl");
+    }
+
+    public function showAmministratoreResponse(string $username,string $nome,string $cognome,int $eta,string $segnlazione){
+        $this -> smarty -> assign('nome',$nome);
+        $this -> smarty -> assign('cognome',$cognome);
+        $this -> smarty -> assign('username',$username);
+        $this -> smarty -> assign('eta',$eta);
+        $this -> smarty -> assign('segnalazione',$segnlazione);
+        $this->smarty->display("AmministratoreResponse.tpl");
+    }
 }

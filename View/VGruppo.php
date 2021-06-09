@@ -84,4 +84,23 @@ class VGruppo
         $this -> smarty -> display('RicercaGruppo.tpl');
     }
 
+    /**
+     * Funzione che si occupa della visualizzazione dei campi da scegliere in fase di creazione gruppo
+     * @param array $campi lista dei campi presenti da visualizzare
+     * @throws SmartyException
+     */
+    public function showScegliCampo(array $campi){
+        $this -> smarty -> assign('results',$campi);
+        $this->smarty->display("creaGruppo_scegliCampo.tpl");
+    }
+
+
+    /**
+     * @param array $campi lista dei campi presenti da visualizzare
+     * @throws SmartyException
+     */
+    public function showCreaGruppoDettagliFinali(array $campi){
+        $this -> smarty -> assign('results',$campi);
+        $this->smarty->display("creaGruppo_dettagliFinali.tpl");
+    }
 }

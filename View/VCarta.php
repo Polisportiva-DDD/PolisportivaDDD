@@ -22,4 +22,8 @@ class VCarta
 
     }
 
+
+    public function showAggiungiCarta(){
+        $this -> smarty -> display('aggiungi_carta.tpl');
+    }
 }

@@ -34,4 +34,45 @@ class VGettoni
 
         $this -> smarty -> display("RiepilogoAcquisto.tpl");
     }
+
+
+    /**
+     * Funzione che mostra la pagina in cui è possibile acquistare gettoni relativi ai vari campi
+     * @param array $campi lista dei campi prensenti
+     * @param array $carte liste delle carte di credito dell'utente
+     * @throws SmartyException
+     */
+    public function showAcquistaGettoni(array $campi, array $carte){
+        $this -> smarty -> assign('results',$campi);
+        $this -> smarty -> assign('carta',$carte);
+        $this->smarty->display("acquistaGettoni.tpl");
+    }
+
+    /**
+     * Funzione che mostra la pagina in cui l'amministratore può aggiungere gettoni ad un utente
+     * @param array $campi
+     * @throws SmartyException
+     */
+    public function showAmministratoreAggiungiGettoni(array $campi){
+        $this -> smarty -> assign('results',$campi);
+        $this->smarty->display("AmministratoreAggiungiGettoni.tpl");
+    }
+
+    /**
+     * Funzione che mostra la pagina in cui l'amministratore può modificare il prezzo dei campi
+     * @param array $campi lista dei campi presenti
+     * @throws SmartyException
+     */
+    public function showAmministratoreModificaPrezzo(array $campi){
+        $this -> smarty -> assign('results',$campi);
+        $this->smarty->display("AmministratoreModificaPrezzo.tpl");
+    }
+
+    /**
+     * Funzione che mostra la pagina per inserire i dati di una nuova carta di credito
+     * @throws SmartyException
+     */
+    public function showAcquistoConNuovaCarta(){
+        $this -> smarty -> display('AcquistoConNuovaCarta.tpl');
+    }
 }

@@ -122,4 +122,19 @@ class VUtente
     public function showRegistrazioneUtente(){
         $this -> smarty -> display('registrazione.tpl');
     }
+
+
+    /**
+     * Mostra la pagina in cui inviare il ticket d'assitenza
+     * @throws SmartyException
+     */
+    public function showAssistenza(){
+        $this -> smarty -> display('assistenza.tpl');
+    }
+
+
+
+
+
+
 }
