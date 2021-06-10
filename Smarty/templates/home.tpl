@@ -40,7 +40,7 @@
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" id="navbarDropdownGestione" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Gestione</a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownGestione">
-                <a class="dropdown-item" href="UItentiBannati.html">Utenti Bannati</a>
+                <a class="dropdown-item" href="UtentiBannati.html">Utenti Bannati</a>
                 <a class="dropdown-item" href="SegnalazioniAmministratore.html">Segnalazioni</a>
                 <a class="dropdown-item" href="#">Modifica prezzi</a>
               </div>

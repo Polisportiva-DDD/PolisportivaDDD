@@ -52,6 +52,7 @@
 
 <section class="py-5">
 
+
   <div class="container">
     <h1>Banna utente</h1>
     <hr>
@@ -78,6 +79,24 @@
       </div>
 
     </div>
+
+    <div class="row mb-2 ">
+      <div class="col-md-12 text-right">
+        <form method="post" action="#">
+        <button class="btn btn-primary  " type="submit">Bandisci</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="row mb-2 ">
+      <div class="col-md-12 text-right">
+        <form method="post" action="#">
+        <button class="btn btn-primary  " type="submit">Aggiungi Gettoni</button>
+        </form>
+      </div>
+    </div>
+
+
   <div class="row mt-2 mb-2">
     <div class="col-md-12">
       <form method="post" action="#">

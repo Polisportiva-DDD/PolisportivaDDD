@@ -69,7 +69,7 @@
                         <div class="card-body">
                             <br>
 
-                            <select name='ora' class="form-control w-100" aria-label="Default-select example" id="tipologiaCampo">
+                            <select class="form-control w-100" aria-label="Default-select example" id="tipologiaCampo">
                                 {section name=nr loop=$ore}
                                 <option value=$smarty.section.nr.iteration+1>{$ore[nr]}</option>
                                 {/section}

@@ -70,7 +70,7 @@
                 {/for}
               </h10>
             </li>
-            <li class="list-group-item">Invita <input name={$utenti[nr].username} type="checkbox"></li>
+            <li class="list-group-item">Invita <input type="checkbox"></li>
           </ul>
         </div>
       </div>
