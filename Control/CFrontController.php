@@ -9,7 +9,6 @@ class CFrontController
 
 
 
-
     public function __constructor(){
 
     }
