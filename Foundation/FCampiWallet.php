@@ -14,7 +14,6 @@ class FCampiWallet
 
     public static function bindAssociazione($stmt, $valuesAssociazione)
     {
-        print_r($valuesAssociazione);
         $stmt->bindValue(':idCampo', $valuesAssociazione[1], PDO::PARAM_INT);
         $stmt->bindValue(':idWallet', $valuesAssociazione[0], PDO::PARAM_INT);
         $stmt->bindValue(':gettoni', $valuesAssociazione[2], PDO::PARAM_INT);
@@ -25,7 +24,6 @@ class FCampiWallet
         $idwallet=$id;
         foreach ($campiWallet as $valore){
             $db=FDatabase::getInstance();
-            print($idwallet);
             $valuesAssociazione=array($idwallet,$valore->getCampo()->getId(),$valore->getGettoni());
             $id=$db->store3($sql,__CLASS__,$valuesAssociazione);
             if($id==null){

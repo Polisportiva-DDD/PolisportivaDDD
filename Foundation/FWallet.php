@@ -47,7 +47,6 @@ class FWallet
     public static function update(EWallet $wallet){
 
        if(FCampiWallet::update($wallet->getId(),$wallet->getListaCampiWallet())==true){
-           print ("ciao");
            return true;}
        else return false;
     }
