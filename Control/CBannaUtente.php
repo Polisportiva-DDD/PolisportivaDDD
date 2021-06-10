@@ -1,7 +1,9 @@
 <?php
-
+require_once '../Utility/USession.php';
+require_once '../Utility/StartSmarty.php';
 require_once '../Utility/autoload.php';
 require_once '../Foundation/config.inc.php';
+
 
 class CBannaUtente
 {
@@ -19,8 +21,8 @@ class CBannaUtente
         $isAmministratore = $session->readValue('isAmministratore');
         $pm = new FPersistentManager();
         $view = new VUtente();
-        if($_POST['username']){
-            $username = $_POST['username'];
+        if(true){
+            $username = "lor";
             $utenteDaBannare = $pm->load($username,"FUtente");
             if($utenteDaBannare!=null){
                 $session->setValue('utente', serialize($utenteDaBannare));
@@ -28,12 +30,19 @@ class CBannaUtente
                 $nome=$utenteDaBannare->getNome();
                 $cognome=$utenteDaBannare->getCognome();
                 //$data=$utenteDaBannare->getDataDiNascita();
-                $eta =  $utenteDaBannare->getEta();
+                $eta =  1;
+
                 $pic64=$utenteDaBannare->getImmagine();
                 $type="";
                 $recensioni=$pm->loadRecensioniUtente($username);
-                $valutazioneMedia=round($utenteDaBannare->calcolaMediaRecensioni($recensioni));
-                $view->showProfiloUtenteRegistrato($username, $nome, $cognome, $eta, $valutazioneMedia,$recensioni,$pic64, $type,$isAmministratore);
+                if($recensioni==null){
+                    $recensioni=array();
+                    $valutazioneMedia=0;//non ha recensioni
+                }
+                else {
+                    $valutazioneMedia = round($utenteDaBannare->calcolaMediaRecensioni($recensioni));
+                }
+                $view->showProfiloUtenteRegistrato($username, $nome, $cognome, $eta, $valutazioneMedia,$recensioni,true);
             }
            else{
                $view->showErrore($username,$isAmministratore );
@@ -41,7 +50,7 @@ class CBannaUtente
 
         }
         //???
-        $view->showErrore( );
+//        $view->showErrore( );
 
     }
 

@@ -64,7 +64,7 @@ class FUtente
      */
 
 
-    public static function loadByUsername($username){
+    public static function load($username){
         $sql="SELECT * FROM ".static::getTableName()." WHERE username='".$username."';";
         $db=FDatabase::getInstance();
         $result=$db->loadSingle($sql);

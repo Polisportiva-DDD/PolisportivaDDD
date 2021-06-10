@@ -37,7 +37,18 @@
       <ul class="navbar-nav ml-auto">
         <li class="nav-item"><a class="nav-link" href="home-utente-registrato.html">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="RicercaGruppo.html">Gruppi</a></li>
-        <li class="nav-item"><a class="nav-link" href="assistenza.html">Informazioni</a></li>
+        {if $isAmministratore}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdownGestione" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Gestione</a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownGestione">
+              <a class="dropdown-item" href="UItentiBannati.html">Utenti Bannati</a>
+              <a class="dropdown-item" href="SegnalazioniAmministratore.html">Segnalazioni</a>
+              <a class="dropdown-item" href="#">Modifica prezzi</a>
+            </div>
+          </li>
+        {else}
+          <li class="nav-item"><a class="nav-link" href="assistenza.html">Informazioni</a></li>
+        {/if}
       </ul>
     </div>
   </div>
@@ -46,10 +57,7 @@
   <div class="container">
     <!-- Page heading-->
     <h1>Profilo Utente</h1>
-    <ol class="breadcrumb mb-4">
-      <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-      <li class="breadcrumb-item active">Profilo Utente</li>
-    </ol>
+    <hr>
     <div class="row">
       <div class="col-md-12">
       <div class="text-center mb-2">
@@ -60,7 +68,7 @@
         <h6 class="mb-2">Username: {$username}</h6>
         <h6 class="mb-2">Nome: {$nome}</h6>
         <h6 class="mb-2">Cognome: {$cognome}</h6>
-        <h6 class="mb-2">Età: {$eta}</h6>
+        <h6 class="mb-2">Età: {$eta} anni</h6>
         <h6 class="mb-2">Valutazione media:
           {for $start=1 to $valutazioneMedia}
             <span class="fa fa-star checkedStar"></span>
@@ -72,7 +80,18 @@
       </div>
       </div>
     </div>
-
+    {if $isAmministratore}
+    <div class="row mb-2 ">
+      <div class="col-md-12 text-right">
+        <button class="btn btn-primary  " type="submit">Aggiungi Gettoni</button>
+      </div>
+    </div>
+      <div class="row mb-2 ">
+        <div class="col-md-12 text-right">
+          <button class="btn btn-primary  " type="submit">Bandisci</button>
+        </div>
+      </div>
+        {/if}
     <div class="row mb-2 ">
       <div class="col-md-12 text-right">
         <button class="btn btn-primary  " type="submit">Recensisci</button>
