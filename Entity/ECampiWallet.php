@@ -8,31 +8,15 @@ class ECampiWallet
 
     private int $gettoni;
     private ECampo $campo;
-    private EWallet $wallet;
 
 
-    public function __construct($gettoni, ECampo $campo,EWallet $wallet)
+    public function __construct($gettoni, ECampo $campo)
     {
         $this->gettoni = $gettoni;
         $this->campo = $campo;
-        $this->wallet = $wallet;
+
     }
 
-    /**
-     * @return EWallet
-     */
-    public function getWallet(): EWallet
-    {
-        return $this->wallet;
-    }
-
-    /**
-     * @param EWallet $wallet
-     */
-    public function setWallet(EWallet $wallet): void
-    {
-        $this->wallet = $wallet;
-    }
 
 
     /**
@@ -70,13 +54,14 @@ class ECampiWallet
     public function aggiungiGettoni( int $quantita):bool
     {
       $this->gettoni+=$quantita;
+      return true;
     }
 
 
     public function rimuoviGettoni( int $quantita):bool
     {
         $this->gettoni-=$quantita;
-
+        return true;
     }
 
 }
