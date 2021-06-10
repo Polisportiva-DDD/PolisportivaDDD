@@ -7,6 +7,8 @@ require_once '../Foundation/config.inc.php';
 
 class CCreazioneGruppo
 {
+
+    //commento
     /**
      * Ore possibili per la creazione di un gruppo
      * @var string[]
