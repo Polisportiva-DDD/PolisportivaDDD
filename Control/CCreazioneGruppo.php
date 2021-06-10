@@ -1,5 +1,7 @@
 <?php
 
+require_once '../Utility/USession.php';
+require_once '../Utility/StartSmarty.php';
 require_once '../Utility/autoload.php';
 require_once '../Foundation/config.inc.php';
 
@@ -24,7 +26,7 @@ class CCreazioneGruppo
      * Funzione che permette la scelta di un campo e richiama il template giusto
      * @throws SmartyException
      */
-    public function scegliCamppo(){
+    public function scegliCampo(){
         $session = new USession();
         $session->startSession();
         $pm = new FPersistentManager();
@@ -47,6 +49,7 @@ class CCreazioneGruppo
 
     }
 
+
     /**
      *Funzione che permette la scelta della data per la creazione di un gruppo
      */
@@ -55,16 +58,15 @@ class CCreazioneGruppo
         $pm = new FPersistentManager();
         $session->startSession();
         $view = new VGruppo();
-        if ($_POST['idCampo']){
-            $idCampoScelto = $_POST['idCampo'];
+        if (true){
+            $idCampoScelto = 1;
             $session->setValue('idCampo', $idCampoScelto);
+            $campoScelto = $pm->load($idCampoScelto, 'FCampo');
+            $nomeCampo = $campoScelto->getNome();
+            $isAmministratore = $session->readValue('isAmministratore');
+            $isUtente = $session->readValue('isUtente');
+            $view->showScegliDataPage($nomeCampo, $isAmministratore, $isUtente);
         }
-        $campoScelto = $pm->load($idCampoScelto, 'FCampo');
-        $nomeCampo = $campoScelto->getNome();
-        $isAmministratore = $session->readValue('isAmministratore');
-        $isUtente = $session->readValue('isUtente');
-
-        $view->showScegliDataPage($nomeCampo, $isAmministratore, $isUtente);
 
     }
 
@@ -121,7 +123,7 @@ class CCreazioneGruppo
         $view->showGruppoListaInvitati($results, $isAmministratore, $isUtente);
     }
 
-    public function immissioneDatiGruppo(){
+    public function scegliDettagli(){
         $session = new USession();
         $session->startSession();
         $pm = new FPersistentManager();

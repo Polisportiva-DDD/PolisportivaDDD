@@ -20,7 +20,6 @@ class CFrontController
         $resource = explode('/', $path);
 
         array_shift($resource);
-        print_r($resource);
         if($resource[0] != ''){
             $controller = "C" . $resource[0];
             if(class_exists($controller)){
@@ -44,7 +43,6 @@ class CFrontController
             return $real_controller->$resource[1]($params);
         }
         $method=$resource[1];
-        print ($method);
         return $real_controller->$method();
     }
 
@@ -182,5 +180,5 @@ class CFrontController
 }
 
 $c=new CFrontController();
-$c->run2("ProgettoWeb/gruppo/scegliData");
+$c->run2("ProgettoWeb/CreazioneGruppo/scegliData");
 
