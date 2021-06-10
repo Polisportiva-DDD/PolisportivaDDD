@@ -193,6 +193,13 @@ class FGruppo
         }
     }
 
+    public static function loadField($field){
+        $sql = "SELECT " . $field . " FROM " . static::$tableName;
+        $db = FDatabase::getInstance();
+        $rows = $db->loadMultiple($sql);
+        return $rows;
+    }
+
 
 
 }

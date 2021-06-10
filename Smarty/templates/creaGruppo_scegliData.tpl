@@ -70,8 +70,7 @@
 
 
              <br>
-
-                <input class="form-control" type="date" value="2021-08-19" id="example-date-input">
+                <input class="form-control" name="dataCreazioneGruppo" type="date" value="2021-08-19" id="example-date-input" required>
 
               <br>
             </div>

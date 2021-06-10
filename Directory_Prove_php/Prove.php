@@ -38,6 +38,7 @@ $isRegistrato=true;
 $isUtente=true;
 $isAmministratore=true;
 */
+/*
 $campi = FCampo::load();
 $nomi=array();
 foreach($campi as $campo){
@@ -87,6 +88,18 @@ $gruppo3 = array("nome"=>"gruppo 3", "admin"=>"urwen3", "campo"=>"calcio a cinqu
 //$gruppiDetails = array($gruppo1, $gruppo2, $gruppo3);
 //$smarty->assign("gruppiDetails",$gruppiDetails);
 //$smarty->display('i_tuoi_gruppi.tpl');
+
+
+$rows = FGruppo::loadField("dataEOra");
+print_r($rows);
+foreach ($rows as $row){
+    $d = date('Y-m-d', strtotime($row['dataEOra']));
+    $o = date('H:i:s', strtotime($row['dataEOra']));
+    echo($d);
+    echo("\n");
+    echo($o);
+    echo("\n");
+}
 
 
 

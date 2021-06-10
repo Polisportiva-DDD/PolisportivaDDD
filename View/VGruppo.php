@@ -89,7 +89,7 @@ class VGruppo
      * @param array $campi lista dei campi presenti da visualizzare
      * @throws SmartyException
      */
-    public function showScegliCampo(array $campi){
+    public function showScegliCampo(array $campi, $isAmministratore, $isUtente){
         $this -> smarty -> assign('results',$campi);
         $this->smarty->display("creaGruppo_scegliCampo.tpl");
     }

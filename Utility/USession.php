@@ -65,5 +65,16 @@ class USession {
         }
         else return false;
     }
+
+    /*
+    function isAmministratore(): bool{
+        if (isset($_SESSION['isAmministratore'])){
+            if ($_SESSION['isAmministratore']){
+                return true;
+            }
+        }
+        else return false;
+    }
+    */
 }
 ?>
