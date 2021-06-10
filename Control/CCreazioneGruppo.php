@@ -61,7 +61,7 @@ class CCreazioneGruppo
         $session->startSession();
         $view = new VGruppo();
         if (true){
-            $idCampoScelto = 1;
+            $idCampoScelto = 2;
             $session->setValue('idCampo', $idCampoScelto);
             $campoScelto = $pm->load($idCampoScelto, 'FCampo');
             $nomeCampo = $campoScelto->getNome();
