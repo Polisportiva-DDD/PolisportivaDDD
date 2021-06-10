@@ -26,6 +26,7 @@ class CCreazioneGruppo
      */
     public function scegliCamppo(){
         $session = new USession();
+        $session->startSession();
         $pm = new FPersistentManager();
         $isAmministratore = $session->readValue('isAmministratore');
         $isUtente = $session->readValue('isUtente');
@@ -52,6 +53,7 @@ class CCreazioneGruppo
     public function scegliData(){
         $session = new USession();
         $pm = new FPersistentManager();
+        $session->startSession();
         $view = new VGruppo();
         if ($_POST['idCampo']){
             $idCampoScelto = $_POST['idCampo'];
@@ -71,7 +73,7 @@ class CCreazioneGruppo
      */
     public function scegliOra(){
         $session = new USession();
-        $pm = new FPersistentManager();
+        $session->startSession();
         $view = new VGruppo();
         $isAmministratore = $session->readValue('isAmministratore');
         $isUtente = $session->readValue('isUtente');
@@ -87,9 +89,78 @@ class CCreazioneGruppo
         $oreDisponibili = self::freeHoursFromDate($dataScelta);
 
         $view->showScegliOraPage($dataScelta, $oreDisponibili, $isAmministratore, $isUtente);
+    }
+
+    public function scegliInvitati(){
+        $session = new USession();
+        $session->startSession();
+        $pm = new FPersistentManager();
+        $view = new VGruppo();
+        $isAmministratore = $session->readValue('isAmministratore');
+        $isUtente = $session->readValue('isUtente');
+        $results = array();
+        if (isset($_POST['ora'])){
+            $oraScelta = $_POST['ora'];
+            $session->setValue('oraScelta', $oraScelta);
+        }
+        $utenti = $pm->loadList(FUtente);
+        foreach($utenti as $utente){
+            //Array contentente i dati per la view
+            $u = array();
+            //Username dell'utente
+            $username= $utente->getUsername();
+            //Recensioni dell'utente
+            $recensioniUtente = $pm->loadRecensioniUtente($username);
+            //Assegno all'array i dati
+            $u['username']=$username;
+            $u['eta']=$utente->getEta();
+            $u['valutazione'] = round($utente->calcolaMediaRecensioni($recensioniUtente));
+            //Metto nell'array results per la view l'array appena creato.
+            $results[] = $u;
+        }
+        $view->showGruppoListaInvitati($results, $isAmministratore, $isUtente);
+    }
+
+    public function immissioneDatiGruppo(){
+        $session = new USession();
+        $session->startSession();
+        $pm = new FPersistentManager();
+        $view = new VGruppo();
+        $isAmministratore = $session->readValue('isAmministratore');
+        $isUtente = $session->readValue('isUtente');
+        if ($_POST){
+            $invitati = array();
+            foreach($_POST as $username){
+                $invitati[] = $username;
+            }
+            $session->setValue('invitati', $invitati);
+        }
+        $campi = $pm->loadList(FCampo);
+        $nomiCampi=array();
+        foreach($campi as $campo){
+            $nomiCampi[] = $campo->getNome();
+        }
+        $view->showCreaGruppoDettagliFinali($nomiCampi, $isAmministratore, $isUtente);
+
+
+
+
 
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * Funzione che serve a ricavare le ore disponiibli della data scelta

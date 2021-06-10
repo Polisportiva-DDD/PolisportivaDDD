@@ -99,8 +99,10 @@ class VGruppo
      * @param array $campi lista dei campi presenti da visualizzare
      * @throws SmartyException
      */
-    public function showCreaGruppoDettagliFinali(array $campi){
+    public function showCreaGruppoDettagliFinali(array $campi, $isAmministratore, $isUtente){
         $this -> smarty -> assign('results',$campi);
+        $this -> smarty -> assign("isAmministratore", $isAmministratore);
+        $this -> smarty -> assign("isUtente", $isUtente);
         $this->smarty->display("creaGruppo_dettagliFinali.tpl");
     }
 }
