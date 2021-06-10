@@ -21,8 +21,6 @@ class FWallet
         $db=FDatabase::getInstance();
         $id=$db->store($sql,$wallet);
         if($id!=null){
-            //COME PASSO ID A FCAMPIWALLET???
-            $listaCampoWallet=$wallet->getListaCampiWallet();
 
             if(FCampiWallet::store($wallet->getListaCampiWallet(),$id)==true){
                 return true;
@@ -46,7 +44,13 @@ class FWallet
         else return $wallet;
     }
 
+    public static function update(EWallet $wallet){
 
+       if(FCampiWallet::update($wallet->getId(),$wallet->getListaCampiWallet())==true){
+           print ("ciao");
+           return true;}
+       else return false;
+    }
    
 
 

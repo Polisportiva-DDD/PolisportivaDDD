@@ -14,18 +14,20 @@ class FCampiWallet
 
     public static function bindAssociazione($stmt, $valuesAssociazione)
     {
-        $stmt->bindValue(':idWallet', $valuesAssociazione[0], PDO::PARAM_INT);
+        print_r($valuesAssociazione);
         $stmt->bindValue(':idCampo', $valuesAssociazione[1], PDO::PARAM_INT);
+        $stmt->bindValue(':idWallet', $valuesAssociazione[0], PDO::PARAM_INT);
         $stmt->bindValue(':gettoni', $valuesAssociazione[2], PDO::PARAM_INT);
     }
 
     public static function store(array $campiWallet,$id){
         $sql="INSERT INTO ".static::$tableName." VALUES ".static::$values;
-
+        $idwallet=$id;
         foreach ($campiWallet as $valore){
             $db=FDatabase::getInstance();
-            $valuesAssociazione=array($id,$valore->getCampo()->getId(),$valore->getGettoni());
-            $id=$db->store3($sql,get_class($valore),$valuesAssociazione);
+            print($idwallet);
+            $valuesAssociazione=array($idwallet,$valore->getCampo()->getId(),$valore->getGettoni());
+            $id=$db->store3($sql,__CLASS__,$valuesAssociazione);
             if($id==null){
                 return false;
             }
@@ -45,11 +47,11 @@ class FCampiWallet
      * @param EWallet $wallet wallet da aggiornare
      * @return bool
      */
-    public static function update($id,ECampiWallet $campiwallet){
+    public static function update($id,array $campiwallet){
 
             $sql1="";
             foreach ($campiwallet as  $valore) {//per ogni campo, aggiorno la quantità di gettoni
-            $sql = "UPDATE " . static::$tableName . " SET gettoni='" . $valore->getGettoni() . "' WHERE idCampo='" . $id . "' and idWallet='" . $id . "';";
+            $sql = "UPDATE " . static::$tableName . " SET gettoni='" . $valore->getGettoni() . "' WHERE idCampo='" .  $valore->getCampo()->getId() . "' and idWallet='" . $id . "';";
             $sql1.=$sql;//creo un un'unica query da eseguire
             }
             $db=FDatabase::getInstance();
@@ -95,11 +97,12 @@ class FCampiWallet
         $campiWallet=array();
         if($result!=null){
             for($i=0; $i<count($result); $i++){
-                $campo=FCampo::load($result['idCampo']);
-                $campiWallet[]=new ECampiWallet($result['gettoni'],$campo);
+
+                $campo=FCampo::load($result[$i]['idCampo']);
+                $campiWallet[]=new ECampiWallet($result[$i]['gettoni'],$campo);
 
             }
-            return new $campiWallet;
+            return $campiWallet;
         }
         else return null;
     }
