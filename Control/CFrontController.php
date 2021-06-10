@@ -181,5 +181,5 @@ class CFrontController
 }
 
 $c=new CFrontController();
-$c->run2("ProgettoWeb/CreazioneGruppo/scegliData");
+$c->run2("PolisportivaDDD/CreazioneGruppo/scegliData");
 

@@ -102,5 +102,5 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
-<script src="/ProgettoWeb/Smarty/js/scripts.js"></script>
+<script src="/PolisportivaDDD/Smarty/js/scripts.js"></script>
 </html>

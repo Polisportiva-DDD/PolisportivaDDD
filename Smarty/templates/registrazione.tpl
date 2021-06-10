@@ -10,13 +10,13 @@
 
 
   <!-- Bootstrap core CSS -->
-  <link href="/ProgettoWeb/Smarty/css/bootstrap.min.css" rel="stylesheet">
-  <link href="/ProgettoWeb/Smarty/css/ourStyle.css" rel="stylesheet">
+  <link href="/PolisportivaDDD/Smarty/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/PolisportivaDDD/Smarty/css/ourStyle.css" rel="stylesheet">
   
 
 
   <!-- Custom styles for this template -->
-  <link href="/ProgettoWeb/Smarty/css/login.css" rel="stylesheet">
+  <link href="/PolisportivaDDD/Smarty/css/login.css" rel="stylesheet">
 </head>
 <body class="text-center">
 

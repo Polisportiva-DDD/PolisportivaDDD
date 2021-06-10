@@ -8,7 +8,7 @@
   <!-- Font Awesome icons (free version)-->
   <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
   <!-- Core theme CSS (includes Bootstrap)-->
-  <link href="/ProgettoWeb/Smarty/css/styles.css" rel="stylesheet" type="text/css"/>
+  <link href="/PolisportivaDDD/Smarty/css/styles.css" rel="stylesheet" type="text/css"/>
   
 </head>
 <body>
@@ -100,6 +100,6 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
-<script src="/ProgettoWeb/Smarty/js/scripts.js"></script>
+<script src="/PolisportivaDDD/Smarty/js/scripts.js"></script>
 </body>
 </html>
