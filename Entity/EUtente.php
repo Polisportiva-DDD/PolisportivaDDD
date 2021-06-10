@@ -220,7 +220,7 @@ require_once '../Utility/autoload.php';
 		 $c=0;
          if($recensioni!=null) {
              foreach ($recensioni as $valore) {
-                 if(is_a($valore,Recensione::class)){//solo se è un' oggetto recensione vado a prendere il voto
+                 if(is_a($valore,ERecensione::class)){//solo se è un' oggetto recensione vado a prendere il voto
                  $totale = $totale + $valore->getVoto();
                  $c++;
              }
@@ -232,6 +232,11 @@ require_once '../Utility/autoload.php';
 		else{
 			return 0;
 		}
+	}
+
+	public function getEta(){
+		$data=$this->dataDiNascita;
+		return  (new DateTime('now'))->diff($data);
 	}
 
 	public function rimuoviGruppo(int $id):bool{
@@ -263,10 +268,10 @@ require_once '../Utility/autoload.php';
 	 /**
 	  * Aggiunge la carta di credito passata come parametro alla lista delle carte di credito dell'utente.
 	  * Restituisce true se l'operazione è andata a buon fine, false altrimenti.
-	  * @param CartadiCredito $carta
+	  * @param ECartadiCredito $carta
 	  * @return bool
 	  */
-	public function aggiungiCarta(CartadiCredito $carta):bool
+	public function aggiungiCarta(ECartadiCredito $carta):bool
 	{
 		try
 		{
@@ -289,10 +294,10 @@ require_once '../Utility/autoload.php';
 	 /**
 	  * Rimuove la carta di credito passata come parametro alla lista delle carte di credito dell'utente.
 	  * Restituisce true se l'operazione è andata a buon fine, false altrimenti.
-	  * @param CartadiCredito $carta
+	  * @param ECartadiCredito $carta
 	  * @return bool
 	  */
-	public function rimuoviCarta(CartadiCredito $carta):bool
+	public function rimuoviCarta(ECartadiCredito $carta):bool
 	{
 		try
 		{
