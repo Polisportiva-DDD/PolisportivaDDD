@@ -7,6 +7,7 @@
 
   <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
   <!-- Core theme CSS (includes Bootstrap)-->
+
   <link href="/PolisportivaDDD/Smarty/css/styles.css" rel="stylesheet" />
 </head>
 <body>
@@ -39,6 +40,7 @@
     </div>
   </div>
 </nav>
+<form action="/PolisportivaDDD/CreazioneGruppo/scegliOra" method="POST">
 <section class="py-5">
   <div class="container">
     <!-- Page heading-->
@@ -70,9 +72,11 @@
 
 
              <br>
-                <input class="form-control" name="dataCreazioneGruppo" type="date" value="2021-08-19" id="example-date-input" required>
-
+              <label for="dataCreazioneGruppo">
+              <input class="form-control" name="dataCreazioneGruppo" type="date" value="2021-08-19" id="example-date-input" required>
+              </label>
               <br>
+			
             </div>
           </div>
         </div>
@@ -82,8 +86,8 @@
     </div>
     <div class="d-flex flex-row-reverse my-5">
 
-      <div class="p-2"><a href="/PolisportivaDDD/CreazioneGruppo/scegliOra">  <button type="button" class="btn btn-primary">Vai Avanti</button></a></div>
-      <div class="p-2"><a href="#">  <button type="button" class="btn btn-primary">Torna Indietro</button></a></div>
+      <div class="p-2">  <button type="submit" class="btn btn-primary">Vai Avanti</button></div>
+      <div class="p-2">  <button type="button" class="btn btn-primary">Torna Indietro</button></div>
 
     </div>
 
@@ -92,6 +96,7 @@
 
   </div>
 </section>
+</form>
 <!-- Footer-->
 <footer class="py-5 bg-dark">
   <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Polisportiva DDD 2021</p></div>

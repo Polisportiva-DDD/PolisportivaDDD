@@ -32,7 +32,7 @@ class VGruppo
         $this->smarty->assign("isAmministratore", $isAmministratore);
         $this->smarty->assign("isUtente", $isUtente);
 
-        $this->smarty->display("creaGruppo_scegliOra.tpl");
+        $this->smarty->display(get_include_path() ."/smarty/templates/creaGruppo_scegliOra.tpl");
     }
 
     public function showGruppoListaInvitati($utenti ,$isAmministratore, $isUtente){

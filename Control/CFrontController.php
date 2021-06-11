@@ -19,22 +19,23 @@ class CFrontController
 
 
     public function run($path){
-
         $resource = explode('/', $path);
         array_shift($resource);
+		array_shift($resource);
         if($resource[0] != ''){
             $controller = "C" . $resource[0];
             if(class_exists($controller)){
                 if(method_exists($controller,$resource[1])){
                     $real_controller=new $controller();
-
                 }
                 else{
                     header('HTTP/1.1 405 Method Not Allowed');
                     exit;
                 }
             }
+			
             else{
+				//print("ciao3");
                 header('HTTP/1.1 404 Not Found');
                 exit;
             }
@@ -42,6 +43,7 @@ class CFrontController
         }
         if(count($resource)==3){
             $params=$resource[2];
+			//print("ciao");
             return $real_controller->$resource[1]($params);
         }
         $method=$resource[1];
@@ -50,5 +52,5 @@ class CFrontController
 
 }
 
-$c=new CFrontController();
-$c->run("PolisportivaDDD/CreazioneGruppo/scegliData");
+//$c=new CFrontController();
+//$c->run("PolisportivaDDD/CreazioneGruppo/scegliData");
