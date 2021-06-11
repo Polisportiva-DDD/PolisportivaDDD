@@ -7,10 +7,10 @@
  */
 function myAutoload($class_name){
 
-    $entityClass = "../" . "Entity/". $class_name . ".php";
-    $foundationClass = "../" . "Foundation/". $class_name . ".php";
-    $controlClass = "../" . "Control/" . $class_name . ".php";
-    $viewClass = "../" . "View/" . $class_name . ".php";
+    $entityClass = get_include_path()  . "/Entity/". $class_name . ".php";
+    $foundationClass = get_include_path()  . "/Foundation/". $class_name . ".php";
+    $controlClass = get_include_path()  . "/Control/" . $class_name . ".php";
+    $viewClass = get_include_path()  . "/View/" . $class_name . ".php";
 
     if( file_exists($entityClass)){
         include $entityClass;

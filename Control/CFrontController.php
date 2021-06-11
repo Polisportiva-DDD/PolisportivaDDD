@@ -1,14 +1,16 @@
 <?php
 
 //require_once 'StartSmarty.php';
-require_once '../Utility/autoload.php';
-require_once '../Foundation/config.inc.php';
-require_once '../Utility/USession.php';
+require_once (get_include_path() .'/Utility/autoload.php');
+
+//require_once '../Control/CCreazioneGruppo';
+//require_once '../Foundation/config.inc.php';
+require_once (get_include_path() .'/Utility/USession.php');
 class CFrontController
 {
 
     //commento
-
+	
 
     public function __constructor(){
 
@@ -19,8 +21,6 @@ class CFrontController
     public function run($path){
 
         $resource = explode('/', $path);
-        print_r($path);
-
         array_shift($resource);
         if($resource[0] != ''){
             $controller = "C" . $resource[0];

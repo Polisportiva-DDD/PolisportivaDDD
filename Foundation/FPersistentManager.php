@@ -1,6 +1,6 @@
 <?php
 
-require_once("../Utility/autoload.php");
+require_once(get_include_path() ."/Utility/autoload.php");
 
 class FPersistentManager
 {

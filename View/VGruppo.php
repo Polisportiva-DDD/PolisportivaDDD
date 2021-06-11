@@ -1,7 +1,8 @@
 <?php
 
-require_once '../Utility/autoload.php';
-require_once '../Foundation/config.inc.php';
+require_once (get_include_path() .'/Utility/autoload.php');
+require_once (get_include_path() .'/Foundation/config.inc.php');
+require_once (get_include_path() .'/Utility/StartSmarty.php');
 
 class VGruppo
 {
@@ -22,7 +23,7 @@ class VGruppo
         $this->smarty->assign("isAmministratore", $isAmministratore);
         $this->smarty->assign("isUtente", $isUtente);
 
-        $this->smarty->display("creaGruppo_scegliData.tpl");
+        $this->smarty->display(get_include_path() ."/smarty/templates/creaGruppo_scegliData.tpl");
     }
 
     public function showScegliOraPage($dataScelta, $oreDisponibili, $isAmministratore, $isUtente){

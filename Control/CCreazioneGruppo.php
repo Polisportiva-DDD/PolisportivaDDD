@@ -1,9 +1,9 @@
 <?php
 
-require_once '../Utility/USession.php';
-require_once '../Utility/StartSmarty.php';
-require_once '../Utility/autoload.php';
-require_once '../Foundation/config.inc.php';
+require_once (get_include_path() .'/Utility/USession.php');
+require_once (get_include_path() .'/Utility/StartSmarty.php');
+require_once (get_include_path() .'/Utility/autoload.php');
+//require_once '../Foundation/config.inc.php';
 
 class CCreazioneGruppo
 {
