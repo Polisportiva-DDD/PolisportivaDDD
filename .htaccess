@@ -1,2 +1,13 @@
-RewriteEngine on
-RewriteRule ^(.*)$ /index.php
+adfsgdf
+
+<IfModule mod_rewrite.c>
+
+RewriteEngine On
+RewriteBase /
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule . /FillSpaceWEB/index.php [L]
+</IfModule>

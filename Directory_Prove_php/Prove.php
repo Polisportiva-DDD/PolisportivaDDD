@@ -89,7 +89,7 @@ $gruppo3 = array("nome"=>"gruppo 3", "admin"=>"urwen3", "campo"=>"calcio a cinqu
 //$smarty->assign("gruppiDetails",$gruppiDetails);
 //$smarty->display('i_tuoi_gruppi.tpl');
 
-
+/*
 $rows = FGruppo::loadField("dataEOra");
 print_r($rows);
 foreach ($rows as $row){
@@ -100,9 +100,15 @@ foreach ($rows as $row){
     echo($o);
     echo("\n");
 }
+*/
+
+$pm = new FPersistentManager();
+$carte = $pm->loadField('numero', 'FcartaDiCredito');
 
 
-
+foreach($carte as $carta){
+    print_r($carta['numero']);
+}
 
 
 

@@ -59,7 +59,7 @@ function content_60b76fa91083b1_55000486 (Smarty_Internal_Template $_smarty_tpl)
   <div class="container">
 
 
-    <a class="navbar-brand" href="index.html">Polisportiva DDD</a>
+    <a class="navbar-brand" href="index.php">Polisportiva DDD</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
@@ -75,7 +75,7 @@ function content_60b76fa91083b1_55000486 (Smarty_Internal_Template $_smarty_tpl)
     <!-- Page heading-->
     <h1>Profilo Utente</h1>
     <ol class="breadcrumb mb-4">
-      <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+      <li class="breadcrumb-item"><a href="index.php">Home</a></li>
       <li class="breadcrumb-item active">Profilo Utente</li>
     </ol>
     <div class="row">

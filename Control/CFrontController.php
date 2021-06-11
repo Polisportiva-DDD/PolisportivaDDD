@@ -7,7 +7,6 @@ require_once '../Utility/USession.php';
 class CFrontController
 {
 
-    //commento
 
 
     public function __constructor(){
@@ -19,9 +18,10 @@ class CFrontController
     public function run($path){
 
         $resource = explode('/', $path);
-        print_r($path);
 
         array_shift($resource);
+        array_shift($resource);
+
         if($resource[0] != ''){
             $controller = "C" . $resource[0];
             if(class_exists($controller)){
@@ -51,4 +51,4 @@ class CFrontController
 }
 
 $c=new CFrontController();
-$c->run("PolisportivaDDD/CreazioneGruppo/scegliData");
+$c->run("localhost/PolisportivaDDD/Utente/assistenza");

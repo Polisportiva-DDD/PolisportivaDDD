@@ -28,7 +28,7 @@
   <div class="container">
 
 
-    <a class="navbar-brand" href="index.html">Polisportiva DDD</a>
+    <a class="navbar-brand" href="index.php">Polisportiva DDD</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
@@ -82,7 +82,7 @@
     </div>
     <div class="d-flex flex-row-reverse my-5">
 
-      <div class="p-2"><a href="PolisportivaDDD/CreazioneGruppo/scegliOra">  <button type="button" class="btn btn-primary">Vai Avanti</button></a></div>
+      <div class="p-2"><a href="/PolisportivaDDD/CreazioneGruppo/scegliOra">  <button type="button" class="btn btn-primary">Vai Avanti</button></a></div>
       <div class="p-2"><a href="#">  <button type="button" class="btn btn-primary">Torna Indietro</button></a></div>
 
     </div>
