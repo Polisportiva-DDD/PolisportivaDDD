@@ -1,7 +1,9 @@
 <?php
 
 //caricamento delle librerie di Smarty
-require('../Smarty/Smarty.class.php');
+require_once dirname(__FILE__). '\..\Smarty\Smarty.class.php';
+
+//require('../Smarty/Smarty.class.php');
 
 class StartSmarty extends Smarty {
     static function configuration(): Smarty

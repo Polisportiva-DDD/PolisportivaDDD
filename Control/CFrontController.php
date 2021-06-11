@@ -1,11 +1,13 @@
 <?php
 
-//require_once 'StartSmarty.php';
-require_once '../Utility/autoload.php';
-require_once '../Foundation/config.inc.php';
-require_once '../Utility/USession.php';
+require_once dirname(__FILE__). '/../Utility/StartSmarty.php';
+require_once dirname(__FILE__). '/../Utility/autoload.php';
+require_once dirname(__FILE__). '/../Foundation/config.inc.php';
+require_once dirname(__FILE__). '/../Utility/USession.php';
 class CFrontController
 {
+
+    //commento
 
 
 
@@ -18,10 +20,8 @@ class CFrontController
     public function run($path){
 
         $resource = explode('/', $path);
-
         array_shift($resource);
         array_shift($resource);
-
         if($resource[0] != ''){
             $controller = "C" . $resource[0];
             if(class_exists($controller)){
@@ -51,4 +51,5 @@ class CFrontController
 }
 
 $c=new CFrontController();
-$c->run("localhost/PolisportivaDDD/Utente/assistenza");
+$c->run("localhost/PolisportivaDDD/CreazioneGruppo/scegliData");
+
