@@ -65,4 +65,8 @@ class FPersistentManager
         return $Fclass::loadField($field);
     }
 
+    public function loadCarteUtente(string $username){
+        return FCartaDiCredito::loadCarteUtente($username);
+    }
+
 }

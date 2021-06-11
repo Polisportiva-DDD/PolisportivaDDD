@@ -29,7 +29,7 @@
         <div class="container">
 
 
-            <a class="navbar-brand" href="index.html">Polisportiva DDD</a>
+            <a class="navbar-brand" href="index.php">Polisportiva DDD</a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
@@ -79,11 +79,11 @@
                 <div class="row">
                     <div class="col-lg-8 mb-4">
                         <h3>Invia ticket d'assistenza</h3>
-                        <form id="contactForm" name="sentMessage" novalidate>
+                        <form id="contactForm" method="post" action="/PolisportivaDDD/Utente/inviaSegnalazione" novalidate>
                             <div class="control-group form-group">
                                 <div class="controls">
                                     <label>Oggetto:</label>
-                                    <input class="form-control" id="name" type="text" required data-validation-required-message="Please enter your name." />
+                                    <input name='oggetto' class="form-control" id="name" type="text" required data-validation-required-message="Please enter your name." />
                                     <p class="help-block"></p>
                                 </div>
                             </div>
@@ -91,7 +91,7 @@
                             <div class="control-group form-group">
                                 <div class="controls">
                                     <label>Message:</label>
-                                    <textarea class="form-control" id="message" rows="10" cols="100" required data-validation-required-message="Please enter your message" maxlength="999" style="resize: none"></textarea>
+                                    <textarea name='messaggio' class="form-control" id="message" rows="10" cols="100" required data-validation-required-message="Please enter your message" maxlength="999" style="resize: none"></textarea>
                                 </div>
                             </div>
                             <div id="success"></div>

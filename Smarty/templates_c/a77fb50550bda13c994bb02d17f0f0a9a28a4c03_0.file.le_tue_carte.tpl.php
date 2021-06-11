@@ -57,7 +57,7 @@ function content_60b89f78434925_91243311 (Smarty_Internal_Template $_smarty_tpl)
   <div class="container">
 
 
-    <a class="navbar-brand" href="index.html">Polisportiva DDD</a>
+    <a class="navbar-brand" href="index.php">Polisportiva DDD</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">

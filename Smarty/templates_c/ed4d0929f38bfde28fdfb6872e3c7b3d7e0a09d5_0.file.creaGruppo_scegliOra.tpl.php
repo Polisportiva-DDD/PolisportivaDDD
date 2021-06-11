@@ -1,15 +1,38 @@
-<!DOCTYPE html>
+<?php
+/* Smarty version 3.1.39, created on 2021-06-11 13:09:31
+  from 'C:\Users\dinun\PhpstormProjects\PolisportivaDDD\Smarty\templates\creaGruppo_scegliOra.tpl' */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.39',
+  'unifunc' => 'content_60c3446b58f398_52863014',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    'ed4d0929f38bfde28fdfb6872e3c7b3d7e0a09d5' => 
+    array (
+      0 => 'C:\\Users\\dinun\\PhpstormProjects\\PolisportivaDDD\\Smarty\\templates\\creaGruppo_scegliOra.tpl',
+      1 => 1623409534,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_60c3446b58f398_52863014 (Smarty_Internal_Template $_smarty_tpl) {
+?><!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
     <title>Polisportiva DDD</title>
 
-    <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+    <?php echo '<script'; ?>
+ src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"><?php echo '</script'; ?>
+>
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="../css/styles.css" rel="stylesheet" />
+    <link href="/PolisportivaDDD/Smarty/css/styles.css" rel="stylesheet" />
 </head>
 <body>
 <!-- Navigation-->
@@ -48,12 +71,6 @@
         <!-- Page heading-->
         <h1>Scegli Ora</h1>
         <hr>
-
-
-
-
-
-
         <div class="row">
             <div class="col-lg-6">
                 <div class="text-center mb-2">
@@ -62,7 +79,8 @@
 
                         <div class="card-body">
                             <br>
-                            <h4 class="card-title">12 Novembre 2021</h4>
+                            <h4 class="card-title"><?php echo $_smarty_tpl->tpl_vars['dataScelta']->value;?>
+</h4>
                             <br>
                         </div>
                     </div>
@@ -78,11 +96,19 @@
                             <br>
 
                             <select class="form-control w-100" aria-label="Default-select example" id="tipologiaCampo">
-                                <option selected>9:00-10:00</option>
-                                <option value="1">10:00-11:00</option>
-                                <option value="2">11:00-12:00</option>
-                                <option value="3">13:00-14:00</option>
-                                <option value="3">15:00-16:00</option>
+                                <?php
+$__section_nr_0_loop = (is_array(@$_loop=$_smarty_tpl->tpl_vars['ore']->value) ? count($_loop) : max(0, (int) $_loop));
+$__section_nr_0_total = $__section_nr_0_loop;
+$_smarty_tpl->tpl_vars['__smarty_section_nr'] = new Smarty_Variable(array());
+if ($__section_nr_0_total !== 0) {
+for ($_smarty_tpl->tpl_vars['__smarty_section_nr']->value['iteration'] = 1, $_smarty_tpl->tpl_vars['__smarty_section_nr']->value['index'] = 0; $_smarty_tpl->tpl_vars['__smarty_section_nr']->value['iteration'] <= $__section_nr_0_total; $_smarty_tpl->tpl_vars['__smarty_section_nr']->value['iteration']++, $_smarty_tpl->tpl_vars['__smarty_section_nr']->value['index']++){
+?>
+                                <option value=$smarty.section.nr.iteration+1><?php echo $_smarty_tpl->tpl_vars['ore']->value[(isset($_smarty_tpl->tpl_vars['__smarty_section_nr']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_section_nr']->value['index'] : null)];?>
+</option>
+                                <?php
+}
+}
+?>
                             </select>
                             <br>
                         </div>
@@ -93,11 +119,8 @@
 
             </div>
         <div class="d-flex flex-row-reverse my-5" >
-
-
             <div class="p-2"><a href="#">  <button type="button" class="btn btn-primary">Vai Avanti</button></a></div>
             <div class="p-2"><a href="#">  <button type="button" class="btn btn-primary">Torna Indietro</button></a></div>
-
         </div>
 
         </div>
@@ -108,12 +131,19 @@
 
 <!-- Footer-->
 <footer class="py-5 bg-dark">
-    <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
+    <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Polisportiva DDD 2021</p></div>
 </footer>
 
 </body>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+<?php echo '<script'; ?>
+ src="https://code.jquery.com/jquery-3.5.1.slim.min.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"><?php echo '</script'; ?>
+>
 <!-- Core theme JS-->
-<script src="/ProgettoWeb/Smarty/js/scripts.js"></script>
-</html>
+<?php echo '<script'; ?>
+ src="/PolisportivaDDD/Smarty/js/scripts.js"><?php echo '</script'; ?>
+>
+</html><?php }
+}

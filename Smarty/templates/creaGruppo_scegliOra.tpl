@@ -7,7 +7,7 @@
 
     <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="/ProgettoWeb/Smarty/css/styles.css" rel="stylesheet" />
+    <link href="/PolisportivaDDD/Smarty/css/styles.css" rel="stylesheet" />
 </head>
 <body>
 <!-- Navigation-->
@@ -28,7 +28,7 @@
     <div class="container">
 
 
-        <a class="navbar-brand" href="index.html">Polisportiva DDD</a>
+        <a class="navbar-brand" href="index.php">Polisportiva DDD</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">

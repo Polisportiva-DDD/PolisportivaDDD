@@ -1,15 +1,38 @@
-<!DOCTYPE html>
+<?php
+/* Smarty version 3.1.39, created on 2021-06-11 13:22:36
+  from 'C:\Users\dinun\PhpstormProjects\PolisportivaDDD\Smarty\templates\creaGruppo_scegliData.tpl' */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.39',
+  'unifunc' => 'content_60c3477cdfe376_96363222',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '9816936e9063bf973bf587dfda7edbe05fd202cb' => 
+    array (
+      0 => 'C:\\Users\\dinun\\PhpstormProjects\\PolisportivaDDD\\Smarty\\templates\\creaGruppo_scegliData.tpl',
+      1 => 1623409680,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_60c3477cdfe376_96363222 (Smarty_Internal_Template $_smarty_tpl) {
+?><!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <meta name="description" content="" />
-  <meta name="author" content="" />
   <title>Polisportiva DDD</title>
 
-  <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+  <?php echo '<script'; ?>
+ src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"><?php echo '</script'; ?>
+>
   <!-- Core theme CSS (includes Bootstrap)-->
-  <link href="../css/styles.css" rel="stylesheet" />
+  <link href="/PolisportivaDDD/Smarty/css/styles.css" rel="stylesheet" />
 </head>
 <body>
 <!-- Navigation-->
@@ -56,7 +79,8 @@
 
             <div class="card-body">
               <br>
-              <h4 class="card-title">Calcio a Cinque</h4>
+              <h4 class="card-title"> <?php echo $_smarty_tpl->tpl_vars['nomeCampo']->value;?>
+ </h4>
               <br>
             </div>
           </div>
@@ -72,8 +96,7 @@
 
 
              <br>
-
-                <input class="form-control" type="date" value="2021-08-19" id="example-date-input">
+                <input class="form-control" name="dataCreazioneGruppo" type="date" value="2021-08-19" id="example-date-input" required>
 
               <br>
             </div>
@@ -85,7 +108,7 @@
     </div>
     <div class="d-flex flex-row-reverse my-5">
 
-      <div class="p-2"><a href="#">  <button type="button" class="btn btn-primary">Vai Avanti</button></a></div>
+      <div class="p-2"><a href="/PolisportivaDDD/CreazioneGruppo/scegliOra">  <button type="button" class="btn btn-primary">Vai Avanti</button></a></div>
       <div class="p-2"><a href="#">  <button type="button" class="btn btn-primary">Torna Indietro</button></a></div>
 
     </div>
@@ -97,12 +120,19 @@
 </section>
 <!-- Footer-->
 <footer class="py-5 bg-dark">
-  <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
+  <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Polisportiva DDD 2021</p></div>
 </footer>
 </body>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+<?php echo '<script'; ?>
+ src="https://code.jquery.com/jquery-3.5.1.slim.min.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"><?php echo '</script'; ?>
+>
 <!-- Core theme JS-->
-<script src="/ProgettoWeb/Smarty/js/scripts.js"></script>
-</html>
+<?php echo '<script'; ?>
+ src="/PolisportivaDDD/Smarty/js/scripts.js"><?php echo '</script'; ?>
+>
+</html><?php }
+}
