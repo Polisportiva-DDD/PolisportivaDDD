@@ -18,36 +18,32 @@ class VGruppo
 
 
 
-    public function showScegliDataPage($nomeCampo, $isAmministratore, $isUtente){
+    public function showScegliDataPage($nomeCampo, $isAmministratore){
         $this->smarty->assign("nomeCampo", $nomeCampo);
         $this->smarty->assign("isAmministratore", $isAmministratore);
-        $this->smarty->assign("isUtente", $isUtente);
 
         $this->smarty->display(get_include_path() ."/smarty/templates/creaGruppo_scegliData.tpl");
     }
 
-    public function showScegliOraPage($dataScelta, $oreDisponibili, $isAmministratore, $isUtente){
+    public function showScegliOraPage($dataScelta, $oreDisponibili, $isAmministratore){
         $this->smarty->assign("dataScelta", $dataScelta);
         $this->smarty->assign("ore", $oreDisponibili);
         $this->smarty->assign("isAmministratore", $isAmministratore);
-        $this->smarty->assign("isUtente", $isUtente);
 
         $this->smarty->display(get_include_path() ."/smarty/templates/creaGruppo_scegliOra.tpl");
     }
 
-    public function showGruppoListaInvitati($utenti ,$isAmministratore, $isUtente){
+    public function showGruppoListaInvitati($utenti ,$isAmministratore){
         $this->smarty->assign("utenti", $utenti);
         $this->smarty->assign("isAmministratore", $isAmministratore);
-        $this->smarty->assign("isUtente", $isUtente);
 
-        $this->smarty->display("creaGruppoListaInvitati.tpl");
+        $this->smarty->display(get_include_path() ."/smarty/templates/creaGruppoListaInvitati.tpl");
     }
 
     public function showDettagliGruppo($invitati, $admin, $campo, $postiDisponibili,
                                         $etaMinima, $etaMassima, $votoMinimo, $descrizione,
-                                        $isAmministratore, $isUtente){
+                                        $isAmministratore){
         $this->smarty->assign("isAmministratore", $isAmministratore);
-        $this->smarty->assign("isUtente", $isUtente);
         $this->smarty->assign("invitati", $invitati);
         $this->smarty->assign("admin", $admin);
         $this->smarty->assign("campo", $campo);
@@ -60,9 +56,8 @@ class VGruppo
         $this->smarty->display("dettagliGruppo.tpl");
     }
 
-    public function showITuoiGruppi($isAmministratore, $isUtente, $gruppiDetails){
+    public function showITuoiGruppi($isAmministratore, $gruppiDetails){
         $this->smarty->assign("isAmministratore", $isAmministratore);
-        $this->smarty->assign("isUtente", $isUtente);
         $this->smarty->assign("gruppiDetails", $gruppiDetails);
 
         $this->smarty->display("i_tuoi_gruppi.tpl");
@@ -76,11 +71,10 @@ class VGruppo
      * @param $isUtente bool che controlla se è loggato un utente
      * @throws SmartyException
      */
-    public function showRicercaGruppo(array $listaGruppi,array $listaCampi,bool $isAmministratore,bool $isUtente){
+    public function showRicercaGruppo(array $listaGruppi,array $listaCampi,bool $isAmministratore){
         $this -> smarty -> assign('results',$listaGruppi);
         $this -> smarty -> assign('results',$listaCampi);
         $this -> smarty -> assign("isAmministratore", $isAmministratore);
-        $this -> smarty -> assign("isUtente", $isUtente);
 
         $this -> smarty -> display('RicercaGruppo.tpl');
     }
@@ -90,9 +84,10 @@ class VGruppo
      * @param array $campi lista dei campi presenti da visualizzare
      * @throws SmartyException
      */
-    public function showScegliCampo(array $campi, $isAmministratore, $isUtente){
+    public function showScegliCampo(array $campi, $isAmministratore){
         $this -> smarty -> assign('results',$campi);
-        $this->smarty->display("creaGruppo_scegliCampo.tpl");
+        $this -> smarty -> assign("isAmministratore", $isAmministratore);
+        $this->smarty->display(get_include_path() ."/smarty/templates/creaGruppo_scegliCampo.tpl");
     }
 
 
@@ -100,10 +95,9 @@ class VGruppo
      * @param array $campi lista dei campi presenti da visualizzare
      * @throws SmartyException
      */
-    public function showCreaGruppoDettagliFinali(array $campi, $isAmministratore, $isUtente){
+    public function showCreaGruppoDettagliFinali(array $campi, $isAmministratore){
         $this -> smarty -> assign('results',$campi);
         $this -> smarty -> assign("isAmministratore", $isAmministratore);
-        $this -> smarty -> assign("isUtente", $isUtente);
-        $this->smarty->display("creaGruppo_dettagliFinali.tpl");
+        $this->smarty->display(get_include_path() ."/smarty/templates/creaGruppo_dettagliFinali.tpl");
     }
 }

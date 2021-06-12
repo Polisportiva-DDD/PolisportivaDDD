@@ -8,6 +8,7 @@
     <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="/PolisportivaDDD/Smarty/css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" integrity="undefined" crossorigin="anonymous">
 </head>
 <body>
 <!-- Navigation-->
@@ -42,6 +43,7 @@
 
 
 <section class="py-5">
+    <form action="/PolisportivaDDD/Gruppo/scegliInvitati" method="post">
     <div class="container">
         <!-- Page heading-->
         <h1>Scegli Ora</h1>
@@ -69,9 +71,9 @@
                         <div class="card-body">
                             <br>
 
-                            <select class="form-control w-100" aria-label="Default-select example" id="tipologiaCampo">
+                            <select class="form-control w-100" aria-label="Default-select example" name='ora' id="ora">
                                 {section name=nr loop=$ore}
-                                <option value=$smarty.section.nr.iteration+1>{$ore[nr]}</option>
+                                <option value={$ore[nr]}>{$ore[nr]}</option>
                                 {/section}
                             </select>
                             <br>
@@ -83,11 +85,12 @@
 
             </div>
         <div class="d-flex flex-row-reverse my-5" >
-            <div class="p-2"><a href="#">  <button type="button" class="btn btn-primary">Vai Avanti</button></a></div>
-            <div class="p-2"><a href="#">  <button type="button" class="btn btn-primary">Torna Indietro</button></a></div>
+            <div class="p-2"> <button type="submit" class="btn btn-primary">Vai Avanti</button></div>
+            <div class="p-2"> <button type="button" class="btn btn-primary">Torna Indietro</button></div>
         </div>
 
         </div>
+    </form>
 
 
     </div>

@@ -3,7 +3,7 @@
 //require_once 'StartSmarty.php';
 require_once (get_include_path() .'/Utility/autoload.php');
 
-//require_once '../Control/CCreazioneGruppo';
+//require_once '../Control/CGruppo';
 //require_once '../Foundation/config.inc.php';
 require_once (get_include_path() .'/Utility/USession.php');
 class CFrontController

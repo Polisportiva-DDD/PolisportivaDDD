@@ -11,6 +11,7 @@
   <!-- Core theme CSS (includes Bootstrap)-->
   <link href="/PolisportivaDDD/Smarty/css/styles.css" rel="stylesheet" />
   <link href="/PolisportivaDDD/Smarty/css/ourStyle.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" integrity="undefined" crossorigin="anonymous">
 </head>
 <body>
 <!-- Navigation-->
@@ -50,6 +51,7 @@
     </h1>
     <hr>
     <!-- Content Row-->
+    <form action="/PolisportivaDDD/Gruppo/scegliDettagli" method="post">
     <div class="row">
       {section name=nr loop=$utenti}
       <div class="col-lg-4 mb-4 mt-4 mb-lg-0">
@@ -70,7 +72,7 @@
                 {/for}
               </h10>
             </li>
-            <li class="list-group-item">Invita <input type="checkbox"></li>
+            <li class="list-group-item">Invita <input name={$utenti[nr].username} value={$utenti[nr].username} type="checkbox"></li>
           </ul>
         </div>
       </div>
@@ -78,6 +80,12 @@
       <h2>Nessun Utente presente</h2>
       {/section}
     </div>
+      <div class="d-flex flex-row-reverse my-5">
+
+        <div class="p-2">  <button type="submit" class="btn btn-primary">Vai Avanti</button></div>
+
+      </div>
+    </form>
   </div>
 </section>
 

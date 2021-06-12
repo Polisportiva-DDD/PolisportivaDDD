@@ -101,7 +101,7 @@ foreach ($rows as $row){
     echo("\n");
 }
 */
-
+/*
 $pm = new FPersistentManager();
 $carte = $pm->loadField('numero', 'FcartaDiCredito');
 
@@ -110,6 +110,13 @@ foreach($carte as $carta){
     print_r($carta['numero']);
 }
 
+*/
+$data =  ('2021-05-05');
+$data = strtotime($data);
+$ora= '10:00:00';
+$dataString = date('Y-m-d', $data);
+$dataEOra = DateTime::createFromFormat('Y-m-d H:i:s', $dataString . $ora);
+print_r($dataEOra);
 
 
 /*

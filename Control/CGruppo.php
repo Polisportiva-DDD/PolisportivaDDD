@@ -5,7 +5,7 @@ require_once (get_include_path() .'/Utility/StartSmarty.php');
 require_once (get_include_path() .'/Utility/autoload.php');
 //require_once '../Foundation/config.inc.php';
 
-class CCreazioneGruppo
+class CGruppo
 {
 
     //commento
@@ -33,7 +33,6 @@ class CCreazioneGruppo
         $session->startSession();
         $pm = new FPersistentManager();
         $isAmministratore = $session->readValue('isAmministratore');
-        $isUtente = $session->readValue('isUtente');
         $campi = FPersistentManager::loadList("FCampo");
         $view = new VGruppo();
         $results = array();
@@ -47,7 +46,7 @@ class CCreazioneGruppo
             $c["immagine"] = $immagine;
             $results[] = $c;
         }
-        $view->showScegliCampo($results, $isAmministratore, $isUtente);
+        $view->showScegliCampo($results, $isAmministratore);
 
     }
 
@@ -60,14 +59,13 @@ class CCreazioneGruppo
         $pm = new FPersistentManager();
         $session->startSession();
         $view = new VGruppo();
-        if (true){
-            $idCampoScelto = 2;
+        if (isset($_POST['idCampo'])){
+            $idCampoScelto = $_POST['idCampo'];
             $session->setValue('idCampo', $idCampoScelto);
             $campoScelto = $pm->load($idCampoScelto, 'FCampo');
             $nomeCampo = $campoScelto->getNome();
             $isAmministratore = $session->readValue('isAmministratore');
-            $isUtente = $session->readValue('isUtente');
-            $view->showScegliDataPage($nomeCampo, $isAmministratore, $isUtente);
+            $view->showScegliDataPage($nomeCampo, $isAmministratore);
         }
 
     }
@@ -80,7 +78,6 @@ class CCreazioneGruppo
         $session->startSession();
         $view = new VGruppo();
         $isAmministratore = $session->readValue('isAmministratore');
-        $isUtente = $session->readValue('isUtente');
         //La data è passata con formato yyyy-mm-dd
         if (isset($_POST['dataCreazioneGruppo'])) {
             $dataScelta = $_POST['dataCreazioneGruppo'];
@@ -90,9 +87,10 @@ class CCreazioneGruppo
             $session->setValue('dataScelta', $date);
         }
         //Ore disponibili per la data scelta
-        $oreDisponibili = self::freeHoursFromDate($dataScelta);
+        $idCampoScelto = $session->readValue('idCampo');
+        $oreDisponibili = self::freeHoursFromDate($dataScelta, $idCampoScelto);
 
-        $view->showScegliOraPage($dataScelta, $oreDisponibili, $isAmministratore, $isUtente);
+        $view->showScegliOraPage($dataScelta, $oreDisponibili, $isAmministratore);
     }
 
     public function scegliInvitati(){
@@ -101,13 +99,12 @@ class CCreazioneGruppo
         $pm = new FPersistentManager();
         $view = new VGruppo();
         $isAmministratore = $session->readValue('isAmministratore');
-        $isUtente = $session->readValue('isUtente');
         $results = array();
         if (isset($_POST['ora'])){
             $oraScelta = $_POST['ora'];
             $session->setValue('oraScelta', $oraScelta);
         }
-        $utenti = $pm->loadList(FUtente);
+        $utenti = $pm->loadList('FUtente');
         foreach($utenti as $utente){
             //Array contentente i dati per la view
             $u = array();
@@ -115,6 +112,9 @@ class CCreazioneGruppo
             $username= $utente->getUsername();
             //Recensioni dell'utente
             $recensioniUtente = $pm->loadRecensioniUtente($username);
+            if(!$recensioniUtente){
+                $recensioniUtente=array();
+            }
             //Assegno all'array i dati
             $u['username']=$username;
             $u['eta']=$utente->getEta();
@@ -122,7 +122,7 @@ class CCreazioneGruppo
             //Metto nell'array results per la view l'array appena creato.
             $results[] = $u;
         }
-        $view->showGruppoListaInvitati($results, $isAmministratore, $isUtente);
+        $view->showGruppoListaInvitati($results, $isAmministratore);
     }
 
     public function scegliDettagli(){
@@ -131,7 +131,6 @@ class CCreazioneGruppo
         $pm = new FPersistentManager();
         $view = new VGruppo();
         $isAmministratore = $session->readValue('isAmministratore');
-        $isUtente = $session->readValue('isUtente');
         if ($_POST){
             $invitati = array();
             foreach($_POST as $username){
@@ -139,17 +138,52 @@ class CCreazioneGruppo
             }
             $session->setValue('invitati', $invitati);
         }
-        $campi = $pm->loadList(FCampo);
+        $campi = $pm->loadList('FCampo');
         $nomiCampi=array();
         foreach($campi as $campo){
             $nomiCampi[] = $campo->getNome();
         }
-        $view->showCreaGruppoDettagliFinali($nomiCampi, $isAmministratore, $isUtente);
+        $view->showCreaGruppoDettagliFinali($nomiCampi, $isAmministratore);
+
+    }
+
+    public function creaGruppo(){
+        $session = new USession();
+        $session->startSession();
+        $pm = new FPersistentManager();
+        if ($_POST){
+            $nomeGruppo = $_POST['nomeGruppo'];
+            $etaMinima = $_POST['etaMinima'];
+            $etaMassima = $_POST['etaMassima'];
+            $valutazioneMinima = $_POST['valMinima'];
+            $descrizione = $_POST['descrizione'];
+        }
+        $invitati = $session->readValue('invitati');
+
+        //INVIARE EMAIL AGLI INVITATI!!!!!!
 
 
 
+        $idCampo = $session->readValue('idCampo');
+        $data = $session->readValue('dataScelta');
+        $dataString = date('Y-m-d', $data);
+        $ora = $session->readValue('oraScelta');
+        $dataEOra = DateTime::createFromFormat('Y-m-d H:i:s', $dataString . $ora);
+        //DA SCOMMENTARE
+        //$adminUsername = $session->readValue('username');
+        //$pm->load()
+        //SOLO PER PROVA ADMIN='lor'
+        $adminUsername='lor';
+        $admin = $pm->load($adminUsername, 'FUtente');
+        $campo = $pm->load($idCampo, 'FCampo');
 
-
+        $gruppo = new EGruppo(null, $nomeGruppo, $etaMinima, $etaMassima, $valutazioneMinima, $descrizione, $dataEOra, array(), $admin, $campo);
+        $pm->store($gruppo);
+        $session->deleteValue('oraScelta');
+        $session->deleteValue('dataScelta');
+        $session->deleteValue('invitati');
+        $session->deleteValue('idCampo');
+        header('Location: /PolisportivaDDD/Utente/Home');
 
     }
 
@@ -171,24 +205,34 @@ class CCreazioneGruppo
      * @param $dataScelta
      * @return string[]
      */
-    private static function freeHoursFromDate($dataScelta){
+    public static function freeHoursFromDate($dataScelta, $idCampoScelto){
         $oreDisponibili= self::$orePossibili;
         $pm = new FPersistentManager();
-        //Queste sono tutte le date e ore occupate recuperate dal db
-        $dataEOreOccupate = $pm->loadField('dataEOra', 'FGruppo');
+        //Recupera dal db le ore occupate del campo scelto
+        $gruppi = $pm->loadGruppi(null, null, null, null, null, null, null);
+        $dataEOreOccupate = array();
+        foreach($gruppi as $gruppo){
+            if ($gruppo->getCampo()->getId() == $idCampoScelto){
+                $deO = $gruppo->getDataEOra();
+                $dataEOreOccupate[] = date_format($deO, 'Y-m-d H:i:s');
+            }
+        }
         //Filtro l'array di prima prendendo esclusivamente le date e ore della data scelta dall'utente
         foreach ($dataEOreOccupate as $dataOccupata){
             //Giorno della data occupata
-            $d = date('Y-m-d', strtotime($dataOccupata['dataEOra']));
+            $d = date('Y-m-d', strtotime($dataOccupata));
             //Se la data corrisponde
-            if ($d == $dataScelta)
+            if ($d == $dataScelta) {
                 //Ora occupata della data
-                $o = date('H:i:s', strtotime($dataOccupata['dataEOra']));
+                $o = date('H:i:s', strtotime($dataOccupata));
                 //Cerca l'indice dell'orario da togliere
                 $indexOre = array_search($o, $oreDisponibili);
-                 //Togli quell'orario dagli orari disponibili
+                //Togli quell'orario dagli orari disponibili
                 unset($oreDisponibili[$indexOre]);
+                $oreDisponibili = array_values($oreDisponibili);
+            }
         }
         return $oreDisponibili;
     }
 }
+

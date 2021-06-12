@@ -8,6 +8,7 @@
   <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
   <!-- Core theme CSS (includes Bootstrap)-->
   <link href="/PolisportivaDDD/Smarty/css/styles.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" integrity="undefined" crossorigin="anonymous">
 </head>
 <body>
 <!-- Navigation-->
@@ -45,33 +46,29 @@
     <h1>Crea gruppo</h1>
     <hr>
 
-    <form method="post">
+    <form method="post" action="/PolisportivaDDD/Gruppo/creaGruppo">
       <div class="row mb-3">
         <div class="col-md-3">
           <label for="nomeGruppo" class="form-label">Nome</label>
-          <input type="text" class="form-control" id="nomeGruppo">
+          <input type="text" class="form-control" id="nomeGruppo" name="nomeGruppo" required>
         </div>
         <div class="col-md-3">
           <label for="etaMinima" class="form-label">Età minima</label>
-          <input type="number" class="form-control" id="etaMinima" min="10" max="99">
+          <input type="number" class="form-control" id="etaMinima" min="10" max="99" name="etaMinima" required>
         </div>
         <div class="col-md-3">
           <label for="etaMassima" class="form-label">Età massima</label>
-          <input type="number" class="form-control" id="etaMassima" min="10" max="99">
+          <input type="number" class="form-control" id="etaMassima" min="10" max="99" name="etaMassima" required>
         </div>
         <div class="col-md-3">
-          <label for="tipologiaCampo" class="form-label">Campo</label>
-          <select class="form-control w-100" aria-label="Default-select example" id="tipologiaCampo">
-            {section name=nr loop=$results}
-              <option {if $smarty.section.nr.iteration == 1}selected {/if}>{$results[nr]}</option>
-            {/section}
-          </select>
+          <label for="valMinima" class="form-label">Valutazione minima</label>
+          <input type="number" class="form-control" id="balMinima" min="0" max="5" name="valMinima" required>
         </div>
       </div>
       <div class="row">
         <div class="col-md-12">
           <label for="descrizione" class="form-label">Descrizione</label>
-          <textarea type="text" class="form-control" id="descrizione" rows="5"></textarea>
+          <textarea type="text" class="form-control" id="descrizione" name="descrizione" rows="5" required></textarea>
         </div>
       </div>
       <div class="d-flex flex-row-reverse my-5" >

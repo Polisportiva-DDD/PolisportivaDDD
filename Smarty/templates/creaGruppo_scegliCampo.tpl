@@ -8,6 +8,7 @@
   <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
   <!-- Core theme CSS (includes Bootstrap)-->
   <link href="/PolisportivaDDD/Smarty/css/styles.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" integrity="undefined" crossorigin="anonymous">
 </head>
 <body>
 <!-- Navigation-->
@@ -58,13 +59,14 @@
 
       {section name=nr loop=$results}
       {if $smarty.section.nr.iteration is odd}<div class="row mt-4">{/if}
-      <form method="POST" action = "/PolisportivaDD/CreGruppo/Data">
+      <form action="/PolisportivaDDD/Gruppo/scegliData" method="POST">
       <div class="col-lg-6 mb-4 mb-lg-0">
         <div class="card h-100">
           <h4 class="card-header">{$results[nr].nome}</h4>
           <img class="card-img-top" src="data:{$results[nr].type};base64,{$results[nr].pic64}" width="1400" height="700" alt="Immagine campo">
-          <div class="card-body"><p class="card-text">{$results[nr].descrizione}</p></div>
-          <div class="card-footer"><input type="submit" class="btn btn-primary float-right" name="idCampo" value={$results[nr].idCampo}>Scegli</input></div>
+          <div class="card-footer">
+            <button type="submit" class="btn btn-primary float-right" name="idCampo" value={$results[nr].idCampo}>Scegli</button></form>
+          </div>
         </div>
       </div>
       </form>

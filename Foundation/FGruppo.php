@@ -96,7 +96,7 @@ class FGruppo
             $db = FDatabase::getInstance();
             $rows = $db->loadMultiple($sql);
             foreach ($rows as $row) { //Per ogni row
-                $utente = FUtente::loadUtenteByUsername($row['utente']); //Carica l'utente corrispondente all'username ottenuto
+                $utente = FUtente::load($row['utente']); //Carica l'utente corrispondente all'username ottenuto
                 array_push($partecipanti, $utente); //Mettilo nell'array
             }
             return $partecipanti;
@@ -157,8 +157,8 @@ class FGruppo
             $rows = $db->loadMultiple($sql);
             $gruppi = array();
             foreach($rows as $row){
-                $admin = FUtente::loadByUsername($row['admin']); //Load dell'utente con id dell'admin
-                $campo = FCampo::loadCampo($row['idcampo']); //Load del campo con id corrispondente
+                $admin = FUtente::load($row['admin']); //Load dell'utente con id dell'admin
+                $campo = FCampo::load($row['idcampo']); //Load del campo con id corrispondente
                 $partecipanti = self::loadPartecipanti($row['id']); //Carica i partecipanti del gruppo che stiamo caricando
                 $date = DateTime::createFromFormat('Y-m-d H:i:s', $row['dataEOra']);
                 $gruppo = new EGruppo($row['id'], $row['nome'], $row['etaMinima'],$row['etaMassima'],

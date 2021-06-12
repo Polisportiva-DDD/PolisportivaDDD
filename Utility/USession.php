@@ -66,6 +66,7 @@ class USession {
         else return false;
     }
 
+
     /*
     function isAmministratore(): bool{
         if (isset($_SESSION['isAmministratore'])){

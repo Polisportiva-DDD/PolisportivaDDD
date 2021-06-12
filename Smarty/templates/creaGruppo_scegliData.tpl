@@ -7,8 +7,8 @@
 
   <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
   <!-- Core theme CSS (includes Bootstrap)-->
-
-  <link href="/PolisportivaDDD/Smarty/css/styles.css" rel="stylesheet" />
+  <link href="PolisportivaDDD/Smarty/css/styles.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" integrity="undefined" crossorigin="anonymous">
 </head>
 <body>
 <!-- Navigation-->
@@ -40,7 +40,7 @@
     </div>
   </div>
 </nav>
-<form action="/PolisportivaDDD/CreazioneGruppo/scegliOra" method="POST">
+<form action="/PolisportivaDDD/Gruppo/scegliOra" method="POST">
 <section class="py-5">
   <div class="container">
     <!-- Page heading-->

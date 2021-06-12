@@ -75,7 +75,7 @@
 						  <td >{$results[campi].nome}</td>
 						  <td>{$results[campi].prezzo}</td>
 						  <td>  <label for="quantity{$smarty.section.campi.iteration}">Inserisci quantita:</label>
-							<input type="number" id="quantity{$smarty.section.campi.iteration}" value="0" name="quantity{$smarty.section.campi.iteration}" min="0" ></td>
+							<input type="number" id="quantity{$smarty.section.campi.iteration}" value="0" name={$results[campi].nome} min="0" ></td>
 						</tr>
 						
 					  </tbody>
@@ -132,7 +132,7 @@
 								</tr>
 							</table>
 							</div>
-							<button class="btn btn-primary" id="avanti" type="submit">Vai avanti</button>
+							<button href= "/PolisportivaDDD/Gettoni/riepilogoAcquisto"class="btn btn-primary" id="avanti" type="submit">Vai avanti</button>
 							<button class="btn btn-primary" id="usaUnaltracarta" type="submit">Usa un'altra carta</button>
 						</div>
 					</div>
