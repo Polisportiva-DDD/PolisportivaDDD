@@ -150,4 +150,87 @@ class CUtente
 
 
 
+    /**
+     * Funzione che consente il login di un utente registrato. Si possono avere diversi casi:
+     * 1) se il metodo della richiesta HTTP è GET:
+     *   - se l'utente è già loggato viene reindirizzato alla homepage;
+     *     - se l'utente non è loggato si viene indirizzati alla form di login;
+     * 2) se il metodo della richiesta HTTP è POST viene richiamata la funzione verifica().
+     * @throws SmartyException
+     */
+    public function login (){
+        if($_SERVER['REQUEST_METHOD']=="GET"){
+            if(static::isLogged()) {
+                //$isAmministratore = $session->readValue('isAmministratore');
+                //$isRegistrato = $session->readValue('isRegistrato');
+                $pm = new FPersistentManager();
+                $view = new VUtente();
+                $campi = $pm -> loadList("FCampo");
+                $result=array();
+                $c=0;
+                foreach ($campi as $value){
+
+                    $nomiCampi=array();
+                    $nomiCampi['nome']=$value->getNome();
+                    $nomiCampi['descrizione']=$value->getNome();
+                    $result[$c]=$nomiCampi;
+                    $c++;
+                }
+                $view->showHome('false','true',$result);
+            }
+            else{
+                $view=new VUtente();
+                $view->showFormLogin();
+            }
+        }elseif ($_SERVER['REQUEST_METHOD']=="POST")
+            static::verifica();
+    }
+
+    /**
+     * Metodo che verifica se l'utente è loggato
+     */
+    public function isLogged(): bool
+    {
+        $identificato = false;
+        $session = new USession();
+        if ($session -> isSessionSet()) {
+            if ($session -> isSessionNone()) {
+                //header('Cache-Control: no cache'); //no cache
+                //session_cache_limiter('private_no_expire'); // works
+                //session_cache_limiter('public'); // works too
+                $session -> startSession();
+            }
+        }
+        if (isset($_SESSION['utente'])) {
+            $identificato = true;
+        }
+        return $identificato;
+    }
+
+    /**
+     * Funzione che si occupa di verificare l'esistenza di un utente con username e password inseriti nel form di login.
+     * 1) se, dopo la ricerca nel db non si hanno risultati ($utente = null) oppure se l'utente si trova nel db ma ha lo stato false
+     *    viene ricaricata la pagina con l'aggiunta dell'errore nel login.
+     * 2) se l'utente c'è, avviene il reindirizzamento alla homepage;
+     * @throws SmartyException
+     */
+    static function verifica() {
+        $session = new USession();
+        $view = new VUtente();
+        $pm = new FPersistentManager();
+        $utente = $pm->Login($_POST['email'], $_POST['password']);
+        if ($utente != null) {
+            if ($session -> isSessionNone()) {
+                $session -> startSession();
+                $salvare = serialize($utente);
+                $_SESSION['utente'] = $salvare;
+                if (isset($_COOKIE['username'])) {
+                    header('Location: /PolisportivaDDD/Utente/Home');
+                }
+            }
+        }
+        else {
+            $view->loginError();
+        }
+    }
 }

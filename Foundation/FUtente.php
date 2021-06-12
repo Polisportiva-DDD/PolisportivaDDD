@@ -102,7 +102,8 @@ class FUtente
      */
 
 
-    public static function Login($username,$password){
+    public static function Login($username,$password): EUtente
+    {
         $sql="SELECT * FROM ".static::getTableName()." WHERE username='".$username."' AND "."password='".$password."';";
         $db=FDatabase::getInstance();
         $result=$db->exist($sql);
