@@ -86,11 +86,13 @@
         <button class="btn btn-primary  " type="submit">Aggiungi Gettoni</button>
       </div>
     </div>
+    <form action="/PolisportivaDDD/BannaUtente/banna" method="POST">
       <div class="row mb-2 ">
         <div class="col-md-12 text-right">
           <button class="btn btn-primary  " type="submit">Bandisci</button>
         </div>
       </div>
+      </form>
         {/if}
     <div class="row mb-2 ">
       <div class="col-md-12 text-right">
@@ -112,7 +114,7 @@
           </div>
           <div class="text-left">
             <b><h6 class="mb-2">Valutazione:
-                {for $start=1 to $results[nr].valutazione}
+                {for $start=1 to $results[nr].valutazione}</h6>
                   <span class="fa fa-star checkedStar"></span>
                 {/for}
                 {for $start=($results[nr].valutazione)+1 to 5}

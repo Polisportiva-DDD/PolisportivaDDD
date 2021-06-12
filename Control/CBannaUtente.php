@@ -1,10 +1,7 @@
 <?php
-require_once '../Utility/USession.php';
-require_once '../Utility/StartSmarty.php';
-require_once '../Utility/autoload.php';
-require_once '../Foundation/config.inc.php';
-
-
+require_once (get_include_path() .'/Utility/USession.php');
+require_once (get_include_path() .'/Utility/StartSmarty.php');
+require_once (get_include_path() .'/Utility/autoload.php');
 class CBannaUtente
 {
 
@@ -18,26 +15,26 @@ class CBannaUtente
      */
     public function visualizzaProfilo(){
         $session = new USession();
+        $session->startSession();
         $isAmministratore = $session->readValue('isAmministratore');
         $pm = new FPersistentManager();
         $view = new VUtente();
         if(true){
-            $username = "lor";
+            //if (isset($_POST['username'])) {
+            $username = "lor"; //$_POST['username'];
             $utenteDaBannare = $pm->load($username,"FUtente");
             if($utenteDaBannare!=null){
                 $session->setValue('utente', serialize($utenteDaBannare));
-
+                //$session->setValue('utente2', "allora");
                 $nome=$utenteDaBannare->getNome();
                 $cognome=$utenteDaBannare->getCognome();
-                //$data=$utenteDaBannare->getDataDiNascita();
-                $eta =  1;
-
+                $eta =  $utenteDaBannare->getEta();
                 $pic64=$utenteDaBannare->getImmagine();
                 $type="";
                 $recensioni=$pm->loadRecensioniUtente($username);
                 if($recensioni==null){
                     $recensioni=array();
-                    $valutazioneMedia=0;//non ha recensioni
+                    $valutazioneMedia=1;//non ha recensioni
                 }
                 else {
                     $valutazioneMedia = round($utenteDaBannare->calcolaMediaRecensioni($recensioni));
@@ -59,15 +56,22 @@ class CBannaUtente
      */
     public function banna(){
         $session = new USession();
+        $session->startSession();
         $pm = new FPersistentManager();
         $view = new VAmministratore();
+        //$utente = unserialize($_SESSION['utente']);
         $utente =unserialize($session->readValue('utente'));
         $username=$utente->getUsername();
         $nome=$utente->getNome();
         $cognome=$utente->getCognome();
         $eta=$utente->getEta();
         $recensioni=$pm->loadRecensioniUtente($username);
-        $valutazioneMedia=round($utente->calcolaMediaRecensioni($recensioni));
+        if($recensioni!=null){
+            $valutazioneMedia=round($utente->calcolaMediaRecensioni($recensioni));
+        }
+        else{
+            $valutazioneMedia=0;
+        }
         $pic64=$utente->getImmagine();
         $type="";
         $view->showBannaUtente($username, $nome, $cognome, $eta, $valutazioneMedia,$pic64, $type);
@@ -77,14 +81,15 @@ class CBannaUtente
 
     public function inviaBan(){
         $session = new USession();
+        $session->startSession();
         $pm = new FPersistentManager();
         if ($_POST['motivazione']){
-            $motivazione = $_POST['idCampo'];
+            $motivazione = $_POST['motivazione'];
             $utente =unserialize($session->readValue('utente'));
             $username=$utente->getUsername();
             $pm->updateUtenteRegistrato($username,true,$motivazione);
             //se va male l'update???
-            header('Location: /ProgettoWeb/Admin/home');
+            header('Location: /PolisportivaDDD/Utente/home');
 
         }
 

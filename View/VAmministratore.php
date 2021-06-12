@@ -50,7 +50,7 @@ class VAmministratore{
         $this -> smarty -> assign('valutazioneMedia',$valutazioneMedia);
         $this->smarty->assign("type", $type);
         $this->smarty->assign("pic64", $pic64);
-        $this->smarty->display("bannaUtente.tpl");
+        $this->smarty->display(get_include_path() ."/smarty/templates/bannaUtente.tpl");
     }
 
     public function showAmministratoreResponse(string $username,string $nome,string $cognome,int $eta,string $segnlazione){

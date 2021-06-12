@@ -1,5 +1,5 @@
 <?php
-require_once '../Utility/autoload.php';
+//require_once '../Utility/autoload.php';
 
  class EUtente{
 	private string $username;
@@ -236,7 +236,7 @@ require_once '../Utility/autoload.php';
 
 	public function getEta(){
 		$data=$this->dataDiNascita;
-		return  (new DateTime('now'))->diff($data);
+		return  ((new DateTime('now'))->diff($data))->y;
 	}
 
 	public function rimuoviGruppo(int $id):bool{

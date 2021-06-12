@@ -25,13 +25,12 @@ class VUtente
         $this->smarty->display("dettagliCampo.tpl");
     }
 
-    public function showHome($isAmministratore, $isUtente, $isRegistrato, $nomeCampi){
+    public function showHome($isAmministratore, $isRegistrato, $nomeCampi){
         $this->smarty->assign("isAmministratore", $isAmministratore);
-        $this->smarty->assign("isUtente", $isUtente);
         $this->smarty->assign("isRegistrato", $isRegistrato);
         $this->smarty->assign("results", $nomeCampi);
 
-        $this->smarty->display("home.tpl");
+        $this->smarty->display(get_include_path() ."/smarty/templates/home.tpl");
     }
 
     /**
@@ -81,7 +80,7 @@ class VUtente
         $this -> smarty -> assign('results', $recensioni);
         $this -> smarty -> assign("isAmministratore", $isAmministratore);
 
-        $this -> smarty -> display('profiloUtenteRegistrato.tpl');
+        $this -> smarty -> display(get_include_path() ."/smarty/templates/profiloUtenteRegistrato.tpl");
     }
 
     /**

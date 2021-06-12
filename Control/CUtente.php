@@ -1,8 +1,9 @@
 <?php
 
-require_once '../Utility/autoload.php';
-require_once '../Utility/StartSmarty.php';
-
+//require_once '../Utility/autoload.php';
+//require_once '../Utility/StartSmarty.php';
+require_once (get_include_path() .'/Utility/StartSmarty.php');
+require_once (get_include_path() .'/Utility/autoload.php');
 class CUtente
 {
 
@@ -27,6 +28,16 @@ class CUtente
         $segnalazione = new ETicketAssistenza($autore, $messaggio, $oggetto, new DateTime('now'));
         $pm->store($segnalazione);
         header('Location: /PolisportivaDDD/Utente/Home');
+    }
+    public function home(){
+        $view=new VUtente();
+        $pm = new FPersistentManager();
+        $campi=$pm->loadList("FCampo");
+        $nomiCampi=array();
+        foreach ($campi as $value){
+            $nomiCampi[]=$value->getNome();
+        }
+        $view->showHome(true,true,$nomiCampi);
     }
 
 }

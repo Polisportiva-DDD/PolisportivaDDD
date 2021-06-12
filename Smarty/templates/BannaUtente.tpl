@@ -80,32 +80,21 @@
 
     </div>
 
-    <div class="row mb-2 ">
-      <div class="col-md-12 text-right">
-        <form method="post" action="#">
-        <button class="btn btn-primary  " type="submit">Bandisci</button>
-        </form>
-      </div>
-    </div>
-
-    <div class="row mb-2 ">
-      <div class="col-md-12 text-right">
-        <form method="post" action="#">
-        <button class="btn btn-primary  " type="submit">Aggiungi Gettoni</button>
-        </form>
-      </div>
-    </div>
 
 
   <div class="row mt-2 mb-2">
     <div class="col-md-12">
-      <form method="post" action="#">
+
         <h4>Banna</h4>
-        <textarea placeholder="Motivo ban" class="form-control"></textarea>
-      </form>
+      <form method="POST" action="/PolisportivaDDD/BannaUtente/inviaBan">
+      <label for="motivazione">
+        <textarea name="motivazione" placeholder="motivazione" class="form-control" required></textarea>
+      </label>
       <button type="submit" class="btn btn-primary float-right mt-3">Banna</button>
+      </form>
     </div>
   </div>
+
 </div>
 </section>
 

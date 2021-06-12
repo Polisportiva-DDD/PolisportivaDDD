@@ -45,7 +45,7 @@
                 <a class="dropdown-item" href="#">Modifica prezzi</a>
               </div>
             </li>
-          {elseif $isUtente}
+          {else}
             <li class="nav-item"><a class="nav-link" href="assistenza.html">Informazioni</a></li>
           {/if}
         </ul>
