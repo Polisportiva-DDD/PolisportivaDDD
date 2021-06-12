@@ -30,14 +30,24 @@ class CUtente
         header('Location: /PolisportivaDDD/Utente/Home');
     }
     public function home(){
+        $session = new USession();
+        $session->startSession();
+       // $isAmministratore = $session->readValue('isAmministratore');
+        //$isRegistrato = $session->readValue('isRegistrato');
         $view=new VUtente();
         $pm = new FPersistentManager();
         $campi=$pm->loadList("FCampo");
-        $nomiCampi=array();
+        $result=array();
+        $c=0;
         foreach ($campi as $value){
-            $nomiCampi[]=$value->getNome();
+
+            $nomiCampi=array();
+            $nomiCampi['nome']=$value->getNome();
+            $nomiCampi['descrizione']=$value->getNome();
+            $result[$c]=$nomiCampi;
+            $c++;
         }
-        $view->showHome(true,true,$nomiCampi);
+        $view->showHome(true,true,$result);
     }
 
 }

@@ -25,7 +25,6 @@ class CBannaUtente
             $utenteDaBannare = $pm->load($username,"FUtente");
             if($utenteDaBannare!=null){
                 $session->setValue('utente', serialize($utenteDaBannare));
-                //$session->setValue('utente2', "allora");
                 $nome=$utenteDaBannare->getNome();
                 $cognome=$utenteDaBannare->getCognome();
                 $eta =  $utenteDaBannare->getEta();
@@ -59,7 +58,6 @@ class CBannaUtente
         $session->startSession();
         $pm = new FPersistentManager();
         $view = new VAmministratore();
-        //$utente = unserialize($_SESSION['utente']);
         $utente =unserialize($session->readValue('utente'));
         $username=$utente->getUsername();
         $nome=$utente->getNome();
