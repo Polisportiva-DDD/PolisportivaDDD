@@ -7,7 +7,9 @@
 		<script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
         <!-- Core theme CSS (includes Bootstrap)-->
 <link href="/PolisportivaDDD/Smarty/css/styles.css" rel="stylesheet" type="text/css"/>
-		</head>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+	</head>
 
     <body>
 	<!-- Navigation-->
@@ -28,13 +30,24 @@
 		<div class="container">
 
 
-			<a class="navbar-brand" href="index.php">Polisportiva DDD</a>
+			<a class="navbar-brand" href="home">Polisportiva DDD</a>
 			<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a class="nav-link" href="home-utente-registrato.html">Home</a></li>
+					<li class="nav-item"><a class="nav-link" href="home">Home</a></li>
 					<li class="nav-item"><a class="nav-link" href="RicercaGruppo.html">Gruppi</a></li>
-					<li class="nav-item"><a class="nav-link" href="assistenza.html">Informazioni</a></li>
+					{if $isAmministratore}
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" id="navbarDropdownGestione" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Gestione</a>
+							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownGestione">
+								<a class="dropdown-item" href="UtentiBannati.html">Utenti Bannati</a>
+								<a class="dropdown-item" href="SegnalazioniAmministratore.html">Segnalazioni</a>
+								<a class="dropdown-item" href="#">Modifica prezzi</a>
+							</div>
+						</li>
+					{else}
+						<li class="nav-item"><a class="nav-link" href="assistenza.html">Informazioni</a></li>
+					{/if}
 				</ul>
 			</div>
 		</div>
@@ -94,7 +107,9 @@
 						<h2 class="card-header">Paga con carta di credito</h2>
 
 						<div class="card-body">
+							{if $carta|@count }
 							<div class="form-group">
+
 								<label for="exampleSelect1">Usa una tua carta</label>
 								<select class="form-control" name="mys">
 								{section name=nr loop=$carta}
@@ -103,7 +118,7 @@
 								</option>
 								{/section}
 								</select>
-								
+
 
 							</div>
 
@@ -134,6 +149,15 @@
 							</div>
 							<button href= "/PolisportivaDDD/Gettoni/riepilogoAcquisto"class="btn btn-primary" id="avanti" type="submit">Vai avanti</button>
 							<button class="btn btn-primary" id="usaUnaltracarta" type="submit">Usa un'altra carta</button>
+							{else}
+								<div class="form-group">
+
+									<h4>Nessuna carta disponibile, aggiungine una</h4>
+
+
+								</div>
+							{/if}
+
 						</div>
 					</div>
 				</div>

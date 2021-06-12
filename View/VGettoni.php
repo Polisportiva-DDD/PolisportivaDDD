@@ -42,10 +42,11 @@ class VGettoni
      * @param array $carte liste delle carte di credito dell'utente
      * @throws SmartyException
      */
-    public function showAcquistaGettoni(array $campi, array $carte){
+    public function showAcquistaGettoni(array $campi, array $carte,bool $isAmministratore){
         $this -> smarty -> assign('results',$campi);
         $this -> smarty -> assign('carta',$carte);
-        $this->smarty->display("acquistaGettoni.tpl");
+        $this -> smarty -> assign('isAmministratore',$isAmministratore);
+        $this->smarty->display(get_include_path() ."/smarty/templates/acquistaGettoni.tpl");
     }
 
     /**
@@ -55,7 +56,7 @@ class VGettoni
      */
     public function showAmministratoreAggiungiGettoni(array $campi){
         $this -> smarty -> assign('results',$campi);
-        $this->smarty->display("AmministratoreAggiungiGettoni.tpl");
+        $this->smarty->display(get_include_path() ."/smarty/templates/AmministratoreAggiungiGettoni.tpl");
     }
 
     /**
@@ -65,7 +66,7 @@ class VGettoni
      */
     public function showAmministratoreModificaPrezzo(array $campi){
         $this -> smarty -> assign('results',$campi);
-        $this->smarty->display("AmministratoreModificaPrezzo.tpl");
+        $this->smarty->display(get_include_path() ."/smarty/templates/AmministratoreModificaPrezzo.tpl");
     }
 
     /**
@@ -73,6 +74,6 @@ class VGettoni
      * @throws SmartyException
      */
     public function showAcquistoConNuovaCarta(){
-        $this -> smarty -> display('AcquistoConNuovaCarta.tpl');
+        $this -> smarty -> display(get_include_path() ."/smarty/templates/AcquistoConNuovaCarta.tpl");
     }
 }

@@ -35,7 +35,7 @@
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item"><a class="nav-link" href="home-utente-registrato.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="home">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="RicercaGruppo.html">Gruppi</a></li>
         {if $isAmministratore}
           <li class="nav-item dropdown">
@@ -91,7 +91,7 @@
           <a class="list-group-item" href="#">Le tue carte</a>
           <a class="list-group-item" href="#">Recensione</a>
         </div>
-        <div class="card">
+        <form class="card">
           <div class="card-body rounded">
             <h5 class="card-title">Wallet</h5>
             <p class="card-text">Questo è il tuo wallet</p>
@@ -101,9 +101,12 @@
               <li class="list-group-item">{$results[nr].nomeCampo} <span class="float-right">{$results[nr].quantitaGettoni}</span></li>
             {/section}
           </ul>
+
           <div class="card-body m-auto">
-            <a href="#" class="btn btn-primary btn-lg">Acquista gettoni</a>
+            <a href="/PolisportivaDDD/Gettoni/acquista" class="btn btn-primary btn-lg">Acquista gettoni</a>
+
           </div>
+
         </div>
 
 
