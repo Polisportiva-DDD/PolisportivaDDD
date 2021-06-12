@@ -57,7 +57,7 @@ class CGettoni
         $pm= new FPersistentManager();
         $session->startSession();
         //$username=$session->readValue('utente');
-        $username="lor1";
+        $username="lor";
 
         $acqGettoni = $session->readValue('aggiungiCarta');
         if (isset($_POST['nome']) and isset($_POST['cognome']) and isset($_POST['numero']) and isset($_POST['cvc']) and isset($_POST['data'])) {

@@ -60,7 +60,7 @@ class FCartaDiCredito
 
             $sql = "INSERT INTO ". static::$tableName . " VALUES " . static::$values;
             $db = FDatabase::getInstance();
-            if(static::exist($carta->getNumero())!=false){
+            if(static::exist($carta->getNumero())==0){
                 $id=$db->store($sql, $carta);
                 if($id!=null){
                     $db=FDatabase::getInstance();
@@ -102,8 +102,8 @@ class FCartaDiCredito
         $sql="SELECT * FROM ".static::$tablePossessoCarta." WHERE numero='".$numero."';";
         $db=FDatabase::getInstance();
         $result=$db->exist($sql);
-        if($result!=null) return true;
-        else return false;
+        if($result!=null) return 1;
+        else return 0;
 
     }
 
