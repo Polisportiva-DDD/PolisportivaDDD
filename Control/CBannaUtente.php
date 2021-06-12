@@ -30,15 +30,25 @@ class CBannaUtente
                 $eta =  $utenteDaBannare->getEta();
                 $pic64=$utenteDaBannare->getImmagine();
                 $type="";
+                $result=array();
                 $recensioni=$pm->loadRecensioniUtente($username);
                 if($recensioni==null){
-                    $recensioni=array();
-                    $valutazioneMedia=1;//non ha recensioni
+                    $valutazioneMedia=0;//non ha recensioni
                 }
                 else {
                     $valutazioneMedia = round($utenteDaBannare->calcolaMediaRecensioni($recensioni));
+                    foreach ($recensioni as $valore  ){
+                        $arr=array();
+                        $arr["valutazione"]=$valore->getVoto();
+                        $arr["titoloRecensione"]=$valore->getTitolo();
+                        $arr["dataRecensione"]=$valore->getData()->format('Y-m-d');
+                        $arr["descrizioneRecensione"]=$valore->getTesto();
+                        $arr["username"]=$valore->getAutore()->getUsername();
+                        $result[]=$arr;
+
+                    }
                 }
-                $view->showProfiloUtenteRegistrato($username, $nome, $cognome, $eta, $valutazioneMedia,$recensioni,true);
+                $view->showProfiloUtenteRegistrato($username, $nome, $cognome, $eta, $valutazioneMedia,$result,true);
             }
            else{
                $view->showErrore($username,$isAmministratore );

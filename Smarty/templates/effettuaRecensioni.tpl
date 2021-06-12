@@ -7,6 +7,9 @@
 
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" />
+
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="/PolisportivaDDD/Smarty/css/styles.css" rel="stylesheet" />
     </head>
@@ -29,13 +32,24 @@
         <div class="container">
 
 
-            <a class="navbar-brand" href="index.php">Polisportiva DDD</a>
+            <a class="navbar-brand" href="home">Polisportiva DDD</a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link" href="home-utente-registrato.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="home">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="RicercaGruppo.html">Gruppi</a></li>
-                    <li class="nav-item"><a class="nav-link" href="assistenza.html">Informazioni</a></li>
+                    {if $isAmministratore}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdownGestione" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Gestione</a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownGestione">
+                                <a class="dropdown-item" href="UItentiBannati.html">Utenti Bannati</a>
+                                <a class="dropdown-item" href="SegnalazioniAmministratore.html">Segnalazioni</a>
+                                <a class="dropdown-item" href="#">Modifica prezzi</a>
+                            </div>
+                        </li>
+                    {else}
+                        <li class="nav-item"><a class="nav-link" href="assistenza">Informazioni</a></li>
+                    {/if}
                 </ul>
             </div>
         </div>
@@ -56,12 +70,12 @@
                 <div class="row">
                     <div class="col-lg-8 mb-4">
                         <h3>Invia recensione a: {$username}</h3>
-                        <form id="contactForm" name="sentMessage" novalidate>
+                        <form method="POST" action="recensisci" >
 
                             <p>Valutazione:</p>
                             <div class="rate">
 
-                                <input type="radio" id="star5" name="rate" value="5" />
+                                <input type="radio" id="star5" name="rate" value="5" checked />
                                 <label for="star5" title="5 stelle">5 stars</label>
                                 <input type="radio" id="star4" name="rate" value="4" />
                                 <label for="star4" title="4 stelle">4 stars</label>
@@ -82,7 +96,7 @@
                             <div class="control-group form-group">
                                 <div class="controls">
                                     <label>Titolo Recensione:</label>
-                                    <input class="form-control" id="name" type="text" required data-validation-required-message="Please enter your name." />
+                                    <input class="form-control" name="titoloRecensione" type="text" required data-validation-required-message="Please enter your name." />
                                     <p class="help-block"></p>
                                 </div>
                             </div>
@@ -90,7 +104,7 @@
                             <div class="control-group form-group">
                                 <div class="controls">
                                     <label>Descrizione:</label>
-                                    <textarea class="form-control" id="message" rows="10" cols="100" required data-validation-required-message="Please enter your message" maxlength="999" style="resize: none"></textarea>
+                                    <textarea class="form-control" name="testo" rows="10" cols="100" required data-validation-required-message="Please enter your message" maxlength="999" ></textarea>
                                 </div>
                             </div>
                             <div id="success"></div>

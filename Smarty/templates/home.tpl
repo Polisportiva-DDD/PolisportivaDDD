@@ -8,6 +8,7 @@
   <!-- Font Awesome icons (free version)-->
   <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
   <!-- Core theme CSS (includes Bootstrap)-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="/PolisportivaDDD/Smarty/css/styles.css" rel="stylesheet" />
 </head>
 <body>
@@ -17,8 +18,8 @@
     <div class="table-responsive" >
       <table>
         <tr >
-          <th scope="col" class="padTh"><a href="#">  <button type="button" class="btn btn-primary">Logout</button></a></th>
-          <th scope="col" class="padTh"><a href="#"><button type="button" class="btn btn-secondary">Profilo</button></a></th>
+          <th scope="col" class="padTh"><a href="#">  <button type="submit" class="btn btn-primary">Logout</button></a></th>
+          <th scope="col" class="padTh"><a href="mioProfilo"><button type="submit" class="btn btn-secondary" >Profilo</button></a></th>
           <th scope="col" class="padTh"  dir="ltr"><input type="text" placeholder="Cerca" name="search"></th>
           <th scope="col" class="padTh"><span class="fas fa-search ml-1"></span></th>
         </tr>
@@ -30,11 +31,11 @@
     <div class="container">
 
 
-      <a class="navbar-brand" href="index.php">Polisportiva DDD</a>
+      <a class="navbar-brand" href="home">Polisportiva DDD</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item"><a class="nav-link" href="home-utente-registrato.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="home">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="RicercaGruppo.html">Gruppi</a></li>
           {if $isAmministratore}
             <li class="nav-item dropdown">
@@ -65,7 +66,7 @@
   </div>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-      <a class="navbar-brand" href="index.php">Polisportiva DDD</a>
+      <a class="navbar-brand" href="home">Polisportiva DDD</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
       </div>
@@ -119,13 +120,18 @@
     <h1 class="mb-4">I nostri campi</h1>
     <!-- Marketing Icons Section-->
     {section name=nr loop=$results}
-    <div {if $smarty.section.nr.iteration is even} class="row mt-4"}{/if}>
+    <div {if $smarty.section.nr.iteration is even} class="row mt-4"{/if}>
       <div class="col-lg-6 mb-4 mb-lg-0">
         <div class="card h-100">
           <h4 class="card-header">{$results[nr].nome}</h4>
           <img class="card-img-top" src="https://via.placeholder.com/1400x700" alt="Immagine campo">
           <div class="card-body"><p class="card-text">{$results[nr].descrizione}</p></div>
-          <div class="card-footer"><a class="btn btn-primary float-right" href="#!">Scegli</a></div>
+
+          <form method="POST" action="/PolisportivaDDD/Utente/mostraCampo">
+            <input type="hidden" name="idCampo" value="{$results[nr].idCampo}" >
+            <div class="card-footer"><button type="submit" class="btn btn-primary float-right ">Scegli</button></div>
+
+          </form>
         </div>
       </div>
       {/section}

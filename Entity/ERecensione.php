@@ -16,16 +16,16 @@ class ERecensione
 
     /**
      * ERecensione constructor.
-     * @param int|null $id
-     * @param float $voto
+     * @param int $id
+     * @param int $voto
      * @param string $titolo
      * @param string $testo
      * @param DateTime $data
      * @param EUtente $autore
      * @param EUtente $possessore
      */
-    public function __construct(?int $id,EUtente $autore,float $voto,string $titolo,string $testo,DateTime $data,
-                                EUtente $possessore)
+    public function __construct(EUtente $autore,int $voto,string $titolo,string $testo,DateTime $data,
+                                EUtente $possessore,int $id=-1)
     {
         $this -> id = $id;
         $this -> autore = $autore;
@@ -87,7 +87,7 @@ class ERecensione
      * Restituisce il voto della recensione
      * @return float
      */
-    public function getVoto(): float
+    public function getVoto(): int
     {
         return $this->voto;
     }

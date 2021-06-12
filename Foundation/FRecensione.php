@@ -90,9 +90,9 @@ class FRecensione
             if($result!=null){
                 $recensioniUtente = array();
                 for($i=0; $i<count($result); $i++){
-                    $possessore = FUtente::loadByUsername($result[$i]['possessore']);
-                    $autore = FUtente::loadByUsername($result[$i]['autore']);
-                    $recensioniUtente[] = new ERecensione($result[$i]['id'],$autore,$result[$i]['voto'],$result[$i]['titolo'],$result[$i]['testo'],new DateTime($result[$i]['data']),$possessore);
+                    $possessore = FUtente::load($result[$i]['possessore']);
+                    $autore = FUtente::load($result[$i]['autore']);
+                    $recensioniUtente[] = new ERecensione($autore,$result[$i]['voto'],$result[$i]['titolo'],$result[$i]['testo'],new DateTime($result[$i]['data']),$possessore,$result[$i]['id']);
                 }
                 return $recensioniUtente;
             }

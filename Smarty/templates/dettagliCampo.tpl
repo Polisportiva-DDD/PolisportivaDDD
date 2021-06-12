@@ -9,6 +9,7 @@
   <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
   <!-- Core theme CSS (includes Bootstrap)-->
   <link href="/PolisportivaDDD/Smarty/css/styles.css" rel="stylesheet" type="text/css"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" />
   
 </head>
 <body>
@@ -31,7 +32,7 @@
     <div class="container">
 
 
-      <a class="navbar-brand" href="index.php">Polisportiva DDD</a>
+      <a class="navbar-brand" href="home">Polisportiva DDD</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
@@ -46,7 +47,7 @@
                 <a class="dropdown-item" href="#">Modifica prezzi</a>
               </div>
             </li>
-          {elseif $isUtente}
+          {else}
             <li class="nav-item"><a class="nav-link" href="assistenza.html">Informazioni</a></li>
           {/if}
         </ul>
@@ -66,9 +67,12 @@
   </div>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-      <a class="navbar-brand" href="index.php">Polisportiva DDD</a>
+      <a class="navbar-brand" href="home">Polisportiva DDD</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item"><a class="nav-link" href="home">Home</a></li>
+          <ul>
       </div>
     </div>
   </nav>

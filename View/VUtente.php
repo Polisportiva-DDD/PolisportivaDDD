@@ -13,16 +13,16 @@ class VUtente
     }
 
 
-    public function showDettagliCampo($nomeCampo, $descrizione, $pic64, $type ,$isRegistrato,$isAmministratore, $isUtente){
+    public function showDettagliCampo($nomeCampo, $descrizione, $pic64, $type ,$isRegistrato,$isAmministratore){
         $this->smarty->assign("nomeCampo", $nomeCampo);
         $this->smarty->assign("descrizione", $descrizione);
         $this->smarty->assign("type", $type);
         $this->smarty->assign("pic64", $pic64);
         $this->smarty->assign("isAmministratore", $isAmministratore);
-        $this->smarty->assign("isUtente", $isUtente);
+
         $this->smarty->assign("isRegistrato", $isRegistrato);
 
-        $this->smarty->display("dettagliCampo.tpl");
+        $this->smarty->display(get_include_path() ."/smarty/templates/dettagliCampo.tpl");
     }
 
     public function showHome($isAmministratore, $isRegistrato, $nomeCampi){
@@ -42,10 +42,9 @@ class VUtente
      * @param int $media_recensioni media delle recensioni dell'utente loggato
      * @param array $gettoni contiene il nome del campo e la quantità dei gettoni
      * @param $isAmministratore bool che controlla se è loggato un amministratore
-     * @param $isUtente bool che controlla se è loggato un utente
      * @throws SmartyException
      */
-    public function showMioProfilo(string $username,string $nome,string $cognome,int $eta,int $media_recensioni,array $gettoni,bool $isAmministratore,bool $isUtente){
+    public function showMioProfilo(string $username,string $nome,string $cognome,int $eta,int $media_recensioni,array $gettoni,bool $isAmministratore,$pic64, $type){
         $this -> smarty -> assign('username',$username);
         $this -> smarty -> assign('nome',$nome);
         $this -> smarty -> assign('cognome',$cognome);
@@ -53,9 +52,8 @@ class VUtente
         $this -> smarty -> assign('valutazioneMedia',$media_recensioni);
         $this -> smarty -> assign('results', $gettoni);
         $this -> smarty -> assign("isAmministratore", $isAmministratore);
-        $this -> smarty -> assign("isUtente", $isUtente);
 
-        $this -> smarty -> display('MioProfilo.tpl');
+        $this -> smarty -> display(get_include_path() ."/smarty/templates/MioProfilo.tpl");
     }
 
     /**
@@ -79,6 +77,7 @@ class VUtente
         $this -> smarty -> assign('valutazioneMedia',$media_recensioni);
         $this -> smarty -> assign('results', $recensioni);
         $this -> smarty -> assign("isAmministratore", $isAmministratore);
+        $this -> smarty -> assign("results", $recensioni);
 
         $this -> smarty -> display(get_include_path() ."/smarty/templates/profiloUtenteRegistrato.tpl");
     }
