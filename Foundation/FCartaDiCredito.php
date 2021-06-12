@@ -60,26 +60,50 @@ class FCartaDiCredito
 
             $sql = "INSERT INTO ". static::$tableName . " VALUES " . static::$values;
             $db = FDatabase::getInstance();
-            $id = $db->store($sql, $carta);
-            if($id){
-                $db=FDatabase::getInstance();
-                 $sql = "INSERT INTO ". static::$tablePossessoCarta . " VALUES (:carta, :utente) " ;
-                 $valuesAsscoiazione=array($id,$username);
-                 $id2 = $db->store3($sql,get_class($carta),$valuesAsscoiazione );
-                 if($id2==null){
-                     return false;
-                 }
-                 else return true;
+            if(static::exist($carta->getNumero())!=false){
+                $id=$db->store($sql, $carta);
+                if($id!=null){
+                    $db=FDatabase::getInstance();
+                    $sql = "INSERT INTO ". static::$tablePossessoCarta . " VALUES (:carta, :utente) " ;
+                    $valuesAsscoiazione=array($carta->getNumero(),$username);
+                    $id2 = $db->store3($sql,__CLASS__,$valuesAsscoiazione );
+                    if($id2==null){
+                        return false;
+                    }
+                    else return true;
+                }
+                else{
+                    return false;
+                }
             }
             else{
-                return false;
+                $db=FDatabase::getInstance();
+                $sql = "INSERT INTO ". static::$tablePossessoCarta . " VALUES (:carta, :utente) " ;
+                $valuesAsscoiazione=array($carta->getNumero(),$username);
+                $id2 = $db->store3($sql,__CLASS__,$valuesAsscoiazione );
+                if($id2==null){
+                    return false;
+                }
+                else return true;
             }
+
+
 
 
         }
         catch (Exception $e){
             echo "Error";
         }
+
+    }
+
+    public static function exist($numero){
+
+        $sql="SELECT * FROM ".static::$tablePossessoCarta." WHERE numero='".$numero."';";
+        $db=FDatabase::getInstance();
+        $result=$db->exist($sql);
+        if($result!=null) return true;
+        else return false;
 
     }
 

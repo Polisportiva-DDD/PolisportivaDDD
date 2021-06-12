@@ -9,6 +9,8 @@
   <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
   <!-- Core theme CSS (includes Bootstrap)-->
 <link href="/PolisportivaDDD/Smarty/css/styles.css" rel="stylesheet" type="text/css"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" />
+
 </head>
 
 <body>
@@ -29,13 +31,25 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
 
-    <a class="navbar-brand" href="index.php">Polisportiva DDD</a>
+
+    <a class="navbar-brand" href="home">Polisportiva DDD</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item"><a class="nav-link" href="home-utente-registrato.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="home">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="RicercaGruppo.html">Gruppi</a></li>
-        <li class="nav-item"><a class="nav-link" href="assistenza.html">Informazioni</a></li>
+        {if $isAmministratore}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdownGestione" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Gestione</a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownGestione">
+              <a class="dropdown-item" href="UItentiBannati.html">Utenti Bannati</a>
+              <a class="dropdown-item" href="SegnalazioniAmministratore.html">Segnalazioni</a>
+              <a class="dropdown-item" href="#">Modifica prezzi</a>
+            </div>
+          </li>
+        {else}
+          <li class="nav-item"><a class="nav-link" href="assistenza.html">Informazioni</a></li>
+        {/if}
       </ul>
     </div>
   </div>
@@ -44,7 +58,7 @@
 <section class="py-5">
   <div class="container">
 
-    <form method="post">
+    <form method="post" action="/PolisportivaDDD/Gettoni/confermaAggiungiCarta">
 
       <h1 class="h3 mb-3 fw-normal">Aggiungi carta di credito</h1>
       <hr>
@@ -53,19 +67,19 @@
 
 
         <label for="validationDefault01">Numero della Carta</label>
-        <input class="form-control mb-3" placeholder="XXXX XXXX XXXX XXXX" type="text" id="validationDefault01" required>
+        <input class="form-control mb-3" placeholder="XXXX XXXX XXXX XXXX" type="text" id="validationDefault01" name="numero" minlength="16" maxlength="16" required>
 
         <label for="validationDefault02">Cognome titolare della carta</label>
-        <input class="form-control mb-3" placeholder="Cognome titolare" type="text" id="validationDefault02" required>
+        <input class="form-control mb-3" placeholder="Cognome titolare" type="text" id="validationDefault02" name="cognome"  maxlength="40" required>
 
         <label for="validationDefault03">Nome titolare della carta</label>
-        <input class="form-control mb-3" placeholder="Nome titolare" type="text" id="validationDefault03" required>
+        <input class="form-control mb-3" placeholder="Nome titolare" type="text" name="nome" id="validationDefault03" maxlength="40" required>
 
         <label for="ValidationDefaultData">Data di scadenza</label>
-        <input type="date" class="form-control mb-3" id="ValidationDefaultData" required>
+        <input type="date" class="form-control mb-3" id="ValidationDefaultData" name="data" required>
 
         <label for="validationDefault04">Codice di sicurezza</label>
-        <input class="form-control mb-3" placeholder="CVC" type="text" id="validationDefault04" required>
+        <input class="form-control mb-3" placeholder="CVC" type="text" id="validationDefault04"  name="cvc" minlength="3" maxlength="3" required>
 
       </div>
 

@@ -53,8 +53,8 @@
 		</div>
 	</nav>
 
-		
-	
+
+
 
 	<section class="py-5">
 		<div class="container">
@@ -64,13 +64,13 @@
 			<hr>
 
 
-
+			<form method="post" action="/PolisportivaDDD/Gettoni/riepilogoAcquisto">
 			<div class="row">
 				<div class="col-lg-6">
-					
+
 				<div class="table-responsive">
 					<table class="table">
-					 
+
 					  <thead>
 						<tr class="table-primary">
 						  <th >Campi</th>
@@ -147,8 +147,12 @@
 								</tr>
 							</table>
 							</div>
-							<button href= "/PolisportivaDDD/Gettoni/riepilogoAcquisto"class="btn btn-primary" id="avanti" type="submit">Vai avanti</button>
-							<button class="btn btn-primary" id="usaUnaltracarta" type="submit">Usa un'altra carta</button>
+
+								<button class="btn btn-primary" id="avanti" type="submit">Vai avanti</button>
+								</form>
+							<form method="post" action="/PolisportivaDDD/Gettoni/aggiungiCarta">
+							<button class="btn btn-primary" name="aggiungiCarta" value="1" type="submit">Aggiungi Carta</button>
+							</form>
 							{else}
 								<div class="form-group">
 

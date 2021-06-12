@@ -23,16 +23,15 @@ class VGettoni
      * @param bool $isUtente sei utente?
      * @throws SmartyException
      */
-    public function showRiepilogoAcquisto(array $gettoniAcquistati,string $numeroCarta,string $titolareCarta,string $dataScadenza,int $prezzoTotale,bool $isAmministratore,bool $isUtente){
+    public function showRiepilogoAcquisto(array $gettoniAcquistati,string $numeroCarta,string $titolareCarta,string $dataScadenza,int $prezzoTotale,bool $isAmministratore){
         $this -> smarty -> assign('results',$gettoniAcquistati);
         $this -> smarty -> assign('results',$numeroCarta);
         $this -> smarty -> assign('results',$titolareCarta);
         $this -> smarty -> assign('results',$dataScadenza);
         $this -> smarty -> assign('results',$prezzoTotale);
         $this -> smarty -> assign("isAmministratore", $isAmministratore);
-        $this -> smarty -> assign("isUtente", $isUtente);
 
-        $this -> smarty -> display("RiepilogoAcquisto.tpl");
+        $this -> smarty -> display(get_include_path() ."/smarty/templates/RiepilogoAcquisto.tpl");
     }
 
 
@@ -73,7 +72,8 @@ class VGettoni
      * Funzione che mostra la pagina per inserire i dati di una nuova carta di credito
      * @throws SmartyException
      */
-    public function showAcquistoConNuovaCarta(){
+    public function showAcquistoConNuovaCarta(bool $isAmministratore){
+        $this -> smarty -> assign('isAmministratore',$isAmministratore);
         $this -> smarty -> display(get_include_path() ."/smarty/templates/AcquistoConNuovaCarta.tpl");
     }
 }

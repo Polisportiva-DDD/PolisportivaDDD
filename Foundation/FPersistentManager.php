@@ -11,6 +11,13 @@ class FPersistentManager
         $id = $Fclass::store($obj);
         return $id;
     }
+    //per EcartaDiCredito
+    public function store2($obj,$username) {
+        $Eclass = get_class($obj);
+        $Fclass = str_replace("E", "F", $Eclass);
+        $id = $Fclass::store($obj,$username);
+        return $id;
+    }
 
     public function delete($id, $Fclass) {
         $Fclass::delete($id);

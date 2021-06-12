@@ -23,7 +23,8 @@ class VCarta
     }
 
 
-    public function showAggiungiCarta(){
-        $this -> smarty -> display('aggiungi_carta.tpl');
+    public function showAggiungiCarta(bool $isAmministratore){
+        $this->smarty->assign("isAmministratore", $isAmministratore);
+        $this -> smarty -> display(get_include_path() ."/smarty/templates/aggiungi_carta.tpl");
     }
 }
