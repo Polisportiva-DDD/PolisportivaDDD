@@ -129,9 +129,22 @@ class VUtente
         $this -> smarty -> display('assistenza.tpl');
     }
 
+    /**
+     * Funzione che si occupa di gestire la visualizzazione della form di login
+     * @throws SmartyException
+     */
+    public function showFormLogin(){
+        $this -> smarty -> display(get_include_path() ."/smarty/templates/login.tpl");
+    }
 
-
-
+    /**
+     * Funzione che si occupa di gestire la visualizzazione degli errori in fase login
+     * @throws SmartyException
+     */
+    public function loginError() {
+        $this -> smarty -> assign('error',"errore");
+        $this -> smarty -> display('login.tpl');
+    }
 
 
 }

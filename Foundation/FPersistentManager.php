@@ -44,7 +44,8 @@ class FPersistentManager
         //??????????
     }
 
-    public function existLogin($username, $password): bool{
+    public function Login($username, $password): EUtente
+    {
         return FUtente::Login($username,$password);
     }
 
