@@ -32,7 +32,7 @@
   <body class="text-center">
 
 <main class="form-signin">
-  <form action="/PolisportivaDDD/Utente/Home" method="POST">
+  <form action="/PolisportivaDDD/Utente/verifica" method="POST">
     <img class="mb-4" src="C:\xampp\htdocs\PolisportivaDDD\Smarty\assets\img\bootstrap-logo.svg" alt="" width="72" height="57">
     <h1 class="h3 mb-3 fw-normal">Benvenuto</h1>
 
@@ -46,7 +46,7 @@
     </div>
 
     {if $error!='ok'}
-      <div style="color: red;">
+      <div >
         <p class="text-center" >Attenzione! Username e/o password errati! </p>
       </div>
     {/if}

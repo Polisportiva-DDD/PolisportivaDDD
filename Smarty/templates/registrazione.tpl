@@ -28,7 +28,7 @@
     <div class="form-group">
 
       <label for="validationDefault01">Nome</label>
-      <input class="form-control" placeholder="Nome" type="text" id="validationDefault01" required>
+      <input class="form-control" placeholder="Nome" name="nome" type="text" id="validationDefault01" required>
 
       <label for="validationDefault02">Cognome</label>
       <input class="form-control" placeholder="Cognome" type="text" id="validationDefault02" required>
@@ -48,6 +48,10 @@
       <label for="floatingPasswordConfirm">Conferma Password</label>
       <input type="password" class="form-control" id="floatingPasswordConfirm" placeholder="Conferma Password" required>
 
+      <div class="form-group">
+        <label for="exampleInputFile">Inserisci immagine</label>
+        <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+      </div>
     </div>
 
 

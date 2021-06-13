@@ -117,7 +117,7 @@ class VUtente
      * @throws SmartyException
      */
     public function showRegistrazioneUtente(){
-        $this -> smarty -> display('registrazione.tpl');
+        $this -> smarty -> display(get_include_path() ."/smarty/templates/registrazione.tpl");
     }
 
 
@@ -126,7 +126,7 @@ class VUtente
      * @throws SmartyException
      */
     public function showAssistenza(){
-        $this -> smarty -> display('assistenza.tpl');
+        $this -> smarty -> display(get_include_path() ."/smarty/templates/assistenza.tpl");
     }
 
     /**
@@ -141,9 +141,9 @@ class VUtente
      * Funzione che si occupa di gestire la visualizzazione degli errori in fase login
      * @throws SmartyException
      */
-    public function loginError() {
+    public function showLoginError() {
         $this -> smarty -> assign('error',"errore");
-        $this -> smarty -> display('login.tpl');
+        $this -> smarty -> display(get_include_path() ."/smarty/templates/login.tpl");
     }
 
 

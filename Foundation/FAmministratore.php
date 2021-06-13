@@ -1,7 +1,6 @@
 <?php
 
-require_once '../Utility/autoload.php';
-require_once '../Foundation/config.inc.php';
+
 
 class FAmministratore
 {
@@ -21,7 +20,8 @@ class FAmministratore
     }
 
     public static function exist(string $username){
-        $sql = "SELECT * FROM " . static::$tableName . " WHERE username=" . $username;
+        print($username);
+        $sql = "SELECT * FROM " . static::$tableName . " WHERE username=" . "'".$username."'";
         $db=FDatabase::getInstance();
         $response = $db->exist($sql);
         if($response) return true;

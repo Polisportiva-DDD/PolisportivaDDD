@@ -48,10 +48,10 @@ class FPersistentManager
     }
 
     public function exist($username){
-        //??????????
+        return FAmministratore::exist($username);
     }
 
-    public function Login($username, $password): EUtente
+    public function Login($username, $password): int
     {
         return FUtente::Login($username,$password);
     }

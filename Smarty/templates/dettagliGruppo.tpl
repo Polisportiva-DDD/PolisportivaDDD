@@ -35,7 +35,7 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item"><a class="nav-link" href="home">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="RicercaGruppo.html">Gruppi</a></li>
+        <li class="nav-item"><a class="nav-link" href="/PolisportivaDDD/Gruppo/gruppi">Gruppi</a></li>
         {if $isAmministratore}
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" id="navbarDropdownGestione" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Gestione</a>

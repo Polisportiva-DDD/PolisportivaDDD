@@ -169,29 +169,6 @@ class FCartaDiCredito
 
     }
 
-    /**
-     * Aggiunge una carta di credito all'utente, in base all'username passatogli
-     * @param String $username
-     * @param string $numero
-     */
-    public static function addCartaDiCredito(String $username, string $numero ){
-        try {
-            $db1 = FDatabase::getInstance();
-            $db=$db1->getDb();
-            $db->beginTransaction();
-            $sql = "INSERT INTO " . static::$tablePossessoCarta . " VALUES (:carta, :utente)";
-            $stmt=$db->prepare($sql);
-            $stmt->bindValue(':carta', $numero , PDO::PARAM_STR);
-            $stmt->bindValue(':utente', $username, PDO::PARAM_STR);
-            $stmt->execute();
-            $db->commit();
-            //$db->closeConnection();
-
-        }
-        catch (PDOException $e){
-            echo "ERROR: ".$e->getMessage();
-        }
-    }
 
 
 }

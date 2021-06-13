@@ -98,16 +98,18 @@ class FUtente
      * Metodo che verifica l'esistenza di un utente con quell'username e password
      * @param string $username username dell'utente che vuole effettuare la modifica
      * @param  string $password
-     * @return EUtente Utente altrimenti false se non esiste l'utente
      */
 
 
-    public static function Login($username,$password): EUtente
+    public static function Login($username,$password): int
     {
         $sql="SELECT * FROM ".static::getTableName()." WHERE username='".$username."' AND "."password='".$password."';";
         $db=FDatabase::getInstance();
         $result=$db->exist($sql);
-        return $result;
+        if($result==null or $result==0){
+            return 0;
+        }
+        else return 1;
     }
 
      /** 

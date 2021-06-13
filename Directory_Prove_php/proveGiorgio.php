@@ -44,11 +44,11 @@ $utenteBannato = new EUtenteRegistrato('true','scemo',$utente4->getUsername(),$u
 
 //FWallet::update2(1,$utente1->getWallet()->getId(),10);
 
-$r1 = new ERecensione(1,$utente1,2.5,'Bravissimo','tante belle cose',new DateTime('now'),$utente2);
+/*$r1 = new ERecensione(1,$utente1,2.5,'Bravissimo','tante belle cose',new DateTime('now'),$utente2);
 $r2 = new ERecensione(2,$utente2,4.8,'bo','forse si dai',new DateTime('now'),$utente3);
 $r3 = new ERecensione(3,$utente3,2.5,'certo','tante',new DateTime('now'),$utente1);
 $r4 = new ERecensione(4,$utente2,4.8,'bo o no','forse si ',new DateTime('now'),$utente1);
-$recensioni = array($r3,$r4,$r1,$r2);
+$recensioni = array($r3,$r4,$r1,$r2);*/
 //FRecensione::store($r1);
 //FRecensione::store($r2);
 //FRecensione::store($r3);
@@ -60,11 +60,12 @@ $recensioni = array($r3,$r4,$r1,$r2);
 //print_r(FRecensione::loadRecensioniUtente('Lorediel'));
 
 
-$carta1 = new ECartadiCredito('5555555555','Giorgio','Di Nunzio','111',new DateTime('now'));
+/*$carta1 = new ECartadiCredito('5555555555','Giorgio','Di Nunzio','111',new DateTime('now'));
 $carta2 = new ECartadiCredito('0000000000','Giorgio','Di Nunzio','111',new DateTime('now'));
 $carta3 = new ECartadiCredito('1111111111','Giorgio','Di Nunzio','111',new DateTime('now'));
-$carta4 = new ECartadiCredito('2222222222','Giorgio','Di Nunzio','111',new DateTime('now'));
-
+$carta4 = new ECartadiCredito('2222222222','Giorgio','Di Nunzio','111',new DateTime('now'));*/
+$c=FAmministratore::exist("lor");
+print ($c);
 //print_r(FCartaDiCredito::loadCarta('5555555555'));
 //FCartaDiCredito::store($carta4);
 //FCartaDiCredito::delete($carta1);
@@ -140,9 +141,9 @@ $carta4 = new ECartadiCredito('2222222222','Giorgio','Di Nunzio','111',new DateT
 //
 //$smarty -> assign('valutazioneMedia',$media_recensioni);
 //
-$walletUtente2 = FWallet::load($utente2->getWallet()->getId());
-$arrayGettoni = FCampiWallet::load($walletUtente2->getId());
-print_r($arrayGettoni);
+//$walletUtente2 = FWallet::load($utente2->getWallet()->getId());
+//$arrayGettoni = FCampiWallet::load($walletUtente2->getId());
+//print_r($arrayGettoni);
 //$results = array();
 //foreach($arrayGettoni as $chiave => $valore){
 //    $tmp = array(
