@@ -7,6 +7,7 @@
 
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" integrity="undefined" crossorigin="anonymous">
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="/PolisportivaDDD/Smarty/css/styles.css" rel="stylesheet" />
 </head>
@@ -51,7 +52,7 @@
             <!-- Blog Entries Column-->
             <div class="col-md-8">
                 <div class="col-md-4 m-auto">
-                    <button class="btn btn-lg btn-primary mb-4">Crea Gruppo</button>
+                    <a href="/PolisportivaDDD/Gruppo/ScegliCampo" class="btn btn-lg btn-primary mb-4">Crea Gruppo</a>
                 </div>
                 <!-- Blog Post-->
                 {section name=nr loop=$results}
@@ -71,7 +72,7 @@
                         </div>
                         <div class="row mb-2">
                             <div class="col-sm">
-                                {$results[nr].limiteEtà}
+                                {$results[nr].etaMinima} - {$results[nr].etaMassima} anni
                             </div>
                             <div class="col-sm">
                                 {$results[nr].limiteValutazione}
@@ -80,7 +81,7 @@
                                 {$results[nr].postiDisponibili}
                             </div>
                         </div>
-                        <a class="btn btn-primary float-right mt-2" href="#!">Vai al gruppo</a>
+                        <a class="btn btn-primary float-right mt-2" href="/PolisportivaDDD/Gruppo/Gruppi/{$results[nr].id}">Vai al gruppo</a>
                     </div>
                 </div>
                 {sectionelse}
@@ -94,51 +95,46 @@
                 <div class="card mb-4">
                     <h5 class="card-header">Filtra</h5>
                     <div class="card-body">
-                        <form method="post">
+                        <form method="post" action="/PolisportivaDDD/Gruppo/Gruppi">
                             <div class="mb-3">
                                 <label for="nomeGruppo" class="form-label">Nome Gruppo</label>
-                                <input type="text" class="form-control" id="nomeGruppo" aria-describedby="emailHelp">
+                                <input type="text" class="form-control" id="nomeGruppo" name="nomeGruppo">
                             </div>
                             <div class="mb-3">
                                 <label for="adminGruppo" class="form-label">Admin</label>
-                                <input type="text" class="form-control" id="adminGruppo">
+                                <input type="text" class="form-control" id="adminGruppo" name="adminGruppo">
                             </div>
                             <div class="mb-3">
                                 <label for="etaMinima" class="form-label">Età minima</label>
-                                <input type="number" class="form-control" id="etaMinima" min="10" max="99">
+                                <input type="number" class="form-control" id="etaMinima" name="etaMinima" min="10" max="99">
                             </div>
                             <div class="mb-3">
                                 <label for="etaMassima" class="form-label">Età massima</label>
                                 <input type="number" class="form-control" id="etaMassima" min="10" max="99">
                             </div>
                             <div class="mb-3">
-                                <label for="inputData" class="form-label">Dalle ore</label>
-                                <input class="form-control" type="date" id="inputData">
-                            </div>
-                            <div class="mb-3">
                                 <label for="inputOra" class="form-label">Data</label>
-                                <input class="form-control" type="time" id="inputOra">
+                                <input class="form-control" type="date" name="dataGruppo" id="dataGruppo">
                             </div>
                             <div class="mb-3">
-                                <label for="tipologiaCampo" class="form-label">Tipologia Campo</label>
-                                <select class="form-control w-100" aria-label="Default-select example" id="tipologiaCampo">
+                                <label for="tipologiaCampo" class="form-label">Campo</label>
+                                <select class="form-control w-100" aria-label="Default-select example" name= "campo" id="tipologiaCampo">
+                                        <option></option>
                                     {section name=nr loop=$campi}
-                                        <option selected>Open this select menu</option>
-                                        <option value=nr>{$campi[nr].nomeCampo}</option>
+                                        <option>{$campi[nr].nomeCampo}</option>
                                     {/section}
 
                                 </select>
                             </div>
                             <div class="mb-3">
                                 <label for="valMin" class="form-label">Valutazione minima</label>
-                                <select class="form-control w-100" aria-label="Default-select example" id="valMin">
-                                    <option selected>Open this select menu</option>
-                                    <option value="1">0 stelle</option>
+                                <select class="form-control w-100" aria-label="Default-select example" name="valutazioneMinima" id="valMin">
+                                    <option value="0">0 stelle</option>
                                     <option value="1">1 stelle</option>
-                                    <option value="1">2 stelle</option>
-                                    <option value="1">3 stelle</option>
-                                    <option value="1">4 stelle</option>
-                                    <option value="1">5 stelle</option>
+                                    <option value="2">2 stelle</option>
+                                    <option value="3">3 stelle</option>
+                                    <option value="4">4 stelle</option>
+                                    <option value="5">5 stelle</option>
                                 </select>
                             </div>
                             <button type="submit" class="btn btn-primary">Filtra</button>

@@ -32,6 +32,8 @@ class CUtente
     public function home(){
         $session = new USession();
         $session->startSession();
+        $session->setValue('isAmministratore', true);
+        $session->setValue('isRegistrato', true);
        // $isAmministratore = $session->readValue('isAmministratore');
         //$isRegistrato = $session->readValue('isRegistrato');
         $view=new VUtente();
@@ -218,19 +220,26 @@ class CUtente
         $session = new USession();
         $view = new VUtente();
         $pm = new FPersistentManager();
-        $utente = $pm->Login($_POST['email'], $_POST['password']);
-        if ($utente != null) {
-            if ($session -> isSessionNone()) {
-                $session -> startSession();
-                $salvare = serialize($utente);
-                $_SESSION['utente'] = $salvare;
-                if (isset($_COOKIE['username'])) {
-                    header('Location: /PolisportivaDDD/Utente/Home');
+        if(isset($_POST['username']) && isset($_POST['password'])) {
+            $esiste = $pm->Login($_POST['username'], $_POST['password']);
+            if ($esiste) {
+                $utente = $pm->load($_POST['username'], 'FUtente');
+                if ($utente != null) {
+                    if ($session->isSessionNone()) {
+                        $session->startSession();
+                        $salvare = serialize($utente);
+                        $_SESSION['utente'] = $salvare;
+                        header('Location: /PolisportivaDDD/Utente/Home');
+                        /*
+                        if (isset($_COOKIE['username'])) {
+                            header('Location: /PolisportivaDDD/Utente/Home');
+                        }
+                        */
+                    }
+                } else {
+                    $view->loginError();
                 }
             }
-        }
-        else {
-            $view->loginError();
         }
     }
 }

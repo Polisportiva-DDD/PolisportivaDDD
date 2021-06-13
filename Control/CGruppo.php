@@ -44,6 +44,7 @@ class CGruppo
             $c["idCampo"] = $id;
             $c["nome"] = $nome;
             $c["immagine"] = $immagine;
+            $c['type'] = 'image/png';
             $results[] = $c;
         }
         $view->showScegliCampo($results, $isAmministratore);
@@ -169,21 +170,112 @@ class CGruppo
         $dataString = date('Y-m-d', $data);
         $ora = $session->readValue('oraScelta');
         $dataEOra = DateTime::createFromFormat('Y-m-d H:i:s', $dataString . $ora);
+        $partecipanti = array();
+
         //DA SCOMMENTARE
         //$adminUsername = $session->readValue('username');
-        //$pm->load()
+        //$admin = $pm->load('username', 'FUtente')
+        //$parteicipanti[] = $admin;
+
+
         //SOLO PER PROVA ADMIN='lor'
         $adminUsername='lor';
         $admin = $pm->load($adminUsername, 'FUtente');
         $campo = $pm->load($idCampo, 'FCampo');
+        $partecipanti[] = $admin;
+        //SOLO PER PROVA ADMIN='lor'
 
-        $gruppo = new EGruppo(null, $nomeGruppo, $etaMinima, $etaMassima, $valutazioneMinima, $descrizione, $dataEOra, array(), $admin, $campo);
+
+        $gruppo = new EGruppo(null, $nomeGruppo, $etaMinima, $etaMassima, $valutazioneMinima, $descrizione, $dataEOra, $partecipanti, $admin, $campo);
         $pm->store($gruppo);
         $session->deleteValue('oraScelta');
         $session->deleteValue('dataScelta');
         $session->deleteValue('invitati');
         $session->deleteValue('idCampo');
-        header('Location: /PolisportivaDDD/Utente/Home');
+        header('Location: /PolisportivaDDD/Utente/home');
+
+    }
+
+
+
+
+
+    public function gruppi($id=-1){
+        $session = new USession();
+        $isAmministratore = $session->readValue('isAmministratore');
+        $pm = new FPersistentManager();
+        $view = new VGruppo();
+        $nomeGruppo = null; $adminGruppo = null; $etaMinima = null; $etaMassima = null; $dataGruppo = null; $campo = null; $valutazioneMinima = null;
+        if(isset($_POST['nomeGruppo']) && $_POST['nomeGruppo']!=''){
+            $nomeGruppo = $_POST['nomeGruppo'];
+        }
+        if(isset($_POST['adminGruppo']) && $_POST['adminGruppo']!=''){
+            $adminGruppo = $_POST['adminGruppo'];
+        }
+        if(isset($_POST['etaMinima']) && $_POST['etaMinima']!=''){
+            $etaMinima = $_POST['etaMinima'];
+        }
+        if(isset($_POST['etaMassima']) && $_POST['etaMassima']!=''){
+            $etaMassima = $_POST['etaMassima'];
+        }
+        if(isset($_POST['dataGruppo']) && $_POST['dataGruppo']!=''){
+            $dataGruppo = $_POST['dataGruppo'];
+        }
+        if(isset($_POST['campo']) && $_POST['campo']!=''){
+            $campo = $_POST['campo'];
+        }
+        if(isset($_POST['valutazioneMinima']) && $_POST['valutazioneMinima']!=''){
+            $valutazioneMinima = $_POST['valutazioneMinima'];
+        }
+        if ($id==-1) {
+            $gruppiObj = $pm->loadGruppi($nomeGruppo, $adminGruppo, $dataGruppo, $campo, $etaMinima, $etaMassima, $valutazioneMinima);
+            $campiObj = $pm->loadList('FCampo');
+            $campi = array();
+            foreach ($campiObj as $campoObj) {
+                $c = array();
+                $nomeCampo = $campoObj->getNome();
+                $c['nomeCampo'] = $nomeCampo;
+                $campi[] = $c;
+            }
+
+            $gruppi = array();
+            foreach ($gruppiObj as $gruppo) {
+                $g = array();
+                $g['nomeGruppo'] = $gruppo->getNome();
+                $g['admin'] = $gruppo->getAdmin()->getUsername();
+                $g['tipologia'] = $gruppo->getCampo()->getNome();
+                $g['dataEOra'] = $gruppo->getDataEOra()->format("Y-m-d H:i:s");
+                $g['etaMinima'] = $gruppo->getEtaMinima();
+                $g['etaMassima'] = $gruppo->getEtaMassima();
+                $g['limiteValutazione'] = $gruppo->getVotoMinimo();
+                $g['postiDisponibili'] = $gruppo->getPostiDisponibili();
+                $g['id'] = $gruppo->getId();
+                $gruppi[] = $g;
+            }
+
+            $view->showRicercaGruppo($gruppi, $campi, $isAmministratore);
+        }
+        else{
+
+            $gruppo = $pm->load($id, 'FGruppo');
+            $partecipanti = $gruppo->getPartecipanti();
+            $nomePartecipanti = array();
+            foreach($partecipanti as $partecipante){
+                $nomePartecipanti[] = $partecipante->getUsername();
+            }
+            $admin = $gruppo->getAdmin()->getUsername();
+            $campo = $gruppo->getCampo()->getNome();
+            $dataEOra = $gruppo->getDataEOra()->format('Y-m-d H:i:s');
+            $postiDisponibili = $gruppo->getPostiDisponibili();
+            $etaMinima = $gruppo->getEtaMinima();
+            $etaMassima = $gruppo->getEtaMassima();
+            $votoMinimo = $gruppo->getVotoMinimo();
+            $descrizione = $gruppo->getDescrizione();
+
+            $view->showDettagliGruppo($nomePartecipanti, $admin, $campo, $dataEOra, $postiDisponibili, $etaMinima, $etaMassima, $votoMinimo, $descrizione, $isAmministratore);
+
+        }
+
 
     }
 

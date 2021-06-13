@@ -40,20 +40,21 @@ class VGruppo
         $this->smarty->display(get_include_path() ."/smarty/templates/creaGruppoListaInvitati.tpl");
     }
 
-    public function showDettagliGruppo($invitati, $admin, $campo, $postiDisponibili,
+    public function showDettagliGruppo($invitati, $admin, $campo, $dataEOra, $postiDisponibili,
                                         $etaMinima, $etaMassima, $votoMinimo, $descrizione,
                                         $isAmministratore){
         $this->smarty->assign("isAmministratore", $isAmministratore);
         $this->smarty->assign("invitati", $invitati);
         $this->smarty->assign("admin", $admin);
         $this->smarty->assign("campo", $campo);
+        $this->smarty->assign("dataEOra", $dataEOra);
         $this->smarty->assign("postiDisponibili", $postiDisponibili);
         $this->smarty->assign("etaMinima", $etaMinima);
         $this->smarty->assign("etaMassima", $etaMassima);
         $this->smarty->assign("votoMinimo", $votoMinimo);
         $this->smarty->assign("descrizione", $descrizione);
 
-        $this->smarty->display("dettagliGruppo.tpl");
+        $this->smarty->display(get_include_path() ."/smarty/templates/dettagliGruppo.tpl");
     }
 
     public function showITuoiGruppi($isAmministratore, $gruppiDetails){
@@ -73,10 +74,10 @@ class VGruppo
      */
     public function showRicercaGruppo(array $listaGruppi,array $listaCampi,bool $isAmministratore){
         $this -> smarty -> assign('results',$listaGruppi);
-        $this -> smarty -> assign('results',$listaCampi);
+        $this -> smarty -> assign('campi',$listaCampi);
         $this -> smarty -> assign("isAmministratore", $isAmministratore);
 
-        $this -> smarty -> display('RicercaGruppo.tpl');
+        $this->smarty->display(get_include_path() ."/smarty/templates/ricercaGruppo.tpl");
     }
 
     /**

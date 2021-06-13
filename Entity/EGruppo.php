@@ -279,6 +279,12 @@ class EGruppo
         $objArray["campo"] = $this->campo;
     }
 
+    public function getPostiDisponibili(){
+        $postiOccupati = count($this->partecipanti);
+        $postiMassimi = $this->getCampo()->getNumeroMassimo();
+        return $postiMassimi - $postiOccupati;
+    }
+
 
 
 

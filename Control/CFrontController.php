@@ -9,14 +9,11 @@ require_once (get_include_path() .'/Utility/USession.php');
 class CFrontController
 {
 
-    //commento
 	
 
     public function __constructor(){
 
     }
-
-
 
     public function run($path){
         $resource = explode('/', $path);
@@ -42,9 +39,9 @@ class CFrontController
 
         }
         if(count($resource)==3){
-            $params=$resource[2];
-			//print("ciao");
-            return $real_controller->$resource[1]($params);
+            $method=$resource[1];
+            $param=$resource[2];
+            return $real_controller->$method($param);
         }
         $method=$resource[1];
         return $real_controller->$method();
@@ -53,4 +50,4 @@ class CFrontController
 }
 
 //$c=new CFrontController();
-//$c->run("PolisportivaDDD/CreazioneGruppo/scegliData");
+//$c->run("localhost/Polisportiva/Gruppo/Gruppi/2");

@@ -27,7 +27,7 @@ class FGruppo
         $stmt->bindValue(':etaMassima', $gruppo->getEtaMassima(), PDO::PARAM_INT);
         $stmt->bindValue(':votoMinimo', $gruppo->getVotoMinimo(), PDO::PARAM_STR);
         $stmt->bindValue(':descrizione', $gruppo->getDescrizione(), PDO::PARAM_STR);
-        $stmt->bindValue(':dataEOra', $gruppo->getDataEOra()->format("Y-m-d"), PDO::PARAM_STR);
+        $stmt->bindValue(':dataEOra', $gruppo->getDataEOra()->format("Y-m-d H:i:s"), PDO::PARAM_STR);
     }
 
 
@@ -67,10 +67,10 @@ class FGruppo
         try{
             $sql = "SELECT * FROM " . static::$tableName . " WHERE id=" . $idGruppo; //Query per ottenere un gruppo dall'id
             $db=FDatabase::getInstance(); //Ottieni il DB
-            $row = $db->loadSingle($sql, static::$classeEntity); //Ottieni la riga corrispondente dal DB
+            $row = $db->loadSingle($sql); //Ottieni la riga corrispondente dal DB
             if ($row){ //Se row non è vuoto
-                $admin = FUtente::loadByUsername($row['admin']); //Load dell'utente con id dell'admin
-                $campo = FCampo::loadCampo($row['idcampo']); //Load del campo con id corrispondente
+                $admin = FUtente::load($row['admin']); //Load dell'utente con id dell'admin
+                $campo = FCampo::load($row['idcampo']); //Load del campo con id corrispondente
                 $partecipanti = self::loadPartecipanti($row['id']); //Carica i partecipanti del gruppo che stiamo caricando
                 $date = DateTime::createFromFormat('Y-m-d H:i:s', $row['dataEOra']); //Ricrea la data dalla stringa recuperata dal DB
                 $gruppo = new EGruppo($row['id'], $row['nome'], $row['etaMinima'],$row['etaMassima'],
@@ -108,31 +108,31 @@ class FGruppo
     }
 
 
-    public static function loadGruppi(?string $nomeGruppo, ?string $admin, ?DateTime $data, ?string $tipoCampo,
+    public static function loadGruppi(?string $nomeGruppo, ?string $admin, ?string $data, ?string $tipoCampo,
                                       ?int $etaMin, ?int $etaMax, ?float $valMin){
         try{
             $sql = "SELECT * FROM " . static::$tableName; //Prendi tutti i gruppi
             $conditions = array(); //Array delle condizioni
 
             if (isset($nomeGruppo)){ //Se nomegruppo != null
-                $conditions[] = "nome=".$nomeGruppo; //Aggiungi nome=nomeGruppo per poi aggiungerlo alla query
+                $conditions[] = "nome=". "'" . $nomeGruppo . "'"; //Aggiungi nome=nomeGruppo per poi aggiungerlo alla query
             }
 
             if (isset($admin)){
-                $conditions[] = "admin=".$admin;
+                $conditions[] = "admin=". "'" . $admin . "'" ;
             }
 
             if (isset($data)){
-                $conditions[] = "dataEOra > ".data;
+                $conditions[] = "dataEOra LIKE '" . $data ."%'";
             }
 
             if (isset($tipoCampo)){
-                $campi = FCampo::loadCampi();
+                $campi = FCampo::loadList();
                 foreach($campi as $campo){
                     $nomec = $campo->getNome();
-                    if ($tipoCampo = $nomec)
+                    if ($tipoCampo == $nomec)
                     {
-                        $conditions[] = "campo=" . $campo->getId();
+                        $conditions[] = "idCampo=" . $campo->getId();
                     }
                 }
             }

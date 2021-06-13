@@ -56,7 +56,7 @@ class FPersistentManager
         return FUtente::Login($username,$password);
     }
 
-    public function loadGruppi(?string $nomeGruppo, ?string $admin, ?DateTime $data,
+    public function loadGruppi(?string $nomeGruppo, ?string $admin, ?string $data,
                                         ?string $tipologiaCampo, ?int $etaMinima, ?int $etaMassima, ?float $valutazioneMinima){
         return FGruppo::loadGruppi($nomeGruppo, $admin, $data, $tipologiaCampo, $etaMinima, $etaMassima, $valutazioneMinima);
     }

@@ -37,11 +37,11 @@
     <h1 class="h3 mb-3 fw-normal">Benvenuto</h1>
 
     <div class="form-floating">
-      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
-      <label for="floatingInput">Email</label>
+      <input type="text" class="form-control" id="floatingInput" name="username" placeholder="username" required>
+      <label for="floatingInput">username</label>
     </div>
     <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
+      <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password" required>
       <label for="floatingPassword">Password</label>
     </div>
 
