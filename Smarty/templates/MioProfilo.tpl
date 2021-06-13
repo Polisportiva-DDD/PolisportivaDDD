@@ -10,7 +10,6 @@
   <!-- Core theme CSS (includes Bootstrap)-->
   <link href="/PolisportivaDDD/Smarty/css/styles.css" rel="stylesheet" />
   <link href="/PolisportivaDDD/Smarty/css/ourStyle.css" rel="stylesheet" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
 <!-- Navigation-->

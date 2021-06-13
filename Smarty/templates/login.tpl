@@ -13,8 +13,6 @@
 {*    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" integrity="undefined" crossorigin="anonymous">*}
 
     <!-- Bootstrap core CSS -->
-    <link href="https://cdn.jsdelivr.net/gh/Polisportiva-DDD/PolisportivaDDD@main/Smarty/css/styles.css?token=AT7Q53F7W7QA4XDL476F5YDAYS7BY" rel="stylesheet" integrity="undefined" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/gh/Polisportiva-DDD/PolisportivaDDD@62b984d32e67cda14e74f20dedfc93f15928721a/Smarty/css/ourStyle.css" rel="stylesheet" integrity="undefined" crossorigin="anonymous" >
 
     <script>
       function ready(){
@@ -27,7 +25,6 @@
 
     
     <!-- Custom styles for this template -->
-    <link href="https://cdn.jsdelivr.net/gh/Polisportiva-DDD/PolisportivaDDD@078198c0e2db4b216d21ab289870b3f37859385a/Smarty/css/login.css" rel="stylesheet" integrity="undefined" crossorigin="anonymous">
   </head>
   <body class="text-center">
 
