@@ -13,7 +13,7 @@ class CGettoni
         $session = new USession();
         $session->startSession();
         $view = new VGettoni();
-        //$isAmministratore = $session->readValue('isAmministatore');
+        $isAmministratore = $session->readValue('isAmministratore');
         $username = $session->readValue('username');
         $pm= new FPersistentManager();
         $campi = $pm->loadList('FCampo');
@@ -22,11 +22,13 @@ class CGettoni
             $c = array();
             $nome = $campo->getNome();
             $prezzo = $campo->getPrezzo();
+            $id=$campo->getId();
             $c['nome'] = $nome;
             $c['prezzo'] = $prezzo;
+            $c['id'] = $id;
             $resultsCampi[] = $c;
         }
-        $username="lor";
+        //$username="lor";
         $carte = $pm->loadCarteUtente($username);
         $resultCarte=array();
         if($carte!=null){
@@ -36,7 +38,7 @@ class CGettoni
                 $resultCarte[]=$numeriCarte;
             }
         }
-        $view->showAcquistaGettoni($resultsCampi, $resultCarte,false);
+        $view->showAcquistaGettoni($resultsCampi, $resultCarte,$isAmministratore);
 
     }
 
@@ -45,19 +47,19 @@ class CGettoni
         $session = new USession();
         $session->startSession();
         $isAmministratore = $session->readValue('isAmministatore');
-        if(isset($_POST['aggiungiCarta']) and $_POST['aggiungiCarta']==1){
+        if(isset($_POST['aggiungiCarta']) && $_POST['aggiungiCarta']==1){
             $session->setValue('aggiungiCarta',1);
         }
-        $view->showAggiungiCarta(true);
+        $view->showAggiungiCarta($isAmministratore);
     }
+
+
     public function confermaAggiungiCarta()
     {
-        $view = new VCarta();
         $session = new USession();
         $pm= new FPersistentManager();
         $session->startSession();
-        //$username=$session->readValue('utente');
-        $username="lor";
+        $username=$session->readValue('username');
 
         $acqGettoni = $session->readValue('aggiungiCarta');
         if (isset($_POST['nome']) and isset($_POST['cognome']) and isset($_POST['numero']) and isset($_POST['cvc']) and isset($_POST['data'])) {
@@ -84,8 +86,22 @@ class CGettoni
         $view = new VGettoni();
         $session = new USession();
         $session->startSession();
-        $isAmministratore = $session->readValue('isAmministatore');
-        $view->showRiepilogoAcquisto(true);
+        $isAmministratore = $session->readValue('isAmministratore');
+        if(isset($_POST["carta"])  ){
+            $numero=$_POST["carta"];
+            unset($_POST["carta"]);
+            if ($_POST){
+                $campi = array();
+                foreach($_POST as $chiave => $idCampo){
+                    $campi[$chiave] = $idCampo;
+                }
+
+                //$session->setValue('invitati', $invitati);
+            }
+        }
+
+
+        //$view->showRiepilogoAcquisto(true);
     }
 
 

@@ -54,7 +54,7 @@ class CUtente
     public function mioProfilo(){
         $session = new USession();
         $session->startSession();
-        // $isAmministratore = $session->readValue('isAmministratore');
+        $isAmministratore = $session->readValue('isAmministratore');
         $view=new VUtente();
         $pm = new FPersistentManager();
         //$username = $session->readValue('username');
@@ -87,7 +87,7 @@ class CUtente
         }
 
 
-        $view->showMioProfilo($username, $nome, $cognome, $eta, $valutazioneMedia,$result,true,$pic64, $type);
+        $view->showMioProfilo($username, $nome, $cognome, $eta, $valutazioneMedia,$result,$isAmministratore,$pic64, $type);
     }
 
     public function mostraCampo(){
@@ -112,11 +112,11 @@ class CUtente
         $view=new VRecensione();
         $session = new USession();
         $session->startSession();
-        // $isAmministratore = $session->readValue('isAmministratore');
+        $isAmministratore = $session->readValue('isAmministratore');
         if (isset($_POST['username'])) {
             $username=$_POST['username'];
             $session->setValue('utenteDaRecensire',$username);
-            $view->showEffettuaRecensioni(true,$username);
+            $view->showEffettuaRecensioni($isAmministratore,$username);
         }
         else{
             //che faccio?
@@ -150,9 +150,9 @@ class CUtente
 
 
 
-    public function loginError(){
+    public function loginError($error=-1){
         $view=new VUtente();
-        $view->showLoginError();
+        $view->showLoginError($error);
     }
 
     public function login (){
@@ -176,30 +176,34 @@ class CUtente
         if(isset($_POST['username']) && isset($_POST['password'])) {
             $esiste = $pm->Login($_POST['username'], $_POST['password']);
             if ($esiste==1) {
-                $utente = $pm->load($_POST['username'], 'FUtente');
-                if ($utente != null) {
-
-                    if ($session->isSessionNone()) {
-                        $session->startSession();
-
-                        $username=$utente->getUsername();
-                          $session->setValue("username",$username);
-                        if($pm->exist($username)){
-                            $_SESSION['isAmministratore'] = true;
-                        }else{
-                            $_SESSION['isAmministratore'] = false;
-                        }
-                        header('Location: /PolisportivaDDD/Utente/Home');
-
-                    }
-                } else {
-                    $view->loginError();
-                    header('Location: /PolisportivaDDD/Utente/login');
+                if($pm->isBannato($_POST['username'])){
+                    header('Location: /PolisportivaDDD/Utente/loginError/2');
                 }
+                else{
+                    $utente = $pm->load($_POST['username'], 'FUtente');
+                    if ($utente != null) {
+
+                        if ($session->isSessionNone()) {
+                            $session->startSession();
+
+                            $username=$utente->getUsername();
+                            $session->setValue("username",$username);
+                            if($pm->exist($username)){
+                                $session->setValue("isAmministratore",true);
+                            }else{
+                                $session->setValue("isAmministratore",false);
+                            }
+                            header('Location: /PolisportivaDDD/Utente/Home');
+
+                        }
+                    } else {
+                        header('Location: /PolisportivaDDD/Utente/login');
+                    }
+                }
+
             }
             else{
-
-                header('Location: /PolisportivaDDD/Utente/loginError');
+                header('Location: /PolisportivaDDD/Utente/loginError/1');
 
             }
         }
@@ -208,5 +212,32 @@ class CUtente
     public function registrazione(){
         $view = new VUtente();
         $view->showRegistrazioneUtente();
+    }
+
+    public function utentiBannati(){
+        $session = new USession();
+        $view = new VAmministratore();
+        $pm = new FPersistentManager();
+        $utentiBannati=$pm->loadList("FUtenteRegistrato");
+        $result=array();
+        foreach ($utentiBannati as $value){
+            $array=array();
+            $array["motivoBan"]=$value->getMotivazione();
+            $array["username"]=$value->getUsername();
+            $result[]=$array;
+
+        }
+        $view->showUtentiBannati($result);
+
+    }
+
+    public function rimuoviBan(){
+        $session = new USession();
+        $pm = new FPersistentManager();
+        if(isset($_POST['username'])){
+            $pm->updateUtenteRegistrato($_POST['username'],false,"");
+            header('Location: /PolisportivaDDD/Utente/utentiBannati');
+        }
+
     }
 }

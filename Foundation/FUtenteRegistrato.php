@@ -83,7 +83,7 @@ class FUtenteRegistrato
      * @return array|null
      */
     public static function loadList(){
-        $sql = "SELECT * FROM " . static::$tables;
+        $sql = "SELECT * FROM " . static::$tables." WHERE bannato=1" ;
         $db=FDatabase::getInstance();
         $result=$db->loadMultiple($sql);
         if($result!=null){

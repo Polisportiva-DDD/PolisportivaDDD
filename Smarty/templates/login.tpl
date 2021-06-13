@@ -45,11 +45,16 @@
       <label for="floatingPassword">Password</label>
     </div>
 
-    {if $error!='ok'}
+    {if $error=='1'}
       <div >
         <p class="text-center" >Attenzione! Username e/o password errati! </p>
       </div>
+    {elseif $error=="2"}
+      <div >
+      <p class="text-center" >Sei stato bannato, non puoi accedere </p>
+    </div>
     {/if}
+
 
     <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
   </form>

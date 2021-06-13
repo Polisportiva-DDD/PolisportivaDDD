@@ -141,8 +141,8 @@ class VUtente
      * Funzione che si occupa di gestire la visualizzazione degli errori in fase login
      * @throws SmartyException
      */
-    public function showLoginError() {
-        $this -> smarty -> assign('error',"errore");
+    public function showLoginError($error) {
+        $this -> smarty -> assign('error',$error);
         $this -> smarty -> display(get_include_path() ."/smarty/templates/login.tpl");
     }
 

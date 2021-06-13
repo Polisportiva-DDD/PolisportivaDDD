@@ -9,6 +9,8 @@
   <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
   <!-- Core theme CSS (includes Bootstrap)-->
   <link href="/PolisportivaDDD/Smarty/css/styles.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" />
+
 </head>
 <body>
 <!-- Navigation-->
@@ -29,13 +31,21 @@
   <div class="container">
 
 
-    <a class="navbar-brand" href="index.php">Polisportiva DDD</a>
+    <a class="navbar-brand" href="/PolisportivaDDD/Utente/home">Polisportiva DDD</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item"><a class="nav-link" href="home-utente-registrato.html">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="RicercaGruppo.html">Gruppi</a></li>
-        <li class="nav-item"><a class="nav-link" href="assistenza.html">Informazioni</a></li>
+        <li class="nav-item"><a class="nav-link" href="/PolisportivaDDD/Utente/home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="/PolisportivaDDD/Gruppo/gruppi">Gruppi</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdownGestione" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Gestione</a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownGestione">
+            <a class="dropdown-item" href="/PolisportivaDDD/Utente/utentiBannati">Utenti Bannati</a>
+            <a class="dropdown-item" href="/PolisportivaDDD/Utente/segnalazioni">Segnalazioni</a>
+            <a class="dropdown-item" href="/PolisportivaDDD/Utente/modificaPrezzi">Modifica prezzi</a>
+          </div>
+        </li>
+
       </ul>
     </div>
   </div>
@@ -45,9 +55,10 @@
   <div class="container">
     <!-- Page Heading/Breadcrumbs-->
     <h1>Utenti bannati</h1>
-    <ol class="breadcrumb mb-4 h-100"></ol>
+    <hr>
 
     {section name=nr loop=$results}
+      <form method="post" action="/PolisportivaDDD/Utente/rimuoviBan">
     <div class="row rounded border col-md-12 mb-5 py-4">
       <div class="col-lg-3 col-md-3 col-sm-12">
         <img src="https://via.placeholder.com/150" class="rounded-circle" alt="Immagine utente">
@@ -59,9 +70,10 @@
         <p>Motivo ban: {$results[nr].motivoBan}</p>
       </div>
       <div class="col-lg-3 col-md-3 col-sm-12 m-auto text-center">
-        <button class="btn btn-primary float-md-none float-sm-right float-right">Rimuovi ban</button>
+        <button class="btn btn-primary float-md-none float-sm-right float-right" name="username" value="{$results[nr].username}" type="submit">Rimuovi ban</button>
       </div>
     </div>
+      </form>
     {sectionelse}
     <h2>Nessun utente bannato.</h2>
     {/section}

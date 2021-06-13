@@ -51,6 +51,10 @@ class FPersistentManager
         return FAmministratore::exist($username);
     }
 
+    public function isBannato($username){
+        return FUtenteRegistrato::isBannato($username);
+    }
+
     public function Login($username, $password): int
     {
         return FUtente::Login($username,$password);

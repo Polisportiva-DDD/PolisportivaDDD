@@ -29,20 +29,20 @@
 		<div class="container">
 
 
-			<a class="navbar-brand" href="index.php">Polisportiva DDD</a>
+			<a class="navbar-brand" href="/PolisportivaDDD/Utente/home">Polisportiva DDD</a>
 			<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a class="nav-link" href="home-utente-registrato.html">Home</a></li>
-					<li class="nav-item"><a class="nav-link" href="RicercaGruppo.html">Gruppi</a></li>
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" id="navbarDropdownGestione" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Gestione</a>
-							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownGestione">
-								<a class="dropdown-item" href="UItentiBannati.html">Utenti Bannati</a>
-								<a class="dropdown-item" href="SegnalazioniAmministratore.html">Segnalazioni</a>
-								<a class="dropdown-item" href="#">Modifica prezzi</a>
-							</div>
-						</li>
+					<li class="nav-item"><a class="nav-link" href="/PolisportivaDDD/Utente/home">Home</a></li>
+					<li class="nav-item"><a class="nav-link" href="/PolisportivaDDD/Gruppo/gruppi">Gruppi</a></li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" id="navbarDropdownGestione" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Gestione</a>
+						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownGestione">
+							<a class="dropdown-item" href="/PolisportivaDDD/Utente/utentiBannati">Utenti Bannati</a>
+							<a class="dropdown-item" href="/PolisportivaDDD/Utente/segnalazioni">Segnalazioni</a>
+							<a class="dropdown-item" href="/PolisportivaDDD/Utente/modificaPrezzi">Modifica prezzi</a>
+						</div>
+					</li>
 
 				</ul>
 			</div>

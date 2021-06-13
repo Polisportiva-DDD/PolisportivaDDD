@@ -30,19 +30,19 @@
 		<div class="container">
 
 
-			<a class="navbar-brand" href="home">Polisportiva DDD</a>
+			<a class="navbar-brand" href="/PolisportivaDDD/Utente/home">Polisportiva DDD</a>
 			<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item"><a class="nav-link" href="/PolisportivaDDD/Utente/home">Home</a></li>
-					<li class="nav-item"><a class="nav-link" href="RicercaGruppo.html">Gruppi</a></li>
+					<li class="nav-item"><a class="nav-link" href="/PolisportivaDDD/Gruppo/ricercaGruppi">Gruppi</a></li>
 					{if $isAmministratore}
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" id="navbarDropdownGestione" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Gestione</a>
 							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownGestione">
-								<a class="dropdown-item" href="UtentiBannati.html">Utenti Bannati</a>
-								<a class="dropdown-item" href="SegnalazioniAmministratore.html">Segnalazioni</a>
-								<a class="dropdown-item" href="#">Modifica prezzi</a>
+								<a class="dropdown-item" href="/PolisportivaDDD/Utente/utentiBannati">Utenti Bannati</a>
+								<a class="dropdown-item" href="/PolisportivaDDD/Utente/segnalazioni">Segnalazioni</a>
+								<a class="dropdown-item" href="/PolisportivaDDD/Utente/modificaPrezzi">Modifica prezzi</a>
 							</div>
 						</li>
 					{else}
@@ -64,7 +64,7 @@
 			<hr>
 
 
-			<form method="post" action="/PolisportivaDDD/Gettoni/riepilogoAcquisto">
+			<form method="POST" action="/PolisportivaDDD/Gettoni/riepilogoAcquisto">
 			<div class="row">
 				<div class="col-lg-6">
 
@@ -80,15 +80,16 @@
 
 						</tr>
 					  </thead>
-					  <tbody>
+
 					  {section name=campi loop=$results}
+						  <tbody>
 						<tr>
 						
 						  <th scope="row" class="image" data-title="No"><img src="data:{$results[campi].type};base64,{$results[campi].pic64}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="100" height="100" loading="lazy"></th>
 						  <td >{$results[campi].nome}</td>
 						  <td>{$results[campi].prezzo}</td>
 						  <td>  <label for="quantity{$smarty.section.campi.iteration}">Inserisci quantita:</label>
-							<input type="number" id="quantity{$smarty.section.campi.iteration}" value="0" name={$results[campi].nome} min="0" ></td>
+							<input type="number" id="quantity{$smarty.section.campi.iteration}"  name="{$results[campi].id}" min="0" value="0" ></td>
 						</tr>
 						
 					  </tbody>
@@ -111,9 +112,9 @@
 							<div class="form-group">
 
 								<label for="exampleSelect1">Usa una tua carta</label>
-								<select class="form-control" name="mys">
+								<select class="form-control" name="carta">
 								{section name=nr loop=$carta}
-								<option value="$results[nr].numero}">
+								<option value="{$carta[nr].numero}">
 								{$carta[nr].numero}
 								</option>
 								{/section}

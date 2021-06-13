@@ -14,31 +14,22 @@ class VAmministratore{
     /**
      * Funzione che si occupa di gestire la visualizzazione di tutti gli utenti bannati dall'account amministratore
      * @param array $listaBannati lista degli utenti bannati
-     * @param bool $isAmministratore sei amministratore?
-     * @param bool $isUtente sei utente?
      * @throws SmartyException
      */
-    public function showUtentiBannati(array $listaBannati,bool $isAmministratore,bool $isUtente){
+    public function showUtentiBannati(array $listaBannati){
         $this -> smarty -> assign('results', $listaBannati);
-        $this -> smarty -> assign("isAmministratore", $isAmministratore);
-        $this -> smarty -> assign("isUtente", $isUtente);
-
-        $this -> smarty -> display("utentiBannati.tpl");
+        $this -> smarty -> display(get_include_path() ."/smarty/templates/utentiBannati.tpl");
     }
 
     /**
      * Funzione che si occupa di gestire la visualizzazione di tutte le segnalazioni dall'account amministratore
      * @param array $listaSegnalazioni lista di tutte le segnalazioni
-     * @param bool $isAmministratore sei amministratore?
-     * @param bool $isUtente sei utente?
      * @throws SmartyException
      */
-    public function showSegnalazioniAmministratore(array $listaSegnalazioni,bool $isAmministratore,bool $isUtente){
+    public function showSegnalazioniAmministratore(array $listaSegnalazioni){
         $this -> smarty -> assign('results', $listaSegnalazioni);
-        $this -> smarty -> assign("isAmministratore", $isAmministratore);
-        $this -> smarty -> assign("isUtente", $isUtente);
 
-        $this -> smarty -> display("SegnalazioniAmministratore.tpl");
+        $this -> smarty -> display(get_include_path() ."/smarty/templates/SegnalazioniAmministratore.tpl");
 
     }
 
@@ -59,6 +50,6 @@ class VAmministratore{
         $this -> smarty -> assign('username',$username);
         $this -> smarty -> assign('eta',$eta);
         $this -> smarty -> assign('segnalazione',$segnlazione);
-        $this->smarty->display("AmministratoreResponse.tpl");
+        $this->smarty->display(get_include_path() ."/smarty/templates/AmministratoreResponse.tpl");
     }
 }
