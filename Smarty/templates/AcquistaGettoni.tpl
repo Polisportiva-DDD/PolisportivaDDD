@@ -56,7 +56,7 @@
 
 
 	<section class="py-5">
-		<div class="container">
+		<form class="container">
 			<h1>
 				Acquista Gettoni
 			</h1>
@@ -153,11 +153,14 @@
 							<form method="post" action="/PolisportivaDDD/Gettoni/aggiungiCarta">
 							<button class="btn btn-primary" name="aggiungiCarta" value="1" type="submit">Aggiungi Carta</button>
 							</form>
-							{else}
+								{else}
+								</form>
 								<div class="form-group">
 
 									<h4>Nessuna carta disponibile, aggiungine una</h4>
-
+									<form method="post" action="/PolisportivaDDD/Gettoni/aggiungiCarta">
+										<button class="btn btn-primary" name="aggiungiCarta" value="1" type="submit">Aggiungi Carta</button>
+									</form>
 
 								</div>
 							{/if}
