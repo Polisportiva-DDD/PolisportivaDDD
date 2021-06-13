@@ -9,12 +9,14 @@ class CUtente
 
     public function __construct(){}
 
-    public function assistenza(){
+    public function informazioni(){
         $session = new USession();
         $session->startSession();
+        $username = $session->readValue('username');
         $view = new VUtente();
         $view->showAssistenza();
     }
+
 
     public function inviaSegnalazione(){
         $session = new USession();
@@ -29,6 +31,7 @@ class CUtente
         $pm->store($segnalazione);
         header('Location: /PolisportivaDDD/Utente/Home');
     }
+
     public function home(){
         $session = new USession();
         $session->startSession();
@@ -240,4 +243,5 @@ class CUtente
         }
 
     }
+
 }

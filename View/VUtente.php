@@ -127,6 +127,7 @@ class VUtente
      */
     public function showAssistenza(){
         $this -> smarty -> display(get_include_path() ."/smarty/templates/assistenza.tpl");
+
     }
 
     /**

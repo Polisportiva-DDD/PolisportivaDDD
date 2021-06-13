@@ -79,23 +79,15 @@
                 <div class="row">
                     <div class="col-lg-8 mb-4">
                         <h3>Invia ticket d'assistenza</h3>
-                        <form id="contactForm" method="post" action="/PolisportivaDDD/Utente/inviaSegnalazione" novalidate>
-                            <div class="control-group form-group">
-                                <div class="controls">
-                                    <label>Oggetto:</label>
-                                    <input name='oggetto' class="form-control" id="name" type="text" required data-validation-required-message="Please enter your name." />
-                                    <p class="help-block"></p>
-                                </div>
+                        <form method="post" action="/PolisportivaDDD/utente/inviaSegnalazione">
+                            <div>
+                                <label for="oggetto" class="form-label">Oggetto</label>
+                                <input type="text" class="form-control" id="oggetto" name="oggetto" required>
                             </div>
-                            
-                            <div class="control-group form-group">
-                                <div class="controls">
-                                    <label>Message:</label>
-                                    <textarea name='messaggio' class="form-control" id="message" rows="10" cols="100" required data-validation-required-message="Please enter your message" maxlength="999" style="resize: none"></textarea>
-                                </div>
+                            <div>
+                                    <label for="messaggio" class="form-label">Messaggio</label>
+                                    <textarea type="text" class="form-control" id="messaggio" name="messaggio" rows="5" required></textarea>
                             </div>
-                            <div id="success"></div>
-                            <!-- For success/fail messages-->
                             <button class="btn btn-primary" id="sendMessageButton" type="submit">Invia ticket</button>
                         </form>
                     </div>

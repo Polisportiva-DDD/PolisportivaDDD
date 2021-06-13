@@ -60,8 +60,13 @@ class ECampiWallet
 
     public function rimuoviGettoni( int $quantita):bool
     {
-        $this->gettoni-=$quantita;
-        return true;
+        if ($this->gettoni < $quantita){
+            return false;
+        }
+        else{
+            $this->gettoni-=$quantita;
+            return true;
+        }
     }
 
 }
