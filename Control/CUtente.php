@@ -232,15 +232,25 @@ class CUtente
         $data = $_POST['data'];
         $data=(DateTime::createFromFormat('Y-m-d',$data));
         $immagine = $_POST['file'];
-        $wallet = new EWallet(array(),-1);
         $verUsername = $pm->existUsername($username);
         if ($verUsername){
             $view->showRegistrazioneError("errorUsername");
         }
         else {
+            $campi = $pm -> loadList('FCampo');
+            $listaCampiWallet = array();
+            foreach ($campi as $campo){
+                $gettoni = new ECampiWallet(0,$campo);
+                array_push($listaCampiWallet,$gettoni);
+            }
+            $wallet = new EWallet($listaCampiWallet,-1);
 
             $utente = new EUtente($username,$nome,$cognome,$email,$password,$data,$immagine,$wallet);
-            $pm -> store($utente,FUtente);
+            $utenteRegistrato = new EUtenteRegistrato('false','',$username,$nome,$cognome,$email,$password,$data,$immagine,$wallet);
+
+
+            $pm -> store($utente);
+            $pm -> store($utenteRegistrato);
             header('Location: /PolisportivaDDD/Utente/home');
         }
     }
