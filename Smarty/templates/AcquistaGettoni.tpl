@@ -149,7 +149,7 @@
 							</table>
 							</div>
 
-								<button class="btn btn-primary" id="avanti" type="submit">Vai avanti</button>
+								<button class="btn btn-primary" id="avanti" type="submit" disabled>Vai avanti</button>
 								</form>
 							<form method="post" action="/PolisportivaDDD/Gettoni/aggiungiCarta">
 							<button class="btn btn-primary" name="aggiungiCarta" value="1" type="submit">Aggiungi Carta</button>
@@ -185,6 +185,21 @@
 	<footer class="py-5 bg-dark">
 		<div class="container"><p class="m-0 text-center text-white">Copyright &copy; Polisportiva DDD 2021</p></div>
 	</footer>
+
+	<script>
+		$('.quantitaGettoni').change(function() {
+			let abilitato = false;
+			$('.quantitaGettoni').each( function () {
+				if($(this).val()>0){
+					abilitato = true;
+				}
+			})
+			$('#avanti').prop("disabled",!abilitato);
+		});
+*/
+
+
+	</script>
 
 
 

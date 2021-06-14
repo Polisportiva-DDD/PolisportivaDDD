@@ -69,18 +69,18 @@
 
     </div>
     <div class="row">
-        <div class="col-md-12 mt-2">
-            <h4>Segnalazione</h4>
-            <div style="height: 100px" class="border"> {$segnalazione}</div>
+        <div class="col-md-12 mt-3">
+            <h5>Oggetto: {$oggettoSegnalazione}</h5>
+            <div style="height: 100px" class="border"> {$messaggioSegnalazione}</div>
         </div>
     </div>
     <div class="row mt-2 mb-2">
         <div class="col-md-12">
-            <form method="post" action="#">
+            <form method="post" action="/PolisportivaDDD/amministratore/rispondiSegnalazione">
                 <h4>Rispondi</h4>
-                <textarea class="form-control"></textarea>
+                <textarea name="risposta" class="form-control"></textarea>
+            <button type="submit" class="btn btn-primary float-right mt-3">Rispondi</button>
             </form>
-            <button type="submit" class="btn btn-primary float-right mt-3">Submit</button>
         </div>
     </div>
 </div>

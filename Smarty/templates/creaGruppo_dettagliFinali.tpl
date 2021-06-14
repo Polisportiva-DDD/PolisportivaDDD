@@ -91,7 +91,7 @@
   let etaMinima = $('#etaMinima');
   let etaMassima = $('#etaMassima');
 
-  etaMinima.keyup(function(){
+  etaMinima.change(function(){
     console.log(etaMinima.val());
     etaMassima.attr('min',etaMinima.val());
   })
