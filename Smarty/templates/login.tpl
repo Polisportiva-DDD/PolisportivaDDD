@@ -8,11 +8,10 @@
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sign-in/">
 
-
-{*    <!-- Bootstrap CSS CDN -->*}
-{*    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" integrity="undefined" crossorigin="anonymous">*}
-
     <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="/PolisportivaDDD/Smarty/css/styles.css"/>
+    <link rel="stylesheet" href="/PolisportivaDDD/Smarty/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/PolisportivaDDD/Smarty/css/login.css"/>
 
     <script>
       function ready(){
@@ -23,14 +22,12 @@
       document.addEventListener("DOMContentLoaded", ready);
     </script>
 
-    
-    <!-- Custom styles for this template -->
   </head>
   <body class="text-center">
 
 <main class="form-signin">
   <form action="/PolisportivaDDD/Utente/verifica" method="POST">
-    <img class="mb-4" src="C:\xampp\htdocs\PolisportivaDDD\Smarty\assets\img\bootstrap-logo.svg" alt="" width="72" height="57">
+    <img class="mb-4" src="/PolisportivaDDD/Smarty/assets/img/bootstrap-logo.svg" alt="" width="72" height="57">
     <h1 class="h3 mb-3 fw-normal">Benvenuto</h1>
 
     <div class="form-floating">

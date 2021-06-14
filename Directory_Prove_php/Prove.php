@@ -111,6 +111,7 @@ foreach($carte as $carta){
 }
 
 */
+/*
 $data =  ('2021-05-05');
 $data = strtotime($data);
 $ora= '10:00:00';
@@ -118,7 +119,7 @@ $dataString = date('Y-m-d', $data);
 $dataEOra = DateTime::createFromFormat('Y-m-d H:i:s', $dataString . $ora);
 print_r($dataEOra);
 
-
+*/
 /*
 $c5 = new ECalcioACinque(1, "calcio a cinque", 1, 10, "desc", 12.2);
 $c7 = new ECalcioACinque(0, "calcio a sette", 1, 10, "desc", 12.2);
@@ -136,4 +137,10 @@ FWallet::store($wallet);
 
 //FGruppo::addPartecipante('usern', 3);
 
+$utente = FUtente::load('lor');
+$campo = FCampo::load(2);
+$gruppo = new EGruppo(null, 'a', 1, 2, 2, 'a', new DateTime('now'), array(), $utente, $campo);
+$pm = new FPersistentManager();
+$id = $pm->store($gruppo);
+print_r($id);
 ?>

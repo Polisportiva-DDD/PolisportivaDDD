@@ -152,6 +152,7 @@ class CGruppo
         $session = new USession();
         $session->startSession();
         $pm = new FPersistentManager();
+        $username = $session->readValue('username');
         if ($_POST){
             $nomeGruppo = $_POST['nomeGruppo'];
             $etaMinima = $_POST['etaMinima'];
@@ -182,17 +183,25 @@ class CGruppo
         $adminUsername='lor';
         $admin = $pm->load($adminUsername, 'FUtente');
         $campo = $pm->load($idCampo, 'FCampo');
-        $partecipanti[] = $admin;
         //SOLO PER PROVA ADMIN='lor'
-
-
-        $gruppo = new EGruppo(null, $nomeGruppo, $etaMinima, $etaMassima, $valutazioneMinima, $descrizione, $dataEOra, $partecipanti, $admin, $campo);
-        $pm->store($gruppo);
-        $session->deleteValue('oraScelta');
-        $session->deleteValue('dataScelta');
-        $session->deleteValue('invitati');
-        $session->deleteValue('idCampo');
-        header('Location: /PolisportivaDDD/Utente/home');
+        $abbastanzaGettoni = self::rimuoviGettone($username, $idCampo);
+        if ($abbastanzaGettoni){
+            $gruppo = new EGruppo(null, $nomeGruppo, $etaMinima, $etaMassima, $valutazioneMinima, $descrizione, $dataEOra, array(), $admin, $campo);
+            $idGruppoCreato = $pm->store($gruppo);
+            $pm->addPartecipanteGruppo($adminUsername, $idGruppoCreato);
+            $session->deleteValue('oraScelta');
+            $session->deleteValue('dataScelta');
+            $session->deleteValue('invitati');
+            $session->deleteValue('idCampo');
+            header('Location: /PolisportivaDDD/Utente/home');
+        }
+        else{
+            $session->deleteValue('oraScelta');
+            $session->deleteValue('dataScelta');
+            $session->deleteValue('invitati');
+            $session->deleteValue('idCampo');
+            header( "refresh:3;url=/PolisportivaDDD/Utente/Home");
+        }
 
     }
 
@@ -276,7 +285,6 @@ class CGruppo
 
         }
 
-
     }
 
 
@@ -288,6 +296,17 @@ class CGruppo
 
 
 
+    private function rimuoviGettone($username, $idCampo): bool{
+        $pm = new FPersistentManager();
+        $utente = $pm->load($username, "Futente");
+        $wallet = $utente->getWallet();
+        $campo = $pm->load($idCampo, 'FCampo');
+        $result=false;
+        if($wallet->rimuoviGettoni($campo, 1)){
+            $result = $pm->update($wallet);
+        }
+        return $result;
+    }
 
 
 

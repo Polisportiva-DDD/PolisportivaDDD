@@ -47,6 +47,7 @@
     <ol class="breadcrumb mb-4 h-100">
     </ol>
     {section name=nr loop=$results}
+    <form method="post" action="/PolisportivaDDD/amministratore/segnalazioni/{$results[nr].idSegnalazione}">
     <div class="row rounded border col-md-12 mb-5 py-4">
       <div class="col-lg-3 col-md-3 col-sm-12 m-auto">
         <p>Username: {$results[nr].username}</p>
@@ -56,13 +57,14 @@
         <div style="height: 100px" class="border mt-3">
           <p>{$results[nr].testoSegnalazione}</p>
         </div>
-        <button class="btn btn-secondary float-right mt-3">
+        <button name={$results[nr].idSegnalazione} type="submit" class="btn btn-primary float-right mt-3">
           Rispondi
         </button>
       </div>
     </div>
     {sectionelse}
     <h2>Nessuna segnalazione presente.</h2>
+    </form>
     {/section}
   </div>
 </section>

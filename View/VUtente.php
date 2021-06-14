@@ -94,7 +94,7 @@ class VUtente
         $this -> smarty -> assign("isAmministratore", $isAmministratore);
         $this -> smarty -> assign("isUtente", $isUtente);
 
-        $this -> smarty -> display('ricercaUtente.tpl');
+        $this -> smarty -> display(get_include_path() ."/smarty/templates/ricercaUtente.tpl");
     }
 
     /**
@@ -109,7 +109,7 @@ class VUtente
         $this -> smarty -> assign("isAmministratore", $isAmministratore);
         $this -> smarty -> assign("isUtente", $isUtente);
 
-        $this -> smarty -> display('recensioni.tpl');
+        $this -> smarty -> display(get_include_path() ."/smarty/templates/recensioni.tpl");
     }
 
     /**
@@ -127,6 +127,7 @@ class VUtente
      */
     public function showAssistenza(){
         $this -> smarty -> display(get_include_path() ."/smarty/templates/assistenza.tpl");
+
     }
 
     /**
@@ -146,5 +147,13 @@ class VUtente
         $this -> smarty -> display(get_include_path() ."/smarty/templates/login.tpl");
     }
 
-
+    /**
+     * Funzione che si occupa di gestire la visualizzazione degli errori nella form di registrazione
+     * @param $error
+     * @throws SmartyException
+     */
+    public function showRegistrazioneError ($errorUsername) {
+        $this->smarty->assign('errorUsername',$errorUsername);
+        $this->smarty->display(get_include_path() ."/smarty/templates/registrazione.tpl");
+    }
 }

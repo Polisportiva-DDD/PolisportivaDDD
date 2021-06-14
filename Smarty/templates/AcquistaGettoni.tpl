@@ -4,6 +4,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <title>Polisportiva</title>
 
+		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 		<script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
         <!-- Core theme CSS (includes Bootstrap)-->
 <link href="/PolisportivaDDD/Smarty/css/styles.css" rel="stylesheet" type="text/css"/>
@@ -88,7 +89,7 @@
 						  <td >{$results[campi].nome}</td>
 						  <td>{$results[campi].prezzo}</td>
 						  <td>  <label for="quantity{$smarty.section.campi.iteration}">Inserisci quantita:</label>
-							<input type="number" id="quantity{$smarty.section.campi.iteration}"  name="{$results[campi].id}" min="0" value="0" ></td>
+							<input class="quantitaGettoni" type="number" id="quantity{$smarty.section.campi.iteration}"  name="{$results[campi].id}" min="0" value="0" ></td>
 						</tr>
 						
 					  </tbody>
@@ -148,7 +149,7 @@
 							</table>
 							</div>
 
-								<button class="btn btn-primary" id="avanti" type="submit">Vai avanti</button>
+								<button class="btn btn-primary" id="avanti" type="submit" disabled>Vai avanti</button>
 								</form>
 								<form method="post" action="/PolisportivaDDD/Gettoni/aggiungiCarta">
 								<button class="btn btn-primary mt-1" name="aggiungiCarta" value="1" type="submit">Aggiungi Carta</button>
@@ -173,6 +174,22 @@
 	<footer class="py-5 bg-dark">
 		<div class="container"><p class="m-0 text-center text-white">Copyright &copy; Polisportiva DDD 2021</p></div>
 	</footer>
+
+	<script>
+		$('.quantitaGettoni').change(function() {
+			let abilitato = false;
+			$('.quantitaGettoni').each( function () {
+				if($(this).val()>0){
+					abilitato = true;
+				}
+			})
+			$('#avanti').prop("disabled",!abilitato);
+		});
+*/
+
+
+	</script>
+
 
 
 

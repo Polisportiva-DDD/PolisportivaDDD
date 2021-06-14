@@ -1,5 +1,8 @@
 <?php
 
+require_once (get_include_path() .'/Utility/autoload.php');
+require_once (get_include_path() .'/Foundation/config.inc.php');
+require_once (get_include_path() .'/Utility/StartSmarty.php');
 
 class VAmministratore{
     private Smarty $smarty;
@@ -28,9 +31,7 @@ class VAmministratore{
      */
     public function showSegnalazioniAmministratore(array $listaSegnalazioni){
         $this -> smarty -> assign('results', $listaSegnalazioni);
-
         $this -> smarty -> display(get_include_path() ."/smarty/templates/SegnalazioniAmministratore.tpl");
-
     }
 
     public function showBannaUtente(string $username,string $nome,string $cognome,int $eta,string $valutazioneMedia,$pic64, $type){
@@ -44,12 +45,13 @@ class VAmministratore{
         $this->smarty->display(get_include_path() ."/smarty/templates/bannaUtente.tpl");
     }
 
-    public function showAmministratoreResponse(string $username,string $nome,string $cognome,int $eta,string $segnlazione){
+    public function showAmministratoreResponse(string $username,string $nome,string $cognome,int $eta, string $oggetto, string $messaggio){
         $this -> smarty -> assign('nome',$nome);
         $this -> smarty -> assign('cognome',$cognome);
         $this -> smarty -> assign('username',$username);
         $this -> smarty -> assign('eta',$eta);
-        $this -> smarty -> assign('segnalazione',$segnlazione);
+        $this -> smarty -> assign('oggettoSegnalazione',$oggetto);
+        $this -> smarty -> assign('messaggioSegnalazione',$messaggio);
         $this->smarty->display(get_include_path() ."/smarty/templates/AmministratoreResponse.tpl");
     }
 }

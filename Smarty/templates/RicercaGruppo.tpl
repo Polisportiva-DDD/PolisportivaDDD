@@ -87,7 +87,6 @@
                     <h2>Nessun Gruppo presente</h2>
                 {/section}
                 </div>
-            </div>
             <!-- Sidebar Widgets Column-->
             <div class="col-md-4">
                 <!-- Search Widget-->
@@ -140,6 +139,7 @@
                         </form>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     </div>

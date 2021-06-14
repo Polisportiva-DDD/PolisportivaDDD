@@ -6,6 +6,7 @@
   <title>Polisportiva DDD</title>
 
   <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <!-- Core theme CSS (includes Bootstrap)-->
   <link href="/PolisportivaDDD/Smarty/css/styles.css" rel="stylesheet" />
 </head>
@@ -57,7 +58,7 @@
         </div>
         <div class="col-md-3">
           <label for="etaMassima" class="form-label">Età massima</label>
-          <input type="number" class="form-control" id="etaMassima" min="10" max="99" name="etaMassima" required>
+          <input type="number" class="form-control" id="etaMassima" max="99" name="etaMassima" required>
         </div>
         <div class="col-md-3">
           <label for="valMinima" class="form-label">Valutazione minima</label>
@@ -83,6 +84,21 @@
 </footer>
 
 </body>
+
+
+<script>
+
+  let etaMinima = $('#etaMinima');
+  let etaMassima = $('#etaMassima');
+
+  etaMinima.change(function(){
+    console.log(etaMinima.val());
+    etaMassima.attr('min',etaMinima.val());
+  })
+
+</script>
+
+
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->

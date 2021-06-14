@@ -35,9 +35,14 @@ class FPersistentManager
         return FUtenteRegistrato::updateBannato($username,$bannato,$motivazione);
     }
 
-    public function updateWallet(){
-        //?????????
+    public function update($obj): bool{
+        $EClass = get_class($obj);
+        $FClass = str_replace("E", "F", $EClass);
+        $result = $FClass::update($obj);
+        return $result;
     }
+
+
 
     public function existUsername($username): bool{
         return FUtente::esisteUsername($username);
@@ -79,6 +84,10 @@ class FPersistentManager
 
     public function loadCarteUtente(string $username){
         return FCartaDiCredito::loadCarteUtente($username);
+    }
+
+    public function addPartecipanteGruppo($username, $idGruppo){
+        return FGruppo::addPartecipante($username, $idGruppo);
     }
 
 }

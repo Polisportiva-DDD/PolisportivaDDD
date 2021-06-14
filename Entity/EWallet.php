@@ -72,9 +72,8 @@ class EWallet
     public function rimuoviGettoni(ECampo $campo, int $quantita):bool
     {
         foreach ($this->listaCampiWallet as $valore){
-            if($valore->getId()==$campo->getId()){
-                $valore::aggiungiGettoni($quantita);
-                return true;
+            if($valore->getCampo()->getId()==$campo->getId()){
+                return $valore->rimuoviGettoni($quantita);
             }
         }
         return false;
