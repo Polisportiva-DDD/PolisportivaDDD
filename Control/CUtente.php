@@ -64,6 +64,7 @@ class CUtente
         $session->startSession();
         $isAmministratore = $session->readValue('isAmministratore');
         $isRegistrato = $session->readValue('isRegistrato');
+        print ($isRegistrato);
         $view=new VUtente();
         $pm = new FPersistentManager();
         $campi=$pm->loadList("FCampo");
@@ -263,6 +264,9 @@ class CUtente
      */
     public function verificaRegistrazione() {
         $session = new USession();
+        $session->startSession();
+        $session->setValue("isAmministratore",false);
+        $session->setValue('isRegistrato',true);
         $pm = new FPersistentManager();
         $view = new VUtente();
         $username = $_POST['username'];
