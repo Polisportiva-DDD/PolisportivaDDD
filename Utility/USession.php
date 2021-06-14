@@ -44,6 +44,11 @@ class USession {
         session_start();
     }
 
+    public function stopSession(){
+        session_unset();
+        session_destroy();
+    }
+
     /**
      * Funzione che controlla se è arrivato il cookie PHPSESSID
      * @return bool

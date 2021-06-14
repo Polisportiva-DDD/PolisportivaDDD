@@ -57,7 +57,7 @@ class CUtente
         $session = new USession();
         $session->startSession();
         $isAmministratore = $session->readValue('isAmministratore');
-        //$isRegistrato = $session->readValue('isRegistrato');
+        $isRegistrato = $session->readValue('isRegistrato');
         $view=new VUtente();
         $pm = new FPersistentManager();
         $campi=$pm->loadList("FCampo");
@@ -72,7 +72,7 @@ class CUtente
             $result[]=$nomiCampi;
 
         }
-        $view->showHome($isAmministratore,true,$result);
+        $view->showHome($isAmministratore,$isRegistrato,$result);
     }
 
     public function mioProfilo(){
@@ -192,7 +192,7 @@ class CUtente
      *    viene ricaricata la pagina con l'aggiunta dell'errore nel login.
      * 2) se l'utente c'è, avviene il reindirizzamento alla homepage;
      */
-    static function verifica() {
+    public function verifica() {
         $session = new USession();
         $view = new VUtente();
         $pm = new FPersistentManager();
@@ -238,8 +238,8 @@ class CUtente
     }
     /**
      * Funzione di supporto che si occupa di verificare i dati inseriti nella form di registrazione per il cliente .
-     * In questo metodo avviene la verifica sull'univocità dell'email inserita;
-     * se questa verifiche non riscontrano problemi, si passa verifica dell'immagine inserita e quindi alla store nel db vera e propria del cliente.
+     * In questo metodo avviene la verifica sull'univocità dell'username inserito;
+     * se questa verifiche non riscontrano problemi, si passa alla store nel db.
      */
     public function verificaRegistrazione() {
         $session = new USession();
@@ -300,6 +300,13 @@ class CUtente
             header('Location: /PolisportivaDDD/Utente/utentiBannati');
         }
 
+    }
+
+    public function logout(){
+        $session = new USession();
+        $session->startSession();
+        $session->stopSession();
+        header('Location: /FillSpaceWEB/Utente/home');
     }
 
 }

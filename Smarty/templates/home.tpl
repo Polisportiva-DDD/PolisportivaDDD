@@ -20,7 +20,7 @@
     <div class="table-responsive" >
       <table>
         <tr >
-          <th scope="col" class="padTh"><a href="#">  <button type="submit" class="btn btn-primary">Logout</button></a></th>
+          <th scope="col" class="padTh"><a href="/PolisportivaDDD/Utente/logout">  <button type="submit" class="btn btn-primary">Logout</button></a></th>
           <th scope="col" class="padTh"><a href="mioProfilo"><button type="submit" class="btn btn-secondary" >Profilo</button></a></th>
           <form method="post" action="/PolisportivaDDD/Utente/Utenti">
             <th scope="col" class="padTh"><button type="submit" class="btn btn-outline-dark"><span class="fas fa-search"></span></button></th>
@@ -62,8 +62,8 @@
     <div class="table-responsive" >
       <table>
         <tr >
-          <th scope="col" class="padTh"><a href="#">  <button type="button" class="btn btn-primary">Login</button></a></th>
-          <th scope="col" class="padTh"><a href="#"><button type="button" class="btn btn-secondary">Registrati</button></a></th>
+          <th scope="col" class="padTh"><a href="/PolisportivaDDD/Utente/login">  <button type="button" class="btn btn-primary">Login</button></a></th>
+          <th scope="col" class="padTh"><a href="/PolisportivaDDD/Utente/registrazione"><button type="button" class="btn btn-secondary">Registrati</button></a></th>
         </tr>
       </table>
     </div>
