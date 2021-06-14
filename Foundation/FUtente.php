@@ -154,6 +154,18 @@ class FUtente
         return $utenti;
     }
 
+    public static function loadUtentiFiltered($searcchedUsername){
+        $sql="SELECT * FROM ".static::getTableName() . " WHERE username LIKE '%" . $searcchedUsername . "%'";
+        $db=FDatabase::getInstance();
+        $rows = $db->loadMultiple($sql);
+        $utenti =array();
+        foreach($rows as $result){
+            $wallet=FWallet::load($result['wallet']);
+            $user=new EUtente($result['username'], $result['nome'], $result['cognome'],$result['email'],$result['password'],new DateTime($result['dataDiNascita']),$result['immagine'],$wallet);
+            $utenti[] = $user;
+        }
+        return $utenti;
+    }
 
 
    

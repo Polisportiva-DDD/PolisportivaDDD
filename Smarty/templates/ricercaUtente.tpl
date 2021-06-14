@@ -9,6 +9,7 @@
   <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
   <!-- Core theme CSS (includes Bootstrap)-->
   <link href="/PolisportivaDDD/Smarty/css/styles.css" rel="stylesheet" />
+  <link href="/PolisportivaDDD/Smarty/css/ourStyle.css" rel="stylesheet" />
 </head>
 <body>
 <!-- Navigation-->
@@ -47,27 +48,29 @@
     <h1 class="mb-5">Ricerca utente</h1>
 
     {section name=nr loop=$results}
-      <div class="row rounded border col-md-12 mb-5 py-4">
-        <div class="col-lg-3 col-md-3 col-sm-12">
+      <div class="row rounded border mb-5 py-4">
+        <div class="col-lg-3 col-md-3 text-center">
           <img src="https://via.placeholder.com/150" class="rounded-circle" alt="Immagine utente">
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-12 m-auto">
-          <p>Username: {$results[nr].username}</p>
+        <div class="col-lg-3 col-md-3 col-sm-12 m-auto text-center">
+          <p>Username: <a href="/PolisportivaDDD/utente/utenti/{$results[nr].username}">{$results[nr].username}</a></p>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-12 m-auto">
+        <div class="col-lg-3 col-md-3 col-sm-12 m-auto text-center">
           <p>Nome: {$results[nr].nome}</p>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-12 m-auto">
+        <div class="col-lg-3 col-md-3 col-sm-12 m-auto text-center">
           <p>Cognome: {$results[nr].cognome}</p>
         </div>
       </div>
     {sectionelse}
-      <h2>Nessun utente presente</h2>
+      <h2>Nessun utente corrispondente alla ricerca</h2>
+      <br><br><br><br><br><br><br><br><br><br><br><br>
     {/section}
   </div>
+
 </section>
 <!-- Footer-->
-<footer class="py-5 bg-dark">
+<footer id='footer' class="py-5 bg-dark">
   <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Polisportiva DDD 2021</p></div>
 </footer>
 <!-- Bootstrap core JS-->

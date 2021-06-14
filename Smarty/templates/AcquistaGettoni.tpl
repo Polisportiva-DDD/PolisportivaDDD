@@ -196,7 +196,6 @@
 			})
 			$('#avanti').prop("disabled",!abilitato);
 		});
-*/
 
 
 	</script>
