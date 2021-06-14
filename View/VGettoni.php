@@ -36,7 +36,7 @@ class VGettoni
 
     /**
      * Funzione che mostra la pagina in cui è possibile acquistare gettoni relativi ai vari campi
-     * @param array $campi lista dei campi prensenti
+     * @param array $campi lista dei campi presenti
      * @param array $carte liste delle carte di credito dell'utente
      * @throws SmartyException
      */

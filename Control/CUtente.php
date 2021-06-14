@@ -233,8 +233,15 @@ class CUtente
                             $session->setValue("username",$username);
                             if($pm->exist($username)){
                                 $session->setValue("isAmministratore",true);
+                                $session->setValue("isRegistrato",true);
                             }else{
                                 $session->setValue("isAmministratore",false);
+                                if($pm->existUsername($username)){
+                                    $session->setValue("isRegistrato",true);
+                                }
+                                else{
+                                    $session->setValue("isRegistrato",false);
+                                }
                             }
                             $session->setValue("isRegistrato",true);
                             header('Location: /PolisportivaDDD/Utente/Home');

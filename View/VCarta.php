@@ -12,12 +12,17 @@ class VCarta
         $this->smarty = StartSmarty::configuration();
     }
 
-    public function showLeTueCarte($isAmministratore, $isUtente, $carte){
+    /**
+     * Funzione che mostra la pagina delle carte possedute dall'utente.
+     * @param bool $isAmministratore sei Amministratore?
+     * @param array $carte carte dell'utente
+     * @throws SmartyException
+     */
+    public function showLeTueCarte(bool $isAmministratore, array $carte){
         $this->smarty->assign("isAmministratore", $isAmministratore);
-        $this->smarty->assign("isUtente", $isUtente);
         $this->smarty->assign("results", $carte);
 
-        $this->smarty->display("le_tue_carte.tpl");
+        $this->smarty->display(get_include_path() ."/smarty/templates/le_tue_carte.tpl");
 
 
     }

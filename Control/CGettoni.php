@@ -45,7 +45,7 @@ class CGettoni
         $view = new VCarta();
         $session = new USession();
         $session->startSession();
-        $isAmministratore = $session->readValue('isAmministatore');
+        $isAmministratore = $session->readValue('isAmministratore');
         if(isset($_POST['aggiungiCarta']) && $_POST['aggiungiCarta']==1){
             $session->setValue('aggiungiCarta',1);
         }
@@ -73,7 +73,7 @@ class CGettoni
             if ($acqGettoni == 1) {
                 header('Location: /PolisportivaDDD/Gettoni/acquista');
             } else {
-                header('Location: /PolisportivaDDD/Utente/Home');
+                header('Location: /PolisportivaDDD/Gettoni/visualizzaCarte');
             }
         }
         else{
@@ -138,23 +138,40 @@ class CGettoni
     {
         $session = new USession();
         $session->startSession();
-        $username=$session->readValue("username");
-        $pm= new FPersistentManager();
-        $utente=$pm->load($username,"FUtente");
-        $wallet=$utente->getWallet();
-        if ($_POST){
-            foreach($_POST as $chiave => $quantita){
-                $campo=$pm->load($chiave,"FCampo");
-                $wallet->aggiungiGettoni($campo,$quantita);
+        $username = $session->readValue("username");
+        $pm = new FPersistentManager();
+        $utente = $pm->load($username, "FUtente");
+        $wallet = $utente->getWallet();
+        if ($_POST) {
+            foreach ($_POST as $chiave => $quantita) {
+                $campo = $pm->load($chiave, "FCampo");
+                $wallet->aggiungiGettoni($campo, $quantita);
             }
             $pm->update($wallet);
             //se va male l'update??
             header('Location: /PolisportivaDDD/Utente/mioProfilo');
         }
+    }
 
-
+    public function visualizzaCarte(){
+        $session = new USession();
+        $session->startSession();
+        $isAmministratore = $session->readValue('isAmministratore');
+        $pm = new FPersistentManager();
+        $view = new VCarta();
+        $carteUtente = $pm -> loadCarteUtente($session->readValue('username'));
+        $results = array();
+        for ($i=0;$i<count($carteUtente); $i++){
+            $tmp = array(
+              'numeroCarta' => $carteUtente[$i]->getNumero(),
+              'titolareCarta' => $carteUtente[$i]->getNomeTitolare(). " " . $carteUtente[$i]->getCognomeTitolare(),
+              'dataScadenza' => $carteUtente[$i]->getScadenza()->format('d-m-y')
+            );
+            $results[]=$tmp;
+        }
+        $view -> showLeTueCarte($isAmministratore,$results);
+    }
 
 
 
     }
-}
