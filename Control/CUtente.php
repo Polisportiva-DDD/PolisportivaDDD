@@ -60,8 +60,8 @@ class CUtente
         $isAmministratore = $session->readValue('isAmministratore');
         $view=new VUtente();
         $pm = new FPersistentManager();
-        //$username = $session->readValue('username');
-        $username="lor";
+        $username = $session->readValue('username');
+        //$username="lor";
         $utente=$pm->load($username,"FUtente");
         $username=$utente->getUsername();
         $nome=$utente->getNome();
@@ -170,7 +170,6 @@ class CUtente
      * 1) se, dopo la ricerca nel db non si hanno risultati ($utente = null) oppure se l'utente si trova nel db ma ha lo stato false
      *    viene ricaricata la pagina con l'aggiunta dell'errore nel login.
      * 2) se l'utente c'è, avviene il reindirizzamento alla homepage;
-     * @throws SmartyException
      */
     static function verifica() {
         $session = new USession();
@@ -216,7 +215,35 @@ class CUtente
         $view = new VUtente();
         $view->showRegistrazioneUtente();
     }
+    /**
+     * Funzione di supporto che si occupa di verificare i dati inseriti nella form di registrazione per il cliente .
+     * In questo metodo avviene la verifica sull'univocità dell'email inserita;
+     * se questa verifiche non riscontrano problemi, si passa verifica dell'immagine inserita e quindi alla store nel db vera e propria del cliente.
+     */
+    public function verificaRegistrazione() {
+        $session = new USession();
+        $pm = new FPersistentManager();
+        $view = new VUtente();
+        $username = $_POST['username'];
+        $nome = $_POST['nome'];
+        $cognome = $_POST['cognome'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $data = $_POST['data'];
+        $data=(DateTime::createFromFormat('Y-m-d',$data));
+        $immagine = $_POST['file'];
+        $wallet = new EWallet(array(),-1);
+        $verUsername = $pm->existUsername($username);
+        if ($verUsername){
+            $view->showRegistrazioneError("errorUsername");
+        }
+        else {
 
+            $utente = new EUtente($username,$nome,$cognome,$email,$password,$data,$immagine,$wallet);
+            $pm -> store($utente,FUtente);
+            header('Location: /PolisportivaDDD/Utente/home');
+        }
+    }
     public function utentiBannati(){
         $session = new USession();
         $view = new VAmministratore();
