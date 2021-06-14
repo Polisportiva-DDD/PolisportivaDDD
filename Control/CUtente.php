@@ -9,12 +9,35 @@ class CUtente
 
     public function __construct(){}
 
-    public function assistenza(){
+    public function informazioni(){
         $session = new USession();
         $session->startSession();
+        $username = $session->readValue('username');
         $view = new VUtente();
         $view->showAssistenza();
     }
+
+    public function utenti(){
+        $session = new USession();
+        $session->startSession();
+        $isAmministratore= $session->readValue('isAmministratore');
+        $view = new VUtente();
+        $pm = new FPersistentManager();
+        if (isset($_POST['searchedUser'])){
+            $searchedUser = $_POST['searchedUser'];
+            $utenti = $pm->loadUtentiFiltered($searchedUser);
+            $risultatiRicerca = array();
+            foreach ($utenti as $utente){
+                $u= array();
+                $u['username'] = $utente->getUsername();
+                $u['nome'] = $utente->getNome();
+                $u['cognome'] = $utente->getCognome();
+                $risultatiRicerca[] = $u;
+            }
+            $view->showRicercaUtente($risultatiRicerca, $isAmministratore);
+        }
+    }
+
 
     public function inviaSegnalazione(){
         $session = new USession();
@@ -29,11 +52,12 @@ class CUtente
         $pm->store($segnalazione);
         header('Location: /PolisportivaDDD/Utente/Home');
     }
+
     public function home(){
         $session = new USession();
         $session->startSession();
         $isAmministratore = $session->readValue('isAmministratore');
-        //$isRegistrato = $session->readValue('isRegistrato');
+        $isRegistrato = $session->readValue('isRegistrato');
         $view=new VUtente();
         $pm = new FPersistentManager();
         $campi=$pm->loadList("FCampo");
@@ -48,7 +72,7 @@ class CUtente
             $result[]=$nomiCampi;
 
         }
-        $view->showHome($isAmministratore,true,$result);
+        $view->showHome($isAmministratore,$isRegistrato,$result);
     }
 
     public function mioProfilo(){
@@ -58,6 +82,7 @@ class CUtente
         $view=new VUtente();
         $pm = new FPersistentManager();
         $username = $session->readValue('username');
+        //$username="lor";
         $utente=$pm->load($username,"FUtente");
         $username=$utente->getUsername();
         $nome=$utente->getNome();
@@ -128,14 +153,14 @@ class CUtente
         $session = new USession();
         $session->startSession();
         // $isAmministratore = $session->readValue('isAmministratore');
-        $utente = $session->readValue('username');
+        // $utente = $session->readValue('username');
         $utenteDaRec = $session->readValue('utenteDaRecensire');
 
         if (isset($_POST['titoloRecensione']) and isset($_POST['testo']) and isset($_POST['rate'])) {
             $titolo=$_POST['titoloRecensione'];
             $testo=$_POST['testo'];
             $voto=$_POST['rate'];
-            $utenteAutore=$pm->load("$utente","FUtente");
+            $utenteAutore=$pm->load("lor1","FUtente");
             $utentePosessore=$pm->load($utenteDaRec,"FUtente");
             $recensione=new ERecensione($utenteAutore,$voto,$titolo,$testo,new DateTime('now'),$utentePosessore);
             $pm->store($recensione);
@@ -166,10 +191,10 @@ class CUtente
      * 1) se, dopo la ricerca nel db non si hanno risultati ($utente = null) oppure se l'utente si trova nel db ma ha lo stato false
      *    viene ricaricata la pagina con l'aggiunta dell'errore nel login.
      * 2) se l'utente c'è, avviene il reindirizzamento alla homepage;
-     * @throws SmartyException
      */
-    static function verifica() {
+    public function verifica() {
         $session = new USession();
+        $view = new VUtente();
         $pm = new FPersistentManager();
         if(isset($_POST['username']) && isset($_POST['password'])) {
             $esiste = $pm->Login($_POST['username'], $_POST['password']);
@@ -211,7 +236,45 @@ class CUtente
         $view = new VUtente();
         $view->showRegistrazioneUtente();
     }
+    /**
+     * Funzione di supporto che si occupa di verificare i dati inseriti nella form di registrazione per il cliente .
+     * In questo metodo avviene la verifica sull'univocità dell'username inserito;
+     * se questa verifiche non riscontrano problemi, si passa alla store nel db.
+     */
+    public function verificaRegistrazione() {
+        $session = new USession();
+        $pm = new FPersistentManager();
+        $view = new VUtente();
+        $username = $_POST['username'];
+        $nome = $_POST['nome'];
+        $cognome = $_POST['cognome'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $data = $_POST['data'];
+        $data=(DateTime::createFromFormat('Y-m-d',$data));
+        $immagine = $_POST['file'];
+        $verUsername = $pm->existUsername($username);
+        if ($verUsername){
+            $view->showRegistrazioneError("errorUsername");
+        }
+        else {
+            $campi = $pm -> loadList('FCampo');
+            $listaCampiWallet = array();
+            foreach ($campi as $campo){
+                $gettoni = new ECampiWallet(0,$campo);
+                array_push($listaCampiWallet,$gettoni);
+            }
+            $wallet = new EWallet($listaCampiWallet,-1);
 
+            $utente = new EUtente($username,$nome,$cognome,$email,$password,$data,$immagine,$wallet);
+            $utenteRegistrato = new EUtenteRegistrato('false','',$username,$nome,$cognome,$email,$password,$data,$immagine,$wallet);
+
+
+            $pm -> store($utente);
+            $pm -> store($utenteRegistrato);
+            header('Location: /PolisportivaDDD/Utente/home');
+        }
+    }
     public function utentiBannati(){
         $session = new USession();
         $view = new VAmministratore();
@@ -239,38 +302,11 @@ class CUtente
 
     }
 
-    public function modificaPrezzi(){
-        $view = new VGettoni();
-        $pm= new FPersistentManager();
-        $campi = $pm->loadList('FCampo');
-        $resultsCampi = array();
-        foreach($campi as $campo){
-            $c = array();
-            $nome = $campo->getNome();
-            $prezzo = $campo->getPrezzo();
-            $id=$campo->getId();
-            $c['nome'] = $nome;
-            $c['prezzo'] = $prezzo;
-            $c['id'] = $id;
-            $resultsCampi[] = $c;
-        }
-        $view->showAmministratoreModificaPrezzo($resultsCampi);
+    public function logout(){
+        $session = new USession();
+        $session->startSession();
+        $session->stopSession();
+        header('Location: /FillSpaceWEB/Utente/home');
     }
-    public function aggiungiGettoni(){
-        $view = new VGettoni();
-        $pm= new FPersistentManager();
-        $campi = $pm->loadList('FCampo');
-        $resultsCampi = array();
-        foreach($campi as $campo){
-            $c = array();
-            $nome = $campo->getNome();
-            $prezzo = $campo->getPrezzo();
-            $id=$campo->getId();
-            $c['nome'] = $nome;
-            $c['prezzo'] = $prezzo;
-            $c['id'] = $id;
-            $resultsCampi[] = $c;
-        }
-        $view->showAmministratoreAggiungiGettoni($resultsCampi);
-    }
+
 }

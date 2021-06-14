@@ -38,7 +38,7 @@ $utente4 = new EUtente('zioFrack','Franco','Deucalion','bobobo@gmail.com','cicci
 //FUtente::store($utente2);
 //FUtente::store($utente4);
 
-$utenteBannato = new EUtenteRegistrato('true','scemo',$utente4->getUsername(),$utente4->getNome(),$utente4->getCognome(),$utente4->getEmail(),$utente4->getPassword(),$utente4->getDataDiNascita(),$utente4->getImmagine(),$utente4->getWallet());
+
 
 //FUtenteRegistrato::store($utenteBannato);
 

@@ -90,4 +90,7 @@ class FPersistentManager
         return FGruppo::addPartecipante($username, $idGruppo);
     }
 
+    public function loadUtentiFiltered(string $searchedUsername){
+        return FUtente::loadUtentiFiltered($searchedUsername);
+    }
 }
