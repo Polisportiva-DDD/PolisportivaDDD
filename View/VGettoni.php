@@ -20,15 +20,14 @@ class VGettoni
      * @param string $dataScadenza data di scadenza della carta di credito
      * @param int $prezzoTotale costo complessivo dei gettoni che si vuole acquistare
      * @param bool $isAmministratore sei amministratore?
-     * @param bool $isUtente sei utente?
      * @throws SmartyException
      */
-    public function showRiepilogoAcquisto(array $gettoniAcquistati,string $numeroCarta,string $titolareCarta,string $dataScadenza,int $prezzoTotale,bool $isAmministratore){
+    public function showRiepilogoAcquisto(array $gettoniAcquistati,string $numeroCarta,string $nomeTitolare,string $dataScadenza,int $prezzoTotale,bool $isAmministratore){
         $this -> smarty -> assign('results',$gettoniAcquistati);
-        $this -> smarty -> assign('results',$numeroCarta);
-        $this -> smarty -> assign('results',$titolareCarta);
-        $this -> smarty -> assign('results',$dataScadenza);
-        $this -> smarty -> assign('results',$prezzoTotale);
+        $this -> smarty -> assign('numeroCarta',$numeroCarta);
+        $this -> smarty -> assign('nomeTitolare',$nomeTitolare);
+        $this -> smarty -> assign('dataScadenza',$dataScadenza);
+        $this -> smarty -> assign('prezzoTotale',$prezzoTotale);
         $this -> smarty -> assign("isAmministratore", $isAmministratore);
 
         $this -> smarty -> display(get_include_path() ."/smarty/templates/RiepilogoAcquisto.tpl");

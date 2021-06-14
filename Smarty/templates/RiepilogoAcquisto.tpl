@@ -53,53 +53,50 @@
 </nav>
 <!-- Page Content-->
 <section class="py-5 mb-5">
+  <form method="get" action="/PolisportivaDDD/Gettoni/paga">
   <div class="container">
-    <!-- Page Heading/Breadcrumbs-->
-    <h1 class="mb-5">Riepilogo acquisto</h1>
+
+    <h1 >Riepilogo acquisto</h1>
+    <hr >
     {section name=nr loop=$results}
-      <div class="row rounded border col-md-12 mb-5 py-4">
+      <div class="row rounded border col-md-12 mb-2 py-4">
         <div class="col-lg-6 col-md-6 col-sm-12">
           <h4>Gettoni {$results[nr].nomeCampo}</h4>
+          <input  hidden  name="{$results[campi].id}" value="{$results[nr].quantita}" >
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-12 m-auto">
+        <div class="col-lg-3 col-md-3 col-sm-12 m-auto mb-2" >
           <p>Prezzo per gettone: {$results[nr].prezzo}€</p>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-12 m-auto">
+        <div class="col-lg-3 col-md-3 col-sm-12 m-auto mb-2">
           <p>Quantità gettoni: {$results[nr].quantita}</p>
         </div>
       </div>
     {/section}
     <div class="row rounded border col-md-12 mb-5 py-4">
       <div class="col-sm">
-        Numero della carta
-        <div style="width:100%;max-width:250px;border:1px red solid;overflow:hidden">
-          <div style="background-color:#eeeeee;padding:5px">
-            {$numeroCarta}
-          </div>
+
+          <div class="border text-center">Numero della carta:<br>
+            {$numeroCarta}</div>
+      </div>
+      <div class="col-sm">
+
+        <div class="border text-center">Nome titolare della carta:<br>
+            {$nomeTitolare}
         </div>
       </div>
       <div class="col-sm">
-        Titolare della carta
-        <div style="width:100%;max-width:250px;border:1px red solid;overflow:hidden">
-          <div style="background-color:#eeeeee;padding:5px">
-            {$titolareCarta}
-          </div>
+        <div class="border text-center">Data di scadenza:<br>{$dataScadenza}</div >
+
         </div>
       </div>
-      <div class="col-sm">
-        Data di scadenza
-        <div style="width:100%;max-width:250px;border:1px red solid;overflow:hidden">
-          <div style="background-color:#eeeeee;padding:5px">
-            {$dataScadenza}
-          </div>
-        </div>
-      </div>
-    </div>
+
 
     <h4>Prezzo totale: {$prezzoTotale}€</h4>
-    <button class="btn btn-primary btn-lg float-right mt-2">Paga</button>
+
+    <button class="btn btn-primary btn-lg float-right mt-2" type="submit">Paga</button>
 
   </div>
+  </form>
 
 </section>
 <!-- Footer-->

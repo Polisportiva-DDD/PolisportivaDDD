@@ -28,7 +28,6 @@ class CGettoni
             $c['id'] = $id;
             $resultsCampi[] = $c;
         }
-        //$username="lor";
         $carte = $pm->loadCarteUtente($username);
         $resultCarte=array();
         if($carte!=null){
@@ -86,6 +85,7 @@ class CGettoni
         $view = new VGettoni();
         $session = new USession();
         $session->startSession();
+        $pm= new FPersistentManager();
         $isAmministratore = $session->readValue('isAmministratore');
         if(isset($_POST["carta"])  ){
             $numero=$_POST["carta"];
@@ -95,15 +95,62 @@ class CGettoni
                 foreach($_POST as $chiave => $idCampo){
                     $campi[$chiave] = $idCampo;
                 }
+                $carta=$pm->load($numero,"FCartadiCredito");
+                $nomeTitolare=$carta->getNomeTitolare();
+                $carta->getCognomeTitolare();
+                $scadenza=$carta->getScadenza()->format("Y-m-d");
 
-                //$session->setValue('invitati', $invitati);
+                $listaCampi=$pm->loadList("FCampo");
+                $result=array();
+                $prezzoTotale=0;
+                $quantita=0;
+                foreach ($listaCampi as $value){
+                    $arr=array();
+                    $arr["nomeCampo"]=$value->getNome();
+                    $arr["quantita"]=$campi[$value->getId()];
+                    $arr["prezzo"]=$value->getPrezzo();
+                    $prezzoTotale+= $arr["prezzo"]*$arr["quantita"];
+                    $result[]=$arr;
+                    $quantita+=$arr["quantita"];
+                }
+                if($prezzoTotale!=0){
+                    if($quantita>=3 and $quantita<5){
+                        $prezzoTotale=$prezzoTotale-$prezzoTotale*5/100;
+                    }
+                    elseif($quantita>=5 and $quantita<=9){
+                        $prezzoTotale=$prezzoTotale-$prezzoTotale*10/100;
+                    }elseif($quantita>=10 ){
+                        $prezzoTotale=$prezzoTotale-$prezzoTotale*15/100;
+
+                    }
+                }
+                $view->showRiepilogoAcquisto($result,$numero,$nomeTitolare,$scadenza,$prezzoTotale,$isAmministratore);
+
             }
         }
 
 
-        //$view->showRiepilogoAcquisto(true);
     }
 
+    public function paga()
+    {
+        $session = new USession();
+        $session->startSession();
+        //$username=$session->readValue("username");
+        //$pm= new FPersistentManager();
+        /*if ($_POST) {
+            $campi = array();
+            foreach ($_POST as $chiave => $idCampo) {
+                $campo=$pm->load($chiave,"FCampo");
+                if($campo!=null){
+                    $cmpw=new ECampiWallet($idCampo,$campo);
+                    $campi[]=$cmpw;
+                }
+            }
+            //da finire
+            //$pm->updateWallet($campi);
+            header('Location: /PolisportivaDDD/Utente/home');
+        }*/
 
-
+    }
 }

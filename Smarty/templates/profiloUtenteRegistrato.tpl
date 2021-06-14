@@ -83,7 +83,7 @@
       </div>
     </div>
     {if $isAmministratore}
-    <form action="/PolisportivaDDD/Gettoni/aggiungiGettoni" method="POST">
+    <form action="/PolisportivaDDD/Utente/aggiungiGettoni" method="POST">
     <div class="row mb-2 ">
       <div class="col-md-12 text-right">
         <button class="btn btn-primary  " type="submit">Aggiungi Gettoni</button>

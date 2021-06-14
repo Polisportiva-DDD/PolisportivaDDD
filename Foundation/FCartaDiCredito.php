@@ -131,7 +131,7 @@ class FCartaDiCredito
      * @return ECartadiCredito|null
      * @throws Exception
      */
-    public static function loadCartaByNumero(string $numero){
+    public static function load(string $numero){
         $sql="SELECT * FROM ".static::$tableName." WHERE numero='" . $numero . "';";
         $db=FDatabase::getInstance();
         $result=$db->loadSingle($sql);
@@ -156,7 +156,7 @@ class FCartaDiCredito
             if($rows!=null){
                 $carteUtente = array();
                 foreach ($rows as $row) { //Per ogni row
-                    $carta = FCartaDiCredito::loadCartaByNumero($row['carta']); //Carica la carta corrispondente al numero ottenuto
+                    $carta = FCartaDiCredito::load($row['carta']); //Carica la carta corrispondente al numero ottenuto
                     array_push($carteUtente, $carta); //Mettilo nell'array
                 }
                 return $carteUtente;

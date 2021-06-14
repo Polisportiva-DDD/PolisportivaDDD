@@ -57,8 +57,7 @@ class CUtente
         $isAmministratore = $session->readValue('isAmministratore');
         $view=new VUtente();
         $pm = new FPersistentManager();
-        //$username = $session->readValue('username');
-        $username="lor";
+        $username = $session->readValue('username');
         $utente=$pm->load($username,"FUtente");
         $username=$utente->getUsername();
         $nome=$utente->getNome();
@@ -129,14 +128,14 @@ class CUtente
         $session = new USession();
         $session->startSession();
         // $isAmministratore = $session->readValue('isAmministratore');
-        // $utente = $session->readValue('username');
+        $utente = $session->readValue('username');
         $utenteDaRec = $session->readValue('utenteDaRecensire');
 
         if (isset($_POST['titoloRecensione']) and isset($_POST['testo']) and isset($_POST['rate'])) {
             $titolo=$_POST['titoloRecensione'];
             $testo=$_POST['testo'];
             $voto=$_POST['rate'];
-            $utenteAutore=$pm->load("lor1","FUtente");
+            $utenteAutore=$pm->load("$utente","FUtente");
             $utentePosessore=$pm->load($utenteDaRec,"FUtente");
             $recensione=new ERecensione($utenteAutore,$voto,$titolo,$testo,new DateTime('now'),$utentePosessore);
             $pm->store($recensione);
@@ -171,7 +170,6 @@ class CUtente
      */
     static function verifica() {
         $session = new USession();
-        $view = new VUtente();
         $pm = new FPersistentManager();
         if(isset($_POST['username']) && isset($_POST['password'])) {
             $esiste = $pm->Login($_POST['username'], $_POST['password']);
@@ -239,5 +237,40 @@ class CUtente
             header('Location: /PolisportivaDDD/Utente/utentiBannati');
         }
 
+    }
+
+    public function modificaPrezzi(){
+        $view = new VGettoni();
+        $pm= new FPersistentManager();
+        $campi = $pm->loadList('FCampo');
+        $resultsCampi = array();
+        foreach($campi as $campo){
+            $c = array();
+            $nome = $campo->getNome();
+            $prezzo = $campo->getPrezzo();
+            $id=$campo->getId();
+            $c['nome'] = $nome;
+            $c['prezzo'] = $prezzo;
+            $c['id'] = $id;
+            $resultsCampi[] = $c;
+        }
+        $view->showAmministratoreModificaPrezzo($resultsCampi);
+    }
+    public function aggiungiGettoni(){
+        $view = new VGettoni();
+        $pm= new FPersistentManager();
+        $campi = $pm->loadList('FCampo');
+        $resultsCampi = array();
+        foreach($campi as $campo){
+            $c = array();
+            $nome = $campo->getNome();
+            $prezzo = $campo->getPrezzo();
+            $id=$campo->getId();
+            $c['nome'] = $nome;
+            $c['prezzo'] = $prezzo;
+            $c['id'] = $id;
+            $resultsCampi[] = $c;
+        }
+        $view->showAmministratoreAggiungiGettoni($resultsCampi);
     }
 }
