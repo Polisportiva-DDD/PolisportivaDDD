@@ -109,9 +109,11 @@ class CGettoni
                     $arr["nomeCampo"]=$value->getNome();
                     $arr["quantita"]=$campi[$value->getId()];
                     $arr["prezzo"]=$value->getPrezzo();
+                    $arr["id"]=$value->getId();
+                    $quantita+=$arr["quantita"];
                     $prezzoTotale+= $arr["prezzo"]*$arr["quantita"];
                     $result[]=$arr;
-                    $quantita+=$arr["quantita"];
+
                 }
                 if($prezzoTotale!=0){
                     if($quantita>=3 and $quantita<5){
@@ -136,21 +138,23 @@ class CGettoni
     {
         $session = new USession();
         $session->startSession();
-        //$username=$session->readValue("username");
-        //$pm= new FPersistentManager();
-        /*if ($_POST) {
-            $campi = array();
-            foreach ($_POST as $chiave => $idCampo) {
+        $username=$session->readValue("username");
+        $pm= new FPersistentManager();
+        $utente=$pm->load($username,"FUtente");
+        $wallet=$utente->getWallet();
+        if ($_POST){
+            foreach($_POST as $chiave => $quantita){
                 $campo=$pm->load($chiave,"FCampo");
-                if($campo!=null){
-                    $cmpw=new ECampiWallet($idCampo,$campo);
-                    $campi[]=$cmpw;
-                }
+                $wallet->aggiungiGettoni($campo,$quantita);
             }
-            //da finire
-            //$pm->updateWallet($campi);
-            header('Location: /PolisportivaDDD/Utente/home');
-        }*/
+            $pm->update($wallet);
+            //se va male l'update??
+            header('Location: /PolisportivaDDD/Utente/mioProfilo');
+        }
+
+
+
+
 
     }
 }

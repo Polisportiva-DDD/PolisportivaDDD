@@ -42,6 +42,10 @@ class FPersistentManager
         return $result;
     }
 
+    public function updateCampo(float $prezzo, int $idCampo): bool{
+        $result = FCampo::update($prezzo, $idCampo);
+        return $result;
+    }
 
 
     public function existUsername($username): bool{

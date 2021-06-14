@@ -53,7 +53,7 @@
 </nav>
 <!-- Page Content-->
 <section class="py-5 mb-5">
-  <form method="get" action="/PolisportivaDDD/Gettoni/paga">
+  <form method="post" action="/PolisportivaDDD/Gettoni/paga">
   <div class="container">
 
     <h1 >Riepilogo acquisto</h1>
@@ -62,7 +62,7 @@
       <div class="row rounded border col-md-12 mb-2 py-4">
         <div class="col-lg-6 col-md-6 col-sm-12">
           <h4>Gettoni {$results[nr].nomeCampo}</h4>
-          <input  hidden  name="{$results[campi].id}" value="{$results[nr].quantita}" >
+          <input  hidden  name="{$results[nr].id}" value="{$results[nr].quantita}" >
         </div>
         <div class="col-lg-3 col-md-3 col-sm-12 m-auto mb-2" >
           <p>Prezzo per gettone: {$results[nr].prezzo}€</p>

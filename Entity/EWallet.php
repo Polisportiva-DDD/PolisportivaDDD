@@ -60,8 +60,10 @@ class EWallet
     public function aggiungiGettoni(ECampo $campo, int $quantita):bool
     {
         foreach ($this->listaCampiWallet as $valore){
-            if($valore->getId()==$campo->getId()){
-                $valore::aggiungiGettoni($quantita);
+            if($valore->getCampo()->getId()==$campo->getId()){
+                $g=$valore->getGettoni();
+                $g+=$quantita;
+                $valore->setGettoni($g);
                 return true;
             }
         }
@@ -73,7 +75,10 @@ class EWallet
     {
         foreach ($this->listaCampiWallet as $valore){
             if($valore->getCampo()->getId()==$campo->getId()){
-                return $valore->rimuoviGettoni($quantita);
+                $g=$valore->getGettoni();
+                $g-=$quantita;
+                $valore->setGettoni($g);
+                return true;
             }
         }
         return false;

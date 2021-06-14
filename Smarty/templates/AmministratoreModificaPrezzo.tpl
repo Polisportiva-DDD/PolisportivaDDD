@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <title>Polisportiva</title>
-
+		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 		<script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="/PolisportivaDDD/Smarty/css/styles.css" rel="stylesheet" type="text/css"/>
@@ -25,6 +25,7 @@
 	</div>
 
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
 		<div class="container">
 
 
@@ -39,7 +40,7 @@
 						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownGestione">
 							<a class="dropdown-item" href="/PolisportivaDDD/Utente/utentiBannati">Utenti Bannati</a>
 							<a class="dropdown-item" href="/PolisportivaDDD/Utente/segnalazioni">Segnalazioni</a>
-							<a class="dropdown-item" href="/PolisportivaDDD/Utente/modificaPrezzi">Modifica prezzi</a>
+							<a class="dropdown-item" href="/PolisportivaDDD/Amministratore/modificaPrezzi">Modifica prezzi</a>
 						</div>
 					</li>
 
@@ -49,6 +50,7 @@
 	</nav>
 
 	<section class="py-5">
+		<form method="POST" action="/PolisportivaDDD/Amministratore/modifica">
 		<div class="container">
 
 
@@ -80,7 +82,7 @@
 						  <td >{$results[campi].nome}</td>
 						  <td>{$results[campi].prezzo}</td>
 						  <td>  <label for="prezzo{$smarty.section.campi.iteration}">Inserisci nuovo prezzo :</label>
-							<input type="number" id="prezzo{$smarty.section.campi.iteration}" value="0" name="prezzo{$smarty.section.campi.iteration}" min="0" ></td>
+							<input class="prezzo" type="number" id="prezzo{$smarty.section.campi.iteration}" value="0" name="{$results[campi].idCampo}" min="0" step="0.2"></td>
 						</tr>
 						
 					  </tbody>
@@ -97,7 +99,7 @@
 			<div class="d-flex flex-row-reverse mb-5" >
 
 
-				<div class="p-2"><a href="#">  <button type="button" class="btn btn-primary">Modifica prezzo gettoni</button></a></div>
+				<div class="p-2">  <button id="avanti" type="submit" class="btn btn-primary" disabled>Modifica prezzo gettoni</button></div>
 
 			</div>
 
@@ -107,13 +109,26 @@
 
 
 		</div>
+		</form>
 	</section>
 	</body>
 	<footer class="py-5 bg-dark">
 		<div class="container"><p class="m-0 text-center text-white">Copyright &copy; Polisportiva DDD 2021</p></div>
 	</footer>
 
+	<script>
+		$('.prezzo').change(function() {
+			let abilitato = false;
+			$('.prezzo').each( function () {
+				if($(this).val()>0){
+					abilitato = true;
+				}
+			})
+			$('#avanti').prop("disabled",!abilitato);
+		});
 
+
+	</script>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>

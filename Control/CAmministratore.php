@@ -1,6 +1,8 @@
 <?php
 
-
+require_once (get_include_path() .'/Utility/USession.php');
+require_once (get_include_path() .'/Utility/StartSmarty.php');
+require_once (get_include_path() .'/Utility/autoload.php');
 class CAmministratore
 {
 
@@ -66,6 +68,70 @@ class CAmministratore
 
 
 
+        }
+    }
+    public function modificaPrezzi(){
+        $view = new VGettoni();
+        $pm= new FPersistentManager();
+        $campi = $pm->loadList('FCampo');
+        $resultsCampi = array();
+        foreach($campi as $campo){
+            $c = array();
+            $nome = $campo->getNome();
+            $prezzo = $campo->getPrezzo();
+            $id=$campo->getId();
+            $c['nome'] = $nome;
+            $c['prezzo'] = $prezzo;
+            $c['idCampo'] = $id;
+            $resultsCampi[] = $c;
+        }
+        $view->showAmministratoreModificaPrezzo($resultsCampi);
+    }
+
+    public function modifica(){
+        $pm = new FPersistentManager();
+        if ($_POST){
+            foreach($_POST as $chiave => $prezzo){
+                if($prezzo>0){
+                    $pm->updateCampo($prezzo,$chiave);
+                }
+            }
+            header('Location: /PolisportivaDDD/Utente/home');
+        }
+    }
+
+    public function aggiungiGettoni(){
+        $view = new VGettoni();
+        $pm= new FPersistentManager();
+        $campi = $pm->loadList('FCampo');
+        $resultsCampi = array();
+        foreach($campi as $campo){
+            $c = array();
+            $nome = $campo->getNome();
+            $prezzo = $campo->getPrezzo();
+            $id=$campo->getId();
+            $c['nome'] = $nome;
+            $c['prezzo'] = $prezzo;
+            $c['idCampo'] = $id;
+            $resultsCampi[] = $c;
+        }
+        $view->showAmministratoreAggiungiGettoni($resultsCampi);
+    }
+
+    public function aggiungi(){
+        $pm= new FPersistentManager();
+        $session = new USession();
+        $session->startSession();
+        $utente =unserialize($session->readValue('utente'));
+        $wallet=$utente->getWallet();
+        if ($_POST){
+            foreach($_POST as $chiave => $quantita){
+                $campo=$pm->load($chiave,"FCampo");
+                $wallet->aggiungiGettoni($campo,$quantita);
+            }
+            $pm->update($wallet);
+            //se va male l'update??
+            header('Location: /PolisportivaDDD/Utente/home');
         }
     }
 

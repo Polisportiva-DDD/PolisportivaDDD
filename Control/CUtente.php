@@ -17,25 +17,31 @@ class CUtente
         $view->showAssistenza();
     }
 
-    public function utenti(){
+    public function utenti($username=""){
         $session = new USession();
         $session->startSession();
         $isAmministratore= $session->readValue('isAmministratore');
-        $view = new VUtente();
-        $pm = new FPersistentManager();
-        if (isset($_POST['searchedUser'])){
-            $searchedUser = $_POST['searchedUser'];
-            $utenti = $pm->loadUtentiFiltered($searchedUser);
-            $risultatiRicerca = array();
-            foreach ($utenti as $utente){
-                $u= array();
-                $u['username'] = $utente->getUsername();
-                $u['nome'] = $utente->getNome();
-                $u['cognome'] = $utente->getCognome();
-                $risultatiRicerca[] = $u;
-            }
-            $view->showRicercaUtente($risultatiRicerca, $isAmministratore);
+        if($username!=""){
+            self::visualizzaProfilo($username);
         }
+        else{
+            $view = new VUtente();
+            $pm = new FPersistentManager();
+            if (isset($_POST['searchedUser'])){
+                $searchedUser = $_POST['searchedUser'];
+                $utenti = $pm->loadUtentiFiltered($searchedUser);
+                $risultatiRicerca = array();
+                foreach ($utenti as $utente){
+                    $u= array();
+                    $u['username'] = $utente->getUsername();
+                    $u['nome'] = $utente->getNome();
+                    $u['cognome'] = $utente->getCognome();
+                    $risultatiRicerca[] = $u;
+                }
+                $view->showRicercaUtente($risultatiRicerca, $isAmministratore);
+            }
+        }
+
     }
 
 
@@ -82,18 +88,29 @@ class CUtente
         $view=new VUtente();
         $pm = new FPersistentManager();
         $username = $session->readValue('username');
-        //$username="lor";
         $utente=$pm->load($username,"FUtente");
         $username=$utente->getUsername();
         $nome=$utente->getNome();
         $cognome=$utente->getCognome();
         $eta=$utente->getEta();
         $recensioni=$pm->loadRecensioniUtente($username);
+
+        $rec=array();
         $listCampi=$utente->getWallet()->getListaCampiWallet();
         $pic64=$utente->getImmagine();
         $type="";
         if($recensioni!=null){
             $valutazioneMedia=round($utente->calcolaMediaRecensioni($recensioni));
+            foreach ($recensioni as $valore  ){
+                $arr=array();
+                $arr["valutazione"]=$valore->getVoto();
+                $arr["titoloRecensione"]=$valore->getTitolo();
+                $arr["dataRecensione"]=$valore->getData()->format('Y-m-d');
+                $arr["descrizioneRecensione"]=$valore->getTesto();
+                $arr["username"]=$valore->getAutore()->getUsername();
+                $rec[]=$arr;
+
+            }
         }
         else{
             $valutazioneMedia=0;
@@ -111,12 +128,16 @@ class CUtente
         }
 
 
-        $view->showMioProfilo($username, $nome, $cognome, $eta, $valutazioneMedia,$result,$isAmministratore,$pic64, $type);
+        $view->showMioProfilo($username, $nome, $cognome, $eta, $valutazioneMedia,$result,$rec,$isAmministratore,$pic64, $type);
     }
 
     public function mostraCampo(){
         $view=new VUtente();
         $pm = new FPersistentManager();
+        $session = new USession();
+        $session->startSession();
+        $isAmministratore = $session->readValue('isAmministratore');
+        $isRegistrato = $session->readValue('isRegistrato');
         if (isset($_POST['idCampo'])) {
             $idCampo=$_POST['idCampo'];
             $campo=$pm->load($idCampo,"FCampo");
@@ -124,7 +145,7 @@ class CUtente
             $descrizione=$campo->getDescrizione();
             $type=$campo->getImmagine();
             $pic64="";
-            $view->showDettagliCampo($nome,$descrizione,$type,$pic64,false,true);
+            $view->showDettagliCampo($nome,$descrizione,$type,$pic64,$isRegistrato,$isAmministratore);
         }
         else{
             //che faccio?
@@ -148,19 +169,17 @@ class CUtente
     }
 
     public function recensisci(){
-        $view=new VRecensione();
         $pm = new FPersistentManager();
         $session = new USession();
         $session->startSession();
-        // $isAmministratore = $session->readValue('isAmministratore');
-        // $utente = $session->readValue('username');
+        $utente = $session->readValue('username');
         $utenteDaRec = $session->readValue('utenteDaRecensire');
 
         if (isset($_POST['titoloRecensione']) and isset($_POST['testo']) and isset($_POST['rate'])) {
             $titolo=$_POST['titoloRecensione'];
             $testo=$_POST['testo'];
             $voto=$_POST['rate'];
-            $utenteAutore=$pm->load("lor1","FUtente");
+            $utenteAutore=$pm->load($utente,"FUtente");
             $utentePosessore=$pm->load($utenteDaRec,"FUtente");
             $recensione=new ERecensione($utenteAutore,$voto,$titolo,$testo,new DateTime('now'),$utentePosessore);
             $pm->store($recensione);
@@ -216,6 +235,7 @@ class CUtente
                             }else{
                                 $session->setValue("isAmministratore",false);
                             }
+                            $session->setValue("isRegistrato",true);
                             header('Location: /PolisportivaDDD/Utente/Home');
 
                         }
@@ -264,10 +284,11 @@ class CUtente
                 $gettoni = new ECampiWallet(0,$campo);
                 array_push($listaCampiWallet,$gettoni);
             }
-            $wallet = new EWallet($listaCampiWallet,-1);
-
+            $wallet = new EWallet($listaCampiWallet);
+            $id=$pm->store($wallet);
+            $wallet->setId($id);
             $utente = new EUtente($username,$nome,$cognome,$email,$password,$data,$immagine,$wallet);
-            $utenteRegistrato = new EUtenteRegistrato('false','',$username,$nome,$cognome,$email,$password,$data,$immagine,$wallet);
+            $utenteRegistrato = new EUtenteRegistrato(false,'',$username,$nome,$cognome,$email,$password,$data,$immagine,$wallet);
 
 
             $pm -> store($utente);
@@ -306,7 +327,68 @@ class CUtente
         $session = new USession();
         $session->startSession();
         $session->stopSession();
-        header('Location: /FillSpaceWEB/Utente/home');
+        header('Location: /PolisportivaDDD/Utente/home');
     }
+
+    public function visualizzaProfilo($username){
+        $session = new USession();
+        $isAmministratore = $session->readValue('isAmministratore');
+        $pm = new FPersistentManager();
+        $view = new VUtente();
+
+            $utenteDaBannare = $pm->load($username,"FUtente");
+            if($utenteDaBannare!=null){
+                $nome=$utenteDaBannare->getNome();
+                $cognome=$utenteDaBannare->getCognome();
+                $eta =  $utenteDaBannare->getEta();
+                $pic64=$utenteDaBannare->getImmagine();
+                $type="";
+                $result=array();
+                $recensioni=$pm->loadRecensioniUtente($username);
+                if($recensioni==null){
+                    $valutazioneMedia=0;//non ha recensioni
+                }
+                else {
+                    $valutazioneMedia = round($utenteDaBannare->calcolaMediaRecensioni($recensioni));
+                    foreach ($recensioni as $valore  ){
+                        $arr=array();
+                        $arr["valutazione"]=$valore->getVoto();
+                        $arr["titoloRecensione"]=$valore->getTitolo();
+                        $arr["dataRecensione"]=$valore->getData()->format('Y-m-d');
+                        $arr["descrizioneRecensione"]=$valore->getTesto();
+                        $arr["username"]=$valore->getAutore()->getUsername();
+                        $result[]=$arr;
+
+                    }
+                }
+                if($username==$session->readValue('username')){
+                    $listaCampiWallet=$utenteDaBannare->getWallet()->getListaCampiWallet();
+                    $wallet=array();
+                    foreach ($listaCampiWallet as $value){
+                        $arr=array();
+                        $arr["nomeCampo"]=$value->getCampo()->getNome();
+                        $arr["quantitaGettoni"]=$value->getGettoni();
+                        $wallet[]=$arr;
+                    }
+                    $view->showMioProfilo($username, $nome, $cognome, $eta, $valutazioneMedia,$wallet,$result,$isAmministratore,$pic64,$type);
+                }
+                else{
+                    $session->setValue('utente', serialize($utenteDaBannare));
+
+                    $view->showProfiloUtenteRegistrato($username, $nome, $cognome, $eta, $valutazioneMedia,$result,$isAmministratore);
+                }
+
+            }
+            else{
+                //$view->showErrore($username,$isAmministratore );
+            }
+
+
+
+
+    }
+
+
+
 
 }

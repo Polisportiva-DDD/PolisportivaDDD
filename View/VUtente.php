@@ -44,13 +44,14 @@ class VUtente
      * @param $isAmministratore bool che controlla se è loggato un amministratore
      * @throws SmartyException
      */
-    public function showMioProfilo(string $username,string $nome,string $cognome,int $eta,int $media_recensioni,array $gettoni,bool $isAmministratore,$pic64, $type){
+    public function showMioProfilo(string $username,string $nome,string $cognome,int $eta,int $media_recensioni,array $gettoni,array $recensioni,bool $isAmministratore,$pic64, $type){
         $this -> smarty -> assign('username',$username);
         $this -> smarty -> assign('nome',$nome);
         $this -> smarty -> assign('cognome',$cognome);
         $this -> smarty -> assign('eta',$eta);
         $this -> smarty -> assign('valutazioneMedia',$media_recensioni);
         $this -> smarty -> assign('results', $gettoni);
+        $this -> smarty -> assign("recensioni", $recensioni);
         $this -> smarty -> assign("isAmministratore", $isAmministratore);
 
         $this -> smarty -> display(get_include_path() ."/smarty/templates/MioProfilo.tpl");

@@ -51,23 +51,7 @@ class ECampiWallet
         return $this->campo;
     }
 
-    public function aggiungiGettoni( int $quantita):bool
-    {
-      $this->gettoni+=$quantita;
-      return true;
-    }
 
-
-    public function rimuoviGettoni( int $quantita):bool
-    {
-        if ($this->gettoni < $quantita){
-            return false;
-        }
-        else{
-            $this->gettoni-=$quantita;
-            return true;
-        }
-    }
 
 }
 

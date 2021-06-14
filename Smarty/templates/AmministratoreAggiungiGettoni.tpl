@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <title>Polisportiva</title>
-
+		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 		<script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
         <!-- Core theme CSS (includes Bootstrap)-->
 <link href="/PolisportivaDDD/Smarty/css/styles.css" rel="stylesheet" type="text/css"/>
@@ -40,7 +40,7 @@
 						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownGestione">
 							<a class="dropdown-item" href="/PolisportivaDDD/Utente/utentiBannati">Utenti Bannati</a>
 							<a class="dropdown-item" href="/PolisportivaDDD/Utente/segnalazioni">Segnalazioni</a>
-							<a class="dropdown-item" href="/PolisportivaDDD/Utente/modificaPrezzi">Modifica prezzi</a>
+							<a class="dropdown-item" href="/PolisportivaDDD/Amministratore/modificaPrezzi">Modifica prezzi</a>
 						</div>
 					</li>
 
@@ -48,7 +48,7 @@
 			</div>
 		</div>
 	</nav>
-
+	<form method="POST" action="/PolisportivaDDD/Amministratore/aggiungi">
 	<section class="py-5">
 		<div class="container">
 
@@ -80,7 +80,7 @@
 						  <td >{$results[campi].nome}</td>
 						  <td>{$results[campi].prezzo}</td>
 						  <td>  <label for="quantity{$smarty.section.campi.iteration}">Inserisci quantita:</label>
-							<input type="number" id="quantity{$smarty.section.campi.iteration}" value="0" name="quantity{$smarty.section.campi.iteration}" min="0" ></td>
+							<input type="number" class="quantitaGettoni" id="quantity{$smarty.section.campi.iteration}" value="0" name="{$results[campi].idCampo}" min="0" ></td>
 						</tr>
 						
 					  </tbody>
@@ -97,21 +97,32 @@
 			<div class="d-flex flex-row-reverse mb-5" >
 
 
-				<div class="p-2"><a href="#">  <button type="button" class="btn btn-primary">Aggiungi gettoni</button></a></div>
+				<div class="p-2">  <button type="submit" id="avanti" class="btn btn-primary" disabled>Aggiungi gettoni</button></div>
 
 			</div>
 
 
 
-
-
-
 		</div>
 	</section>
+		</form>
 	</body>
 	<footer class="py-5 bg-dark">
 		<div class="container"><p class="m-0 text-center text-white">Copyright &copy; Polisportiva DDD 2021</p></div>
 	</footer>
+	<script>
+		$('.quantitaGettoni').change(function() {
+			let abilitato = false;
+			$('.quantitaGettoni').each( function () {
+				if($(this).val()>0){
+					abilitato = true;
+				}
+			})
+			$('#avanti').prop("disabled",!abilitato);
+		});
+
+
+	</script>
 
 
 

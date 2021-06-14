@@ -23,7 +23,7 @@ class FWallet
         if($id!=null){
 
             if(FCampiWallet::store($wallet->getListaCampiWallet(),$id)==true){
-                return true;
+                return $id;
             }
             else{
                 self::delete($id);//cancello il wallet creato nell tabella "wallet" in caso di errori

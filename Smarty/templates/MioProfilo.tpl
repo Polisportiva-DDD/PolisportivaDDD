@@ -30,19 +30,19 @@
   <div class="container">
 
 
-    <a class="navbar-brand" href="home">Polisportiva DDD</a>
+    <a class="navbar-brand" href="/PolisportivaDDD/Utente/home">Polisportiva DDD</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item"><a class="nav-link" href="home">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="RicercaGruppo.html">Gruppi</a></li>
+        <li class="nav-item"><a class="nav-link" href="/PolisportivaDDD/Utente/home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="/PolisportivaDDD/Gruppo/ricercaGruppi">Gruppi</a></li>
         {if $isAmministratore}
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" id="navbarDropdownGestione" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Gestione</a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownGestione">
-              <a class="dropdown-item" href="UItentiBannati.html">Utenti Bannati</a>
-              <a class="dropdown-item" href="SegnalazioniAmministratore.html">Segnalazioni</a>
-              <a class="dropdown-item" href="#">Modifica prezzi</a>
+              <a class="dropdown-item" href="/PolisportivaDDD/Utente/utentiBannati">Utenti Bannati</a>
+              <a class="dropdown-item" href="/PolisportivaDDD/Utente/segnalazioni">Segnalazioni</a>
+              <a class="dropdown-item" href="/PolisportivaDDD/Amministratore/modificaPrezzi">Modifica prezzi</a>
             </div>
           </li>
         {else}
@@ -110,8 +110,39 @@
 
 
       </div>
+    <h6>Recensioni:</h6>
+
+    <hr>
+
+    {section name=nr loop=$recensioni}
+      <div class="row">
+        <div class="container">
+          <div class="text-left mb-2">
+            <!-- Profilo -->
+            <img src="https://via.placeholder.com/75" class="rounded-circle" alt="Immagine utente">
+            <h4 >{$recensioni[nr].username}</h4>
+          </div>
+          <div class="text-left">
+            <b><h6 class="mb-2">Valutazione:
+                {for $start=1 to $recensioni[nr].valutazione}</h6>
+              <span class="fa fa-star checkedStar"></span>
+              {/for}
+              {for $start=($recensioni[nr].valutazione)+1 to 5}
+                <span class="fa fa-star"></span>
+              {/for}
+              </h6></b>
+            <b><h6>{$recensioni[nr].titoloRecensione}</h6></b>
+            <b><h6>{$recensioni[nr].dataRecensione}</h6></b>
+            <p >{$recensioni[nr].descrizioneRecensione}</p><br>
+
+          </div>
+        </div>
+      </div>
+      {sectionelse}
+      <h2>Nessuna recensione presente</h2>
+    {/section}
     </div>
-  </div>
+
 </section>
 <!-- Footer-->
 <footer class="py-5 bg-dark">
