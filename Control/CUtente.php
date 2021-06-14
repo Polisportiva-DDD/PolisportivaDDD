@@ -17,6 +17,27 @@ class CUtente
         $view->showAssistenza();
     }
 
+    public function utenti(){
+        $session = new USession();
+        $session->startSession();
+        $isAmministratore= $session->readValue('isAmministratore');
+        $view = new VUtente();
+        $pm = new FPersistentManager();
+        if (isset($_POST['searchedUser'])){
+            $searchedUser = $_POST['searchedUser'];
+            $utenti = $pm->loadUtentiFiltered($searchedUser);
+            $risultatiRicerca = array();
+            foreach ($utenti as $utente){
+                $u= array();
+                $u['username'] = $utente->getUsername();
+                $u['nome'] = $utente->getNome();
+                $u['cognome'] = $utente->getCognome();
+                $risultatiRicerca[] = $u;
+            }
+            $view->showRicercaUtente($risultatiRicerca, $isAmministratore);
+        }
+    }
+
 
     public function inviaSegnalazione(){
         $session = new USession();

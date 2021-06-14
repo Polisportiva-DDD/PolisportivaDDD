@@ -89,10 +89,9 @@ class VUtente
      * @param $isUtente bool che controlla se è loggato un utente
      * @throws SmartyException
      */
-    public function showRicercaUtente(array $listaUtenti,bool $isAmministratore,bool $isUtente){
+    public function showRicercaUtente(array $listaUtenti,bool $isAmministratore){
         $this -> smarty -> assign('results',$listaUtenti);
         $this -> smarty -> assign("isAmministratore", $isAmministratore);
-        $this -> smarty -> assign("isUtente", $isUtente);
 
         $this -> smarty -> display(get_include_path() ."/smarty/templates/ricercaUtente.tpl");
     }
