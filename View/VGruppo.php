@@ -61,7 +61,7 @@ class VGruppo
         $this->smarty->assign("isAmministratore", $isAmministratore);
         $this->smarty->assign("gruppiDetails", $gruppiDetails);
 
-        $this->smarty->display("i_tuoi_gruppi.tpl");
+        $this->smarty->display(get_include_path() ."/smarty/templates/i_tuoi_gruppi.tpl");
     }
 
     /**

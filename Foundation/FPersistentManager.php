@@ -90,6 +90,10 @@ class FPersistentManager
         return FCartaDiCredito::loadCarteUtente($username);
     }
 
+    public function loadGruppiUtente(string $username){
+        return FGruppo::loadGruppiUtente($username);
+    }
+
     public function addPartecipanteGruppo($username, $idGruppo){
         return FGruppo::addPartecipante($username, $idGruppo);
     }

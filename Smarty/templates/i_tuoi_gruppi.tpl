@@ -17,7 +17,7 @@
     <table>
       <tr >
         <th scope="col" class="padTh"><a href="/PolisportivaDDD/Utente/logout">  <button type="button" class="btn btn-primary">Logout</button></a></th>
-        <th scope="col" class="padTh"><a href="mioProfilo"><button type="button" class="btn btn-secondary">Profilo</button></a></th>
+        <th scope="col" class="padTh"><a href="/PolisportivaDDD/Utente/mioProfilo"><button type="button" class="btn btn-secondary">Profilo</button></a></th>
         <th scope="col" class="padTh"  dir="ltr"><input type="text" placeholder="Cerca" name="search"></th>
         <th scope="col" class="padTh"><span class="fas fa-search ml-1"></span></th>
       </tr>
@@ -29,17 +29,29 @@
   <div class="container">
 
 
-    <a class="navbar-brand" href="index.php">Polisportiva DDD</a>
+    <a class="navbar-brand" href="/PolisportivaDDD/Utente/home">Polisportiva DDD</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item"><a class="nav-link" href="home-utente-registrato.html">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="RicercaGruppo.html">Gruppi</a></li>
-        <li class="nav-item"><a class="nav-link" href="assistenza.html">Informazioni</a></li>
+        <li class="nav-item"><a class="nav-link" href="/PolisportivaDDD/Utente/home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="/PolisportivaDDD/Gruppo/ricercaGruppi">Gruppi</a></li>
+        {if $isAmministratore}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdownGestione" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Gestione</a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownGestione">
+              <a class="dropdown-item" href="/PolisportivaDDD/Utente/utentiBannati">Utenti Bannati</a>
+              <a class="dropdown-item" href="/PolisportivaDDD/Utente/segnalazioni">Segnalazioni</a>
+              <a class="dropdown-item" href="/PolisportivaDDD/Utente/modificaPrezzi">Modifica prezzi</a>
+            </div>
+          </li>
+        {else}
+          <li class="nav-item"><a class="nav-link" href="/PolisportivaDDD/Utente/assistenza">Informazioni</a></li>
+        {/if}
       </ul>
     </div>
   </div>
 </nav>
+
 <!-- Page Content-->
 <section class="py-5">
   <div class="container">
@@ -60,16 +72,16 @@
       <div class="col-lg-3 col-md-3 col-sm-12 m-auto">
         <p>Data e Ora: {$gruppiDetails[nr].dataEOra}</p>
       </div>
+      <a class="btn btn-primary float-right" href="/PolisportivaDDD/Gruppo/Gruppi/{$gruppiDetails[nr].id}">Vai al gruppo</a>
     </div>
+      <br><br><br>
     {sectionelse}
       <p>Nessun gruppo presente</p>
+      <br><br><br><br><br><br><br>
+
     {/section}
   </div>
-  <!-- Pagination-->
-  <ul class="pagination justify-content-center mb-4">
-    <li class="page-item"><a class="page-link" href="#!">← Precedente</a></li>
-    <li class="page-item"><a class="page-link" href="#!">Successivo →</a></li>
-  </ul>
+
 </section>
 <!-- Footer-->
 <footer class="py-5 bg-dark">

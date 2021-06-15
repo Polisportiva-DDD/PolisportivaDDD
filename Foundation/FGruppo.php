@@ -200,7 +200,20 @@ class FGruppo
         return $rows;
     }
 
-
+    public static function loadGruppiUtente(string $username){
+        $sql="SELECT idGruppo FROM " . static::$tablePartecipanti . " WHERE utente='" . $username . "';";
+        $db=FDatabase::getInstance();
+        $rows=$db->loadMultiple($sql);
+        if($rows!=null){
+            $gruppiUtente = array();
+            foreach ($rows as $row) { //Per ogni row
+                $gruppo = FGruppo::load($row['idGruppo']); //Carica il gruppo corrispondente all'id ottenuto
+                array_push($gruppiUtente, $gruppo); //Mettilo nell'array
+            }
+            return $gruppiUtente;
+        }
+        else return null;
+    }
 
 }
 

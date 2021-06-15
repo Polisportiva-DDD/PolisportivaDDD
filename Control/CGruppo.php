@@ -312,7 +312,7 @@ class CGruppo
 
 
     /**
-     * Funzione che serve a ricavare le ore disponiibli della data scelta
+     * Funzione che serve a ricavare le ore disponibili della data scelta
      * @param $dataScelta
      * @return string[]
      */
@@ -344,6 +344,34 @@ class CGruppo
             }
         }
         return $oreDisponibili;
+    }
+
+    public function visualizzaGruppiUtente(){
+        $session = new USession();
+        $session->startSession();
+        $isAmministratore = $session->readValue('isAmministratore');
+        $pm = new FPersistentManager();
+        $view = new VGruppo();
+        $gruppiUtente = $pm -> loadGruppiUtente($session->readValue('username'));
+        if ($gruppiUtente != null){
+            $gruppiDetails = array();
+            for ($i=0;$i<count($gruppiUtente); $i++){
+                $tmp = array(
+                    'nome' => $gruppiUtente[$i]->getNome(),
+                    'admin' => $gruppiUtente[$i]->getAdmin()->getUsername(),
+                    'campo' => $gruppiUtente[$i]->getCampo()->getNome(),
+                    'dataEOra' => $gruppiUtente[$i]->getDataEOra()->format('d-m-Y H:i'),
+                    'id' => $gruppiUtente[$i]->getId()
+                );
+                $gruppiDetails[]=$tmp;
+            }
+        }
+        else{
+            $gruppiDetails = array();
+        }
+
+
+        $view -> showITuoiGruppi($isAmministratore,$gruppiDetails);
     }
 }
 

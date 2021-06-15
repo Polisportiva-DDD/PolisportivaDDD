@@ -86,7 +86,7 @@
       <div class="col-md-4">
         <div class="list-group mb-4">
           <a class="list-group-item" href="/PolisportivaDDD/Utente/mioProfilo">Profilo personale</a>
-          <a class="list-group-item" href="#">I tuoi gruppi</a>
+          <a class="list-group-item" href="/PolisportivaDDD/Gruppo/visualizzaGruppiUtente">I tuoi gruppi</a>
           <a class="list-group-item" href="/PolisportivaDDD/Gettoni/visualizzaCarte">Le tue carte</a>
           <a class="list-group-item" href="#">Recensioni Effettuate</a>
         </div>
