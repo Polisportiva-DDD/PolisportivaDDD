@@ -136,11 +136,15 @@ FWallet::store($wallet);
 //$gruppo = new EGruppo(null , "GruppoNome", 15, 22, 2.5, "Descr", new DateTime("now"), array(), $utente, $c5);
 
 //FGruppo::addPartecipante('usern', 3);
-
+/*
 $utente = FUtente::load('lor');
 $campo = FCampo::load(2);
 $gruppo = new EGruppo(null, 'a', 1, 2, 2, 'a', new DateTime('now'), array(), $utente, $campo);
 $pm = new FPersistentManager();
 $id = $pm->store($gruppo);
 print_r($id);
+*/
+
+echo(get_include_path());
+
 ?>

@@ -123,23 +123,27 @@
   <div class="container">
     <h1 class="mb-4">I nostri campi</h1>
     <!-- Marketing Icons Section-->
+    <div class="row">
     {section name=nr loop=$results}
-    <div {if $smarty.section.nr.iteration is even} class="row mt-4"{/if}>
-      <div class="col-lg-6 mb-4 mb-lg-0">
+
+      <div class="col-lg-6 mb-4">
         <div class="card h-100">
           <h4 class="card-header">{$results[nr].nome}</h4>
           <img class="card-img-top" src="https://via.placeholder.com/1400x700" alt="Immagine campo">
           <div class="card-body"><p class="card-text">{$results[nr].descrizione}</p></div>
-
+          <div class="card-footer">
           <form method="POST" action="/PolisportivaDDD/Utente/mostraCampo">
             <input type="hidden" name="idCampo" value="{$results[nr].idCampo}" >
-            <div class="card-footer"><button type="submit" class="btn btn-primary float-right ">Scegli</button></div>
-
+            <button type="submit" class="btn btn-primary float-right ">Scegli</button>
           </form>
+          </div>
         </div>
       </div>
-      {/section}
+
+    {/section}
     </div>
+  </div>
+
 </section>
 <hr class="my-0" />
 
