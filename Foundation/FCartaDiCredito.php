@@ -108,13 +108,12 @@ class FCartaDiCredito
     }
 
     /**
-     * Permette la delete sul db in base alla carta di credito
-     * @param ECartadiCredito $carta
+     * Permette la delete sul db in base al numero della carta di credito
+     * @param string $numeroCarta
      * @return bool
      */
-    public static function delete(ECartadiCredito $carta){
+    public static function delete(string $numeroCarta){
         try{
-            $numeroCarta = $carta->getNumero();
             $sql = "DELETE FROM " . static::$tableName . " WHERE numero=" . $numeroCarta;
             $db=FDatabase::getInstance();
             if($db->delete($sql)) return true;

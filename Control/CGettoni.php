@@ -168,10 +168,19 @@ class CGettoni
               'dataScadenza' => $carteUtente[$i]->getScadenza()->format('d-m-y')
             );
             $results[]=$tmp;
+            $session->setValue('numeroCarta',$tmp['numeroCarta']);
         }
         $view -> showLeTueCarte($isAmministratore,$results);
     }
 
+    public function rimuoviCarta(){
+        $session = new USession();
+        $session->startSession();
+        $pm = new FPersistentManager();
+        $numerocarta=$_POST["numeroCarta"];
+        $pm->delete($numerocarta,'FCartaDiCredito');
+        header('Location: /PolisportivaDDD/Gettoni/visualizzaCarte');
+    }
 
 
     }

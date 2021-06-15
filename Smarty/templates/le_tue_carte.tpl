@@ -94,7 +94,12 @@
                   </div>
                 </div>
               </div>
-              <a class="btn btn-primary float-right mt-2" href="#!">Rimuovi carta</a>
+              <form method="POST" action="/PolisportivaDDD/Gettoni/rimuoviCarta">
+                <button name="numeroCarta" value={$results[nr].numeroCarta} type="submit" class="btn btn-primary float-right mt-2" >
+                  Rimuovi carta
+                </button>
+              </form>
+
             </div>
           </div>
           {sectionelse}
