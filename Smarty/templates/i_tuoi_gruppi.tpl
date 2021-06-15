@@ -61,7 +61,7 @@
     {section name=nr loop=$gruppiDetails}
     <div class="row rounded border py-4 float-center mx-2 mb-5">
       <div class="col-lg-3 col-md-3 col-sm-12 m-auto">
-        <p>Nome: {$gruppiDetails[nr].nome}</p>
+        <p>Nome: <a href="/PolisportivaDDD/Gruppo/Gruppi/{$gruppiDetails[nr].id}"> {$gruppiDetails[nr].nome}</a></p>
       </div>
       <div class="col-lg-3 col-md-3 col-sm-12 m-auto">
         <p>Admin: {$gruppiDetails[nr].admin}</p>
@@ -72,7 +72,6 @@
       <div class="col-lg-3 col-md-3 col-sm-12 m-auto">
         <p>Data e Ora: {$gruppiDetails[nr].dataEOra}</p>
       </div>
-      <a class="btn btn-primary float-right" href="/PolisportivaDDD/Gruppo/Gruppi/{$gruppiDetails[nr].id}">Vai al gruppo</a>
     </div>
       <br><br><br>
     {sectionelse}

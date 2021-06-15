@@ -357,11 +357,11 @@ class CGruppo
             $gruppiDetails = array();
             for ($i=0;$i<count($gruppiUtente); $i++){
                 $tmp = array(
+                    'id' => $gruppiUtente[$i]->getId(),
                     'nome' => $gruppiUtente[$i]->getNome(),
                     'admin' => $gruppiUtente[$i]->getAdmin()->getUsername(),
                     'campo' => $gruppiUtente[$i]->getCampo()->getNome(),
-                    'dataEOra' => $gruppiUtente[$i]->getDataEOra()->format('d-m-Y H:i'),
-                    'id' => $gruppiUtente[$i]->getId()
+                    'dataEOra' => $gruppiUtente[$i]->getDataEOra()->format('d-m-Y H:i')
                 );
                 $gruppiDetails[]=$tmp;
             }
