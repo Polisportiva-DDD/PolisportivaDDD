@@ -76,9 +76,14 @@ class EWallet
         foreach ($this->listaCampiWallet as $valore){
             if($valore->getCampo()->getId()==$campo->getId()){
                 $g=$valore->getGettoni();
-                $g-=$quantita;
-                $valore->setGettoni($g);
-                return true;
+                if($g >= $quantita){
+                    $g-=$quantita;
+                    $valore->setGettoni($g);
+                    return true;
+                }
+                else{
+                    return false;
+                }
             }
         }
         return false;

@@ -135,4 +135,21 @@ class CAmministratore
         }
     }
 
+    public function eliminaGruppo($id=-1){
+        $pm= new FPersistentManager();
+        $session = new USession();
+        $session->startSession();
+        $usernameAmm = $session->readValue('username');
+        if ($id!=-1){
+            $gruppo = $pm->load($id, 'FGruppo');
+            $campo = $gruppo->getCampo();
+            $partecipanti = $gruppo->getPartecipanti();
+            $amministratore = $pm->load($usernameAmm, 'FAmministratore');
+            $amministratore->rimborsaGruppo($partecipanti, $campo);
+            $pm->delete($id, 'FGruppo');
+        }
+        header("Location: /PolisportivaDDD/Utente/home");
+
+    }
+
 }

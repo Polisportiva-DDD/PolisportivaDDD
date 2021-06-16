@@ -207,11 +207,13 @@ class EGruppo
     }
 
 
+
     /**
      * Aggiunge un partecipante al gruppo
      * @param EUtente $utente
      * @return bool
      */
+    /*
     public function aggiungiPartecipante(EUtente $utente): bool{
 
         $numeroMaxPartecipanti = $this->campo->getNumeroMassimo();
@@ -227,6 +229,21 @@ class EGruppo
             array_push($this->partecipanti, $utente);
             return true;
         }
+    }*/
+
+    /**
+     * Restituisce true se il gruppo è al completo, false altrimenti
+     * @return bool
+     */
+    public function isPieno(): bool{
+        $numeroMaxPartecipanti = $this->campo->getNumeroMassimo();
+
+        //Se il gruppo è già al completo restituisci false
+        $numeroPartecipanti = count($this->partecipanti);
+        if ($numeroPartecipanti == $numeroMaxPartecipanti){
+            return true;
+        }
+        else return false;
     }
 
     /**
@@ -263,6 +280,32 @@ class EGruppo
             return false;
         }
 
+    }
+
+    public function hasPartecipante($username){
+        return in_array($username, $this->partecipanti);
+    }
+
+    /**
+     * Funzione che verifica se un utente può partecipare o meno al gruppo, true in caso affermativo, false altrimenti
+     * @param $utente
+     * @return bool
+     */
+    public function verificaCondizioni($utente): bool{
+        $etaUtente = $utente->getEta();
+        $pm = new FPersistentManager();
+        $recensioni = $pm->loadRecensioniUtente($utente->getUsername());
+        $val = round($utente->calcolaMediaRecensioni($recensioni));
+        $etaMin = $this->etaMinima;
+        $etaMax = $this->etaMassima;
+        $valMin = $this->votoMinimo;
+
+        if ($etaMin<=$etaUtente && $etaUtente<=$etaMax && $val>=$valMin){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     public function toArray(): array{

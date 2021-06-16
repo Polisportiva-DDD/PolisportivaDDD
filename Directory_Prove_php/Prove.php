@@ -145,6 +145,20 @@ $id = $pm->store($gruppo);
 print_r($id);
 */
 
-echo(get_include_path());
+$pm = new FPersistentManager();
+$amm = $pm->load('lor1', 'FAmministratore');
+$campo = $pm->load(4, 'FCampo');
+$u = $pm->load('lor', 'FUtente');
+$g = $pm->load(16, 'FGruppo');
+$partecipanti = $g->getPartecipanti();
+foreach($partecipanti as $partecipante){
+    echo($partecipante->getUsername());
+}
+if(in_array('lor', $partecipanti)){
+    echo("true");
+}
+else{
+    echo("false");
+}
 
 ?>

@@ -95,11 +95,11 @@
           Descrizione: {$descrizione}
         </div>
         <div class="float-right mt-5">
-          <button class="btn btn-primary" href="#">Chiedi di partecipare</button>
+          <a href="/PolisportivaDDD/gruppo/partecipa/{$idGruppo}"><button class="btn btn-primary">Partecipa</button></a>
         </div>
         {if $isAmministratore}
           <div class="float-right mt-5 mx-3">
-            <button class="btn btn-danger" href="#">Elimina gruppo</button>
+            <a href="/PolisportivaDDD/amministratore/eliminaGruppo/{$idGruppo}"><button class="btn btn-danger">Elimina gruppo</button></a>
           </div>
         {/if}
       </div>

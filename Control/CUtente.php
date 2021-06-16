@@ -68,17 +68,18 @@ class CUtente
         $pm = new FPersistentManager();
         $campi=$pm->loadList("FCampo");
         $result=array();
-
+        $type = 'image/png';
         foreach ($campi as $value){
 
             $nomiCampi=array();
             $nomiCampi['nome']=$value->getNome();
-            $nomiCampi['descrizione']=$value->getDescrizione();
             $nomiCampi['idCampo']=$value->getId();
+            $nomiCampi['pic64'] = $value->getImmagine();
+
             $result[]=$nomiCampi;
 
         }
-        $view->showHome($isAmministratore,$isRegistrato,$result);
+        $view->showHome($isAmministratore,$isRegistrato,$result, $type);
     }
 
     public function mioProfilo(){
@@ -143,9 +144,9 @@ class CUtente
             $campo=$pm->load($idCampo,"FCampo");
             $nome=$campo->getNome();
             $descrizione=$campo->getDescrizione();
-            $type=$campo->getImmagine();
-            $pic64="";
-            $view->showDettagliCampo($nome,$descrizione,$type,$pic64,$isRegistrato,$isAmministratore);
+            $type='image/jpg';
+            $pic64=$campo->getImmagine();
+            $view->showDettagliCampo($nome,$descrizione,$pic64, $type,$isRegistrato,$isAmministratore);
         }
         else{
             //che faccio?

@@ -55,22 +55,22 @@
     <!-- Page heading-->
     <h1>Scegli campo</h1>
     <hr>
-
-      {section name=nr loop=$results}
-      {if $smarty.section.nr.iteration is odd}<div class="row mt-4">{/if}
-      <form action="/PolisportivaDDD/Gruppo/scegliData" method="POST">
-      <div class="col-lg-6 mb-4 mb-lg-0">
+    <div class="row">
+    {section name=nr loop=$results}
+      <div class="col-md-6 mb-4">
         <div class="card h-100">
           <h4 class="card-header">{$results[nr].nome}</h4>
-          <img class="card-img-top" src="data:{$results[nr].type};base64,{$results[nr].pic64}" width="1400" height="700" alt="Immagine campo">
+          <img class="card-img-top" src="data:{$type};base64,{$results[nr].pic64}" alt="Immagine campo">
           <div class="card-footer">
-            <button type="submit" class="btn btn-primary float-right" name="idCampo" value={$results[nr].idCampo}>Scegli</button></form>
+            <form action="/PolisportivaDDD/Gruppo/scegliData" method="POST">
+              <button type="submit" class="btn btn-primary float-right" name="idCampo" value={$results[nr].idCampo}>Scegli</button>
+            </form>
           </div>
         </div>
       </div>
-      </form>
-      {/section}
-      {if $smarty.section.nr.iteration is odd}</div>{/if}
+    {/section}
+    </div>
+  </div>
 </section>
 <!-- Footer-->
 <footer class="py-5 bg-dark">

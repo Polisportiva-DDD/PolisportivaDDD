@@ -36,6 +36,7 @@ class CGruppo
         $campi = FPersistentManager::loadList("FCampo");
         $view = new VGruppo();
         $results = array();
+        $type = 'image/png';
         foreach($campi as $campo){
             $c = array();
             $id = $campo->getId();
@@ -44,10 +45,10 @@ class CGruppo
             $c["idCampo"] = $id;
             $c["nome"] = $nome;
             $c["immagine"] = $immagine;
-            $c['type'] = 'image/png';
+            $c['pic64'] = $immagine;
             $results[] = $c;
         }
-        $view->showScegliCampo($results, $isAmministratore);
+        $view->showScegliCampo($results, $type, $isAmministratore);
 
     }
 
@@ -171,19 +172,12 @@ class CGruppo
         $dataString = date('Y-m-d', $data);
         $ora = $session->readValue('oraScelta');
         $dataEOra = DateTime::createFromFormat('Y-m-d H:i:s', $dataString . $ora);
-        $partecipanti = array();
-
-        //DA SCOMMENTARE
-        //$adminUsername = $session->readValue('username');
-        //$admin = $pm->load('username', 'FUtente')
-        //$parteicipanti[] = $admin;
 
 
-        //SOLO PER PROVA ADMIN='lor'
-        $adminUsername='lor';
+        $adminUsername = $session->readValue('username');
+        $admin = $pm->load('username', 'FUtente');
         $admin = $pm->load($adminUsername, 'FUtente');
         $campo = $pm->load($idCampo, 'FCampo');
-        //SOLO PER PROVA ADMIN='lor'
         $abbastanzaGettoni = self::rimuoviGettone($username, $idCampo);
         if ($abbastanzaGettoni){
             $gruppo = new EGruppo(null, $nomeGruppo, $etaMinima, $etaMassima, $valutazioneMinima, $descrizione, $dataEOra, array(), $admin, $campo);
@@ -200,7 +194,9 @@ class CGruppo
             $session->deleteValue('dataScelta');
             $session->deleteValue('invitati');
             $session->deleteValue('idCampo');
-            header( "refresh:3;url=/PolisportivaDDD/Utente/Home");
+            $messaggio = 'Siamo spiacenti, non ha un gettone per il campo da lei scelto';
+            $session->setValue('messaggioErrore', $messaggio);
+            header("Location: /PolisportivaDDD/messaggio/genericError");
         }
 
     }
@@ -211,6 +207,7 @@ class CGruppo
 
     public function gruppi($id=-1){
         $session = new USession();
+        $session->startSession();
         $isAmministratore = $session->readValue('isAmministratore');
         $pm = new FPersistentManager();
         $view = new VGruppo();
@@ -280,8 +277,9 @@ class CGruppo
             $etaMassima = $gruppo->getEtaMassima();
             $votoMinimo = $gruppo->getVotoMinimo();
             $descrizione = $gruppo->getDescrizione();
+            $idGruppo = $gruppo->getId();
 
-            $view->showDettagliGruppo($nomePartecipanti, $admin, $campo, $dataEOra, $postiDisponibili, $etaMinima, $etaMassima, $votoMinimo, $descrizione, $isAmministratore);
+            $view->showDettagliGruppo($idGruppo, $nomePartecipanti, $admin, $campo, $dataEOra, $postiDisponibili, $etaMinima, $etaMassima, $votoMinimo, $descrizione, $isAmministratore);
 
         }
 
@@ -373,5 +371,58 @@ class CGruppo
 
         $view -> showITuoiGruppi($isAmministratore,$gruppiDetails);
     }
+
+
+    /**
+     * Metodo che permette la partecipazione al gruppo da parte dell'utente che ne fa richiesta. L'id del gruppo gli
+     * viene passato come parametro mentre l'username si prende dall'array session. Restituisce false se l'utente non soddisfa
+     * le condizioni oppure se il gruppo è già pieno.
+     * @param $idGruppo
+     * @return false
+     */
+    public function partecipa($idGruppo){
+        $session = new USession();
+        $session->startSession();
+        $username = $session->readValue('username');
+        $pm = new FPersistentManager();
+        $utente = $pm->load($username, 'FUtente');
+        $gruppo = $pm->load($idGruppo, 'FGruppo');
+        //Se soddisfa le condizioni
+        if ($gruppo->verificaCondizioni($utente)){
+            //Se il gruppo non è pieno
+            if(!($gruppo->isPieno())){
+                //Se non è già un partecipante
+                if(!($gruppo->hasPartecipante($username))){
+                    //Se ha abbastanza gettoni per quel campo
+                    if(self::rimuoviGettone($username, $gruppo->getCampo()->getId())){
+                        $pm->addPartecipanteGruppo($username, $idGruppo);
+                        header("Location: /PolisportivaDDD/utente/home");
+                    }
+                    else{
+                        $messaggio = 'Siamo spiacenti, non ha un gettone per questo campo';
+                        $session->setValue('messaggioErrore', $messaggio);
+                        header("Location: /PolisportivaDDD/messaggio/genericError");
+                    }
+                }
+                else{
+                    $messaggio = 'Siamo spiacenti, è già un partecipante di questo gruppo';
+                    $session->setValue('messaggioErrore', $messaggio);
+                    header("Location: /PolisportivaDDD/messaggio/genericError");
+                }
+            }
+            else{
+                $messaggio = 'Siamo spiacenti, il gruppo è già pieno';
+                $session->setValue('messaggioErrore', $messaggio);
+                header("Location: /PolisportivaDDD/messaggio/genericError");
+            }
+        }
+        else{
+            $messaggio = 'Siamo spiacenti, non soddisfa i requisiti per partecipare al gruppo';
+            $session->setValue('messaggioErrore', $messaggio);
+            header("Location: /PolisportivaDDD/messaggio/genericError");
+        }
+
+    }
+
 }
 

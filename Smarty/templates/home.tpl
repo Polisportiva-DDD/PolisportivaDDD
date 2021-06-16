@@ -129,12 +129,11 @@
       <div class="col-lg-6 mb-4">
         <div class="card h-100">
           <h4 class="card-header">{$results[nr].nome}</h4>
-          <img class="card-img-top" src="https://via.placeholder.com/1400x700" alt="Immagine campo">
-          <div class="card-body"><p class="card-text">{$results[nr].descrizione}</p></div>
+          <img class="card-img-top" src="data:{$type};base64,{$results[nr].pic64}" alt="Immagine campo">
           <div class="card-footer">
           <form method="POST" action="/PolisportivaDDD/Utente/mostraCampo">
             <input type="hidden" name="idCampo" value="{$results[nr].idCampo}" >
-            <button type="submit" class="btn btn-primary float-right ">Scegli</button>
+            <button type="submit" class="btn btn-primary float-right ">Dettagli</button>
           </form>
           </div>
         </div>

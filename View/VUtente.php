@@ -21,14 +21,14 @@ class VUtente
         $this->smarty->assign("isAmministratore", $isAmministratore);
 
         $this->smarty->assign("isRegistrato", $isRegistrato);
-
         $this->smarty->display(get_include_path() ."/smarty/templates/dettagliCampo.tpl");
     }
 
-    public function showHome($isAmministratore, $isRegistrato, $nomeCampi){
+    public function showHome($isAmministratore, $isRegistrato, $nomeCampi, $type){
         $this->smarty->assign("isAmministratore", $isAmministratore);
         $this->smarty->assign("isRegistrato", $isRegistrato);
         $this->smarty->assign("results", $nomeCampi);
+        $this->smarty->assign("type", $type);
 
         $this->smarty->display(get_include_path() ."/smarty/templates/home.tpl");
     }

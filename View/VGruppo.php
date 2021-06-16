@@ -40,10 +40,11 @@ class VGruppo
         $this->smarty->display(get_include_path() ."/smarty/templates/creaGruppoListaInvitati.tpl");
     }
 
-    public function showDettagliGruppo($invitati, $admin, $campo, $dataEOra, $postiDisponibili,
+    public function showDettagliGruppo($idGruppo, $invitati, $admin, $campo, $dataEOra, $postiDisponibili,
                                         $etaMinima, $etaMassima, $votoMinimo, $descrizione,
                                         $isAmministratore){
         $this->smarty->assign("isAmministratore", $isAmministratore);
+        $this->smarty->assign("idGruppo", $idGruppo);
         $this->smarty->assign("invitati", $invitati);
         $this->smarty->assign("admin", $admin);
         $this->smarty->assign("campo", $campo);
@@ -85,8 +86,9 @@ class VGruppo
      * @param array $campi lista dei campi presenti da visualizzare
      * @throws SmartyException
      */
-    public function showScegliCampo(array $campi, $isAmministratore){
+    public function showScegliCampo(array $campi, $type,  $isAmministratore){
         $this -> smarty -> assign('results',$campi);
+        $this -> smarty -> assign('type',$type);
         $this -> smarty -> assign("isAmministratore", $isAmministratore);
         $this->smarty->display(get_include_path() ."/smarty/templates/creaGruppo_scegliCampo.tpl");
     }

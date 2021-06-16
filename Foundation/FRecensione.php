@@ -87,16 +87,13 @@ class FRecensione
             $sql="SELECT * FROM " . static::$tableName . " WHERE possessore='" . $username . "';";
             $db=FDatabase::getInstance();
             $result=$db->loadMultiple($sql);
-            if($result!=null){
-                $recensioniUtente = array();
-                for($i=0; $i<count($result); $i++){
-                    $possessore = FUtente::load($result[$i]['possessore']);
-                    $autore = FUtente::load($result[$i]['autore']);
-                    $recensioniUtente[] = new ERecensione($autore,$result[$i]['voto'],$result[$i]['titolo'],$result[$i]['testo'],new DateTime($result[$i]['data']),$possessore,$result[$i]['id']);
-                }
-                return $recensioniUtente;
+            $recensioniUtente = array();
+            for($i=0; $i<count($result); $i++){
+                $possessore = FUtente::load($result[$i]['possessore']);
+                $autore = FUtente::load($result[$i]['autore']);
+                $recensioniUtente[] = new ERecensione($autore,$result[$i]['voto'],$result[$i]['titolo'],$result[$i]['testo'],new DateTime($result[$i]['data']),$possessore,$result[$i]['id']);
             }
-            else return null;
+            return $recensioniUtente;
         }
         catch(Exception $e){
             echo ("Error");

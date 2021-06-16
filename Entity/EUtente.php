@@ -148,14 +148,6 @@
 		return $this->dataDiNascita;
 	}
 
-     /**
-      * Restituisce la media delle recensioni dell'utente
-      * @return float
-      */
-     public function getMediaRecensioni():float{
-		return $this->mediaRecensioni;
-	}
-
 
      /**
       * Imposta l'username dell'utente

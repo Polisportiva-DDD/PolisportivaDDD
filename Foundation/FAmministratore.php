@@ -20,12 +20,23 @@ class FAmministratore
     }
 
     public static function exist(string $username){
-        print($username);
         $sql = "SELECT * FROM " . static::$tableName . " WHERE username=" . "'".$username."'";
         $db=FDatabase::getInstance();
         $response = $db->exist($sql);
         if($response) return true;
         else return false;
+    }
+
+    public static function load(string $username){
+        if(self::exist($username)){
+            $u =FUtente::load($username);
+            $amm = new EAmministratore($username, $u->getNome(),$u->getCognome(), $u->getEmail(), $u->getPassword(),
+            $u->getDataDiNascita(), $u->getImmagine(), $u->getWallet());
+            return $amm;
+        }
+        else{
+            return 0;
+        }
     }
 
 }

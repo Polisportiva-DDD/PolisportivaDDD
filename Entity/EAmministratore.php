@@ -31,4 +31,18 @@ class EAmministratore extends EUtente
     public function modificaPrezzo(ECampo $campo, float $prezzo): bool{
         //Da implementare
     }
+
+    public function RimborsaGruppo(array $partecipanti, ECampo $campo): bool{
+        $pm = new FPersistentManager();
+        if($partecipanti) {
+            foreach ($partecipanti as $partecipante) {
+                $wallet = $partecipante->getWallet();
+                $wallet->aggiungiGettoni($campo, 1);
+                $pm->update($wallet);
+                return true;
+            }
+        }
+        else return false;
+
+    }
 }
