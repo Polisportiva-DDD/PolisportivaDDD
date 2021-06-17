@@ -26,6 +26,7 @@ class CGettoni
             $c['nome'] = $nome;
             $c['prezzo'] = $prezzo;
             $c['id'] = $id;
+            $c['pic64']=$campo->getImmagine();
             $resultsCampi[] = $c;
         }
         $carte = $pm->loadCarteUtente($username);

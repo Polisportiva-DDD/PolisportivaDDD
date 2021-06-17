@@ -68,7 +68,7 @@ class CUtente
         $pm = new FPersistentManager();
         $campi=$pm->loadList("FCampo");
         $result=array();
-        $type = 'image/png';
+        $type = '';
         foreach ($campi as $value){
 
             $nomiCampi=array();
@@ -87,49 +87,58 @@ class CUtente
         $session->startSession();
         $isAmministratore = $session->readValue('isAmministratore');
         $view=new VUtente();
-        $pm = new FPersistentManager();
-        $username = $session->readValue('username');
-        $utente=$pm->load($username,"FUtente");
-        $username=$utente->getUsername();
-        $nome=$utente->getNome();
-        $cognome=$utente->getCognome();
-        $eta=$utente->getEta();
-        $recensioni=$pm->loadRecensioniUtente($username);
+        if(CUtente::isLogged()){
+            $pm = new FPersistentManager();
+            $username = $session->readValue('username');
+            $utente=$pm->load($username,"FUtente");
+            $username=$utente->getUsername();
+            $nome=$utente->getNome();
+            $cognome=$utente->getCognome();
+            $eta=$utente->getEta();
+            $recensioni=$pm->loadRecensioniUtente($username);
 
-        $rec=array();
-        $listCampi=$utente->getWallet()->getListaCampiWallet();
-        $pic64=$utente->getImmagine();
-        $type="";
-        if($recensioni!=null){
-            $valutazioneMedia=round($utente->calcolaMediaRecensioni($recensioni));
-            foreach ($recensioni as $valore  ){
-                $arr=array();
-                $arr["valutazione"]=$valore->getVoto();
-                $arr["titoloRecensione"]=$valore->getTitolo();
-                $arr["dataRecensione"]=$valore->getData()->format('Y-m-d');
-                $arr["descrizioneRecensione"]=$valore->getTesto();
-                $arr["username"]=$valore->getAutore()->getUsername();
-                $rec[]=$arr;
+            $rec=array();
+            $listCampi=$utente->getWallet()->getListaCampiWallet();
+            $pic64=base64_encode($utente->getImmagine());
+            $type="";
+            if($recensioni!=null){
+                $valutazioneMedia=round($utente->calcolaMediaRecensioni($recensioni));
+                foreach ($recensioni as $valore  ){
+                    $arr=array();
+                    $arr["valutazione"]=$valore->getVoto();
+                    $arr["titoloRecensione"]=$valore->getTitolo();
+                    $arr["dataRecensione"]=$valore->getData()->format('Y-m-d');
+                    $arr["descrizioneRecensione"]=$valore->getTesto();
+                    $arr["username"]=$valore->getAutore()->getUsername();
+                    $utenteRec=$pm->load($arr["username"],"FUtente");
+                    $arr["pic64"]=base64_encode($utenteRec->getImmagine());
+                    $rec[]=$arr;
+
+                }
+            }
+            else{
+                $valutazioneMedia=0;
+            }
+
+            $result=array();
+
+            foreach ($listCampi as $value){
+
+                $gettoni=array();
+                $gettoni['nomeCampo']=$value->getCampo()->getNome();
+                $gettoni['quantitaGettoni']=$value->getGettoni();
+                $result[]=$gettoni;
 
             }
+
+
+            $view->showMioProfilo($username, $nome, $cognome, $eta, $valutazioneMedia,$result,$rec,$isAmministratore,$pic64, $type);
+
         }
         else{
-            $valutazioneMedia=0;
+            header('Location: /PolisportivaDDD/Utente/Home');
         }
 
-        $result=array();
-
-        foreach ($listCampi as $value){
-
-            $gettoni=array();
-            $gettoni['nomeCampo']=$value->getCampo()->getNome();
-            $gettoni['quantitaGettoni']=$value->getGettoni();
-            $result[]=$gettoni;
-
-        }
-
-
-        $view->showMioProfilo($username, $nome, $cognome, $eta, $valutazioneMedia,$result,$rec,$isAmministratore,$pic64, $type);
     }
 
     public function mostraCampo(){
@@ -313,13 +322,17 @@ class CUtente
         $pm = new FPersistentManager();
         $utentiBannati=$pm->loadList("FUtenteRegistrato");
         $result=array();
-        foreach ($utentiBannati as $value){
+        if($utentiBannati!=null){
+            foreach ($utentiBannati as $value){
             $array=array();
             $array["motivoBan"]=$value->getMotivazione();
             $array["username"]=$value->getUsername();
+            $utente=$pm->load($value->getUsername(),"FUtente");
+            $array["pic64"]=base64_encode($utente->getImmagine());
             $result[]=$array;
-
+            }
         }
+
         $view->showUtentiBannati($result);
 
     }
@@ -352,7 +365,7 @@ class CUtente
                 $nome=$utenteDaBannare->getNome();
                 $cognome=$utenteDaBannare->getCognome();
                 $eta =  $utenteDaBannare->getEta();
-                $pic64=$utenteDaBannare->getImmagine();
+                $pic64=base64_encode($utenteDaBannare->getImmagine());
                 $type="";
                 $result=array();
                 $recensioni=$pm->loadRecensioniUtente($username);
@@ -368,6 +381,8 @@ class CUtente
                         $arr["dataRecensione"]=$valore->getData()->format('Y-m-d');
                         $arr["descrizioneRecensione"]=$valore->getTesto();
                         $arr["username"]=$valore->getAutore()->getUsername();
+                        $utenteRec=$pm->load($arr["username"],"FUtente");
+                        $arr["pic64"]=base64_encode($utenteRec->getImmagine());
                         $result[]=$arr;
 
                     }
@@ -386,7 +401,7 @@ class CUtente
                 else{
                     $session->setValue('utente', serialize($utenteDaBannare));
 
-                    $view->showProfiloUtenteRegistrato($username, $nome, $cognome, $eta, $valutazioneMedia,$result,$isAmministratore);
+                    $view->showProfiloUtenteRegistrato($username, $nome, $cognome, $eta, $valutazioneMedia,$result,$isAmministratore,$pic64);
                 }
 
             }
@@ -397,8 +412,24 @@ class CUtente
 
 
 
+
+
+
     }
 
+
+    static function isLogged() {
+        $identificato = false;
+        if (isset($_COOKIE['PHPSESSID'])) {
+            if (session_status() == PHP_SESSION_NONE) {
+                session_start();
+            }
+        }
+        if (isset($_SESSION['username'])) {
+            $identificato = true;
+        }
+        return $identificato;
+    }
 
 
 

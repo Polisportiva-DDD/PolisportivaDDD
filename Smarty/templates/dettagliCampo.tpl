@@ -18,10 +18,12 @@
     <div class="table-responsive" >
       <table>
         <tr >
-          <th scope="col" class="padTh"><a href="/PolisportivaDDD/Utente/logout">  <button type="button" class="btn btn-primary">Logout</button></a></th>
-          <th scope="col" class="padTh"><a href="mioProfilo"><button type="button" class="btn btn-secondary">Profilo</button></a></th>
-          <th scope="col" class="padTh"  dir="ltr"><input type="text" placeholder="Cerca" name="search"></th>
-          <th scope="col" class="padTh"><span class="fas fa-search ml-1"></span></th>
+          <th scope="col" class="padTh"><a href="/PolisportivaDDD/Utente/logout">  <button type="submit" class="btn btn-primary">Logout</button></a></th>
+          <th scope="col" class="padTh"><a href="/PolisportivaDDD/Utente/mioProfilo"><button type="submit" class="btn btn-secondary" >Profilo</button></a></th>
+          <form method="post" action="/PolisportivaDDD/Utente/Utenti">
+            <th scope="col" class="padTh"><button type="submit" class="btn btn-outline-dark"><span class="fas fa-search"></span></button></th>
+            <th scope="col" class="padTh"  dir="ltr"><input type="text" placeholder="Cerca" name="searchedUser"></th>
+          </form>
         </tr>
       </table>
     </div>
@@ -31,19 +33,19 @@
     <div class="container">
 
 
-      <a class="navbar-brand" href="home">Polisportiva DDD</a>
+      <a class="navbar-brand" href="/PolisportivaDDD/Utente/home">Polisportiva DDD</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item"><a class="nav-link" href="home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/PolisportivaDDD/Utente/home">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="/PolisportivaDDD/Gruppo/Gruppi">Gruppi</a></li>
           {if $isAmministratore}
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" id="navbarDropdownGestione" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Gestione</a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownGestione">
-                <a class="dropdown-item" href="UItentiBannati.html">Utenti Bannati</a>
-                <a class="dropdown-item" href="/PolisportivaDDD/amministratore/segnalazioni">Segnalazioni</a>
-                <a class="dropdown-item" href="#">Modifica prezzi</a>
+                <a class="dropdown-item" href="/PolisportivaDDD/Utente/utentiBannati">Utenti Bannati</a>
+                <a class="dropdown-item" href="/PolisportivaDDD/Amministratore/segnalazioni">Segnalazioni</a>
+                <a class="dropdown-item" href="/PolisportivaDDD/Amministratore/modificaPrezzi">Modifica prezzi</a>
               </div>
             </li>
           {else}
@@ -66,12 +68,9 @@
   </div>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-      <a class="navbar-brand" href="home">Polisportiva DDD</a>
+      <a class="navbar-brand" href="/PolisportivaDDD/Utente/home">Polisportiva DDD</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item"><a class="nav-link" href="home">Home</a></li>
-          <ul>
       </div>
     </div>
   </nav>
@@ -82,7 +81,11 @@
 <div class="container  py-5">
   <div class="row flex-lg-row-reverse  py-5">
     <div class="col-lg-6">
-      <img src="data:{$type};base64,{$pic64}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="500" height="500" loading="lazy">
+      {if $pic64  neq ""}
+      <img src="data:;base64,{$pic64}" class="d-block mx-lg-auto img-fluid" alt="Immagine campo" width="300" height="300" loading="lazy">
+      {else}
+        <img  src="https://via.placeholder.com/300"  alt="Immagine campo">
+      {/if}
     </div>
     <div class="col-lg-6">
       <h1 class="mb-3">{$nomeCampo}</h1>

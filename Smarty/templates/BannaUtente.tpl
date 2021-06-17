@@ -17,10 +17,12 @@
   <div class="table-responsive" >
     <table>
       <tr >
-        <th scope="col" class="padTh"><a href="/PolisportivaDDD/Utente/logout">  <button type="button" class="btn btn-primary">Logout</button></a></th>
-        <th scope="col" class="padTh"><a href="mioProfilo"><button type="button" class="btn btn-secondary">Profilo</button></a></th>
-        <th scope="col" class="padTh"  dir="ltr"><input type="text" placeholder="Cerca" name="search"></th>
-        <th scope="col" class="padTh"><span class="fas fa-search ml-1"></span></th>
+        <th scope="col" class="padTh"><a href="/PolisportivaDDD/Utente/logout">  <button type="submit" class="btn btn-primary">Logout</button></a></th>
+        <th scope="col" class="padTh"><a href="/PolisportivaDDD/Utente/mioProfilo"><button type="submit" class="btn btn-secondary" >Profilo</button></a></th>
+        <form method="post" action="/PolisportivaDDD/Utente/Utenti">
+          <th scope="col" class="padTh"><button type="submit" class="btn btn-outline-dark"><span class="fas fa-search"></span></button></th>
+          <th scope="col" class="padTh"  dir="ltr"><input type="text" placeholder="Cerca" name="searchedUser"></th>
+        </form>
       </tr>
     </table>
   </div>
@@ -40,7 +42,7 @@
           <a class="nav-link dropdown-toggle" id="navbarDropdownGestione" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Gestione</a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownGestione">
             <a class="dropdown-item" href="/PolisportivaDDD/Utente/utentiBannati">Utenti Bannati</a>
-            <a class="dropdown-item" href="/PolisportivaDDD/Utente/segnalazioni">Segnalazioni</a>
+            <a class="dropdown-item" href="/PolisportivaDDD/Amministratore/segnalazioni">Segnalazioni</a>
             <a class="dropdown-item" href="/PolisportivaDDD/Amministratore/modificaPrezzi">Modifica prezzi</a>
           </div>
         </li>
@@ -81,19 +83,21 @@
     </div>
 
 
+    <div class="row mt-2 mb-2">
+      <div class="col-lg-8 mb-4">
+        <h4>Motivazione Ban</h4>
+        <form method="POST" action="/PolisportivaDDD/Amministratore/inviaBan">
 
-  <div class="row mt-2 mb-2">
-    <div class="col-md-12">
+          <div>
 
-        <h4>Banna</h4>
-      <form method="POST" action="/PolisportivaDDD/BannaUtente/inviaBan">
-      <label for="motivazione">
-        <textarea name="motivazione" placeholder="motivazione" class="form-control" required></textarea>
-      </label>
-      <button type="submit" class="btn btn-primary float-right mt-3">Banna</button>
-      </form>
+            <label for="motivazione"></label><textarea type="text" class="form-control" id="motivazione" name="motivazione" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary float-right mt-3">Banna</button>
+        </form>
+      </div>
     </div>
-  </div>
+
+
 
 </div>
 </section>

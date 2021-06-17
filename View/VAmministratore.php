@@ -45,13 +45,14 @@ class VAmministratore{
         $this->smarty->display(get_include_path() ."/smarty/templates/bannaUtente.tpl");
     }
 
-    public function showAmministratoreResponse(string $username,string $nome,string $cognome,int $eta, string $oggetto, string $messaggio){
+    public function showAmministratoreResponse(string $username,string $nome,string $cognome,int $eta, string $oggetto, string $messaggio,$pic64){
         $this -> smarty -> assign('nome',$nome);
         $this -> smarty -> assign('cognome',$cognome);
         $this -> smarty -> assign('username',$username);
         $this -> smarty -> assign('eta',$eta);
         $this -> smarty -> assign('oggettoSegnalazione',$oggetto);
         $this -> smarty -> assign('messaggioSegnalazione',$messaggio);
+        $this->smarty->assign("pic64", $pic64);
         $this->smarty->display(get_include_path() ."/smarty/templates/AmministratoreResponse.tpl");
     }
 }

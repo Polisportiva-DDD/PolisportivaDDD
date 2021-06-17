@@ -53,6 +53,8 @@ class VUtente
         $this -> smarty -> assign('results', $gettoni);
         $this -> smarty -> assign("recensioni", $recensioni);
         $this -> smarty -> assign("isAmministratore", $isAmministratore);
+        $this->smarty->assign("type", $type);
+        $this->smarty->assign("pic64", $pic64);
 
         $this -> smarty -> display(get_include_path() ."/smarty/templates/MioProfilo.tpl");
     }
@@ -69,7 +71,7 @@ class VUtente
      * @param $isUtente bool che controlla se è loggato un utente
      * @throws SmartyException
      */
-    public function showProfiloUtenteRegistrato(string $username, string $nome, string $cognome, int $eta, int $media_recensioni, array $recensioni, bool $isAmministratore){
+    public function showProfiloUtenteRegistrato(string $username, string $nome, string $cognome, int $eta, int $media_recensioni, array $recensioni, bool $isAmministratore,$pic64){
 
         $this -> smarty -> assign('username',$username);
         $this -> smarty -> assign('nome',$nome);
@@ -78,7 +80,7 @@ class VUtente
         $this -> smarty -> assign('valutazioneMedia',$media_recensioni);
         $this -> smarty -> assign('results', $recensioni);
         $this -> smarty -> assign("isAmministratore", $isAmministratore);
-        $this -> smarty -> assign("results", $recensioni);
+        $this->smarty->assign("pic64", $pic64);
 
         $this -> smarty -> display(get_include_path() ."/smarty/templates/profiloUtenteRegistrato.tpl");
     }

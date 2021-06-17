@@ -21,7 +21,7 @@
       <table>
         <tr >
           <th scope="col" class="padTh"><a href="/PolisportivaDDD/Utente/logout">  <button type="submit" class="btn btn-primary">Logout</button></a></th>
-          <th scope="col" class="padTh"><a href="mioProfilo"><button type="submit" class="btn btn-secondary" >Profilo</button></a></th>
+          <th scope="col" class="padTh"><a href="/PolisportivaDDD/Utente/mioProfilo"><button type="submit" class="btn btn-secondary" >Profilo</button></a></th>
           <form method="post" action="/PolisportivaDDD/Utente/Utenti">
             <th scope="col" class="padTh"><button type="submit" class="btn btn-outline-dark"><span class="fas fa-search"></span></button></th>
             <th scope="col" class="padTh"  dir="ltr"><input type="text" placeholder="Cerca" name="searchedUser"></th>
@@ -35,23 +35,23 @@
     <div class="container">
 
 
-      <a class="navbar-brand" href="home">Polisportiva DDD</a>
+      <a class="navbar-brand" href="/PolisportivaDDD/Utente/home">Polisportiva DDD</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item"><a class="nav-link" href="home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/PolisportivaDDD/Utente/home">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="/PolisportivaDDD/Gruppo/Gruppi">Gruppi</a></li>
           {if $isAmministratore}
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" id="navbarDropdownGestione" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Gestione</a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownGestione">
                 <a class="dropdown-item" href="/PolisportivaDDD/Utente/utentiBannati">Utenti Bannati</a>
-                <a class="dropdown-item" href="/PolisportivaDDD/Utente/segnalazioni">Segnalazioni</a>
+                <a class="dropdown-item" href="/PolisportivaDDD/Amministratore/segnalazioni">Segnalazioni</a>
                 <a class="dropdown-item" href="/PolisportivaDDD/Amministratore/modificaPrezzi">Modifica prezzi</a>
               </div>
             </li>
           {else}
-            <li class="nav-item"><a class="nav-link" href="assistenza.html">Informazioni</a></li>
+            <li class="nav-item"><a class="nav-link" href="/PolisportivaDDD/Utente/informazioni">Informazioni</a></li>
           {/if}
         </ul>
       </div>
@@ -70,7 +70,7 @@
   </div>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-      <a class="navbar-brand" href="home">Polisportiva DDD</a>
+      <a class="navbar-brand" href="/PolisportivaDDD/Utente/home">Polisportiva DDD</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
       </div>
@@ -129,8 +129,11 @@
       <div class="col-lg-6 mb-4">
         <div class="card h-100">
           <h4 class="card-header">{$results[nr].nome}</h4>
-          <img class="card-img-top" src="data:{$type};base64,{$results[nr].pic64}" alt="Immagine campo">
-          <div class="card-footer">
+          {if $results[nr].pic64  neq ""}
+          <img class="card-img-top" src="data:;base64,{$results[nr].pic64}" width="300" height="300" alt="Immagine campo">
+          {else}
+        <img class="card-img-top" src="https://via.placeholder.com/300"  alt="Immagine campo">
+          {/if}<div class="card-footer">
           <form method="POST" action="/PolisportivaDDD/Utente/mostraCampo">
             <input type="hidden" name="idCampo" value="{$results[nr].idCampo}" >
             <button type="submit" class="btn btn-primary float-right ">Dettagli</button>

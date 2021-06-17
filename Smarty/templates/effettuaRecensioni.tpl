@@ -17,10 +17,12 @@
         <div class="table-responsive" >
             <table>
                 <tr >
-                    <th scope="col" class="padTh"><a href="/PolisportivaDDD/Utente/logout">  <button type="button" class="btn btn-primary">Logout</button></a></th>
-                    <th scope="col" class="padTh"><a href="mioProfilo"><button type="button" class="btn btn-secondary">Profilo</button></a></th>
-                    <th scope="col" class="padTh"  dir="ltr"><input type="text" placeholder="Cerca" name="search"></th>
-                    <th scope="col" class="padTh"><span class="fas fa-search ml-1"></span></th>
+                    <th scope="col" class="padTh"><a href="/PolisportivaDDD/Utente/logout">  <button type="submit" class="btn btn-primary">Logout</button></a></th>
+                    <th scope="col" class="padTh"><a href="/PolisportivaDDD/Utente/mioProfilo"><button type="submit" class="btn btn-secondary" >Profilo</button></a></th>
+                    <form method="post" action="/PolisportivaDDD/Utente/Utenti">
+                        <th scope="col" class="padTh"><button type="submit" class="btn btn-outline-dark"><span class="fas fa-search"></span></button></th>
+                        <th scope="col" class="padTh"  dir="ltr"><input type="text" placeholder="Cerca" name="searchedUser"></th>
+                    </form>
                 </tr>
             </table>
         </div>
@@ -30,63 +32,50 @@
         <div class="container">
 
 
-            <a class="navbar-brand" href="home">Polisportiva DDD</a>
+            <a class="navbar-brand" href="/PolisportivaDDD/Utente/home">Polisportiva DDD</a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link" href="home">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="RicercaGruppo.html">Gruppi</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/PolisportivaDDD/Utente/home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/PolisportivaDDD/Gruppo/gruppi">Gruppi</a></li>
                     {if $isAmministratore}
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdownGestione" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Gestione</a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownGestione">
-                                <a class="dropdown-item" href="UItentiBannati.html">Utenti Bannati</a>
-                                <a class="dropdown-item" href="SegnalazioniAmministratore.html">Segnalazioni</a>
-                                <a class="dropdown-item" href="#">Modifica prezzi</a>
+                                <a class="dropdown-item" href="/PolisportivaDDD/Utente/utentiBannati">Utenti Bannati</a>
+                                <a class="dropdown-item" href="/PolisportivaDDD/Amministratore/segnalazioni">Segnalazioni</a>
+                                <a class="dropdown-item" href="/PolisportivaDDD/Amministratore/modificaPrezzi">Modifica prezzi</a>
                             </div>
                         </li>
                     {else}
-                        <li class="nav-item"><a class="nav-link" href="assistenza">Informazioni</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/PolisportivaDDD/Utente/informazioni">Informazioni</a></li>
                     {/if}
                 </ul>
             </div>
         </div>
     </nav>
-        <!-- Page Content-->
         <section class="py-5">
             <div class="container">
-                <!-- Page Heading/Breadcrumbs-->
-                <h1>
-                    Effettua Recensione
-                    
-                </h1>
+                <h1>Effettua Recensione</h1>
                 <hr>
 
-
-                <!-- Contact Form-->
-                <!-- In order to set the email address and subject line for the contact form go to the assets/mail/contact_me.php file.-->
                 <div class="row">
                     <div class="col-lg-8 mb-4">
-                        <h3>Invia recensione a: {$username}</h3>
+                        <h3>Invia recensione a: {$username} </h3>
                         <form method="POST" action="recensisci" >
-
                             <p>Valutazione:</p>
                             <div class="rate">
-
                                 <input type="radio" id="star5" name="rate" value="5" checked />
-                                <label for="star5" title="5 stelle">5 stars</label>
+                                <label for="star5" title="5 stelle">5 stars </label>
                                 <input type="radio" id="star4" name="rate" value="4" />
-                                <label for="star4" title="4 stelle">4 stars</label>
+                                <label for="star4" title="4 stelle">4 stars </label>
                                 <input type="radio" id="star3" name="rate" value="3" />
                                 <label for="star3" title="3 stelle">3 stars</label>
                                 <input type="radio" id="star2" name="rate" value="2" />
-                                <label for="star2" title="2 stelle">2 stars</label>
+                                <label for="star2" title="2 stelle">2 stars </label>
                                 <input type="radio" id="star1" name="rate" value="1" />
-                                <label for="star1" title="1 stelle">1 star</label>
-
+                                <label for="star1" title="1 stelle">1 star </label>
                             </div>
-
-
 
                             <br>
                             <br>
@@ -100,8 +89,7 @@
                             </div>
                             
                             <div class="control-group form-group">
-                                <div class="controls">
-                                    <label>Descrizione:</label>
+                                <div class="controls"><label>Descrizione: </label>
                                     <textarea class="form-control" name="testo" rows="10" cols="100" required data-validation-required-message="Please enter your message" maxlength="999" ></textarea>
                                 </div>
                             </div>

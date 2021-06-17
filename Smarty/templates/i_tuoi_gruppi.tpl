@@ -16,10 +16,12 @@
   <div class="table-responsive" >
     <table>
       <tr >
-        <th scope="col" class="padTh"><a href="/PolisportivaDDD/Utente/logout">  <button type="button" class="btn btn-primary">Logout</button></a></th>
-        <th scope="col" class="padTh"><a href="/PolisportivaDDD/Utente/mioProfilo"><button type="button" class="btn btn-secondary">Profilo</button></a></th>
-        <th scope="col" class="padTh"  dir="ltr"><input type="text" placeholder="Cerca" name="search"></th>
-        <th scope="col" class="padTh"><span class="fas fa-search ml-1"></span></th>
+        <th scope="col" class="padTh"><a href="/PolisportivaDDD/Utente/logout">  <button type="submit" class="btn btn-primary">Logout</button></a></th>
+        <th scope="col" class="padTh"><a href="/PolisportivaDDD/Utente/mioProfilo"><button type="submit" class="btn btn-secondary" >Profilo</button></a></th>
+        <form method="post" action="/PolisportivaDDD/Utente/Utenti">
+          <th scope="col" class="padTh"><button type="submit" class="btn btn-outline-dark"><span class="fas fa-search"></span></button></th>
+          <th scope="col" class="padTh"  dir="ltr"><input type="text" placeholder="Cerca" name="searchedUser"></th>
+        </form>
       </tr>
     </table>
   </div>
@@ -34,18 +36,18 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item"><a class="nav-link" href="/PolisportivaDDD/Utente/home">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="/PolisportivaDDD/Gruppo/ricercaGruppi">Gruppi</a></li>
+        <li class="nav-item"><a class="nav-link" href="/PolisportivaDDD/Gruppo/gruppi">Gruppi</a></li>
         {if $isAmministratore}
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" id="navbarDropdownGestione" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Gestione</a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownGestione">
               <a class="dropdown-item" href="/PolisportivaDDD/Utente/utentiBannati">Utenti Bannati</a>
-              <a class="dropdown-item" href="/PolisportivaDDD/Utente/segnalazioni">Segnalazioni</a>
-              <a class="dropdown-item" href="/PolisportivaDDD/Utente/modificaPrezzi">Modifica prezzi</a>
+              <a class="dropdown-item" href="/PolisportivaDDD/Amministratore/segnalazioni">Segnalazioni</a>
+              <a class="dropdown-item" href="/PolisportivaDDD/Amministratore/modificaPrezzi">Modifica prezzi</a>
             </div>
           </li>
         {else}
-          <li class="nav-item"><a class="nav-link" href="/PolisportivaDDD/Utente/assistenza">Informazioni</a></li>
+          <li class="nav-item"><a class="nav-link" href="/PolisportivaDDD/Utente/informazioni">Informazioni</a></li>
         {/if}
       </ul>
     </div>

@@ -15,13 +15,17 @@ class CAmministratore
         if($id==-1) {
             $segnalazioni = $pm->loadList('FTicketAssistenza');
             $listaSegnalazioni = array();
-            foreach ($segnalazioni as $segnalazione) {
+            if($segnalazioni!=null){
+                foreach ($segnalazioni as $segnalazione) {
                 $s = array();
                 $s['username'] = $segnalazione->getAutore();
                 $s['testoSegnalazione'] = $segnalazione->getMessaggio();
                 $s['idSegnalazione'] = $segnalazione->getId();
                 $listaSegnalazioni[] = $s;
+                }
             }
+
+
             $view->showSegnalazioniAmministratore($listaSegnalazioni);
         }
         else{
@@ -33,16 +37,18 @@ class CAmministratore
             $eta = $utente->getEta();
             $oggetto = $segnalazione->getOggetto();
             $messaggio = $segnalazione->getMessaggio();
+            $pic64=base64_encode($utente->getImmagine());
             $session = new USession();
             $session->startSession();
             $session->setValue('emailUtenteSegnalazione', $utente->getEmail());
             $session->setValue('oggettoSegnalazione', $oggetto);
             $session->setValue('messaggioSegnalazione', $messaggio);
 
-            $view->showAmministratoreResponse($userAutore, $nome, $cognome, $eta, $oggetto, $messaggio);
+            $view->showAmministratoreResponse($userAutore, $nome, $cognome, $eta, $oggetto, $messaggio,$pic64);
 
         }
     }
+
 
     public function rispondiSegnalazione(){
         $session = new USession();
@@ -70,6 +76,7 @@ class CAmministratore
 
         }
     }
+    //Funzione che mostra la sezione modifica prezzi dei campi
     public function modificaPrezzi(){
         $view = new VGettoni();
         $pm= new FPersistentManager();
@@ -80,6 +87,7 @@ class CAmministratore
             $nome = $campo->getNome();
             $prezzo = $campo->getPrezzo();
             $id=$campo->getId();
+            $c['pic64']=$campo->getImmagine();
             $c['nome'] = $nome;
             $c['prezzo'] = $prezzo;
             $c['idCampo'] = $id;
@@ -88,6 +96,7 @@ class CAmministratore
         $view->showAmministratoreModificaPrezzo($resultsCampi);
     }
 
+    //Funzione che modifica i prezzi dei campi
     public function modifica(){
         $pm = new FPersistentManager();
         if ($_POST){
@@ -100,6 +109,7 @@ class CAmministratore
         }
     }
 
+    //Funzione che mostra la sezione aggiungi gettoni
     public function aggiungiGettoni(){
         $view = new VGettoni();
         $pm= new FPersistentManager();
@@ -110,6 +120,7 @@ class CAmministratore
             $nome = $campo->getNome();
             $prezzo = $campo->getPrezzo();
             $id=$campo->getId();
+            $c['pic64']=$campo->getImmagine();
             $c['nome'] = $nome;
             $c['prezzo'] = $prezzo;
             $c['idCampo'] = $id;
@@ -118,6 +129,7 @@ class CAmministratore
         $view->showAmministratoreAggiungiGettoni($resultsCampi);
     }
 
+    //Funzione che permette di aggiungere i gettoni gettoni al wallet
     public function aggiungi(){
         $pm= new FPersistentManager();
         $session = new USession();
@@ -130,7 +142,6 @@ class CAmministratore
                 $wallet->aggiungiGettoni($campo,$quantita);
             }
             $pm->update($wallet);
-            //se va male l'update??
             header('Location: /PolisportivaDDD/Utente/home');
         }
     }
@@ -149,6 +160,50 @@ class CAmministratore
             $pm->delete($id, 'FGruppo');
         }
         header("Location: /PolisportivaDDD/Utente/home");
+
+    }
+
+
+
+    /**
+     *Funzione che mostra la pagina in cui si banna un utente
+     */
+    public function banna(){
+        $session = new USession();
+        $session->startSession();
+        $pm = new FPersistentManager();
+        $view = new VAmministratore();
+        $utente =unserialize($session->readValue('utente'));
+        $username=$utente->getUsername();
+        $nome=$utente->getNome();
+        $cognome=$utente->getCognome();
+        $eta=$utente->getEta();
+        $recensioni=$pm->loadRecensioniUtente($username);
+        if($recensioni!=null){
+            $valutazioneMedia=round($utente->calcolaMediaRecensioni($recensioni));
+        }
+        else{
+            $valutazioneMedia=0;
+        }
+        $pic64=$utente->getImmagine();
+        $type="";
+        $view->showBannaUtente($username, $nome, $cognome, $eta, $valutazioneMedia,$pic64, $type);
+
+    }
+
+    public function inviaBan(){
+        $session = new USession();
+        $session->startSession();
+        $pm = new FPersistentManager();
+        if ($_POST['motivazione']){
+            $motivazione = $_POST['motivazione'];
+            $utente =unserialize($session->readValue('utente'));
+            $username=$utente->getUsername();
+            $pm->updateUtenteRegistrato($username,true,$motivazione);
+            //se va male l'update???
+            header('Location: /PolisportivaDDD/Utente/home');
+
+        }
 
     }
 

@@ -13,7 +13,7 @@ class CBannaUtente
 
     /**
      *Funzione che mostra la pagina in cui si banna un utente
-     */
+     *//*
     public function banna(){
         $session = new USession();
         $session->startSession();
@@ -35,7 +35,6 @@ class CBannaUtente
         $type="";
         $view->showBannaUtente($username, $nome, $cognome, $eta, $valutazioneMedia,$pic64, $type);
 
-
     }
 
     public function inviaBan(){
@@ -53,6 +52,6 @@ class CBannaUtente
         }
 
     }
-
+*/
 
 }

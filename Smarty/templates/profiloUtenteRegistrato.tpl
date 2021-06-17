@@ -20,10 +20,12 @@
   <div class="table-responsive" >
     <table>
       <tr >
-        <th scope="col" class="padTh"><a href="/PolisportivaDDD/Utente/logout">  <button type="button" class="btn btn-primary">Logout</button></a></th>
-        <th scope="col" class="padTh"><a href="mioProfilo"><button type="button" class="btn btn-secondary">Profilo</button></a></th>
-        <th scope="col" class="padTh"  dir="ltr"><input type="text" placeholder="Cerca" name="search"></th>
-        <th scope="col" class="padTh"><span class="fas fa-search ml-1"></span></th>
+        <th scope="col" class="padTh"><a href="/PolisportivaDDD/Utente/logout">  <button type="submit" class="btn btn-primary">Logout</button></a></th>
+        <th scope="col" class="padTh"><a href="/PolisportivaDDD/Utente/mioProfilo"><button type="submit" class="btn btn-secondary" >Profilo</button></a></th>
+        <form method="post" action="/PolisportivaDDD/Utente/Utenti">
+          <th scope="col" class="padTh"><button type="submit" class="btn btn-outline-dark"><span class="fas fa-search"></span></button></th>
+          <th scope="col" class="padTh"  dir="ltr"><input type="text" placeholder="Cerca" name="searchedUser"></th>
+        </form>
       </tr>
     </table>
   </div>
@@ -38,23 +40,24 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item"><a class="nav-link" href="/PolisportivaDDD/Utente/home">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="/PolisportivaDDD/Gruppo/ricercaGruppi">Gruppi</a></li>
+        <li class="nav-item"><a class="nav-link" href="/PolisportivaDDD/Gruppo/gruppi">Gruppi</a></li>
         {if $isAmministratore}
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" id="navbarDropdownGestione" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Gestione</a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownGestione">
               <a class="dropdown-item" href="/PolisportivaDDD/Utente/utentiBannati">Utenti Bannati</a>
-              <a class="dropdown-item" href="/PolisportivaDDD/Utente/segnalazioni">Segnalazioni</a>
+              <a class="dropdown-item" href="/PolisportivaDDD/Amministratore/segnalazioni">Segnalazioni</a>
               <a class="dropdown-item" href="/PolisportivaDDD/Amministratore/modificaPrezzi">Modifica prezzi</a>
             </div>
           </li>
         {else}
-          <li class="nav-item"><a class="nav-link" href="assistenza.html">Informazioni</a></li>
+          <li class="nav-item"><a class="nav-link" href="/PolisportivaDDD/Utente/informazioni">Informazioni</a></li>
         {/if}
       </ul>
     </div>
   </div>
 </nav>
+
 <section class="py-5">
   <div class="container">
     <!-- Page heading-->
@@ -64,7 +67,11 @@
       <div class="col-md-12">
       <div class="text-center mb-2">
         <!-- Profilo -->
-          <img src="https://via.placeholder.com/250" class="rounded-circle" alt="Immagine utente">
+        {if $pic64  neq ""}
+          <img src="data:;base64,{$pic64}" alt="Immagine utente"   width="200" height="200" loading="lazy">
+        {else}
+          <img  src="https://via.placeholder.com/300"  alt="Immagine Utente">
+        {/if}
       </div>
       <div class="text-center">
         <h6 class="mb-2">Username: {$username}</h6>
@@ -90,7 +97,7 @@
       </div>
     </div>
     </form>
-    <form action="/PolisportivaDDD/BannaUtente/banna" method="POST">
+    <form action="/PolisportivaDDD/Amministratore/banna" method="POST">
       <div class="row mb-2 ">
         <div class="col-md-12 text-right">
           <button class="btn btn-primary  " type="submit">Bandisci</button>
@@ -117,7 +124,11 @@
         <div class="container">
           <div class="text-left mb-2">
             <!-- Profilo -->
-            <img src="https://via.placeholder.com/75" class="rounded-circle" alt="Immagine utente">
+            {if $results[nr].pic64  neq ""}
+              <img src="data:;base64,{$results[nr].pic64}" alt="Immagine utente"   width="75" height="75" loading="lazy">
+            {else}
+              <img  src="https://via.placeholder.com/75"  alt="Immagine utente">
+            {/if}
             <h4 >{$results[nr].username}</h4>
           </div>
           <div class="text-left">
