@@ -16,5 +16,12 @@ class VRecensione
         $this->smarty->display(get_include_path() ."/smarty/templates/effettuaRecensioni.tpl");
     }
 
+    public function showRecensioniEffettuate($results, $isAmministratore){
+        $this->smarty->assign("isAmministratore", $isAmministratore);
+        $this->smarty->assign("results", $results);
+
+        $this->smarty->display(get_include_path() ."/smarty/templates/recensioni.tpl");
+    }
+
 
 }

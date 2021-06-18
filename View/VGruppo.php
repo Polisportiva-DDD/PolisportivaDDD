@@ -18,9 +18,10 @@ class VGruppo
 
 
 
-    public function showScegliDataPage($nomeCampo, $isAmministratore){
+    public function showScegliDataPage($nomeCampo, $isAmministratore, $tomorrowString){
         $this->smarty->assign("nomeCampo", $nomeCampo);
         $this->smarty->assign("isAmministratore", $isAmministratore);
+        $this->smarty->assign("tomorrow", $tomorrowString);
 
         $this->smarty->display(get_include_path() ."/smarty/templates/creaGruppo_scegliData.tpl");
     }

@@ -20,7 +20,7 @@ class FPersistentManager
     }
 
     public function delete($id, $Fclass) {
-        $Fclass::delete($id);
+        return $Fclass::delete($id);
     }
 
     public function load($id, $Fclasse){

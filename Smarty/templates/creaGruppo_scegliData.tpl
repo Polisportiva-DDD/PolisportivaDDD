@@ -85,7 +85,7 @@
 
              <br>
               <label for="dataCreazioneGruppo">
-              <input class="form-control" name="dataCreazioneGruppo" type="date" value="2021-08-19" id="example-date-input" required>
+              <input class="form-control" name="dataCreazioneGruppo" type="date" min={$tomorrow} id="example-date-input" required>
               </label>
               <br>
 			

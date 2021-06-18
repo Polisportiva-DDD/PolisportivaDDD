@@ -92,7 +92,7 @@
         <div class="list-group mb-4">
           <a class="list-group-item" href="/PolisportivaDDD/Gruppo/visualizzaGruppiUtente">I tuoi gruppi</a>
           <a class="list-group-item" href="/PolisportivaDDD/Gettoni/visualizzaCarte">Le tue carte</a>
-          <a class="list-group-item" href="#">Recensioni Effettuate</a>
+          <a class="list-group-item" href="/PolisportivaDDD/Recensione/recensioniEffettuate">Recensioni Effettuate</a>
         </div>
         <form class="card">
           <div class="card-body rounded">

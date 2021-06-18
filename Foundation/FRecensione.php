@@ -114,13 +114,13 @@ class FRecensione
             if($result!=null){
                 $recensioniEffettuate = array();
                 for($i=0; $i<count($result); $i++){
-                    $possessore = FUtente::loadByUsername($result[$i]['possessore']);
-                    $autore = FUtente::loadByUsername($result[$i]['autore']);
-                    $recensioniEffettuate[] = new ERecensione($result[$i]['id'],$autore,$result[$i]['voto'],$result[$i]['titolo'],$result[$i]['testo'],new DateTime($result[$i]['data']),$possessore);
+                    $possessore = FUtente::load($result[$i]['possessore']);
+                    $autore = FUtente::load($result[$i]['autore']);
+                    $recensioniEffettuate[] = new ERecensione($autore,$result[$i]['voto'],$result[$i]['titolo'],$result[$i]['testo'],new DateTime($result[$i]['data']),$possessore, $result[$i]['id']);
                 }
                 return $recensioniEffettuate;
             }
-            else return null;
+            else return array();
         }
         catch(Exception $e){
             echo ("Error");

@@ -146,6 +146,10 @@ print_r($id);
 */
 
 $pm = new FPersistentManager();
+if($pm->delete(8, 'FRecensione')){
+    echo('true');
+};
+/*
 $amm = $pm->load('lor1', 'FAmministratore');
 $campo = $pm->load(4, 'FCampo');
 $u = $pm->load('lor', 'FUtente');
@@ -159,6 +163,6 @@ if(in_array('lor', $partecipanti)){
 }
 else{
     echo("false");
-}
+}*/
 
 ?>

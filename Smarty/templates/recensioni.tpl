@@ -63,7 +63,11 @@
     {section name=nr loop=$results}
       <div class="row rounded border col-md-12 mb-5 py-4">
         <div class="col-lg-12 col-md-12 col-sm-12">
+          {if $results[nr].pic64 neq ""}
+          <img src="base64,{$results[nr].pic64}" class="rounded-circle" alt="Immagine utente">
+          {else}
           <img src="https://image-placeholder.com/images/actual-size/57x57.png" class="rounded-circle" alt="Immagine utente">
+          {/if}
           {$results[nr].username}
           <h6>
             {for $start=1 to $results[nr].valutazione}
@@ -76,7 +80,7 @@
           <h6>{$results[nr].titoloRecensione}</h6>
           <h6>{$results[nr].dataRecensione}</h6>
           <p>{$results[nr].descrizioneRecensione}</p>
-          <a class="btn btn-primary float-right" href="#!">Elimina Recensione</a>
+          <a class="btn btn-primary float-right" href="/PolisportivaDDD/Recensione/eliminaRecensione/{$results[nr].idRecensione}">Elimina Recensione</a>
         </div>
       </div>
       {sectionelse}
