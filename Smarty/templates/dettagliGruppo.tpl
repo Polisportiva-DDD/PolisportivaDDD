@@ -68,7 +68,7 @@
         <div class="list-group">
           <h2>Partecipanti</h2>
           {section name=nr loop=$invitati}
-          <a class="list-group-item" href="#">{$invitati[nr]}</a>
+          <a class="list-group-item" href="/PolisportivaDDD/utente/utenti/{$invitati[nr]}">{$invitati[nr]}</a>
           {/section}
         </div>
       </div>

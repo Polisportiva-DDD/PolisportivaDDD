@@ -283,7 +283,9 @@ class EGruppo
     }
 
     public function hasPartecipante($username){
-        return in_array($username, $this->partecipanti);
+        $pm = new FPersistentManager();
+        $utente = $pm->load($username, 'FUtente');
+        return in_array($utente, $this->partecipanti);
     }
 
     /**

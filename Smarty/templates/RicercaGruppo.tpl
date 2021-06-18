@@ -71,24 +71,24 @@
                         <h2 class="card-title">{$results[nr].nomeGruppo}</h2>
                         <div class="row mb-2">
                             <div class="col-sm">
-                                {$results[nr].admin}
+                                Admin: {$results[nr].admin}
                             </div>
                             <div class="col-sm">
-                                {$results[nr].tipologia}
+                                Campo: {$results[nr].tipologia}
                             </div>
                             <div class="col-sm">
-                                {$results[nr].dataEOra}
+                                Data e ora: {$results[nr].dataEOra}
                             </div>
                         </div>
                         <div class="row mb-2">
                             <div class="col-sm">
-                                {$results[nr].etaMinima} - {$results[nr].etaMassima} anni
+                                Limiti età: {$results[nr].etaMinima} - {$results[nr].etaMassima} anni
                             </div>
                             <div class="col-sm">
-                                {$results[nr].limiteValutazione}
+                                Valutazione minima: {$results[nr].limiteValutazione}
                             </div>
                             <div class="col-sm">
-                                {$results[nr].postiDisponibili}
+                                Posti disponibili: {$results[nr].postiDisponibili}
                             </div>
                         </div>
                         <a class="btn btn-primary float-right mt-2" href="/PolisportivaDDD/Gruppo/Gruppi/{$results[nr].id}">Vai al gruppo</a>
@@ -119,7 +119,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="etaMassima" class="form-label">Età massima</label>
-                                <input type="number" class="form-control" id="etaMassima" min="10" max="99">
+                                <input type="number" class="form-control" id="etaMassima" name="etaMassima" min="10" max="99">
                             </div>
                             <div class="mb-3">
                                 <label for="inputOra" class="form-label">Data</label>

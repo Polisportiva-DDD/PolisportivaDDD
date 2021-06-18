@@ -144,11 +144,20 @@ $pm = new FPersistentManager();
 $id = $pm->store($gruppo);
 print_r($id);
 */
-
+/*
 $pm = new FPersistentManager();
-if($pm->delete(8, 'FRecensione')){
+$gruppo = $pm->load(16,'FGruppo');
+$p = $gruppo->getPartecipanti();
+foreach($p as $pa){
+    echo($pa->getUsername());
+    echo('\n');
+}
+if($gruppo->hasPartecipante('lor')){
     echo('true');
-};
+}
+else{
+    echo('false');
+}*/
 /*
 $amm = $pm->load('lor1', 'FAmministratore');
 $campo = $pm->load(4, 'FCampo');

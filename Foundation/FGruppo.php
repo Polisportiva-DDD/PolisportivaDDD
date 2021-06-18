@@ -138,15 +138,15 @@ class FGruppo
             }
 
             if (isset($etaMin)){
-                $conditions[] = "etaMinima > ".$etaMin;
+                $conditions[] = "etaMinima >= ".$etaMin;
             }
 
             if (isset($etaMax)){
-                $conditions[] = "etaMassima < ".$etaMax;
+                $conditions[] = "etaMassima <= ".$etaMax;
             }
 
             if (isset($valMin)){
-                $conditions[] = "votoMinimo > ".$valMin;
+                $conditions[] = "votoMinimo >= ".$valMin;
             }
 
             if (count($conditions) > 0) {
