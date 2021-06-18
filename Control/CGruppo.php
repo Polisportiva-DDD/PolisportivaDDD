@@ -69,13 +69,16 @@ class CGruppo
             $pm = new FPersistentManager();
 
             $view = new VGruppo();
+            $today = new DateTime("now", new DateTimeZone('Europe/Rome') );
+            $tomorrow = $today->modify('+1 day');
+            $tomorrowString = $tomorrow->format('Y-m-d');
             if (isset($_POST['idCampo'])){
                 $idCampoScelto = $_POST['idCampo'];
                 $session->setValue('idCampo', $idCampoScelto);
                 $campoScelto = $pm->load($idCampoScelto, 'FCampo');
                 $nomeCampo = $campoScelto->getNome();
                 $isAmministratore = $session->readValue('isAmministratore');
-                $view->showScegliDataPage($nomeCampo, $isAmministratore);
+                $view->showScegliDataPage($nomeCampo, $isAmministratore, $tomorrowString);
             }
         }
         else{
