@@ -71,7 +71,7 @@ class VUtente
      * @param $isUtente bool che controlla se è loggato un utente
      * @throws SmartyException
      */
-    public function showProfiloUtenteRegistrato(string $username, string $nome, string $cognome, int $eta, int $media_recensioni, array $recensioni, bool $isAmministratore,$pic64){
+    public function showProfiloUtenteRegistrato(string $username, string $nome, string $cognome, int $eta, int $media_recensioni, array $recensioni, bool $isAmministratore,bool $isBannato,$pic64){
 
         $this -> smarty -> assign('username',$username);
         $this -> smarty -> assign('nome',$nome);
@@ -81,7 +81,7 @@ class VUtente
         $this -> smarty -> assign('results', $recensioni);
         $this -> smarty -> assign("isAmministratore", $isAmministratore);
         $this->smarty->assign("pic64", $pic64);
-
+        $this->smarty->assign("isBannato", $isBannato);
         $this -> smarty -> display(get_include_path() ."/smarty/templates/profiloUtenteRegistrato.tpl");
     }
 

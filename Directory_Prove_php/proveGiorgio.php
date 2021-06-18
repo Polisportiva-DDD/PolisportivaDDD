@@ -20,9 +20,12 @@ $w4 = new EWallet($gettoni,33);
 
 //FWallet::store($w1);
 //FWallet::store($w2);
-//FWallet::store($w3);
+//FWallet::store($w3);$
+$pm=new FPersistentManager();
+$c=FCartaDiCredito::loadCarteNonScadute("lor");
+//print_r($c);
 
-$datadinascita = new DateTime('1999-11-22');
+/*$datadinascita = new DateTime('1999-11-22');
 $datadinascita2 = new DateTime("1999-07-16");
 $datadinascita3 = new DateTime("1999-06-20");
 $datadinascita4 = new DateTime("1998-05-25");
@@ -31,7 +34,7 @@ $utente1 = new EUtente('Urwen99','Giorgio','Di Nunzio','dinunziogiorgio.99@gmail
 $utente2 = new EUtente('Lorediel','Lorenzo',"D'Amico",'nonsapreiproprio@gmial.com','pippo',$datadinascita2,'imm2',$w2);
 $utente3 = new EUtente('Andreinho','Andrea','Franco','bo@gmail.com','pippo',$datadinascita3,'imm3',$w3);
 $utente4 = new EUtente('zioFrack','Franco','Deucalion','bobobo@gmail.com','ciccio',$datadinascita4,'imm4',$w4);
-
+*/
 //FWallet::update($utente1->getWallet());
 
 //FUtente::store($utente1);
@@ -64,8 +67,8 @@ $recensioni = array($r3,$r4,$r1,$r2);*/
 $carta2 = new ECartadiCredito('0000000000','Giorgio','Di Nunzio','111',new DateTime('now'));
 $carta3 = new ECartadiCredito('1111111111','Giorgio','Di Nunzio','111',new DateTime('now'));
 $carta4 = new ECartadiCredito('2222222222','Giorgio','Di Nunzio','111',new DateTime('now'));*/
-$c=FAmministratore::exist("lor");
-print ($c);
+//$c=FAmministratore::exist("lor");
+//print ($c);
 //print_r(FCartaDiCredito::loadCarta('5555555555'));
 //FCartaDiCredito::store($carta4);
 //FCartaDiCredito::delete($carta1);

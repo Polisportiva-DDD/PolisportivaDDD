@@ -97,13 +97,15 @@
       </div>
     </div>
     </form>
-    <form action="/PolisportivaDDD/Amministratore/banna" method="POST">
-      <div class="row mb-2 ">
-        <div class="col-md-12 text-right">
-          <button class="btn btn-primary  " type="submit">Bandisci</button>
+      {if !$isBannato}
+      <form action="/PolisportivaDDD/Amministratore/banna" method="POST">
+        <div class="row mb-2 ">
+          <div class="col-md-12 text-right">
+            <button class="btn btn-primary  " type="submit">Bandisci</button>
+          </div>
         </div>
-      </div>
-      </form>
+        </form>
+      {/if}
         {/if}
     <form action="/PolisportivaDDD/Utente/effettuaRecensione" method="POST">
       <input type="hidden" name="username" value="{$username}" >

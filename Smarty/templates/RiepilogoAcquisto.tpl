@@ -59,7 +59,7 @@
   <div class="container">
 
     <h1 >Riepilogo acquisto</h1>
-    <hr >
+    <hr>
     {section name=nr loop=$results}
       <div class="row rounded border col-md-12 mb-2 py-4">
         <div class="col-lg-6 col-md-6 col-sm-12">

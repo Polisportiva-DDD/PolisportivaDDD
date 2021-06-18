@@ -10,36 +10,44 @@ class CUtente
     public function __construct(){}
 
     public function informazioni(){
-        $session = new USession();
-        $session->startSession();
-        $username = $session->readValue('username');
-        $view = new VUtente();
-        $view->showAssistenza();
+        if(self::isLogged()){
+            $view = new VUtente();
+            $view->showAssistenza();
+        }
+        else{
+            header('Location: /PolisportivaDDD/Utente/Home');
+        }
+
     }
 
     public function utenti($username=""){
         $session = new USession();
         $session->startSession();
-        $isAmministratore= $session->readValue('isAmministratore');
-        if($username!=""){
-            self::visualizzaProfilo($username);
-        }
-        else{
-            $view = new VUtente();
-            $pm = new FPersistentManager();
-            if (isset($_POST['searchedUser'])){
-                $searchedUser = $_POST['searchedUser'];
-                $utenti = $pm->loadUtentiFiltered($searchedUser);
-                $risultatiRicerca = array();
-                foreach ($utenti as $utente){
-                    $u= array();
-                    $u['username'] = $utente->getUsername();
-                    $u['nome'] = $utente->getNome();
-                    $u['cognome'] = $utente->getCognome();
-                    $risultatiRicerca[] = $u;
-                }
-                $view->showRicercaUtente($risultatiRicerca, $isAmministratore);
+        if(self::isLogged()){
+            $isAmministratore= $session->readValue('isAmministratore');
+            if($username!=""){
+                self::visualizzaProfilo($username);
             }
+            else{
+                $view = new VUtente();
+                $pm = new FPersistentManager();
+                if (isset($_POST['searchedUser'])){
+                    $searchedUser = $_POST['searchedUser'];
+                    $utenti = $pm->loadUtentiFiltered($searchedUser);
+                    $risultatiRicerca = array();
+                    foreach ($utenti as $utente){
+                        $u= array();
+                        $u['username'] = $utente->getUsername();
+                        $u['nome'] = $utente->getNome();
+                        $u['cognome'] = $utente->getCognome();
+                        $risultatiRicerca[] = $u;
+                    }
+                    $view->showRicercaUtente($risultatiRicerca, $isAmministratore);
+                }
+            }
+
+        }else{
+            header('Location: /PolisportivaDDD/Utente/Home');
         }
 
     }
@@ -48,15 +56,21 @@ class CUtente
     public function inviaSegnalazione(){
         $session = new USession();
         $session->startSession();
-        $pm = new FPersistentManager();
-        if (isset($_POST['oggetto']) && isset($_POST['messaggio'])){
-            $oggetto = $_POST['oggetto'];
-            $messaggio = $_POST['messaggio'];
+        if(self::isLogged()){
+            $pm = new FPersistentManager();
+            if (isset($_POST['oggetto']) && isset($_POST['messaggio'])){
+                $oggetto = $_POST['oggetto'];
+                $messaggio = $_POST['messaggio'];
+            }
+            $autore = $session->readValue('username');
+            $segnalazione = new ETicketAssistenza($autore, $messaggio, $oggetto, new DateTime('now'));
+            $pm->store($segnalazione);
+            header('Location: /PolisportivaDDD/Utente/Home');
         }
-        $autore = $session->readValue('username');
-        $segnalazione = new ETicketAssistenza($autore, $messaggio, $oggetto, new DateTime('now'));
-        $pm->store($segnalazione);
-        header('Location: /PolisportivaDDD/Utente/Home');
+        else{
+            header('Location: /PolisportivaDDD/Utente/Home');
+        }
+
     }
 
     public function home(){
@@ -83,61 +97,64 @@ class CUtente
     }
 
     public function mioProfilo(){
-        $session = new USession();
-        $session->startSession();
-        $isAmministratore = $session->readValue('isAmministratore');
-        $view=new VUtente();
-        if(CUtente::isLogged()){
-            $pm = new FPersistentManager();
-            $username = $session->readValue('username');
-            $utente=$pm->load($username,"FUtente");
-            $username=$utente->getUsername();
-            $nome=$utente->getNome();
-            $cognome=$utente->getCognome();
-            $eta=$utente->getEta();
-            $recensioni=$pm->loadRecensioniUtente($username);
+            $session = new USession();
+            $session->startSession();
+            $isAmministratore = $session->readValue('isAmministratore');
+            $view=new VUtente();
+            if(CUtente::isLogged()){
+                $pm = new FPersistentManager();
+                $username = $session->readValue('username');
+                $utente=$pm->load($username,"FUtente");
+                $username=$utente->getUsername();
+                $nome=$utente->getNome();
+                $cognome=$utente->getCognome();
+                $eta=$utente->getEta();
+                $recensioni=$pm->loadRecensioniUtente($username);
 
-            $rec=array();
-            $listCampi=$utente->getWallet()->getListaCampiWallet();
-            $pic64=base64_encode($utente->getImmagine());
-            $type="";
-            if($recensioni!=null){
-                $valutazioneMedia=round($utente->calcolaMediaRecensioni($recensioni));
-                foreach ($recensioni as $valore  ){
-                    $arr=array();
-                    $arr["valutazione"]=$valore->getVoto();
-                    $arr["titoloRecensione"]=$valore->getTitolo();
-                    $arr["dataRecensione"]=$valore->getData()->format('Y-m-d');
-                    $arr["descrizioneRecensione"]=$valore->getTesto();
-                    $arr["username"]=$valore->getAutore()->getUsername();
-                    $utenteRec=$pm->load($arr["username"],"FUtente");
-                    $arr["pic64"]=base64_encode($utenteRec->getImmagine());
-                    $rec[]=$arr;
+                $rec=array();
+                $listCampi=$utente->getWallet()->getListaCampiWallet();
+                $pic64=base64_encode($utente->getImmagine());
+                $type="";
+                if($recensioni!=null){
+                    $valutazioneMedia=round($utente->calcolaMediaRecensioni($recensioni));
+                    foreach ($recensioni as $valore  ){
+                        $arr=array();
+                        $arr["valutazione"]=$valore->getVoto();
+                        $arr["titoloRecensione"]=$valore->getTitolo();
+                        $arr["dataRecensione"]=$valore->getData()->format('Y-m-d');
+                        $arr["descrizioneRecensione"]=$valore->getTesto();
+                        $arr["username"]=$valore->getAutore()->getUsername();
+                        $utenteRec=$pm->load($arr["username"],"FUtente");
+                        $arr["pic64"]=base64_encode($utenteRec->getImmagine());
+                        $rec[]=$arr;
+
+                    }
+                }
+                else{
+                    $valutazioneMedia=0;
+                }
+
+                $result=array();
+
+                foreach ($listCampi as $value){
+
+                    $gettoni=array();
+                    $gettoni['nomeCampo']=$value->getCampo()->getNome();
+                    $gettoni['quantitaGettoni']=$value->getGettoni();
+                    $result[]=$gettoni;
 
                 }
+
+
+                $view->showMioProfilo($username, $nome, $cognome, $eta, $valutazioneMedia,$result,$rec,$isAmministratore,$pic64, $type);
+
             }
             else{
-                $valutazioneMedia=0;
-            }
-
-            $result=array();
-
-            foreach ($listCampi as $value){
-
-                $gettoni=array();
-                $gettoni['nomeCampo']=$value->getCampo()->getNome();
-                $gettoni['quantitaGettoni']=$value->getGettoni();
-                $result[]=$gettoni;
-
+                header('Location: /PolisportivaDDD/Utente/Home');
             }
 
 
-            $view->showMioProfilo($username, $nome, $cognome, $eta, $valutazioneMedia,$result,$rec,$isAmministratore,$pic64, $type);
 
-        }
-        else{
-            header('Location: /PolisportivaDDD/Utente/Home');
-        }
 
     }
 
@@ -164,41 +181,49 @@ class CUtente
     }
 
     public function effettuaRecensione(){
-        $view=new VRecensione();
         $session = new USession();
         $session->startSession();
-        $isAmministratore = $session->readValue('isAmministratore');
-        if (isset($_POST['username'])) {
-            $username=$_POST['username'];
-            $session->setValue('utenteDaRecensire',$username);
-            $view->showEffettuaRecensioni($isAmministratore,$username);
-        }
-        else{
-            //che faccio?
+        if(self::isLogged()) {
+            $view = new VRecensione();
+            $isAmministratore = $session->readValue('isAmministratore');
+            if (isset($_POST['username'])) {
+                $username = $_POST['username'];
+                $session->setValue('utenteDaRecensire', $username);
+                $view->showEffettuaRecensioni($isAmministratore, $username);
+            } else {
+                //che faccio?
+            }
+        }else{
+            header('Location: /PolisportivaDDD/Utente/Home');
         }
     }
 
     public function recensisci(){
-        $pm = new FPersistentManager();
         $session = new USession();
         $session->startSession();
-        $utente = $session->readValue('username');
-        $utenteDaRec = $session->readValue('utenteDaRecensire');
+        if(self::isLogged()) {
+            $pm = new FPersistentManager();
+            $utente = $session->readValue('username');
+            $utenteDaRec = $session->readValue('utenteDaRecensire');
 
-        if (isset($_POST['titoloRecensione']) and isset($_POST['testo']) and isset($_POST['rate'])) {
-            $titolo=$_POST['titoloRecensione'];
-            $testo=$_POST['testo'];
-            $voto=$_POST['rate'];
-            $utenteAutore=$pm->load($utente,"FUtente");
-            $utentePosessore=$pm->load($utenteDaRec,"FUtente");
-            $recensione=new ERecensione($utenteAutore,$voto,$titolo,$testo,new DateTime('now'),$utentePosessore);
-            $pm->store($recensione);
+            if (isset($_POST['titoloRecensione']) and isset($_POST['testo']) and isset($_POST['rate'])) {
+                $titolo=$_POST['titoloRecensione'];
+                $testo=$_POST['testo'];
+                $voto=$_POST['rate'];
+                $utenteAutore=$pm->load($utente,"FUtente");
+                $utentePosessore=$pm->load($utenteDaRec,"FUtente");
+                $recensione=new ERecensione($utenteAutore,$voto,$titolo,$testo,new DateTime('now'),$utentePosessore);
+                $pm->store($recensione);
 
+                header('Location: /PolisportivaDDD/Utente/home');
+            }
+            else{
+                //che faccio?
+            }
+        }else{
             header('Location: /PolisportivaDDD/Utente/home');
         }
-        else{
-            //che faccio?
-        }
+
     }
 
 
@@ -222,13 +247,14 @@ class CUtente
      * 2) se l'utente c'è, avviene il reindirizzamento alla homepage;
      */
     public function verifica() {
+        $view = new VUtente();
         $session = new USession();
         $pm = new FPersistentManager();
         if(isset($_POST['username']) && isset($_POST['password'])) {
             $esiste = $pm->Login($_POST['username'], $_POST['password']);
             if ($esiste==1) {
                 if($pm->isBannato($_POST['username'])){
-                    header('Location: /PolisportivaDDD/Utente/loginError/2');
+                    $view->showLoginError(2);
                 }
                 else{
                     $utente = $pm->load($_POST['username'], 'FUtente');
@@ -262,7 +288,7 @@ class CUtente
 
             }
             else{
-                header('Location: /PolisportivaDDD/Utente/loginError/1');
+                $view->showLoginError(1);
 
             }
         }
@@ -284,7 +310,7 @@ class CUtente
         $session->startSession();
         $session->setValue("isAmministratore",false);
         $session->setValue('isRegistrato',true);
-        if (isset($_POST['username']) and isset($_POST['nome']) and isset($_POST['cognome']) and isset($_POST['email']) and isset($_POST['password']) and isset($_POST['data']) and isset($_POST['file'])){
+        if (isset($_POST['username']) and isset($_POST['nome']) and isset($_POST['cognome']) and isset($_POST['email']) and isset($_POST['password']) and isset($_POST['data']) and isset($_FILES['file'])){
             $session->setValue("username",$_POST['username']);
             $username = $_POST['username'];
             $nome = $_POST['nome'];
@@ -337,22 +363,28 @@ class CUtente
 
     }
     public function utentiBannati(){
-        $view = new VAmministratore();
-        $pm = new FPersistentManager();
-        $utentiBannati=$pm->loadList("FUtenteRegistrato");
-        $result=array();
-        if($utentiBannati!=null){
-            foreach ($utentiBannati as $value){
-            $array=array();
-            $array["motivoBan"]=$value->getMotivazione();
-            $array["username"]=$value->getUsername();
-            $utente=$pm->load($value->getUsername(),"FUtente");
-            $array["pic64"]=base64_encode($utente->getImmagine());
-            $result[]=$array;
+        if(self::isLogged()){
+            $view = new VAmministratore();
+            $pm = new FPersistentManager();
+            $utentiBannati=$pm->loadList("FUtenteRegistrato");
+            $result=array();
+            if($utentiBannati!=null){
+                foreach ($utentiBannati as $value){
+                    $array=array();
+                    $array["motivoBan"]=$value->getMotivazione();
+                    $array["username"]=$value->getUsername();
+                    $utente=$pm->load($value->getUsername(),"FUtente");
+                    $array["pic64"]=base64_encode($utente->getImmagine());
+                    $result[]=$array;
+                }
             }
+
+            $view->showUtentiBannati($result);
+        }
+        else{
+            header('Location: /PolisportivaDDD/Utente/home');
         }
 
-        $view->showUtentiBannati($result);
 
     }
 
@@ -373,12 +405,14 @@ class CUtente
     }
 
     public function visualizzaProfilo($username){
-        $session = new USession();
-        $isAmministratore = $session->readValue('isAmministratore');
-        $pm = new FPersistentManager();
-        $view = new VUtente();
+        if(self::isLogged()){
+            $session = new USession();
+            $isAmministratore = $session->readValue('isAmministratore');
+            $pm = new FPersistentManager();
+            $view = new VUtente();
 
             $utenteDaBannare = $pm->load($username,"FUtente");
+            $isBannato=$pm->isBannato($username);
             if($utenteDaBannare!=null){
                 $nome=$utenteDaBannare->getNome();
                 $cognome=$utenteDaBannare->getCognome();
@@ -419,17 +453,17 @@ class CUtente
                 else{
                     $session->setValue('utente', serialize($utenteDaBannare));
 
-                    $view->showProfiloUtenteRegistrato($username, $nome, $cognome, $eta, $valutazioneMedia,$result,$isAmministratore,$pic64);
+                    $view->showProfiloUtenteRegistrato($username, $nome, $cognome, $eta, $valutazioneMedia,$result,$isAmministratore,$isBannato,$pic64);
                 }
 
             }
             else{
                 //$view->showErrore($username,$isAmministratore );
             }
-
-
-
-
+        }
+        else{
+            header('Location: /PolisportivaDDD/Utente/home');
+        }
 
 
 

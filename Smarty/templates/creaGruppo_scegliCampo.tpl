@@ -61,8 +61,15 @@
     {section name=nr loop=$results}
       <div class="col-md-6 mb-4">
         <div class="card h-100">
+
           <h4 class="card-header">{$results[nr].nome}</h4>
-          <img class="card-img-top" src="data:{$type};base64,{$results[nr].pic64}" alt="Immagine campo">
+
+          {if $results[nr].pic64  neq ""}
+            <img class="card-img-top" src="data:;base64,{$results[nr].pic64}" width="300" height="300" alt="Immagine campo">
+          {else}
+            <img class="card-img-top" src="https://via.placeholder.com/300" width="300" height="300"  alt="Immagine campo">
+          {/if}
+
           <div class="card-footer">
             <form action="/PolisportivaDDD/Gruppo/scegliData" method="POST">
               <button type="submit" class="btn btn-primary float-right" name="idCampo" value={$results[nr].idCampo}>Scegli</button>

@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <title>Polisportiva DDD</title>
 
-  <!-- Font Awesome icons (free version)-->
   <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
   <!-- Core theme CSS (includes Bootstrap)-->
   <link href="/PolisportivaDDD/Smarty/css/styles.css" rel="stylesheet" />
@@ -53,47 +52,37 @@
     </div>
   </div>
 </nav>
-<!-- Page Content-->
+
 <section class="py-5">
   <div class="container">
-    <!-- Page heading-->
     <h1>Le tue carte</h1>
     <div class="row">
-      <!-- Blog Entries Column-->
         <a class="col-md-12 mb-2 py-2">
           <a href="/PolisportivaDDD/Gettoni/aggiungiCarta"> <button class="btn btn-lg btn-primary mb-4">Aggiungi carta</button></a>
         </div>
 
-
-        <!-- Blog Post-->
         {section name=nr loop=$results}
           <div class="row rounded border col-md-12 mb-5 py-4">
             <div class="card-body">
               <div class="row mb-2">
-                <div class="col-sm">
-                  Numero della carta
-                  <div style="width:100%;max-width:250px;border:1px red solid;overflow:hidden">
-                    <div style="background-color:#eeeeee;padding:5px">
-                      {$results[nr].numeroCarta}
-                    </div>
+
+                  <div class="col-sm">
+                    <div class="border text-center">Numero della carta:<br>
+                      {$results[nr].numeroCarta}</div>
                   </div>
-                </div>
+
                 <div class="col-sm">
-                  Titolare della carta
-                  <div style="width:100%;max-width:250px;border:1px red solid;overflow:hidden">
-                    <div style="background-color:#eeeeee;padding:5px">
-                      {$results[nr].titolareCarta}
-                    </div>
-                  </div>
+                  <div class="border text-center">Titolare della carta<br>
+                    {$results[nr].titolareCarta}</div>
                 </div>
+
+
                 <div class="col-sm">
-                  Data di scadenza
-                  <div style="width:100%;max-width:250px;border:1px red solid;overflow:hidden">
-                    <div style="background-color:#eeeeee;padding:5px">
-                      {$results[nr].dataScadenza}
-                    </div>
-                  </div>
+                  <div class="border text-center">Data di scadenza<br>
+                    {$results[nr].dataScadenza}</div>
                 </div>
+
+
               </div>
               <form method="POST" action="/PolisportivaDDD/Gettoni/rimuoviCarta">
                 <button name="numeroCarta" value={$results[nr].numeroCarta} type="submit" class="btn btn-primary float-right mt-2" >

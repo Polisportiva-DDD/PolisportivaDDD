@@ -41,7 +41,7 @@
 
     {if $error=='1'}
       <div >
-        <p class="text-center" >Attenzione! Username e/o password errati! </p>
+        <p class="text-center" > Username e/o password errati! </p>
       </div>
     {elseif $error=="2"}
       <div >

@@ -171,7 +171,7 @@ class FCartaDiCredito
     public static function loadCarteNonScadute(string $username){
         $data=(new DateTime('now'))->format('Y-m-d');
         try{
-            $sql="SELECT carta FROM " . static::$tablePossessoCarta . " WHERE utente='" . $username . "' AND scadenza>'".$data."';"; //Query per prendere le carte degli utenti
+            $sql="SELECT carta FROM " . static::$tablePossessoCarta . ", ".static::$tableName." WHERE carta=numero AND utente='" . $username . "' AND scadenza>'".$data."';"; //Query per prendere le carte degli utenti
             $db=FDatabase::getInstance();
             $rows=$db->loadMultiple($sql);
             if($rows!=null){
@@ -185,7 +185,7 @@ class FCartaDiCredito
             else return null;
         }
         catch(Exception $e){
-            echo ("Error");
+            print ("Error");
         }
 
     }

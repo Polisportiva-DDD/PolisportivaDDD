@@ -132,8 +132,9 @@
           {if $results[nr].pic64  neq ""}
           <img class="card-img-top" src="data:;base64,{$results[nr].pic64}" width="300" height="300" alt="Immagine campo">
           {else}
-        <img class="card-img-top" src="https://via.placeholder.com/300"  alt="Immagine campo">
-          {/if}<div class="card-footer">
+        <img class="card-img-top" src="https://via.placeholder.com/300" width="300" height="300"  alt="Immagine campo">
+          {/if}
+          <div class="card-footer">
           <form method="POST" action="/PolisportivaDDD/Utente/mostraCampo">
             <input type="hidden" name="idCampo" value="{$results[nr].idCampo}" >
             <button type="submit" class="btn btn-primary float-right ">Dettagli</button>

@@ -1,10 +1,6 @@
 <?php
 
-//require_once 'StartSmarty.php';
 require_once (get_include_path() .'/Utility/autoload.php');
-
-//require_once '../Control/CGruppo';
-//require_once '../Foundation/config.inc.php';
 require_once (get_include_path() .'/Utility/USession.php');
 class CFrontController
 {
@@ -16,7 +12,6 @@ class CFrontController
     }
 
     public function run($path){
-        //if(self::isLogged()){
             $resource = explode('/', $path);
             array_shift($resource);
             array_shift($resource);
@@ -45,28 +40,10 @@ class CFrontController
             }
             $method=$resource[1];
             return $real_controller->$method();
-       // }
-        /*else{
-            $u=new CUtente();
-            $u->home();
-        }*/
+
     }
 
 
-   /* static function isLogged() {
-        $identificato = false;
-        if (isset($_COOKIE['PHPSESSID'])) {
-            if (session_status() == PHP_SESSION_NONE) {
-                session_start();
-            }
-        }
-        if (isset($_SESSION['username'])) {
-            $identificato = true;
-        }
-        return $identificato;
-    }*/
 
 }
 
-//$c=new CFrontController();
-//$c->run("localhost/Polisportiva/Gruppo/Gruppi/2");

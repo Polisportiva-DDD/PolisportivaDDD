@@ -121,7 +121,7 @@
 							{if $carta|@count }
 							<div class="form-group">
 
-								<label for="exampleSelect1">Usa una tua carta</label>
+								<label for="exampleSelect1">Usa una tua carta non scaduta</label>
 								<select class="form-control" name="carta">
 								{section name=nr loop=$carta}
 								<option value="{$carta[nr].numero}">
