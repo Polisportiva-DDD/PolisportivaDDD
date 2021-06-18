@@ -2,8 +2,8 @@
 
 //require_once '../Utility/autoload.php';
 //require_once '../Utility/StartSmarty.php';
-require_once (get_include_path() .'/Utility/StartSmarty.php');
-require_once (get_include_path() .'/Utility/autoload.php');
+require_once (dirname(__DIR__)  .'/Utility/StartSmarty.php');
+require_once (dirname(__DIR__)  .'/Utility/autoload.php');
 class CUtente
 {
 

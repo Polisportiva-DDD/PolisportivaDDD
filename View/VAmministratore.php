@@ -1,8 +1,8 @@
 <?php
 
-require_once (get_include_path() .'/Utility/autoload.php');
-require_once (get_include_path() .'/Foundation/config.inc.php');
-require_once (get_include_path() .'/Utility/StartSmarty.php');
+//require_once (dirname(__DIR__)  .'/Utility/autoload.php');
+//require_once (dirname(__DIR__)  .'/Foundation/config.inc.php');
+//require_once (dirname(__DIR__)  .'/Utility/StartSmarty.php');
 
 class VAmministratore{
     private Smarty $smarty;
@@ -21,7 +21,7 @@ class VAmministratore{
      */
     public function showUtentiBannati(array $listaBannati){
         $this -> smarty -> assign('results', $listaBannati);
-        $this -> smarty -> display(get_include_path() ."/smarty/templates/utentiBannati.tpl");
+        $this -> smarty -> display(dirname(__DIR__)  ."/Smarty/templates/utentiBannati.tpl");
     }
 
     /**
@@ -31,7 +31,7 @@ class VAmministratore{
      */
     public function showSegnalazioniAmministratore(array $listaSegnalazioni){
         $this -> smarty -> assign('results', $listaSegnalazioni);
-        $this -> smarty -> display(get_include_path() ."/smarty/templates/SegnalazioniAmministratore.tpl");
+        $this -> smarty -> display(dirname(__DIR__)  ."/Smarty/templates/SegnalazioniAmministratore.tpl");
     }
 
     public function showBannaUtente(string $username,string $nome,string $cognome,int $eta,string $valutazioneMedia,$pic64, $type){
@@ -42,7 +42,7 @@ class VAmministratore{
         $this -> smarty -> assign('valutazioneMedia',$valutazioneMedia);
         $this->smarty->assign("type", $type);
         $this->smarty->assign("pic64", $pic64);
-        $this->smarty->display(get_include_path() ."/smarty/templates/bannaUtente.tpl");
+        $this->smarty->display(dirname(__DIR__) ."/Smarty/templates/bannaUtente.tpl");
     }
 
     public function showAmministratoreResponse(string $username,string $nome,string $cognome,int $eta, string $oggetto, string $messaggio,$pic64){
@@ -53,6 +53,6 @@ class VAmministratore{
         $this -> smarty -> assign('oggettoSegnalazione',$oggetto);
         $this -> smarty -> assign('messaggioSegnalazione',$messaggio);
         $this->smarty->assign("pic64", $pic64);
-        $this->smarty->display(get_include_path() ."/smarty/templates/AmministratoreResponse.tpl");
+        $this->smarty->display(dirname(__DIR__)  ."/Smarty/templates/AmministratoreResponse.tpl");
     }
 }

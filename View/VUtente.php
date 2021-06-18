@@ -21,7 +21,7 @@ class VUtente
         $this->smarty->assign("isAmministratore", $isAmministratore);
 
         $this->smarty->assign("isRegistrato", $isRegistrato);
-        $this->smarty->display(get_include_path() ."/smarty/templates/dettagliCampo.tpl");
+        $this->smarty->display(dirname(__DIR__)  ."/Smarty/templates/dettagliCampo.tpl");
     }
 
     public function showHome($isAmministratore, $isRegistrato, $nomeCampi, $type){
@@ -30,7 +30,7 @@ class VUtente
         $this->smarty->assign("results", $nomeCampi);
         $this->smarty->assign("type", $type);
 
-        $this->smarty->display(get_include_path() ."/smarty/templates/home.tpl");
+        $this->smarty->display(dirname(__DIR__)  ."/Smarty/templates/home.tpl");
     }
 
     /**
@@ -56,7 +56,7 @@ class VUtente
         $this->smarty->assign("type", $type);
         $this->smarty->assign("pic64", $pic64);
 
-        $this -> smarty -> display(get_include_path() ."/smarty/templates/MioProfilo.tpl");
+        $this -> smarty -> display(dirname(__DIR__)  ."/Smarty/templates/MioProfilo.tpl");
     }
 
     /**
@@ -82,7 +82,7 @@ class VUtente
         $this -> smarty -> assign("isAmministratore", $isAmministratore);
         $this->smarty->assign("pic64", $pic64);
         $this->smarty->assign("isBannato", $isBannato);
-        $this -> smarty -> display(get_include_path() ."/smarty/templates/profiloUtenteRegistrato.tpl");
+        $this -> smarty -> display(dirname(__DIR__) ."/Smarty/templates/profiloUtenteRegistrato.tpl");
     }
 
     /**
@@ -96,7 +96,7 @@ class VUtente
         $this -> smarty -> assign('results',$listaUtenti);
         $this -> smarty -> assign("isAmministratore", $isAmministratore);
 
-        $this -> smarty -> display(get_include_path() ."/smarty/templates/ricercaUtente.tpl");
+        $this -> smarty -> display(dirname(__DIR__)  ."/Smarty/templates/ricercaUtente.tpl");
     }
 
     /**
@@ -111,7 +111,7 @@ class VUtente
         $this -> smarty -> assign("isAmministratore", $isAmministratore);
         $this -> smarty -> assign("isUtente", $isUtente);
 
-        $this -> smarty -> display(get_include_path() ."/smarty/templates/recensioni.tpl");
+        $this -> smarty -> display(dirname(__DIR__)  ."/Smarty/templates/recensioni.tpl");
     }
 
     /**
@@ -119,7 +119,7 @@ class VUtente
      * @throws SmartyException
      */
     public function showRegistrazioneUtente(){
-        $this -> smarty -> display(get_include_path() ."/smarty/templates/registrazione.tpl");
+        $this -> smarty -> display(dirname(__DIR__)  ."/Smarty/templates/registrazione.tpl");
     }
 
 
@@ -128,7 +128,7 @@ class VUtente
      * @throws SmartyException
      */
     public function showAssistenza(){
-        $this -> smarty -> display(get_include_path() ."/smarty/templates/assistenza.tpl");
+        $this -> smarty -> display(dirname(__DIR__)  ."/Smarty/templates/assistenza.tpl");
 
     }
 
@@ -137,7 +137,7 @@ class VUtente
      * @throws SmartyException
      */
     public function showFormLogin(){
-        $this -> smarty -> display(get_include_path() ."/smarty/templates/login.tpl");
+        $this -> smarty -> display(dirname(__DIR__)  ."/Smarty/templates/login.tpl");
     }
 
     /**
@@ -146,7 +146,7 @@ class VUtente
      */
     public function showLoginError($error) {
         $this -> smarty -> assign('error',$error);
-        $this -> smarty -> display(get_include_path() ."/smarty/templates/login.tpl");
+        $this -> smarty -> display(dirname(__DIR__)  ."/Smarty/templates/login.tpl");
     }
 
     /**
@@ -156,6 +156,6 @@ class VUtente
      */
     public function showRegistrazioneError ($error) {
         $this->smarty->assign('error',$error);
-        $this->smarty->display(get_include_path() ."/smarty/templates/registrazione.tpl");
+        $this->smarty->display(dirname(__DIR__)  ."/Smarty/templates/registrazione.tpl");
     }
 }

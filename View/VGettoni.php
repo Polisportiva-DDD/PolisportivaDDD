@@ -30,7 +30,7 @@ class VGettoni
         $this -> smarty -> assign('prezzoTotale',$prezzoTotale);
         $this -> smarty -> assign("isAmministratore", $isAmministratore);
 
-        $this -> smarty -> display(get_include_path() ."/smarty/templates/RiepilogoAcquisto.tpl");
+        $this -> smarty -> display(dirname(__DIR__)  ."/Smarty/templates/RiepilogoAcquisto.tpl");
     }
 
 
@@ -44,7 +44,7 @@ class VGettoni
         $this -> smarty -> assign('results',$campi);
         $this -> smarty -> assign('carta',$carte);
         $this -> smarty -> assign('isAmministratore',$isAmministratore);
-        $this->smarty->display(get_include_path() ."/smarty/templates/acquistaGettoni.tpl");
+        $this->smarty->display(dirname(__DIR__)  ."/Smarty/templates/acquistaGettoni.tpl");
     }
 
     /**
@@ -54,7 +54,7 @@ class VGettoni
      */
     public function showAmministratoreAggiungiGettoni(array $campi){
         $this -> smarty -> assign('results',$campi);
-        $this->smarty->display(get_include_path() ."/smarty/templates/AmministratoreAggiungiGettoni.tpl");
+        $this->smarty->display(dirname(__DIR__) ."/Smarty/templates/AmministratoreAggiungiGettoni.tpl");
     }
 
     /**
@@ -64,7 +64,7 @@ class VGettoni
      */
     public function showAmministratoreModificaPrezzo(array $campi){
         $this -> smarty -> assign('results',$campi);
-        $this->smarty->display(get_include_path() ."/smarty/templates/AmministratoreModificaPrezzo.tpl");
+        $this->smarty->display(dirname(__DIR__)  ."/Smarty/templates/AmministratoreModificaPrezzo.tpl");
     }
 
     /**
@@ -73,6 +73,6 @@ class VGettoni
      */
     public function showAcquistoConNuovaCarta(bool $isAmministratore){
         $this -> smarty -> assign('isAmministratore',$isAmministratore);
-        $this -> smarty -> display(get_include_path() ."/smarty/templates/AcquistoConNuovaCarta.tpl");
+        $this -> smarty -> display(dirname(__DIR__)  ."/Smarty/templates/AcquistoConNuovaCarta.tpl");
     }
 }

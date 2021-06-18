@@ -1,7 +1,7 @@
 <?php
 
-require_once (get_include_path() .'/Utility/autoload.php');
-require_once (get_include_path() .'/Utility/USession.php');
+require_once (dirname(__DIR__)  .'/Utility/autoload.php');
+require_once (dirname(__DIR__) .'/Utility/USession.php');
 class CFrontController
 {
 

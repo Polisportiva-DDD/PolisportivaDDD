@@ -1,8 +1,8 @@
 <?php
 
-require_once (get_include_path() .'/Utility/autoload.php');
-require_once (get_include_path() .'/Foundation/config.inc.php');
-require_once (get_include_path() .'/Utility/StartSmarty.php');
+//require_once (get_include_path() .'/Utility/autoload.php');
+//require_once (get_include_path() .'/Foundation/config.inc.php');
+//require_once (get_include_path() .'/Utility/StartSmarty.php');
 
 class VMessaggio
 {
@@ -19,7 +19,7 @@ class VMessaggio
         $this->smarty->assign('messaggioErrore', $messaggio);
         $this->smarty->assign('isAmministratore', $isAmministratore);
 
-        $this -> smarty -> display(get_include_path() ."/smarty/templates/genericError.tpl");
+        $this -> smarty -> display(dirname(__DIR__)  ."/Smarty/templates/genericError.tpl");
     }
 
 }

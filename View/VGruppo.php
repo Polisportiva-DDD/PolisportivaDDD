@@ -1,8 +1,8 @@
 <?php
 
-require_once (get_include_path() .'/Utility/autoload.php');
-require_once (get_include_path() .'/Foundation/config.inc.php');
-require_once (get_include_path() .'/Utility/StartSmarty.php');
+//require_once (get_include_path() .'/Utility/autoload.php');
+//require_once (get_include_path() .'/Foundation/config.inc.php');
+//require_once (get_include_path() .'/Utility/StartSmarty.php');
 
 class VGruppo
 {
@@ -23,7 +23,7 @@ class VGruppo
         $this->smarty->assign("isAmministratore", $isAmministratore);
         $this->smarty->assign("tomorrow", $tomorrowString);
 
-        $this->smarty->display(get_include_path() ."/smarty/templates/creaGruppo_scegliData.tpl");
+        $this->smarty->display(dirname(__DIR__)  ."/Smarty/templates/creaGruppo_scegliData.tpl");
     }
 
     public function showScegliOraPage($dataScelta, $oreDisponibili, $isAmministratore){
@@ -31,14 +31,14 @@ class VGruppo
         $this->smarty->assign("ore", $oreDisponibili);
         $this->smarty->assign("isAmministratore", $isAmministratore);
 
-        $this->smarty->display(get_include_path() ."/smarty/templates/creaGruppo_scegliOra.tpl");
+        $this->smarty->display(dirname(__DIR__)  ."/Smarty/templates/creaGruppo_scegliOra.tpl");
     }
 
     public function showGruppoListaInvitati($utenti ,$isAmministratore){
         $this->smarty->assign("utenti", $utenti);
         $this->smarty->assign("isAmministratore", $isAmministratore);
 
-        $this->smarty->display(get_include_path() ."/smarty/templates/creaGruppoListaInvitati.tpl");
+        $this->smarty->display(dirname(__DIR__)  ."/Smarty/templates/creaGruppoListaInvitati.tpl");
     }
 
     public function showDettagliGruppo($idGruppo, $invitati, $admin, $campo, $dataEOra, $postiDisponibili,
@@ -56,14 +56,14 @@ class VGruppo
         $this->smarty->assign("votoMinimo", $votoMinimo);
         $this->smarty->assign("descrizione", $descrizione);
 
-        $this->smarty->display(get_include_path() ."/smarty/templates/dettagliGruppo.tpl");
+        $this->smarty->display(dirname(__DIR__) ."/Smarty/templates/dettagliGruppo.tpl");
     }
 
     public function showITuoiGruppi($isAmministratore, $gruppiDetails){
         $this->smarty->assign("isAmministratore", $isAmministratore);
         $this->smarty->assign("gruppiDetails", $gruppiDetails);
 
-        $this->smarty->display(get_include_path() ."/smarty/templates/i_tuoi_gruppi.tpl");
+        $this->smarty->display(dirname(__DIR__)  ."/Smarty/templates/i_tuoi_gruppi.tpl");
     }
 
     /**
@@ -79,7 +79,7 @@ class VGruppo
         $this -> smarty -> assign('campi',$listaCampi);
         $this -> smarty -> assign("isAmministratore", $isAmministratore);
 
-        $this->smarty->display(get_include_path() ."/smarty/templates/ricercaGruppo.tpl");
+        $this->smarty->display(dirname(__DIR__)  ."/Smarty/templates/ricercaGruppo.tpl");
     }
 
     /**
@@ -91,7 +91,7 @@ class VGruppo
         $this -> smarty -> assign('results',$campi);
         $this -> smarty -> assign('type',$type);
         $this -> smarty -> assign("isAmministratore", $isAmministratore);
-        $this->smarty->display(get_include_path() ."/smarty/templates/creaGruppo_scegliCampo.tpl");
+        $this->smarty->display(dirname(__DIR__)  ."/Smarty/templates/creaGruppo_scegliCampo.tpl");
     }
 
 
@@ -102,6 +102,6 @@ class VGruppo
     public function showCreaGruppoDettagliFinali(array $campi, $isAmministratore){
         $this -> smarty -> assign('results',$campi);
         $this -> smarty -> assign("isAmministratore", $isAmministratore);
-        $this->smarty->display(get_include_path() ."/smarty/templates/creaGruppo_dettagliFinali.tpl");
+        $this->smarty->display(dirname(__DIR__)  ."/Smarty/templates/creaGruppo_dettagliFinali.tpl");
     }
 }

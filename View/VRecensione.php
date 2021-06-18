@@ -13,14 +13,14 @@ class VRecensione
         $this->smarty->assign("isAmministratore", $isAmministratore);
         $this->smarty->assign("username", $username);
 
-        $this->smarty->display(get_include_path() ."/smarty/templates/effettuaRecensioni.tpl");
+        $this->smarty->display(dirname(__DIR__)  ."/Smarty/templates/effettuaRecensioni.tpl");
     }
 
     public function showRecensioniEffettuate($results, $isAmministratore){
         $this->smarty->assign("isAmministratore", $isAmministratore);
         $this->smarty->assign("results", $results);
 
-        $this->smarty->display(get_include_path() ."/smarty/templates/recensioni.tpl");
+        $this->smarty->display(dirname(__DIR__)  ."/Smarty/templates/recensioni.tpl");
     }
 
 
