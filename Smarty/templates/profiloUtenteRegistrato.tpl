@@ -68,9 +68,9 @@
       <div class="text-center mb-2">
         <!-- Profilo -->
         {if $pic64  neq ""}
-          <img src="data:;base64,{$pic64}" alt="Immagine utente"   width="200" height="200" loading="lazy">
+          <img src="data:;base64,{$pic64}" alt="Immagine utente"  class="rounded-circle" width="200" height="200" loading="lazy">
         {else}
-          <img  src="https://via.placeholder.com/300"  alt="Immagine Utente">
+          <img  src="https://via.placeholder.com/300"  class="rounded-circle" alt="Immagine Utente">
         {/if}
       </div>
       <div class="text-center">
@@ -125,9 +125,9 @@
           <div class="text-left mb-2">
             <!-- Profilo -->
             {if $results[nr].pic64  neq ""}
-              <img src="data:;base64,{$results[nr].pic64}" alt="Immagine utente"   width="75" height="75" loading="lazy">
+              <img src="data:;base64,{$results[nr].pic64}" class="rounded-circle" alt="Immagine utente"   width="75" height="75" loading="lazy">
             {else}
-              <img  src="https://via.placeholder.com/75"  alt="Immagine utente">
+              <img  src="https://via.placeholder.com/75" class="rounded-circle" alt="Immagine utente">
             {/if}
             <h4 >{$results[nr].username}</h4>
           </div>

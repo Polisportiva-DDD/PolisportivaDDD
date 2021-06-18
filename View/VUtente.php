@@ -154,8 +154,8 @@ class VUtente
      * @param $error
      * @throws SmartyException
      */
-    public function showRegistrazioneError ($errorUsername) {
-        $this->smarty->assign('errorUsername',$errorUsername);
+    public function showRegistrazioneError ($error) {
+        $this->smarty->assign('error',$error);
         $this->smarty->display(get_include_path() ."/smarty/templates/registrazione.tpl");
     }
 }

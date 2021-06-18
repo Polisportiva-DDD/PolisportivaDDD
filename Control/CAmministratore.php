@@ -185,7 +185,7 @@ class CAmministratore
         else{
             $valutazioneMedia=0;
         }
-        $pic64=$utente->getImmagine();
+        $pic64=base64_encode($utente->getImmagine());
         $type="";
         $view->showBannaUtente($username, $nome, $cognome, $eta, $valutazioneMedia,$pic64, $type);
 
@@ -200,7 +200,6 @@ class CAmministratore
             $utente =unserialize($session->readValue('utente'));
             $username=$utente->getUsername();
             $pm->updateUtenteRegistrato($username,true,$motivazione);
-            //se va male l'update???
             header('Location: /PolisportivaDDD/Utente/home');
 
         }

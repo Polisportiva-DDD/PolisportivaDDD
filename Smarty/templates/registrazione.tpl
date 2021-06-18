@@ -1,5 +1,5 @@
 <!doctype html>
-{assign var='errorUsername' value=$errorUsername|default:'ok'}
+{assign var='error' value=$error|default:'ok'}
 <html lang="it">
 <head>
   <meta charset="utf-8">
@@ -22,17 +22,17 @@
 <body class="text-center">
 
 <main class="form-signin">
-  <form action="/PolisportivaDDD/Utente/verificaRegistrazione" method="POST">
+  <form enctype="multipart/form-data" action="/PolisportivaDDD/Utente/verificaRegistrazione" method="POST" >
     <img class="mb-4" src="/PolisportivaDDD/Smarty/assets/img/bootstrap-logo.svg" alt="" width="72" height="57">
     <h1 class="h3 mb-3 fw-normal">Benvenuto</h1>
 
     <div class="form-group">
 
       <label for="nome"><h6>Nome</h6></label>
-      <input class="form-control" placeholder="Nome" name="nome" type="text" maxlength="25" id="nome" pattern="[a-zA-Z]+\" required>
+      <input class="form-control" placeholder="Nome" name="nome" type="text" maxlength="25" id="nome"  required>
 
       <label for="cognome"><h6>Cognome</h6></label>
-      <input class="form-control" placeholder="Cognome" name="cognome" maxlength="25" type="text" id="cognome" pattern="[a-zA-Z]+\" required>
+      <input class="form-control" placeholder="Cognome" name="cognome" maxlength="25" type="text" id="cognome"  required>
 
       <label for="username"><h6>Username</h6></label>
       <input class="form-control" placeholder="Username" name="username" maxlength="20" type="text" id="username" required>
@@ -53,9 +53,17 @@
     </div>
     <br>
 
-    {if $errorUsername!='ok'}
+    {if $error=='errorUsername'}
       <div>
         <p class="text-center">Attenzione! Username già esistente!  </p>
+      </div>
+      {elseif $error=='type'}
+      <div>
+        <p class="text-center">Attenzione! Il tipo dell'immagine deve essere jpg,jpeg o png </p>
+      </div>
+    {elseif $error=='size'}
+      <div>
+        <p class="text-center">Attenzione! La dimensione dell'immagine è troppo grande </p>
       </div>
     {/if}
 

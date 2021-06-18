@@ -57,9 +57,7 @@
     <div class="container">
         <!-- Page heading-->
         <h1>Ricerca gruppo</h1>
-        <ol class="breadcrumb mb-4 h-100">
-
-        </ol>
+        <hr>
         <div class="row">
             <!-- Blog Entries Column-->
             <div class="col-md-8">

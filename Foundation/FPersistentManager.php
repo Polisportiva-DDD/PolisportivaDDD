@@ -47,6 +47,10 @@ class FPersistentManager
         return $result;
     }
 
+    public function loadCarteNonScadute($username){
+        return FCartaDiCredito::loadCarteNonScadute($username);
+    }
+
 
     public function existUsername($username): bool{
         return FUtente::esisteUsername($username);

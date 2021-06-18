@@ -61,9 +61,9 @@
             <div class="text-center mb-2">
                 <!-- Profilo -->
                 {if $pic64  neq ""}
-                    <img src="data:;base64,{$pic64}" alt="Immagine campo"   width="200" height="200" loading="lazy">
+                    <img src="data:;base64,{$pic64}" alt="Immagine utente"  class="rounded-circle" width="200" height="200" loading="lazy">
                 {else}
-                    <img  src="https://via.placeholder.com/300"  alt="Immagine campo">
+                    <img  src="https://via.placeholder.com/300" class="rounded-circle" alt="Immagine utente">
                 {/if}
             </div>
             <div class="text-center">
@@ -85,7 +85,7 @@
         <div class="col-md-12">
             <form method="post" action="/PolisportivaDDD/amministratore/rispondiSegnalazione">
                 <h4>Rispondi</h4>
-                <textarea name="risposta" class="form-control"></textarea>
+                <textarea name="risposta" class="form-control" required></textarea>
             <button type="submit" class="btn btn-primary float-right mt-3">Rispondi</button>
             </form>
         </div>

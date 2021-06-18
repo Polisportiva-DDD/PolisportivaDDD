@@ -29,7 +29,7 @@ class CGettoni
             $c['pic64']=$campo->getImmagine();
             $resultsCampi[] = $c;
         }
-        $carte = $pm->loadCarteUtente($username);
+        $carte = $pm->loadCarteNonScadute($username);
         $resultCarte=array();
         if($carte!=null){
             foreach($carte as $carta){

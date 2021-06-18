@@ -65,7 +65,7 @@
       <div class="col-md-8">
       <div class="text-center mb-2">
         {if $pic64  neq ""}
-          <img src="data:;base64,{$pic64}" alt="Immagine campo" class="d-block mx-lg-auto img-fluid"  width="200" height="200" loading="lazy">
+          <img src="data:;base64,{$pic64}" alt="Immagine campo" class="rounded-circle"  width="200" height="200" loading="lazy">
         {else}
           <img  src="https://via.placeholder.com/300"  alt="Immagine campo">
         {/if}
@@ -90,7 +90,6 @@
 
       <div class="col-md-4">
         <div class="list-group mb-4">
-          <a class="list-group-item" href="/PolisportivaDDD/Utente/mioProfilo">Profilo personale</a>
           <a class="list-group-item" href="/PolisportivaDDD/Gruppo/visualizzaGruppiUtente">I tuoi gruppi</a>
           <a class="list-group-item" href="/PolisportivaDDD/Gettoni/visualizzaCarte">Le tue carte</a>
           <a class="list-group-item" href="#">Recensioni Effettuate</a>
@@ -122,9 +121,9 @@
 
           <div class="text-left mb-2" >
             {if $recensioni[nr].pic64  neq ""}
-              <img src="data:;base64,{$recensioni[nr].pic64}" alt="Immagine utente"   width="75" height="75" loading="lazy">
+              <img src="data:;base64,{$recensioni[nr].pic64}" alt="Immagine utente" class="rounded-circle"   width="75" height="75" loading="lazy">
             {else}
-              <img  src="https://via.placeholder.com/75"  alt="Immagine utente">
+              <img  src="https://via.placeholder.com/75" class="rounded-circle" alt="Immagine utente">
             {/if}
 
             <h4 >{$recensioni[nr].username}</h4>

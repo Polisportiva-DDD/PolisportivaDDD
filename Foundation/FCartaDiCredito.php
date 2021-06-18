@@ -168,6 +168,28 @@ class FCartaDiCredito
 
     }
 
+    public static function loadCarteNonScadute(string $username){
+        $data=(new DateTime('now'))->format('Y-m-d');
+        try{
+            $sql="SELECT carta FROM " . static::$tablePossessoCarta . " WHERE utente='" . $username . "' AND scadenza>'".$data."';"; //Query per prendere le carte degli utenti
+            $db=FDatabase::getInstance();
+            $rows=$db->loadMultiple($sql);
+            if($rows!=null){
+                $carteUtente = array();
+                foreach ($rows as $row) { //Per ogni row
+                    $carta = FCartaDiCredito::load($row['carta']); //Carica la carta corrispondente al numero ottenuto
+                    array_push($carteUtente, $carta); //Mettilo nell'array
+                }
+                return $carteUtente;
+            }
+            else return null;
+        }
+        catch(Exception $e){
+            echo ("Error");
+        }
+
+    }
+
 
 
 }

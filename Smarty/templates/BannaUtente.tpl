@@ -61,8 +61,11 @@
     <div class="row">
       <div class="col-md-12">
         <div class="text-center mb-2">
-          <!-- Profilo -->
-          <img src="data:{$type};base64,{$pic64}" class="rounded-circle" alt="Immagine utente" width="250" height="150">
+          {if $pic64  neq ""}
+            <img src="data:;base64,{$pic64}" alt="Immagine utente"  class="rounded-circle" width="200" height="200" loading="lazy">
+          {else}
+            <img  src="https://via.placeholder.com/200"  class="rounded-circle" alt="Immagine Utente">
+          {/if}
         </div>
         <div class="text-center">
 			<h6 class="mb-2">Username: {$username}</h6>
