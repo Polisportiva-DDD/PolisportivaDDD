@@ -412,7 +412,11 @@ class CUtente
             $view = new VUtente();
 
             $utenteDaBannare = $pm->load($username,"FUtente");
-            $isBannato=$pm->isBannato($username);
+            $isBannato=false;
+            if(!($pm->exist($username))){
+                $isBannato=$pm->isBannato($username);
+            }
+
             if($utenteDaBannare!=null){
                 $nome=$utenteDaBannare->getNome();
                 $cognome=$utenteDaBannare->getCognome();
