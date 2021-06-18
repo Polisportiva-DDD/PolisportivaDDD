@@ -100,7 +100,7 @@ class CUtente
             $rec=array();
             $listCampi=$utente->getWallet()->getListaCampiWallet();
             $pic64=base64_encode($utente->getImmagine());
-            $type= "";
+            $type="";
             if($recensioni!=null){
                 $valutazioneMedia=round($utente->calcolaMediaRecensioni($recensioni));
                 foreach ($recensioni as $valore  ){
@@ -284,53 +284,56 @@ class CUtente
         $session->startSession();
         $session->setValue("isAmministratore",false);
         $session->setValue('isRegistrato',true);
-        $session->setValue("username",$_POST['username']);
-        $username = $_POST['username'];
-        $nome = $_POST['nome'];
-        $cognome = $_POST['cognome'];
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $data = $_POST['data'];
-        $data=(DateTime::createFromFormat('Y-m-d',$data));
-        $nomeFile="file";
-        $ris=static::verificaImmagine($nomeFile);
-        if($ris=="size"){
-            $view->showRegistrazioneError("size");
-        }
-        elseif($ris=="type"){
-            $view->showRegistrazioneError("type");
-        }
-        else{
-
-            $path = $_FILES[$nomeFile]['tmp_name'];
-            $file=fopen($path,'rb') or die ("Attenzione! Impossibile da aprire!");
-            $immagine=fread($file,filesize($path));
-            unset($file);
-            unlink($path);
-
-            $verUsername = $pm->existUsername($username);
-            if ($verUsername){
-                $view->showRegistrazioneError("errorUsername");
+        if (isset($_POST['username']) and isset($_POST['nome']) and isset($_POST['cognome']) and isset($_POST['email']) and isset($_POST['password']) and isset($_POST['data']) and isset($_POST['file'])){
+            $session->setValue("username",$_POST['username']);
+            $username = $_POST['username'];
+            $nome = $_POST['nome'];
+            $cognome = $_POST['cognome'];
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+            $data = $_POST['data'];
+            $data=(DateTime::createFromFormat('Y-m-d',$data));
+            $nomeFile="file";
+            $ris=static::verificaImmagine($nomeFile);
+            if($ris=="size"){
+                $view->showRegistrazioneError("size");
             }
-            else {
-                $campi = $pm -> loadList('FCampo');
-                $listaCampiWallet = array();
-                foreach ($campi as $campo){
-                    $gettoni = new ECampiWallet(0,$campo);
-                    array_push($listaCampiWallet,$gettoni);
+            elseif($ris=="type"){
+                $view->showRegistrazioneError("type");
+            }
+            else{
+
+                $path = $_FILES[$nomeFile]['tmp_name'];
+                $file=fopen($path,'rb') or die ("Attenzione! Impossibile da aprire!");
+                $immagine=fread($file,filesize($path));
+                unset($file);
+                unlink($path);
+
+                $verUsername = $pm->existUsername($username);
+                if ($verUsername){
+                    $view->showRegistrazioneError("errorUsername");
                 }
-                $wallet = new EWallet($listaCampiWallet);
-                $id=$pm->store($wallet);
-                $wallet->setId($id);
-                $utente = new EUtente($username,$nome,$cognome,$email,$password,$data,$immagine,$wallet);
-                $utenteRegistrato = new EUtenteRegistrato(false,'',$username,$nome,$cognome,$email,$password,$data,$immagine,$wallet);
+                else {
+                    $campi = $pm -> loadList('FCampo');
+                    $listaCampiWallet = array();
+                    foreach ($campi as $campo){
+                        $gettoni = new ECampiWallet(0,$campo);
+                        array_push($listaCampiWallet,$gettoni);
+                    }
+                    $wallet = new EWallet($listaCampiWallet);
+                    $id=$pm->store($wallet);
+                    $wallet->setId($id);
+                    $utente = new EUtente($username,$nome,$cognome,$email,$password,$data,$immagine,$wallet);
+                    $utenteRegistrato = new EUtenteRegistrato(false,'',$username,$nome,$cognome,$email,$password,$data,$immagine,$wallet);
 
 
-                $pm -> store($utente);
-                $pm -> store($utenteRegistrato);
-                header('Location: /PolisportivaDDD/Utente/home');
+                    $pm -> store($utente);
+                    $pm -> store($utenteRegistrato);
+                    header('Location: /PolisportivaDDD/Utente/home');
+                }
             }
         }
+
 
     }
     public function utentiBannati(){
@@ -445,11 +448,6 @@ class CUtente
         }
         return $identificato;
     }
-
-
-
-
-
 
     static function verificaImmagine($nome_file)
     {

@@ -29,25 +29,56 @@
     <div class="form-group">
 
       <label for="nome"><h6>Nome</h6></label>
-      <input class="form-control" placeholder="Nome" name="nome" type="text" maxlength="25" id="nome"  required>
+      {literal}
+        <input class="form-control" placeholder="Nome" name="nome" type="text"  minlength="2" maxlength="25" id="nome"
+               pattern="[a-zA-Z ]{2,25}"
+               title="Un nome è composto da lettere minuscole e maiuscole e può contenere spazi; sono consentiti da 2 fino a 25 caratteri."
+               required>
+      {/literal}
+
 
       <label for="cognome"><h6>Cognome</h6></label>
-      <input class="form-control" placeholder="Cognome" name="cognome" maxlength="25" type="text" id="cognome"  required>
+      {literal}
+        <input class="form-control" placeholder="Cognome" name="cognome" minlength="2" maxlength="25" type="text" id="cognome"
+               pattern="[a-zA-Z ]{2,25}"
+               title="Un nome è composto da lettere minuscole e maiuscole e può contenere spazi; sono consentiti da 2 fino a 25 caratteri."
+               required>
+      {/literal}
+
 
       <label for="username"><h6>Username</h6></label>
-      <input class="form-control" placeholder="Username" name="username" maxlength="20" type="text" id="username" required>
+      {literal}
+        <input class="form-control" placeholder="Username" name="username" minlength="3" maxlength="20" type="text" id="username"
+               pattern="[a-zA-Z]{1}[A-Za-z0-9_.-]{2,19}"
+               title="Un username è composto da lettere minuscole, maiuscole, '.', '-', '_'; sono consentiti da 3 a 20 caratteri;deve iniziare con una lettera minuscolo o maiuscola."
+               required>
+      {/literal}
+
 
       <label for="data"><h6>Data di nascita</h6></label>
-      <input type="date" class="form-control" name="data" id="data"  required>
+      <input type="date" class="form-control" name="data" id="data"
+             required>
 
       <label for="email"><h6>Email</h6></label>
-      <input type="email" class="form-control" name="email" maxlength="50" id="email" placeholder="name@example.com" required>
+      {literal}
+        <input type="email" class="form-control" name="email" maxlength="50" id="email" placeholder="name@example.com"
+               pattern="[A-z0-9\.\+_-]+@[A-z0-9\._-]+\.[A-z]{2,6}"
+               title="L'email deve essere del tipo: caratteri@caratteri.dominio; il dominio deve essere compreso tra i 2 e i 6 caratteri."
+               required>
+      {/literal}
 
       <label for="password"><h6>Password</h6></label>
-      <input type="password" class="form-control" name="password" maxlength="40" id="password" placeholder="Password" required>
+      {literal}
+        <input type="password" class="form-control" name="password" minlength="5" maxlength="40" id="password" placeholder="Password"
+               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}"
+               title="La password deve contenere almeno una maiuscola,una minuscola e un numero; almeno 5 caratteri."
+               required>
+      {/literal}
+
 
       <label for="file"><h6>Immagine Profilo</h6></label>
-      <input type="file" class="form-control-file" name="file" id="file" accept="image/png, image/jpeg" required>
+      <input type="file" class="form-control-file" name="file" id="file" accept="image/png, image/jpeg"
+             required>
 
 
     </div>
@@ -57,7 +88,7 @@
       <div>
         <p class="text-center">Attenzione! Username già esistente!  </p>
       </div>
-      {elseif $error=='type'}
+    {elseif $error=='type'}
       <div>
         <p class="text-center">Attenzione! Il tipo dell'immagine deve essere jpg,jpeg o png </p>
       </div>
