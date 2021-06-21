@@ -16,7 +16,7 @@ class FUtenteRegistrato
      * @param EUtenteRegistrato $user l'utente i cui dati devono essere inseriti nel DB
      */
     
-    public static function bind($stmt, EUtenteRegistrato $user){
+    public static function bind(PDOStatement $stmt, EUtenteRegistrato $user){
         $stmt->bindValue(':username', $user->getUsername(), PDO::PARAM_STR);
         $stmt->bindValue(':bannato', $user->getBannato(), PDO::PARAM_BOOL); //ricorda di "collegare" la giusta variabile al bind
         $stmt->bindValue(':motivazione', $user->getMotivazione(), PDO::PARAM_STR);
@@ -29,7 +29,8 @@ class FUtenteRegistrato
      * @return string $tables nome della tabella
      */
 
-    public static function getTables(){
+    public static function getTables(): string
+    {
         return static::$tables;
     }
 
@@ -38,12 +39,14 @@ class FUtenteRegistrato
      * @return string $values valori della tabella
      */
 
-    public static function getValues(){
+    public static function getValues(): string
+    {
         return static::$values;
     }
 
 
-    public static function store($user){
+    public static function store($user): ?string
+    {
         $sql="INSERT INTO ".static::getTables()." VALUES ".static::getValues();
         $db=FDatabase::getInstance();
         $id=$db->store($sql,$user);
@@ -62,7 +65,8 @@ class FUtenteRegistrato
 
     //SERVE?????????????????????????????????????????????????????????????
 
-    public static function load($username){
+    public static function load(string $username): ?EUtenteRegistrato
+    {
         $sql="SELECT * FROM ".static::getTables()." WHERE username='".$username."';";
         $db=FDatabase::getInstance();
         $result=$db->loadSingle($sql);
@@ -82,7 +86,8 @@ class FUtenteRegistrato
      * Carica tutti gli utenti bannati
      * @return array|null
      */
-    public static function loadList(){
+    public static function loadList(): ?array
+    {
         $sql = "SELECT * FROM " . static::$tables." WHERE bannato=1" ;
         $db=FDatabase::getInstance();
         $result=$db->loadMultiple($sql);
@@ -103,7 +108,8 @@ class FUtenteRegistrato
      * @return bool true se è andato a buon fine la cancellazione, false altrimenti
      */
 
-    public static function delete($username){
+    public static function delete(string $username): bool
+    {
         $sql="DELETE FROM ".static::getTables()." WHERE username='".$username."';";
         $db=FDatabase::getInstance();
         if($db->delete($sql)) return true;
@@ -118,7 +124,8 @@ class FUtenteRegistrato
      * @return bool (restituisce true se va tutto a buon fine false altrimenti)
      */
 
-    public static function updateBannato($username, bool $bannato, String $motivazione){
+    public static function updateBannato(string $username, bool $bannato, String $motivazione): bool
+    {
         $sql="UPDATE ".static::getTables()." SET bannato='".$bannato."', motivazione='".$motivazione."' WHERE username='".$username."';";
         $db=FDatabase::getInstance();
         if($db->update($sql)) return true;
@@ -132,7 +139,8 @@ class FUtenteRegistrato
      * @return bool
      */
 
-    public static function isBannato($username){
+    public static function isBannato(string $username): ?bool
+    {
         $sql="SELECT bannato FROM ".static::getTables()." WHERE username='".$username."';";
         $db=FDatabase::getInstance();
         $b=$db->loadSingle($sql);

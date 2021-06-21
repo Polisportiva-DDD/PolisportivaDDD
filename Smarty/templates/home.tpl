@@ -84,27 +84,27 @@
       <li class="active" data-target="#carouselExampleIndicators" data-slide-to="0"></li>
       <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
       <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
     </ol>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img class="d-block w-100" src="https://via.placeholder.com/1900x600" alt="..." />
+        <img class="d-block w-100" src="/PolisportivaDDD/Smarty/assets/img/calcio_a_5.png" alt="calcio a 5"  width="1900" height="450"/>
         <div class="carousel-caption d-none d-md-block">
-          <h3>First Slide</h3>
-          <p>This is a description for the first slide.</p>
         </div>
       </div>
       <div class="carousel-item">
-        <img class="d-block w-100" src="https://via.placeholder.com/1900x600" alt="..." />
+        <img class="d-block w-100" src="/PolisportivaDDD/Smarty/assets/img/calcio_a_7.png" alt="calcio a 7" width="1900" height="450"/>
         <div class="carousel-caption d-none d-md-block">
-          <h3>Second Slide</h3>
-          <p>This is a description for the second slide.</p>
         </div>
       </div>
       <div class="carousel-item">
-        <img class="d-block w-100" src="https://via.placeholder.com/1900x600" alt="..." />
+        <img class="d-block w-100" src="/PolisportivaDDD/Smarty/assets/img/calcio_a_8.png" alt="calcio a 8" width="1900" height="450"/>
         <div class="carousel-caption d-none d-md-block">
-          <h3>Third Slide</h3>
-          <p>This is a description for the third slide.</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="/PolisportivaDDD/Smarty/assets/img/calcio_a_11.png" alt="calcio a 11" width="1900" height="450"/>
+        <div class="carousel-caption d-none d-md-block">
         </div>
       </div>
     </div>

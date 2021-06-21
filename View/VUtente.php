@@ -3,7 +3,7 @@
 
 class VUtente
 {
-    private Smarty $smarty;
+    private $smarty;
 
     /**
      * Funzione che inizializza e configura smarty.
@@ -13,7 +13,10 @@ class VUtente
     }
 
 
-    public function showDettagliCampo($nomeCampo, $descrizione, $pic64, $type ,$isRegistrato,$isAmministratore){
+    /**
+     * @throws SmartyException
+     */
+    public function showDettagliCampo($nomeCampo, $descrizione, $pic64, $type , $isRegistrato, $isAmministratore){
         $this->smarty->assign("nomeCampo", $nomeCampo);
         $this->smarty->assign("descrizione", $descrizione);
         $this->smarty->assign("type", $type);
@@ -24,6 +27,9 @@ class VUtente
         $this->smarty->display(dirname(__DIR__)  ."/Smarty/templates/dettagliCampo.tpl");
     }
 
+    /**
+     * @throws SmartyException
+     */
     public function showHome($isAmministratore, $isRegistrato, $nomeCampi, $type){
         $this->smarty->assign("isAmministratore", $isAmministratore);
         $this->smarty->assign("isRegistrato", $isRegistrato);
@@ -68,7 +74,8 @@ class VUtente
      * @param int $media_recensioni media delle recensioni dell'utente loggato
      * @param array $recensioni contiene tutte le recensioni relative all'utente
      * @param $isAmministratore bool che controlla se è loggato un amministratore
-     * @param $isUtente bool che controlla se è loggato un utente
+     * @param bool $isBannato
+     * @param $pic64
      * @throws SmartyException
      */
     public function showProfiloUtenteRegistrato(string $username, string $nome, string $cognome, int $eta, int $media_recensioni, array $recensioni, bool $isAmministratore,bool $isBannato,$pic64){
@@ -89,7 +96,6 @@ class VUtente
      * Funzione che si occupa di gestire la visualizzazione della ricerca di tutti gli utenti
      * @param array $listaUtenti lista di tutti gli utenti
      * @param $isAmministratore bool che controlla se è loggato un amministratore
-     * @param $isUtente bool che controlla se è loggato un utente
      * @throws SmartyException
      */
     public function showRicercaUtente(array $listaUtenti,bool $isAmministratore){

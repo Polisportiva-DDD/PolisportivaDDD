@@ -31,7 +31,8 @@ class FPersistentManager
         return $Fclasse::loadList();
     }
 
-    public function updateUtenteRegistrato(string $username, bool $bannato, string $motivazione){
+    public function updateUtenteRegistrato(string $username, bool $bannato, string $motivazione): bool
+    {
         return FUtenteRegistrato::updateBannato($username,$bannato,$motivazione);
     }
 
@@ -47,7 +48,8 @@ class FPersistentManager
         return $result;
     }
 
-    public function loadCarteNonScadute($username){
+    public function loadCarteNonScadute($username): ?array
+    {
         return FCartaDiCredito::loadCarteNonScadute($username);
     }
 
@@ -60,11 +62,13 @@ class FPersistentManager
         return FUtente::esisteMail($mail);
     }
 
-    public function exist($username){
+    public function exist($username): bool
+    {
         return FAmministratore::exist($username);
     }
 
-    public function isBannato($username){
+    public function isBannato($username): ?bool
+    {
         return FUtenteRegistrato::isBannato($username);
     }
 
@@ -74,15 +78,18 @@ class FPersistentManager
     }
 
     public function loadGruppi(?string $nomeGruppo, ?string $admin, ?string $data,
-                                        ?string $tipologiaCampo, ?int $etaMinima, ?int $etaMassima, ?float $valutazioneMinima){
+                                        ?string $tipologiaCampo, ?int $etaMinima, ?int $etaMassima, ?float $valutazioneMinima): array
+    {
         return FGruppo::loadGruppi($nomeGruppo, $admin, $data, $tipologiaCampo, $etaMinima, $etaMassima, $valutazioneMinima);
     }
 
-    public function loadRecensioniEffettuate(string $username){
+    public function loadRecensioniEffettuate(string $username): ?array
+    {
         return FRecensione::loadRecensioniEffettuate($username);
     }
 
-    public function loadRecensioniUtente(string $username){
+    public function loadRecensioniUtente(string $username): ?array
+    {
         return FRecensione::loadRecensioniUtente($username);
     }
 
@@ -90,19 +97,23 @@ class FPersistentManager
         return $Fclass::loadField($field);
     }
 
-    public function loadCarteUtente(string $username){
+    public function loadCarteUtente(string $username): ?array
+    {
         return FCartaDiCredito::loadCarteUtente($username);
     }
 
-    public function loadGruppiUtente(string $username){
+    public function loadGruppiUtente(string $username): ?array
+    {
         return FGruppo::loadGruppiUtente($username);
     }
 
-    public function addPartecipanteGruppo($username, $idGruppo){
+    public function addPartecipanteGruppo($username, $idGruppo): bool
+    {
         return FGruppo::addPartecipante($username, $idGruppo);
     }
 
-    public function loadUtentiFiltered(string $searchedUsername){
+    public function loadUtentiFiltered(string $searchedUsername): array
+    {
         return FUtente::loadUtentiFiltered($searchedUsername);
     }
 }

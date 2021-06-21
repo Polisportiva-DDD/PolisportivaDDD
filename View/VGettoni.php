@@ -3,7 +3,7 @@
 
 class VGettoni
 {
-    private Smarty $smarty;
+    private  $smarty;
 
     /**
      * Funzione che inizializza e configura smarty.
@@ -16,7 +16,7 @@ class VGettoni
      * Funzione che si occupa di gestire la visualizzazione della schermata di acquisto dei gettoni
      * @param array $gettoniAcquistati lista dei gettoni dei relativi campi che si vuole acquistare
      * @param string $numeroCarta numero della carta di credito
-     * @param string $titolareCarta titolare della carta di credito
+     * @param string $nomeTitolare titolare della carta di credito
      * @param string $dataScadenza data di scadenza della carta di credito
      * @param int $prezzoTotale costo complessivo dei gettoni che si vuole acquistare
      * @param bool $isAmministratore sei amministratore?

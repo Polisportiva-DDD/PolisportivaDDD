@@ -6,8 +6,8 @@ class EWallet
 {
     //attributes
 
-    private int $id;
-    private array $listaCampiWallet = array();
+    private  $id;
+    private $listaCampiWallet;
 
 
     public function __construct(array $listaCampiWallet,int $id=-1)

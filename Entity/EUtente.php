@@ -2,16 +2,16 @@
 //require_once '../Utility/autoload.php';
 
  class EUtente{
-	private string $username;
-	private string $nome;
-	private string $cognome;
-	private string $email;
-	private string $password;
-	private DateTime $dataDiNascita;
-	private string $immagine;
-	private array $cartedicredito=array();
-	private array $listaGruppi = array();
-	private EWallet $wallet ;
+	private  $username;
+	private  $nome;
+	private  $cognome;
+	private  $email;
+	private  $password;
+	private  $dataDiNascita;
+	private  $immagine;
+	private  $cartedicredito=array();
+	private  $listaGruppi = array();
+	private  $wallet ;
 
 
 
@@ -226,7 +226,8 @@
 		}
 	}
 
-	public function getEta(){
+	public function getEta(): int
+	{
 		$data=$this->dataDiNascita;
 		return  ((new DateTime('now'))->diff($data))->y;
 	}

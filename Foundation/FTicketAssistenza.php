@@ -12,11 +12,11 @@ class FTicketAssistenza
 
     /**
      * Questo metodo lega gli attributi dell'user da inserire con i parametri della INSERT
-     * @param PDOStatement $stmt 
-     * @param ETicketAssistenza $user l'utente i cui dati devono essere inseriti nel DB
+     * @param PDOStatement $stmt
+     * @param ETicketAssistenza $ticket
      */
     
-    public static function bind($stmt, ETicketAssistenza $ticket){
+    public static function bind(PDOStatement $stmt, ETicketAssistenza $ticket){
         $stmt->bindValue(':id',NULL, PDO::PARAM_INT);
         $stmt->bindValue(':autore', $ticket->getAutore(), PDO::PARAM_STR); //ricorda di "collegare" la giusta variabile al bind
         $stmt->bindValue(':messaggio', $ticket->getMessaggio(), PDO::PARAM_STR);
@@ -30,7 +30,8 @@ class FTicketAssistenza
      * @return string $tables nome della tabella
      */
 
-    public static function getTables(){
+    public static function getTables(): string
+    {
         return static::$tables;
     }
 
@@ -39,29 +40,32 @@ class FTicketAssistenza
      * @return string $values valori della tabella
      */
     
-    public static function getValues(){
+    public static function getValues(): string
+    {
         return static::$values;
     }
 
 
-    public static function store(ETicketAssistenza  $ticket){
+    public static function store(ETicketAssistenza  $ticket): ?string
+    {
         $sql="INSERT INTO ".static::getTables()." VALUES ".static::getValues();
         $db=FDatabase::getInstance();
         $id=$db->store($sql,$ticket);
         if($id) return $id;
         else return null;
     }
- 
-    
+
 
     /**
      * Carica il ticket in base all'id passato
      * @param int $id del ticket
      * @return ETicketAssistenza ETicketAssistenza
+     * @throws Exception
      */
 
 
-    public static function load($id){
+    public static function load(int $id): ?ETicketAssistenza
+    {
         $sql="SELECT * FROM ".static::getTables()." WHERE id='".$id."';";
         $db=FDatabase::getInstance();
         $result=$db->loadSingle($sql);
@@ -74,12 +78,13 @@ class FTicketAssistenza
 
     /**
      * Carica tutti i ticket
-     * @param int $id del ticket
      * @return array array<ETicketAssistenza>
+     * @throws Exception
      */
 
 
-    public static function loadList(){
+    public static function loadList(): ?array
+    {
         $sql="SELECT * FROM ".static::getTables();
         $db=FDatabase::getInstance();
         $result=$db->loadMultiple($sql);
@@ -103,7 +108,8 @@ class FTicketAssistenza
      * @return bool 
      */
 
-    public static function delete($id){
+    public static function delete(int $id): bool
+    {
         $sql="DELETE FROM ".static::getTables()." WHERE id='".$id."';";
         $db=FDatabase::getInstance();
         if($db->delete($sql)) return true;

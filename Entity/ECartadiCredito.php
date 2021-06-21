@@ -5,11 +5,11 @@ class ECartadiCredito
 {
     //attributes
 
-    private string $numero;
-    private string $nome_titolare;
-    private string $cognome_titolare;
-    private string $CVC;
-    private DateTime $scadenza;
+    private  $numero;
+    private  $nome_titolare;
+    private  $cognome_titolare;
+    private  $CVC;
+    private  $scadenza;
 
     //constructors
 

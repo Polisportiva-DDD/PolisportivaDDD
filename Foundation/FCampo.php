@@ -24,7 +24,8 @@ class FCampo
     }
 
 
-    public static function store(ECampo $campo){
+    public static function store(ECampo $campo): ?string
+    {
         $sql="INSERT INTO " . static::$tableName . " VALUES " . static::$values;
         $db=FDatabase::getInstance();
         $id=$db->store($sql, $campo);
@@ -32,7 +33,9 @@ class FCampo
         else return null;
     }
 
-    public static function loadList(){ //Carica tutti i campi presenti
+    //Carica tutti i campi presenti
+    public static function loadList(): array
+    {
         try {
             $sql = "SELECT * FROM " . static::$tableName;
             $db = FDatabase::getInstance();
@@ -80,7 +83,8 @@ class FCampo
 
     }
 
-    public static function delete(int $idCampo){
+    public static function delete(int $idCampo): bool
+    {
         $sql = "DELETE FROM " . static::$tableName . " WHERE id=" . $idCampo;
         $db=FDatabase::getInstance();
         $response = $db->delete($sql);

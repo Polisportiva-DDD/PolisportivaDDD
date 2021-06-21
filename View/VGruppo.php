@@ -7,7 +7,7 @@
 class VGruppo
 {
 
-    private Smarty $smarty;
+    private  $smarty;
 
     /**
      * Funzione che inizializza e configura smarty.
@@ -17,7 +17,9 @@ class VGruppo
     }
 
 
-
+    /**
+     * @throws SmartyException
+     */
     public function showScegliDataPage($nomeCampo, $isAmministratore, $tomorrowString){
         $this->smarty->assign("nomeCampo", $nomeCampo);
         $this->smarty->assign("isAmministratore", $isAmministratore);
@@ -26,6 +28,9 @@ class VGruppo
         $this->smarty->display(dirname(__DIR__)  ."/Smarty/templates/creaGruppo_scegliData.tpl");
     }
 
+    /**
+     * @throws SmartyException
+     */
     public function showScegliOraPage($dataScelta, $oreDisponibili, $isAmministratore){
         $this->smarty->assign("dataScelta", $dataScelta);
         $this->smarty->assign("ore", $oreDisponibili);
@@ -34,16 +39,22 @@ class VGruppo
         $this->smarty->display(dirname(__DIR__)  ."/Smarty/templates/creaGruppo_scegliOra.tpl");
     }
 
-    public function showGruppoListaInvitati($utenti ,$isAmministratore){
+    /**
+     * @throws SmartyException
+     */
+    public function showGruppoListaInvitati($utenti , $isAmministratore){
         $this->smarty->assign("utenti", $utenti);
         $this->smarty->assign("isAmministratore", $isAmministratore);
 
         $this->smarty->display(dirname(__DIR__)  ."/Smarty/templates/creaGruppoListaInvitati.tpl");
     }
 
+    /**
+     * @throws SmartyException
+     */
     public function showDettagliGruppo($idGruppo, $invitati, $admin, $campo, $dataEOra, $postiDisponibili,
-                                        $etaMinima, $etaMassima, $votoMinimo, $descrizione,
-                                        $isAmministratore){
+                                       $etaMinima, $etaMassima, $votoMinimo, $descrizione,
+                                       $isAmministratore){
         $this->smarty->assign("isAmministratore", $isAmministratore);
         $this->smarty->assign("idGruppo", $idGruppo);
         $this->smarty->assign("invitati", $invitati);
@@ -59,6 +70,9 @@ class VGruppo
         $this->smarty->display(dirname(__DIR__) ."/Smarty/templates/dettagliGruppo.tpl");
     }
 
+    /**
+     * @throws SmartyException
+     */
     public function showITuoiGruppi($isAmministratore, $gruppiDetails){
         $this->smarty->assign("isAmministratore", $isAmministratore);
         $this->smarty->assign("gruppiDetails", $gruppiDetails);
@@ -71,7 +85,6 @@ class VGruppo
      * @param array $listaGruppi lista dei gruppi presenti
      * @param array $listaCampi lista dei campi presenti
      * @param $isAmministratore bool che controlla se è loggato un amministratore
-     * @param $isUtente bool che controlla se è loggato un utente
      * @throws SmartyException
      */
     public function showRicercaGruppo(array $listaGruppi,array $listaCampi,bool $isAmministratore){
@@ -79,7 +92,7 @@ class VGruppo
         $this -> smarty -> assign('campi',$listaCampi);
         $this -> smarty -> assign("isAmministratore", $isAmministratore);
 
-        $this->smarty->display(dirname(__DIR__)  ."/Smarty/templates/ricercaGruppo.tpl");
+        $this->smarty->display(dirname(__DIR__)  ."/Smarty/templates/RicercaGruppo.tpl");
     }
 
     /**
