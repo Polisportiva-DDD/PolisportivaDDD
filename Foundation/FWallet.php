@@ -44,7 +44,8 @@ class FWallet
         else return $wallet;
     }
 
-    public static function update(EWallet $wallet){
+    public static function update(EWallet $wallet): bool
+    {
 
        if(FCampiWallet::update($wallet->getId(),$wallet->getListaCampiWallet())==true){
            return true;
@@ -61,7 +62,8 @@ class FWallet
      * @return bool 
      */
 
-    public static function delete($id){
+    public static function delete(int $id): bool
+    {
         $sql="DELETE FROM ".static::$tableName." WHERE id='".$id."';";
         $db=FDatabase::getInstance();
         if($db->delete($sql)) return true;

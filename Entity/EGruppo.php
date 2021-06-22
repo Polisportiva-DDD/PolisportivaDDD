@@ -5,19 +5,20 @@
 
 class EGruppo
 {
-    private ?int $id;
-    private String $nome;
-    private int $etaMinima;
-    private int $etaMassima;
-    private float $votoMinimo;
-    private String $descrizione;
-    private DateTime $dataEOra;
-    private array $partecipanti = array();
-    private EUtente $admin;
-    private ECampo $campo;
+    private  $id;
+    private  $nome;
+    private  $etaMinima;
+    private  $etaMassima;
+    private  $votoMinimo;
+    private  $descrizione;
+    private  $dataEOra;
+    private $partecipanti;
+    private  $admin;
+    private  $campo;
 
     /**
      * EGruppo constructor.
+     * @param int|null $id
      * @param String $nome
      * @param int $etaMinima
      * @param int $etaMassima
@@ -282,7 +283,8 @@ class EGruppo
 
     }
 
-    public function hasPartecipante($username){
+    public function hasPartecipante($username): bool
+    {
         $pm = new FPersistentManager();
         $utente = $pm->load($username, 'FUtente');
         return in_array($utente, $this->partecipanti);
@@ -322,9 +324,11 @@ class EGruppo
         $objArray["dataEOra"] = $this->dataEOra;
         $objArray["partecipanti"] = $this->partecipanti;
         $objArray["campo"] = $this->campo;
+        return $objArray;
     }
 
-    public function getPostiDisponibili(){
+    public function getPostiDisponibili(): int
+    {
         $postiOccupati = count($this->partecipanti);
         $postiMassimi = $this->getCampo()->getNumeroMassimo();
         return $postiMassimi - $postiOccupati;

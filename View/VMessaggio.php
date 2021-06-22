@@ -6,7 +6,7 @@
 
 class VMessaggio
 {
-    private Smarty $smarty;
+    private  $smarty;
 
     /**
      * Funzione che inizializza e configura smarty.
@@ -15,6 +15,9 @@ class VMessaggio
         $this->smarty = StartSmarty::configuration();
     }
 
+    /**
+     * @throws SmartyException
+     */
     public function showGenericErrorPage($messaggio, $isAmministratore){
         $this->smarty->assign('messaggioErrore', $messaggio);
         $this->smarty->assign('isAmministratore', $isAmministratore);

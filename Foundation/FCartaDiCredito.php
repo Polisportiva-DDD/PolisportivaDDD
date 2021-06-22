@@ -34,7 +34,8 @@ class FCartaDiCredito
      * @param PDOStatement $stmt
      * @param ECartadiCredito $cartadiCredito Carta di credito in cui i dati devono essere inseriti nel DB
      */
-    public static function bind($stmt, ECartadiCredito $cartadiCredito){
+    public static function bind(PDOStatement $stmt, ECartadiCredito $cartadiCredito)
+    {
         $stmt->bindValue(':numero', $cartadiCredito->getNumero(), PDO::PARAM_STR);
         $stmt->bindValue(':nomeTitolare', $cartadiCredito->getNomeTitolare(), PDO::PARAM_STR);
         $stmt->bindValue(':cognomeTitolare', $cartadiCredito->getCognomeTitolare(), PDO::PARAM_STR);
@@ -44,10 +45,11 @@ class FCartaDiCredito
 
     /**
      * Metodo che permette di salvare una Recensione sul db
-     * @param ECartadiCredito $carta
-     * @return string|null
+     * @param $stmt
+     * @param $valuesAssociazione
      */
-    public static function bindAssociazione($stmt,$valuesAssociazione){
+    public static function bindAssociazione($stmt,$valuesAssociazione)
+    {
         $stmt->bindValue(':carta', $valuesAssociazione[0] , PDO::PARAM_STR);
         $stmt->bindValue(':utente', $valuesAssociazione[1], PDO::PARAM_STR);
     }
@@ -55,7 +57,8 @@ class FCartaDiCredito
 
 
 
-    public static function store(ECartadiCredito $carta,$username) {
+    public static function store(ECartadiCredito $carta,$username): bool
+    {
         try{
 
             $sql = "INSERT INTO ". static::$tableName . " VALUES " . static::$values;
@@ -65,8 +68,8 @@ class FCartaDiCredito
                 if($id!=null){
                     $db=FDatabase::getInstance();
                     $sql = "INSERT INTO ". static::$tablePossessoCarta . " VALUES (:carta, :utente) " ;
-                    $valuesAsscoiazione=array($carta->getNumero(),$username);
-                    $id2 = $db->store3($sql,__CLASS__,$valuesAsscoiazione );
+                    $valuesAssociazione=array($carta->getNumero(),$username);
+                    $id2 = $db->store3($sql,__CLASS__,$valuesAssociazione );
                     if($id2==null){
                         return false;
                     }
@@ -79,8 +82,8 @@ class FCartaDiCredito
             else{
                 $db=FDatabase::getInstance();
                 $sql = "INSERT INTO ". static::$tablePossessoCarta . " VALUES (:carta, :utente) " ;
-                $valuesAsscoiazione=array($carta->getNumero(),$username);
-                $id2 = $db->store3($sql,__CLASS__,$valuesAsscoiazione );
+                $valuesAssociazione=array($carta->getNumero(),$username);
+                $id2 = $db->store3($sql,__CLASS__,$valuesAssociazione );
                 if($id2==null){
                     return false;
                 }
@@ -97,7 +100,8 @@ class FCartaDiCredito
 
     }
 
-    public static function exist($numero){
+    public static function exist($numero): int
+    {
 
         $sql="SELECT * FROM ".static::$tablePossessoCarta." WHERE numero='".$numero."';";
         $db=FDatabase::getInstance();
@@ -112,7 +116,8 @@ class FCartaDiCredito
      * @param string $numeroCarta
      * @return bool
      */
-    public static function delete(string $numeroCarta){
+    public static function delete(string $numeroCarta): bool
+    {
         try{
             $sql = "DELETE FROM " . static::$tableName . " WHERE numero=" . $numeroCarta;
             $db=FDatabase::getInstance();
@@ -130,7 +135,8 @@ class FCartaDiCredito
      * @return ECartadiCredito|null
      * @throws Exception
      */
-    public static function load(string $numero){
+    public static function load(string $numero): ?ECartadiCredito
+    {
         $sql="SELECT * FROM ".static::$tableName." WHERE numero='" . $numero . "';";
         $db=FDatabase::getInstance();
         $result=$db->loadSingle($sql);
@@ -147,7 +153,8 @@ class FCartaDiCredito
      * @param string $username
      * @return array|null
      */
-    public static function loadCarteUtente(string $username){
+    public static function loadCarteUtente(string $username): ?array
+    {
         try{
             $sql="SELECT carta FROM " . static::$tablePossessoCarta . " WHERE utente='" . $username . "';"; //Query per prendere le carte degli utenti
             $db=FDatabase::getInstance();
@@ -168,7 +175,8 @@ class FCartaDiCredito
 
     }
 
-    public static function loadCarteNonScadute(string $username){
+    public static function loadCarteNonScadute(string $username): ?array
+    {
         $data=(new DateTime('now'))->format('Y-m-d');
         try{
             $sql="SELECT carta FROM " . static::$tablePossessoCarta . ", ".static::$tableName." WHERE carta=numero AND utente='" . $username . "' AND scadenza>'".$data."';"; //Query per prendere le carte degli utenti

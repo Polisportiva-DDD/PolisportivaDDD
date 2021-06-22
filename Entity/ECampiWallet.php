@@ -6,8 +6,8 @@ class ECampiWallet
 {
 
 
-    private int $gettoni;
-    private ECampo $campo;
+    private  $gettoni;
+    private  $campo;
 
 
     public function __construct($gettoni, ECampo $campo)

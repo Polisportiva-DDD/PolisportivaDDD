@@ -5,7 +5,7 @@
 //require_once (dirname(__DIR__)  .'/Utility/StartSmarty.php');
 
 class VAmministratore{
-    private Smarty $smarty;
+    private  $smarty;
 
     /**
      * Funzione che inizializza e configura smarty.
@@ -34,7 +34,10 @@ class VAmministratore{
         $this -> smarty -> display(dirname(__DIR__)  ."/Smarty/templates/SegnalazioniAmministratore.tpl");
     }
 
-    public function showBannaUtente(string $username,string $nome,string $cognome,int $eta,string $valutazioneMedia,$pic64, $type){
+    /**
+     * @throws SmartyException
+     */
+    public function showBannaUtente(string $username, string $nome, string $cognome, int $eta, string $valutazioneMedia, $pic64, $type){
         $this -> smarty -> assign('nome',$nome);
         $this -> smarty -> assign('cognome',$cognome);
         $this -> smarty -> assign('username',$username);
@@ -45,7 +48,10 @@ class VAmministratore{
         $this->smarty->display(dirname(__DIR__) ."/Smarty/templates/bannaUtente.tpl");
     }
 
-    public function showAmministratoreResponse(string $username,string $nome,string $cognome,int $eta, string $oggetto, string $messaggio,$pic64){
+    /**
+     * @throws SmartyException
+     */
+    public function showAmministratoreResponse(string $username, string $nome, string $cognome, int $eta, string $oggetto, string $messaggio, $pic64){
         $this -> smarty -> assign('nome',$nome);
         $this -> smarty -> assign('cognome',$cognome);
         $this -> smarty -> assign('username',$username);

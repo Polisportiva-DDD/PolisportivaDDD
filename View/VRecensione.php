@@ -9,6 +9,9 @@ class VRecensione
         $this->smarty = StartSmarty::configuration();
     }
 
+    /**
+     * @throws SmartyException
+     */
     public function showEffettuaRecensioni($isAmministratore, $username){
         $this->smarty->assign("isAmministratore", $isAmministratore);
         $this->smarty->assign("username", $username);
@@ -16,6 +19,9 @@ class VRecensione
         $this->smarty->display(dirname(__DIR__)  ."/Smarty/templates/effettuaRecensioni.tpl");
     }
 
+    /**
+     * @throws SmartyException
+     */
     public function showRecensioniEffettuate($results, $isAmministratore){
         $this->smarty->assign("isAmministratore", $isAmministratore);
         $this->smarty->assign("results", $results);

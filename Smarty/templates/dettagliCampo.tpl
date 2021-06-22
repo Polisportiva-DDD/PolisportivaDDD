@@ -82,14 +82,14 @@
   <div class="row flex-lg-row-reverse  py-5">
     <div class="col-lg-6">
       {if $pic64  neq ""}
-      <img src="data:;base64,{$pic64}" class="d-block mx-lg-auto img-fluid" alt="Immagine campo" width="300" height="300" loading="lazy">
+      <img src="data:;base64,{$pic64}" class="d-block mx-lg-auto img-fluid" alt="Immagine campo" width="650" height="650" loading="lazy">
       {else}
         <img  src="https://via.placeholder.com/300"  alt="Immagine campo">
       {/if}
     </div>
     <div class="col-lg-6">
       <h1 class="mb-3">{$nomeCampo}</h1>
-      <p class="lead ">{$descrizione}</p>
+      <p>{$descrizione}</p>
     </div>
 
   </div>

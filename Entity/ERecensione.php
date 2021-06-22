@@ -5,13 +5,13 @@ class ERecensione
 {
     //attributes
 
-    private int $id;
-    private float $voto;
-    private string $titolo;
-    private string $testo;
-    private DateTime $data;
-    private EUtente $autore;
-    private EUtente $possessore;
+    private  $id;
+    private  $voto;
+    private  $titolo;
+    private  $testo;
+    private  $data;
+    private  $autore;
+    private  $possessore;
 
 
     /**
@@ -85,7 +85,7 @@ class ERecensione
 
     /**
      * Restituisce il voto della recensione
-     * @return float
+     * @return int
      */
     public function getVoto(): int
     {

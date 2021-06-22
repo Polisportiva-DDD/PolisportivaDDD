@@ -3,11 +3,11 @@
 
 class ETicketAssistenza
 {
-    private int $id;
-    private String $oggetto;
-    private String $messaggio;
-    private DateTime $data;
-    private string $autore;
+    private  $id;
+    private  $oggetto;
+    private  $messaggio;
+    private  $data;
+    private  $autore;
 
     /**
      * TicketAssistenza constructor.
@@ -27,7 +27,7 @@ class ETicketAssistenza
     }
 
     /**
-     * @return EUtente
+     * @return string
      */
     public function getAutore(): string
     {
@@ -35,7 +35,7 @@ class ETicketAssistenza
     }
 
     /**
-     * @param EUtente $autore
+     * @param string $autore
      */
     public function setAutore(string $autore): void
     {

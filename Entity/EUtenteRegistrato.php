@@ -2,8 +2,8 @@
 
  class EUtenteRegistrato extends EUtente {
 
-	private bool $bannato=false;
-	private string $motivazione="";
+	private $bannato;
+	private $motivazione;
 
 
 
@@ -21,7 +21,7 @@
     }
 
 	 /**
-	  * @return string
+	  * @return bool
 	  */
 	 public function getBannato(): bool
 	 {
@@ -29,7 +29,7 @@
 	 }
 
 	 /**
-	  * @param string $bannato
+	  * @param bool $bannato
 	  */
 	 public function setBannato(bool $bannato): void
 	 {

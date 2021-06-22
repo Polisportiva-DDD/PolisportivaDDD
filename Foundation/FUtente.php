@@ -16,14 +16,14 @@ class FUtente
      * @param EUtente $user l'utente i cui dati devono essere inseriti nel DB
      */
 
-//$stmt->bindValue(':id',NULL, PDO::PARAM_INT); //l'id � posto a NULL poich� viene dato automaticamente dal DBMS (AUTOINCREMENT_ID)
+//$stmt->bindValue(':id',NULL, PDO::PARAM_INT); //l'id è posto a NULL poichè viene dato automaticamente dal DBMS (AUTOINCREMENT_ID)
 //$stmt->bindValue(':nome',$md->getFname(), PDO::PARAM_STR);
 //$stmt->bindValue(':type',$md->getType(), PDO::PARAM_STR);
 //$stmt->bindValue(':emailutente', $md->getEmailUte(), PDO::PARAM_STR);
 
 
     
-    public static function bind($stmt, EUtente $user){
+    public static function bind(PDOStatement $stmt, EUtente $user){
        // $path = $_FILES['file']['tmp_name'];
        // $file=fopen($path,'rb') or die ("Attenzione! Impossibile da aprire!");
         $stmt->bindValue(':username', $user->getUsername(), PDO::PARAM_STR); 
@@ -38,13 +38,12 @@ class FUtente
        // unset($file);
         //unlink($path);
     }
-  /**
-     * 
+   /**
      *  restituisce il nome della tabella sul DB per la costruzione delle Query
      * @return string $tables nome della tabella
      */
-
-    public static function getTableName(){
+    public static function getTableName(): string
+    {
         return static::$tableName;
     }
 
@@ -53,29 +52,32 @@ class FUtente
      * @return string $values valori della tabella
      */
     
-    public static function getValues(){
+    public static function getValues(): string
+    {
         return static::$values;
     }
 
 
-    public static function store($user){
+    public static function store($user): ?string
+    {
         $sql="INSERT INTO ".static::getTableName()." VALUES ".static::getValues();
         $db=FDatabase::getInstance();
         $id=$db->store($sql,$user);
         if($id) return $id;
         else return null;
     }
- 
-    
+
 
     /**
      * Carica l'utente in base all'username passato
      * @param string $username dell'utente
      * @return EUtente Utente
+     * @throws Exception
      */
 
 
-    public static function load($username){
+    public static function load(string $username): ?EUtente
+    {
         $sql="SELECT * FROM ".static::getTableName()." WHERE username='".$username."';";
         $db=FDatabase::getInstance();
         $result=$db->loadSingle($sql);
@@ -94,25 +96,24 @@ class FUtente
      * @return bool 
      */
 
-    public static function delete($username){
+    public static function delete(string $username): bool
+    {
         $sql="DELETE FROM ".static::getTableName()." WHERE username='".$username."';";
         $db=FDatabase::getInstance();
         if($db->delete($sql)) return true;
         else return false;
     }
 
-     
 
-    
-
-     /** 
+    /**
      * Metodo che verifica l'esistenza di un utente con quell'username e password
      * @param string $username username dell'utente che vuole effettuare la modifica
-     * @param  string $password
+     * @param string $password
+     * @return int
      */
 
 
-    public static function Login($username,$password): int
+    public static function Login(string $username, string $password): int
     {
         $sql="SELECT * FROM ".static::getTableName()." WHERE username='".$username."' AND "."password='".$password."';";
         $db=FDatabase::getInstance();
@@ -129,7 +130,8 @@ class FUtente
      * @return bool 
      */
 
-    public static function esisteUsername($username){
+    public static function esisteUsername(string $username): bool
+    {
         $sql="SELECT * FROM ".static::getTableName()." WHERE username='".$username."';";
         $db=FDatabase::getInstance();
         $result=$db->exist($sql);
@@ -144,7 +146,8 @@ class FUtente
      */
 
 
-    public static function esisteMail($email){
+    public static function esisteMail(string $email): bool
+    {
         $sql="SELECT * FROM ".static::getTableName()." WHERE email='".$email."';";
         $db=FDatabase::getInstance();
         $result=$db->exist($sql);
@@ -152,7 +155,8 @@ class FUtente
         else return false;
     }
 
-    public static function loadList(){
+    public static function loadList(): array
+    {
         $sql="SELECT * FROM ".static::getTableName();
         $db=FDatabase::getInstance();
         $rows = $db->loadMultiple($sql);
@@ -165,7 +169,8 @@ class FUtente
         return $utenti;
     }
 
-    public static function loadUtentiFiltered($searcchedUsername){
+    public static function loadUtentiFiltered($searcchedUsername): array
+    {
         $sql="SELECT * FROM ".static::getTableName() . " WHERE username LIKE '%" . $searcchedUsername . "%'";
         $db=FDatabase::getInstance();
         $rows = $db->loadMultiple($sql);

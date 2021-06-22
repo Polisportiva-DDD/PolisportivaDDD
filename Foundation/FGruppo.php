@@ -31,7 +31,8 @@ class FGruppo
     }
 
 
-    public static function store(EGruppo $gruppo){
+    public static function store(EGruppo $gruppo): ?string
+    {
         try {
             $db = FDatabase::getInstance();
             $sql="INSERT INTO ". static::$tableName ." VALUES ".static::$values;
@@ -45,7 +46,8 @@ class FGruppo
         }
     }
 
-    public static function delete(int $idGruppo){
+    public static function delete(int $idGruppo): bool
+    {
         try{
             $sql = "DELETE FROM " . static::$tableName . " WHERE id=" . $idGruppo;
             $db=FDatabase::getInstance();
@@ -63,7 +65,8 @@ class FGruppo
                                 DateTime $dataEOra, array $partecipanti,
                                 Utente $admin, Campo $campo)
      */
-    public static function load(int $idGruppo){
+    public static function load(int $idGruppo): ?EGruppo
+    {
         try{
             $sql = "SELECT * FROM " . static::$tableName . " WHERE id=" . $idGruppo; //Query per ottenere un gruppo dall'id
             $db=FDatabase::getInstance(); //Ottieni il DB
@@ -89,7 +92,8 @@ class FGruppo
     }
 
 
-    public static function loadPartecipanti(int $idGruppo){
+    public static function loadPartecipanti(int $idGruppo): array
+    {
         try {
             $partecipanti = array();
             $sql = "SELECT utente FROM " . static::$tablePartecipanti . " WHERE idGruppo=" . $idGruppo; //Query per prendere gli username degli utenti che partecipano a questo gruppo
@@ -109,7 +113,8 @@ class FGruppo
 
 
     public static function loadGruppi(?string $nomeGruppo, ?string $admin, ?string $data, ?string $tipoCampo,
-                                      ?int $etaMin, ?int $etaMax, ?float $valMin){
+                                      ?int $etaMin, ?int $etaMax, ?float $valMin): array
+    {
         try{
             $sql = "SELECT * FROM " . static::$tableName; //Prendi tutti i gruppi
             $conditions = array(); //Array delle condizioni
@@ -178,7 +183,8 @@ class FGruppo
         }
     }
 
-    public static function addPartecipante(String $username, int $idGruppo ){
+    public static function addPartecipante(String $username, int $idGruppo ): bool
+    {
         try {
             $sql = "INSERT INTO " . static::$tablePartecipanti . " VALUES (:idGruppo, :utente)";
             $valuesAssociazione = array($idGruppo, $username);
@@ -193,14 +199,16 @@ class FGruppo
         }
     }
 
-    public static function loadField($field){
+    public static function loadField($field): ?array
+    {
         $sql = "SELECT " . $field . " FROM " . static::$tableName;
         $db = FDatabase::getInstance();
         $rows = $db->loadMultiple($sql);
         return $rows;
     }
 
-    public static function loadGruppiUtente(string $username){
+    public static function loadGruppiUtente(string $username): ?array
+    {
         $sql="SELECT idGruppo FROM " . static::$tablePartecipanti . " WHERE utente='" . $username . "';";
         $db=FDatabase::getInstance();
         $rows=$db->loadMultiple($sql);

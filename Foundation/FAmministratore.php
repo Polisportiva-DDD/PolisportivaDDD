@@ -11,7 +11,8 @@ class FAmministratore
         $stmt->bindValue(":username", $amministratore->getUsername(), PDO::PARAM_STR);
     }
 
-    public static function store(EAmministratore $amministratore){
+    public static function store(EAmministratore $amministratore): bool
+    {
         $sql="INSERT INTO " . static::$tableName . " VALUES" . static::$values;
         $db=FDatabase::getInstance();
         $response = $db->store($sql, $amministratore);
@@ -19,7 +20,8 @@ class FAmministratore
         else return false;
     }
 
-    public static function exist(string $username){
+    public static function exist(string $username): bool
+    {
         $sql = "SELECT * FROM " . static::$tableName . " WHERE username=" . "'".$username."'";
         $db=FDatabase::getInstance();
         $response = $db->exist($sql);

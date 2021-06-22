@@ -44,7 +44,8 @@ class FRecensione
      * @param ERecensione $recensione Recensione da salvare
      * @return string|null della Recensione salvata
      */
-    public static function store(ERecensione $recensione) {
+    public static function store(ERecensione $recensione): ?string
+    {
         try {
             $sql = "INSERT INTO ". static::$tableName . " VALUES " . static::$values;
             $db=FDatabase::getInstance();
@@ -65,7 +66,8 @@ class FRecensione
      * @param int $idRecensione l'id dell'oggetto da eliminare dal db
      * @return bool
      */
-    public static function delete(int $idRecensione){
+    public static function delete(int $idRecensione): bool
+    {
         try{
             $sql = "DELETE FROM " . static::$tableName . " WHERE id=" . $idRecensione;
             $db=FDatabase::getInstance();
@@ -82,7 +84,8 @@ class FRecensione
      * @param string $username
      * @return array|null
      */
-    public static function loadRecensioniUtente(string $username){
+    public static function loadRecensioniUtente(string $username): ?array
+    {
         try{
             $sql="SELECT * FROM " . static::$tableName . " WHERE possessore='" . $username . "';";
             $db=FDatabase::getInstance();
@@ -106,7 +109,8 @@ class FRecensione
      * @param string $username
      * @return array|null
      */
-    public static function loadRecensioniEffettuate(string $username){
+    public static function loadRecensioniEffettuate(string $username): ?array
+    {
         try{
             $sql="SELECT * FROM " . static::$tableName . " WHERE autore='" . $username . "';";
             $db=FDatabase::getInstance();

@@ -35,7 +35,7 @@ class FDatabase
         try{
             $dsn = "mysql:host=". $host . ";" . " dbname=" . $database;
 			//connessione a mysql database a cui si passano nome dell'host, del db, username, password
-            $this->db=new PDO("mysql:host=localhost; dbname=progettoweb", "root","");
+            $this->db=new PDO("mysql:host=localhost; dbname=my_polisportivaddd", "polisportivaddd","");
         }
         catch(PDOException $e)
         {
@@ -43,11 +43,13 @@ class FDatabase
           die;
         }
     }
-     /**
+
+    /**
      * Metodo che restituisce l'unica instanza dell'oggetto.
-     * @return l'instanza dell'oggetto.
+     * @return FDatabase|null l'instanza dell'oggetto.
      */
-    public static function getInstance(){ //restituisce l'unica istanza
+    public static function getInstance(): ?FDatabase
+    { //restituisce l'unica istanza
         if(self::$instanza==null){
             self::$instanza=new FDatabase(); //se è null creo l'instanza
         }
@@ -63,7 +65,8 @@ class FDatabase
      */
 
 
-    public function store($query,$EOggetto){
+    public function store(string $query, $EOggetto): ?string
+    {
         try{
             $this->db->beginTransaction();  //Disattiva la modalità autocommit e quindi le  modifiche apportate al database tramite l'istanza dell'oggetto PDO non vengono salvate fino a quando non si termina la transazione chiamando PDO :: commit () . La chiamata a PDO :: rollBack () 
             $stmt=$this->db->prepare($query);  //Prepara un'istruzione per l'esecuzione e restituisce un PDOStatement
@@ -84,7 +87,8 @@ class FDatabase
     }
 
 
-    public function store3($query,$classe,$valuesAssociazione){
+    public function store3($query,$classe,$valuesAssociazione): ?string
+    {
         try{
             $this->db->beginTransaction();  //Disattiva la modalità autocommit e quindi le  modifiche apportate al database tramite l'istanza dell'oggetto PDO non vengono salvate fino a quando non si termina la transazione chiamando PDO :: commit () . La chiamata a PDO :: rollBack ()
             $stmt=$this->db->prepare($query);  //Prepara un'istruzione per l'esecuzione e restituisce un PDOStatement
@@ -143,7 +147,8 @@ class FDatabase
 
 
 
-    public function delete($sql){
+    public function delete($sql): bool
+    {
         try{
             $this->db->beginTransaction();
             $stmt=$this->db->prepare($sql);
@@ -160,7 +165,8 @@ class FDatabase
     }
 
 	//chiamata ad esempio per modificare lo stato di un utente (bannato o no)
-    public function update($sql){
+    public function update($sql): bool
+    {
         try{
              $this->db->beginTransaction();
               $stmt=$this->db->prepare($sql);
@@ -178,7 +184,8 @@ class FDatabase
     }
 	
 	//chiamata ad esempio per verificare se esiste già username o email di un'utente
-    public function exist($sql){
+    public function exist($sql): ?bool
+    {
         try{
             $stmt=$this->db->prepare($sql);
             $stmt->execute();
@@ -213,7 +220,8 @@ class FDatabase
      * 
      * @param String $sql query da eseguire
      */
-    public function loadMultiple($sql){
+    public function loadMultiple(string $sql): ?array
+    {
         try{
             $rows=array();
             $this->db->beginTransaction();
@@ -237,7 +245,7 @@ class FDatabase
      * 
      * @param $sql String query da eseguire
      */
-    public function loadSingle($sql){
+    public function loadSingle(string $sql){
         try{
             $this->db->beginTransaction();
             $stmt=$this->db->prepare($sql);

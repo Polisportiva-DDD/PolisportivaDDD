@@ -19,7 +19,8 @@ class FCampiWallet
         $stmt->bindValue(':gettoni', $valuesAssociazione[2], PDO::PARAM_INT);
     }
 
-    public static function store(array $campiWallet,$id){
+    public static function store(array $campiWallet,$id): bool
+    {
         $sql="INSERT INTO ".static::$tableName." VALUES ".static::$values;
         $idwallet=$id;
         foreach ($campiWallet as $valore){
@@ -38,14 +39,14 @@ class FCampiWallet
     }
 
 
-   
-
     /**
      * aggiorna l'intero wallet
-     * @param EWallet $wallet wallet da aggiornare
+     * @param $id
+     * @param array $campiwallet
      * @return bool
      */
-    public static function update($id,array $campiwallet){
+    public static function update($id,array $campiwallet): bool
+    {
 
             $sql1="";
             foreach ($campiwallet as  $valore) {//per ogni campo, aggiorno la quantità di gettoni
@@ -66,7 +67,7 @@ class FCampiWallet
      * @return bool
      */
 
-    public static function update2($idCampo, $idWallet, $quantita)
+    public static function update2($idCampo, $idWallet, $quantita): bool
     {
         $sql = "UPDATE " . static::$tableName . " SET gettoni='" . $quantita . "' WHERE idCampo='" . $idCampo . "' and idWallet='" . $idWallet . "';";
         $db=FDatabase::getInstance();
@@ -88,7 +89,8 @@ class FCampiWallet
      */
 
 
-    public static function load($id){
+    public static function load(int $id): ?array
+    {
         $sql="SELECT * FROM ".static::$tableName." WHERE idWallet='".$id."';";
         $db=FDatabase::getInstance();
         $result=$db->loadMultiple($sql);

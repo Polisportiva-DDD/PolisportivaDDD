@@ -3,13 +3,13 @@
 
 class ECalcioACinque implements ECampo
 {
-    private int $id;
-    private string $nome;
-    private int $numeroMinimo;
-    private int $numeroMassimo;
-    private string $descrizione;
-    private float $prezzo;
-    private string $immagine;
+    private  $id;
+    private  $nome;
+    private  $numeroMinimo;
+    private  $numeroMassimo;
+    private  $descrizione;
+    private  $prezzo;
+    private  $immagine;
 
     public function __construct($id, $n, $nMin, $nMax, $d, $p, $immagine)
     {
@@ -74,7 +74,6 @@ class ECalcioACinque implements ECampo
 
     /**
      * Restituisce il prezzo del campo
-     * @param float $p
      * @return float
      */
     public function getPrezzo():float{

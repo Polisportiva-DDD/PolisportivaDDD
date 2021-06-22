@@ -211,8 +211,8 @@ class CUtente
                 $testo=$_POST['testo'];
                 $voto=$_POST['rate'];
                 $utenteAutore=$pm->load($utente,"FUtente");
-                $utentePosessore=$pm->load($utenteDaRec,"FUtente");
-                $recensione=new ERecensione($utenteAutore,$voto,$titolo,$testo,new DateTime('now'),$utentePosessore);
+                $utentePossessore=$pm->load($utenteDaRec,"FUtente");
+                $recensione=new ERecensione($utenteAutore,$voto,$titolo,$testo,new DateTime('now'),$utentePossessore);
                 $pm->store($recensione);
 
                 header('Location: /PolisportivaDDD/Utente/home');
