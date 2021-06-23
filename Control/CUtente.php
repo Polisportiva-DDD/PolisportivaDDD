@@ -215,7 +215,7 @@ class CUtente
                 $recensione=new ERecensione($utenteAutore,$voto,$titolo,$testo,new DateTime('now'),$utentePossessore);
                 $pm->store($recensione);
 
-                header('Location: /PolisportivaDDD/Utente/home');
+                header('Location: /PolisportivaDDD/Utente/Utenti/'.$utenteDaRec);
             }
             else{
                 //che faccio?

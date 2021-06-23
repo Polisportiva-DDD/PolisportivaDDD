@@ -107,7 +107,7 @@
 			<div class="d-flex flex-row-reverse mb-5" >
 
 
-				<div class="p-2">  <button id="avanti" type="submit" class="btn btn-primary" disabled>Modifica prezzo gettoni</button></div>
+				<div class="p-2">  <button id="avanti" type="submit" class="btn btn-primary" onclick='alert("Prezzi Modificati");' disabled>Modifica prezzo gettoni</button></div>
 
 			</div>
 

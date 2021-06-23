@@ -91,6 +91,35 @@ class FGruppo
         }
     }
 
+    public static function loadGruppiScaduti()
+    {
+        $data=(new DateTime("now"))->format('Y-m-d H:i:s');
+        try{
+            $sql = "SELECT * FROM " . static::$tableName . " WHERE dataEOra<" ."' $data'"; //Query per ottenere un gruppo dall'id
+            $db=FDatabase::getInstance(); //Ottieni il DB
+            $rows = $db->loadMultiple($sql); //Ottieni la riga corrispondente dal DB
+            $result=array();
+            foreach ($rows as $row){
+
+                    $admin = FUtente::load($row['admin']); //Load dell'utente con id dell'admin
+                    $campo = FCampo::load($row['idcampo']); //Load del campo con id corrispondente
+                    $partecipanti = self::loadPartecipanti($row['id']); //Carica i partecipanti del gruppo che stiamo caricando
+                    $date = DateTime::createFromFormat('Y-m-d H:i:s', $row['dataEOra']); //Ricrea la data dalla stringa recuperata dal DB
+                    $gruppo = new EGruppo($row['id'], $row['nome'], $row['etaMinima'],$row['etaMassima'],
+                        $row['votoMinimo'], $row['descrizione'], $date,
+                        $partecipanti, $admin, $campo);
+                    $result[]= $gruppo;
+
+
+            }
+            return $result;
+
+
+        }
+        catch(Exception $e){
+            echo ("Error");
+        }
+    }
 
     public static function loadPartecipanti(int $idGruppo): array
     {
@@ -225,18 +254,5 @@ class FGruppo
 
 }
 
-/*
-$r1=new ERecensione(1,2.4,"Natale","ciao",new DateTime("2011-01-01T15:03:01.012345Z"));
-$r2=new ERecensione(1,4.4,"Natale","ciao",new DateTime("2011-01-01T15:03:01.012345Z"));
-$r3=4;
-$d = new DateTime("1999-07-16");
 
-$arr=array($r1,$r2,$r3);
-$u=new EUtente("lollo1","lorenzo","Diella","ccc","pass", $d, $arr);
-//$c = new ECampo("calcio a 5", 3, 10, "descrizione campo", 11.5);
-//$g1 = new EGruppo("Ciao",1,10,11,"forse",new DateTime('now'),$arr,$u,$c);
-
-$row = FGruppo::loadById(3);
-print_r($row);
-*/
 ?>

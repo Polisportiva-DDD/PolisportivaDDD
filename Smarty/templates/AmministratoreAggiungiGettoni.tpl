@@ -105,7 +105,7 @@
 			<div class="d-flex flex-row-reverse mb-5" >
 
 
-				<div class="p-2">  <button type="submit" id="avanti" class="btn btn-primary" disabled>Aggiungi gettoni</button></div>
+				<div class="p-2">  <button type="submit" id="avanti" class="btn btn-primary" onclick="alert('Gettoni aggiunti');" disabled>Aggiungi gettoni</button></div>
 
 			</div>
 

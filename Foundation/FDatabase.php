@@ -35,7 +35,7 @@ class FDatabase
         try{
             $dsn = "mysql:host=". $host . ";" . " dbname=" . $database;
 			//connessione a mysql database a cui si passano nome dell'host, del db, username, password
-            $this->db=new PDO("mysql:host=localhost; dbname=my_polisportivaddd", "polisportivaddd","");
+            $this->db=new PDO("mysql:host=localhost; dbname=progettoweb", "root","");
         }
         catch(PDOException $e)
         {

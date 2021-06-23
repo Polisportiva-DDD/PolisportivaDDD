@@ -76,7 +76,7 @@
         <p>Motivo ban: {$results[nr].motivoBan}</p>
       </div>
       <div class="col-lg-3 col-md-3 col-sm-12 m-auto text-center">
-        <button class="btn btn-primary float-md-none float-sm-right float-right" name="username" value="{$results[nr].username}" type="submit">Rimuovi ban</button>
+        <button class="btn btn-primary float-md-none float-sm-right float-right" name="username" value="{$results[nr].username}" type="submit" onclick="alert('Utente Sbandito');">Rimuovi ban</button>
       </div>
     </div>
       </form>
