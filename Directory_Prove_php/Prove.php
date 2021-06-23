@@ -192,18 +192,23 @@ try {
     $mail->Port = 587;
 
     $mail->setFrom('polisportivaddd@outlook.it', 'polisportivaddd@outlook.it');
-    $mail->addAddress('email destinatario');
+    $mail->addAddress('mafegim644@bbsaili.com');
 
 
     $mail->isHTML(true);
-    $mail->Subject = 'Subject';
-    $mail->Body = 'HTML message body in <b>bold</b> ';
-    $mail->AltBody = 'Body in plain text for non-HTML mail clients';
+    $mail->Subject = 'Invito a gruppo PolisportivaDDD!';
+    $mail->Body = "Ciao! l'utente aaa ti ha invitato a partecipare al suo gruppo, clicca
+                            <a href='http://localhost/PolisportivaDDD/Gruppo/Gruppi/16'>QUI</a>
+                            per avere ulteriori informazioni e partecipare!";
+    $mail->AltBody = "Ciao! l'utente aaa ti ha invitato a partecipare al suo gruppo, clicca su
+            http://localhost/PolisportivaDDD/Gruppo/Gruppi/16
+            per avere ulteriori informazioni e partecipare!";
     $mail->send();
     echo "Mail has been sent successfully!";
 } catch (Exception $e) {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
+
 
 
 ?>
