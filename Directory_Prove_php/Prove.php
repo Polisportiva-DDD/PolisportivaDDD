@@ -2,7 +2,9 @@
 require_once('../Utility/autoload.php');
 require_once ('../Foundation/config.inc.php');
 require('../Smarty/Smarty.class.php');
-
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+require '../Utility/vendor/autoload.php';
 
 $smarty= new Smarty();
 
@@ -173,5 +175,40 @@ if(in_array('lor', $partecipanti)){
 else{
     echo("false");
 }*/
+
+
+
+
+$mail = new PHPMailer(true);
+
+try {
+    $mail->SMTPDebug = 2;
+    $mail->isSMTP();
+    $mail->Host = 'outlook.office365.com;';
+    $mail->SMTPAuth = true;
+    $mail->Username = 'polisportivaddd@outlook.it';
+    $mail->Password = 'polisportivaUnivaq';
+    $mail->SMTPSecure = 'tls';
+    $mail->Port = 587;
+
+    $mail->setFrom('polisportivaddd@outlook.it', 'polisportivaddd@outlook.it');
+    $mail->addAddress('mafegim644@bbsaili.com');
+
+
+    $mail->isHTML(true);
+    $mail->Subject = 'Invito a gruppo PolisportivaDDD!';
+    $mail->Body = "Ciao! l'utente aaa ti ha invitato a partecipare al suo gruppo, clicca
+                            <a href='http://localhost/PolisportivaDDD/Gruppo/Gruppi/16'>QUI</a>
+                            per avere ulteriori informazioni e partecipare!";
+    $mail->AltBody = "Ciao! l'utente aaa ti ha invitato a partecipare al suo gruppo, clicca su
+            http://localhost/PolisportivaDDD/Gruppo/Gruppi/16
+            per avere ulteriori informazioni e partecipare!";
+    $mail->send();
+    echo "Mail has been sent successfully!";
+} catch (Exception $e) {
+    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+}
+
+
 
 ?>

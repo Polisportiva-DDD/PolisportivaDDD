@@ -3,6 +3,9 @@
 require_once (dirname(__DIR__)  .'/Utility/USession.php');
 require_once (dirname(__DIR__)  .'/Utility/StartSmarty.php');
 require_once (dirname(__DIR__)  .'/Utility/autoload.php');
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+require dirname(__DIR__) .'/Utility/vendor/autoload.php';
 //require_once '../Foundation/config.inc.php';
 
 class CGruppo
@@ -127,6 +130,7 @@ class CGruppo
             $pm = new FPersistentManager();
             $view = new VGruppo();
             $isAmministratore = $session->readValue('isAmministratore');
+            $username = $session->readValue('username');
             $results = array();
             if (isset($_POST['ora'])){
                 $oraScelta = $_POST['ora'];
@@ -134,6 +138,7 @@ class CGruppo
             }
             $utenti = $pm->loadList('FUtente');
             foreach($utenti as $utente){
+                if($utente->getUsername() != $username){
                 //Array contentente i dati per la view
                 $u = array();
                 //Username dell'utente
@@ -148,7 +153,7 @@ class CGruppo
                 $u['eta']=$utente->getEta();
                 $u['valutazione'] = round($utente->calcolaMediaRecensioni($recensioniUtente));
                 //Metto nell'array results per la view l'array appena creato.
-                $results[] = $u;
+                $results[] = $u;}
             }
             $view->showGruppoListaInvitati($results, $isAmministratore);
         }
@@ -202,7 +207,7 @@ class CGruppo
             }
             $invitati = $session->readValue('invitati');
 
-            //INVIARE EMAIL AGLI INVITATI!!!!!!
+
 
 
 
@@ -222,10 +227,21 @@ class CGruppo
                 $gruppo = new EGruppo(null, $nomeGruppo, $etaMinima, $etaMassima, $valutazioneMinima, $descrizione, $dataEOra, array(), $admin, $campo);
                 $idGruppoCreato = $pm->store($gruppo);
                 $pm->addPartecipanteGruppo($adminUsername, $idGruppoCreato);
+
+                //Invia le mail agli invitati
+                $arrayEmail = array();
+                foreach($invitati as $invitato)
+                {
+                    $utenteInvitato = $pm->load($invitato, 'FUtente');
+                    $emailUtente = $utenteInvitato->getEmail();
+                    $arrayEmail[] = $emailUtente;
+                }
+                self::inviaEmail($username, $arrayEmail, $idGruppoCreato);
                 $session->deleteValue('oraScelta');
                 $session->deleteValue('dataScelta');
                 $session->deleteValue('invitati');
                 $session->deleteValue('idCampo');
+
                 header('Location: /PolisportivaDDD/Utente/home');
             }
             else{
@@ -242,6 +258,41 @@ class CGruppo
         }
 
 
+    }
+
+    private static function inviaEmail($mittente, $arrayEmail, $idGruppo){
+        //Setup di tutta la mail da inviare
+        $mail = new PHPMailer(true);
+
+        try {
+            $mail->SMTPDebug = 2;
+            $mail->isSMTP();
+            $mail->Host = 'outlook.office365.com;';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'polisportivaddd@outlook.it';
+            $mail->Password = 'polisportivaUnivaq';
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = 587;
+
+            $mail->setFrom('polisportivaddd@outlook.it', 'polisportivaddd@outlook.it');
+            //Metti tutti i destinatari delle mail
+            foreach($arrayEmail as $email){
+                $mail->addAddress($email);
+            }
+
+            $mail->isHTML(true);
+            $mail->Subject = 'Invito a gruppo PolisportivaDDD!';
+            $mail->Body = "Ciao! l'utente $mittente ti ha invitato a partecipare al suo gruppo, clicca
+                            <a href='http://localhost/PolisportivaDDD/Gruppo/Gruppi/$idGruppo'>QUI</a>
+                            per avere ulteriori informazioni e partecipare!";
+            $mail->AltBody = "Ciao! l'utente $mittente ti ha invitato a partecipare al suo gruppo, clicca su
+            http://localhost/PolisportivaDDD/Gruppo/Gruppi/$idGruppo
+            per avere ulteriori informazioni e partecipare!";
+            $mail->send();
+            echo "Mail has been sent successfully!";
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
     }
 
 
