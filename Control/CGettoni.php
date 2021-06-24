@@ -6,6 +6,12 @@ require_once (dirname(__DIR__)  .'/Utility/USession.php');
 
 class CGettoni
 {
+    private $quantitasc1=3;
+    private $quantitasc2=5;
+    private $quantitasc3=10;
+    private $sconto1=5/100;
+    private $sconto2=10/100;
+    private $scont3=15/100;
 
     public function __construct(){}
 
@@ -81,7 +87,6 @@ class CGettoni
                 $data=new DateTime($_POST['data']);
                 $carta=new ECartadiCredito($numero,$nome,$cognome,$cvc,$data);
                 $pm->store2($carta,$username);
-                //se va male lo store che faccio?
                 if ($acqGettoni == 1) {
                     header('Location: /PolisportivaDDD/Gettoni/acquista');
                 } else {
@@ -119,7 +124,7 @@ class CGettoni
 
                     $listaCampi=$pm->loadList("FCampo");
                     $result=array();
-                    $prezzoTotale=0;
+                    $prezzoTotale=0.0;
                     $quantita=0;
                     foreach ($listaCampi as $value){
                         $arr=array();
@@ -133,13 +138,13 @@ class CGettoni
 
                     }
                     if($prezzoTotale!=0){
-                        if($quantita>=3 and $quantita<5){
-                            $prezzoTotale=$prezzoTotale-$prezzoTotale*5/100;
+                        if($quantita>=$this->quantitasc1 and $quantita<$this->quantitasc2){
+                            $prezzoTotale=$prezzoTotale-$prezzoTotale*$this->sconto1;
                         }
-                        elseif($quantita>=5 and $quantita<=9){
-                            $prezzoTotale=$prezzoTotale-$prezzoTotale*10/100;
-                        }elseif($quantita>=10 ){
-                            $prezzoTotale=$prezzoTotale-$prezzoTotale*15/100;
+                        elseif($quantita>=$this->quantitasc2 and $quantita<$this->quantitasc3){
+                            $prezzoTotale=$prezzoTotale-$prezzoTotale*$this->sconto2;
+                        }elseif($quantita>=$this->quantitasc3 ){
+                            $prezzoTotale=$prezzoTotale-$prezzoTotale*$this->scont3;
 
                         }
                     }

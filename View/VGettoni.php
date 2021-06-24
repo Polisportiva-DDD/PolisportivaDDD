@@ -22,7 +22,7 @@ class VGettoni
      * @param bool $isAmministratore sei amministratore?
      * @throws SmartyException
      */
-    public function showRiepilogoAcquisto(array $gettoniAcquistati,string $numeroCarta,string $nomeTitolare,string $dataScadenza,int $prezzoTotale,bool $isAmministratore){
+    public function showRiepilogoAcquisto(array $gettoniAcquistati,string $numeroCarta,string $nomeTitolare,string $dataScadenza,float $prezzoTotale,bool $isAmministratore){
         $this -> smarty -> assign('results',$gettoniAcquistati);
         $this -> smarty -> assign('numeroCarta',$numeroCarta);
         $this -> smarty -> assign('nomeTitolare',$nomeTitolare);

@@ -121,7 +121,7 @@ class CAmministratore
                         $pm->updateCampo($prezzo,$chiave);
                     }
                 }
-                header('Location: /PolisportivaDDD/Utente/home');
+                header('Location: /PolisportivaDDD/Amministratore/modificaPrezzi');
             }
         }
         else{
@@ -169,7 +169,7 @@ class CAmministratore
                     $wallet->aggiungiGettoni($campo,$quantita);
                 }
                 $pm->update($wallet);
-                header('Location: /PolisportivaDDD/Utente/home');
+                header('Location: /PolisportivaDDD/Utente/utenti/'.$utente->getUsername());
             }
         }
         else{

@@ -31,6 +31,10 @@ class FPersistentManager
         return $Fclasse::loadList();
     }
 
+    public function loadGruppiScaduti(){
+        return FGruppo::loadGruppiScaduti();
+    }
+
     public function updateUtenteRegistrato(string $username, bool $bannato, string $motivazione): bool
     {
         return FUtenteRegistrato::updateBannato($username,$bannato,$motivazione);

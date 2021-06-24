@@ -215,7 +215,7 @@ class CUtente
                 $recensione=new ERecensione($utenteAutore,$voto,$titolo,$testo,new DateTime('now'),$utentePossessore);
                 $pm->store($recensione);
 
-                header('Location: /PolisportivaDDD/Utente/home');
+                header('Location: /PolisportivaDDD/Utente/Utenti/'.$utenteDaRec);
             }
             else{
                 //che faccio?
@@ -251,18 +251,20 @@ class CUtente
         $session = new USession();
         $pm = new FPersistentManager();
         if(isset($_POST['username']) && isset($_POST['password'])) {
+
             $esiste = $pm->Login($_POST['username'], $_POST['password']);
             if ($esiste==1) {
                 if($pm->isBannato($_POST['username'])){
                     $view->showLoginError(2);
                 }
                 else{
+
                     $utente = $pm->load($_POST['username'], 'FUtente');
                     if ($utente != null) {
 
                         if ($session->isSessionNone()) {
                             $session->startSession();
-
+                        }
                             $username=$utente->getUsername();
                             $session->setValue("username",$username);
                             if($pm->exist($username)){
@@ -280,7 +282,7 @@ class CUtente
                             $session->setValue("isRegistrato",true);
                             header('Location: /PolisportivaDDD/Utente/Home');
 
-                        }
+
                     } else {
                         header('Location: /PolisportivaDDD/Utente/login');
                     }
