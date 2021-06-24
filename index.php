@@ -9,8 +9,8 @@ setcookie('testcookie',"hello",time()+3600);
     }
     else{
         print ("COOKIE NON ABILITATI");
-        header('Location: /PolisportivaDDD/Utente/home');
-
+        $c= new CUtente();
+        $c->home();
     }
 
 
