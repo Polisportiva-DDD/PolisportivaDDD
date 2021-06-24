@@ -14,6 +14,7 @@ class CFrontController
     public function run($path){
         //setcookie('testcookie','hello',time()+3600);
        // if(isset($_COOKIE['testcookie'])){
+            $real_controller=null;
             $resource = explode('/', $path);
             array_shift($resource);
             array_shift($resource);
@@ -34,14 +35,20 @@ class CFrontController
                 }
 
             }
-
-            if(count($resource)==3){
+            if($real_controller!=null){
+                if(count($resource)==3){
+                    $method=$resource[1];
+                    $param=$resource[2];
+                    return $real_controller->$method($param);
+                }
                 $method=$resource[1];
-                $param=$resource[2];
-                return $real_controller->$method($param);
+                return $real_controller->$method();
             }
-            $method=$resource[1];
-            return $real_controller->$method();
+            else{
+               $c= new CUtente();
+               $c->home();
+            }
+
        // }else{
         //    print ("COOKIE NON ABILITATI");
         //    $c=new CUtente();
