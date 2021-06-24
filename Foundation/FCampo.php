@@ -1,7 +1,7 @@
 <?php
 
 //require_once (get_include_path() .'/Utility/autoload.php');
-//require_once (get_include_path() .'/Foundation/config.inc.php');
+//require_once (get_include_path() .'/Foundation/config.php');
 
 
 class FCampo

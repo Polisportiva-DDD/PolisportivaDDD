@@ -1,0 +1,1 @@
+<?php $GLOBALS['database']= 'progettoweb'; $GLOBALS['username']=  'root'; $GLOBALS['password']= ''; $GLOBALS['host']= '127.0.0.1';?>

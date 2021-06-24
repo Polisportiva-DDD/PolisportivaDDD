@@ -1,17 +1,18 @@
 <?php
 
 //require_once (get_include_path() .'/Utility/autoload.php');
-//require_once (get_include_path() .'/Foundation/config.inc.php');
+//require_once (get_include_path() .'/Foundation/config.php');
 
-if(file_exists('config.inc.php')) require_once 'config.inc.php';
-
+require_once('config.php');
 
 /** Qui vi è l'implementazione del modello Singleton ovvero si crea un'unica instanza della classe
  *  In questo caso tale classe ha lo scopo di fornire un unico accesso al dbms
  */
 
+
 class FDatabase
 {
+
     /**istanza della classe (l'unica) */
     private static $instanza=null;
 	
@@ -31,11 +32,12 @@ class FDatabase
     /** costruttore privato poichè l'unico accesso è dato dal metodo getInstance() */
     private function __construct()
     {
-        global $host,$database,$username,$password;
         try{
-            $dsn = "mysql:host=". $host . ";" . " dbname=" . $database;
+            $dsn = "mysql:host=". $GLOBALS['host'] . ";" . " dbname=" . $GLOBALS['database'];
+            $u=$GLOBALS['username'];
+            $p=$GLOBALS['password'];
 			//connessione a mysql database a cui si passano nome dell'host, del db, username, password
-            $this->db=new PDO("mysql:host=localhost; dbname=progettoweb", "root","");
+            $this->db=new PDO($dsn, $u,$p);
         }
         catch(PDOException $e)
         {

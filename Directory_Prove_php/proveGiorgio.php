@@ -1,7 +1,7 @@
 <?php
 
 require_once("../Utility/autoload.php");
-require_once '../Foundation/config.inc.php';
+require_once '../Foundation/config.php';
 require_once "../Utility/StartSmarty.php";
 
 

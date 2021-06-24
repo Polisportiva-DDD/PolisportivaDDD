@@ -1,7 +1,7 @@
 <?php
 
 //require_once (dirname(__DIR__)  .'/Utility/autoload.php');
-//require_once (dirname(__DIR__)  .'/Foundation/config.inc.php');
+//require_once (dirname(__DIR__)  .'/Foundation/config.php');
 //require_once (dirname(__DIR__)  .'/Utility/StartSmarty.php');
 
 class VAmministratore{

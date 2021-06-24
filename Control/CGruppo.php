@@ -6,7 +6,7 @@ require_once (dirname(__DIR__)  .'/Utility/autoload.php');
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 require dirname(__DIR__) .'/Utility/vendor/autoload.php';
-//require_once '../Foundation/config.inc.php';
+//require_once '../Foundation/config.php';
 
 class CGruppo
 {
