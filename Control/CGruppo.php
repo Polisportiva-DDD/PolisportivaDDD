@@ -236,13 +236,13 @@ class CGruppo
                     $emailUtente = $utenteInvitato->getEmail();
                     $arrayEmail[] = $emailUtente;
                 }
-                self::inviaEmail($username, $arrayEmail, $idGruppoCreato);
+
                 $session->deleteValue('oraScelta');
                 $session->deleteValue('dataScelta');
                 $session->deleteValue('invitati');
                 $session->deleteValue('idCampo');
-
                 header('Location: /PolisportivaDDD/Utente/home');
+                self::inviaEmail($username, $arrayEmail, $idGruppoCreato);
             }
             else{
                 $session->deleteValue('oraScelta');
