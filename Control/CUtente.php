@@ -342,22 +342,29 @@ class CUtente
                     $view->showRegistrazioneError("errorUsername");
                 }
                 else {
-                    $campi = $pm -> loadList('FCampo');
-                    $listaCampiWallet = array();
-                    foreach ($campi as $campo){
-                        $gettoni = new ECampiWallet(0,$campo);
-                        array_push($listaCampiWallet,$gettoni);
+                    $verEmail = $pm->existMail($email);
+                    if ($verEmail){
+                        $view->showRegistrazioneError("errorEmail");
                     }
-                    $wallet = new EWallet($listaCampiWallet);
-                    $id=$pm->store($wallet);
-                    $wallet->setId($id);
-                    $utente = new EUtente($username,$nome,$cognome,$email,$password,$data,$immagine,$wallet);
-                    $utenteRegistrato = new EUtenteRegistrato(false,'',$username,$nome,$cognome,$email,$password,$data,$immagine,$wallet);
+                    else{
+                        $campi = $pm -> loadList('FCampo');
+                        $listaCampiWallet = array();
+                        foreach ($campi as $campo){
+                            $gettoni = new ECampiWallet(0,$campo);
+                            array_push($listaCampiWallet,$gettoni);
+                        }
+                        $wallet = new EWallet($listaCampiWallet);
+                        $id=$pm->store($wallet);
+                        $wallet->setId($id);
+                        $utente = new EUtente($username,$nome,$cognome,$email,$password,$data,$immagine,$wallet);
+                        $utenteRegistrato = new EUtenteRegistrato(false,'',$username,$nome,$cognome,$email,$password,$data,$immagine,$wallet);
 
 
-                    $pm -> store($utente);
-                    $pm -> store($utenteRegistrato);
-                    header('Location: /PolisportivaDDD/Utente/home');
+                        $pm -> store($utente);
+                        $pm -> store($utenteRegistrato);
+                        header('Location: /PolisportivaDDD/Utente/home');
+                    }
+
                 }
             }
         }

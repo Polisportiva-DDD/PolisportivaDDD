@@ -88,6 +88,10 @@
       <div>
         <p class="text-center">Attenzione! Username già esistente!  </p>
       </div>
+    {elseif $error=='errorEmail'}
+      <div>
+        <p class="text-center">Attenzione! Email già esistente!  </p>
+      </div>
     {elseif $error=='type'}
       <div>
         <p class="text-center">Attenzione! Il tipo dell'immagine deve essere jpg,jpeg o png </p>
