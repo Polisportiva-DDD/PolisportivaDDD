@@ -40,12 +40,12 @@ class VGettoni
      * @param array $carte liste delle carte di credito dell'utente
      * @throws SmartyException
      */
-    public function showAcquistaGettoni(array $campi, array $carte,bool $isAmministratore){
+  /*  public function showAcquistaGettoni(array $campi, array $carte,bool $isAmministratore){
         $this -> smarty -> assign('results',$campi);
         $this -> smarty -> assign('carta',$carte);
         $this -> smarty -> assign('isAmministratore',$isAmministratore);
         $this->smarty->display(dirname(__DIR__)  ."/Smarty/templates/acquistaGettoni.tpl");
-    }
+    }*/
 
     /**
      * Funzione che mostra la pagina in cui l'amministratore può aggiungere gettoni ad un utente
