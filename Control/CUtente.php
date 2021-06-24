@@ -94,6 +94,7 @@ class CUtente
 
         }
         $view->showHome($isAmministratore,$isRegistrato,$result, $type);
+
     }
 
     public function mioProfilo(){

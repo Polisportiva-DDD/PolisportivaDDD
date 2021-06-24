@@ -23,4 +23,8 @@ class CMessaggio
 
     }
 
+    public function jsError(){
+        header('Location: /PolisportivaDDD/Smarty/html/JavaScriptDisabledError.html');
+    }
+
 }

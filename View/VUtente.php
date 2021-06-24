@@ -37,6 +37,7 @@ class VUtente
         $this->smarty->assign("type", $type);
 
         $this->smarty->display(dirname(__DIR__)  ."/Smarty/templates/home.tpl");
+
     }
 
     /**

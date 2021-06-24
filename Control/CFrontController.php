@@ -2,6 +2,7 @@
 
 require_once (dirname(__DIR__)  .'/Utility/autoload.php');
 require_once (dirname(__DIR__) .'/Utility/USession.php');
+require_once (dirname(__DIR__)  .'/Utility/StartSmarty.php');
 class CFrontController
 {
 
@@ -14,6 +15,7 @@ class CFrontController
     public function run($path){
         //setcookie('testcookie','hello',time()+3600);
        // if(isset($_COOKIE['testcookie'])){
+
             $real_controller=null;
             $resource = explode('/', $path);
             array_shift($resource);

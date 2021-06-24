@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2021-06-24 10:51:44
+/* Smarty version 3.1.39, created on 2021-06-24 22:26:01
   from 'C:\xampp\htdocs\PolisportivaDDD\Smarty\templates\home.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_60d447a0c65cf3_02693472',
+  'unifunc' => 'content_60d4ea59e8bcb3_36156840',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '83be1c731b413ebcfa15c1138114bcbd1f70b42c' => 
     array (
       0 => 'C:\\xampp\\htdocs\\PolisportivaDDD\\Smarty\\templates\\home.tpl',
-      1 => 1624524696,
+      1 => 1624566357,
       2 => 'file',
     ),
   ),
@@ -22,10 +22,14 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_60d447a0c65cf3_02693472 (Smarty_Internal_Template $_smarty_tpl) {
+function content_60d4ea59e8bcb3_36156840 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="it">
 <head>
+  <noscript>
+    <META HTTP-EQUIV="Refresh" CONTENT="0;URL=/PolisportivaDDD/Messaggio/jsError">
+  </noscript>
+
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <title>Polisportiva DDD</title>
@@ -39,8 +43,10 @@ function content_60d447a0c65cf3_02693472 (Smarty_Internal_Template $_smarty_tpl)
 >
   <!-- Core theme CSS (includes Bootstrap)-->
   <link href="/PolisportivaDDD/Smarty/css/styles.css" rel="stylesheet" />
+
 </head>
 <body>
+
 
 <!-- Navigation-->
 <?php $_smarty_tpl->_subTemplateRender("file:navBar.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
@@ -131,7 +137,6 @@ for ($__section_nr_0_iteration = 1, $_smarty_tpl->tpl_vars['__smarty_section_nr'
 <hr class="my-0" />
 
 
-</body>
 <?php $_smarty_tpl->_subTemplateRender("file:footer.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
