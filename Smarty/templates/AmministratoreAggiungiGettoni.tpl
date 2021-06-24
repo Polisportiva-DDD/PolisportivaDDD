@@ -15,7 +15,7 @@
 	<div class="container mb-2 mt-2" dir="rtl" >
 		<div class="table-responsive" >
 			<table>
-				<tr >
+				<tr>
 					<th scope="col" class="padTh"><a href="/PolisportivaDDD/Utente/logout">  <button type="submit" class="btn btn-primary">Logout</button></a></th>
 					<th scope="col" class="padTh"><a href="/PolisportivaDDD/Utente/mioProfilo"><button type="submit" class="btn btn-secondary" >Profilo</button></a></th>
 					<form method="post" action="/PolisportivaDDD/Utente/Utenti">

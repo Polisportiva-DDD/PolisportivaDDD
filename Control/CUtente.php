@@ -252,7 +252,7 @@ class CUtente
         $pm = new FPersistentManager();
         if(isset($_POST['username']) && isset($_POST['password'])) {
 
-            $esiste = $pm->Login($_POST['username'], $_POST['password']);
+            $esiste = $pm->Login($_POST['username'], md5($_POST['password']));
             if ($esiste==1) {
                 if($pm->isBannato($_POST['username'])){
                     $view->showLoginError(2);
@@ -318,7 +318,7 @@ class CUtente
             $nome = $_POST['nome'];
             $cognome = $_POST['cognome'];
             $email = $_POST['email'];
-            $password = $_POST['password'];
+            $password = md5($_POST['password']);
             $data = $_POST['data'];
             $data=(DateTime::createFromFormat('Y-m-d',$data));
             $nomeFile="file";
