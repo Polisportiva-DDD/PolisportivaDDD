@@ -12,7 +12,7 @@ class CRecensione
         $session = new USession();
         $session->startSession();
         if(CUtente::isLogged()){
-            $pm = new FPersistentManager();
+            $pm = FPersistentManager::getInstance();
             $isAmministratore = $session->readValue('isAmministratore');
             $username = $session->readValue('username');
             $recensioni = $pm->loadRecensioniEffettuate($username);
@@ -41,7 +41,7 @@ class CRecensione
 
     public function eliminaRecensione($id){
         if(CUtente::isLogged()){
-            $pm = new FPersistentManager();
+            $pm = FPersistentManager::getInstance();
             $pm->delete($id, 'FRecensione');
             header("Location: /PolisportivaDDD/Utente/Home");
         }

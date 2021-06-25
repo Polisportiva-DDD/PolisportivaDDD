@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+  <noscript>
+    <META HTTP-EQUIV="Refresh" CONTENT="0;URL=/PolisportivaDDD/Messaggio/jsError">
+  </noscript>
+
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <title>Polisportiva DDD</title>
@@ -12,8 +16,10 @@
   <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
   <!-- Core theme CSS (includes Bootstrap)-->
   <link href="/PolisportivaDDD/Smarty/css/styles.css" rel="stylesheet" />
+
 </head>
 <body>
+
 
 <!-- Navigation-->
 {include file="navBar.tpl"}
@@ -91,7 +97,6 @@
 <hr class="my-0" />
 
 
-</body>
 {include file="footer.tpl"}
 
 

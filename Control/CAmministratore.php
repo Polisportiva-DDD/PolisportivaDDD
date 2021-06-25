@@ -12,7 +12,7 @@ class CAmministratore
     public function segnalazioni($id=-1){
         if(CUtente::isLogged()){
             $view = new VAmministratore();
-            $pm = new FPersistentManager();
+            $pm = FPersistentManager::getInstance();
             if($id==-1) {
                 $segnalazioni = $pm->loadList('FTicketAssistenza');
                 $listaSegnalazioni = array();
@@ -90,7 +90,7 @@ class CAmministratore
     public function modificaPrezzi(){
         if(CUtente::isLogged()){
             $view = new VGettoni();
-            $pm= new FPersistentManager();
+            $pm= FPersistentManager::getInstance();
             $campi = $pm->loadList('FCampo');
             $resultsCampi = array();
             foreach($campi as $campo){
@@ -114,7 +114,7 @@ class CAmministratore
     //Funzione che modifica i prezzi dei campi
     public function modifica(){
         if(CUtente::isLogged()){
-            $pm = new FPersistentManager();
+            $pm = FPersistentManager::getInstance();
             if ($_POST){
                 foreach($_POST as $chiave => $prezzo){
                     if($prezzo>0){
@@ -134,7 +134,7 @@ class CAmministratore
     public function aggiungiGettoni(){
         if(CUtente::isLogged()){
             $view = new VGettoni();
-            $pm= new FPersistentManager();
+            $pm= FPersistentManager::getInstance();
             $campi = $pm->loadList('FCampo');
             $resultsCampi = array();
             foreach($campi as $campo){
@@ -160,7 +160,7 @@ class CAmministratore
         $session = new USession();
         $session->startSession();
         if(CUtente::isLogged()){
-            $pm= new FPersistentManager();
+            $pm= FPersistentManager::getInstance();
             $utente =unserialize($session->readValue('utente'));
             $wallet=$utente->getWallet();
             if ($_POST){
@@ -182,7 +182,7 @@ class CAmministratore
         $session = new USession();
         $session->startSession();
         if(CUtente::isLogged()){
-            $pm= new FPersistentManager();
+            $pm= FPersistentManager::getInstance();
 
             $usernameAmm = $session->readValue('username');
             if ($id!=-1){
@@ -211,7 +211,7 @@ class CAmministratore
         $session = new USession();
         $session->startSession();
         if(CUtente::isLogged()){
-            $pm = new FPersistentManager();
+            $pm = FPersistentManager::getInstance();
             $view = new VAmministratore();
             $utente =unserialize($session->readValue('utente'));
             $username=$utente->getUsername();
@@ -239,7 +239,7 @@ class CAmministratore
         $session = new USession();
         $session->startSession();
         if(CUtente::isLogged()){
-            $pm = new FPersistentManager();
+            $pm = FPersistentManager::getInstance();
             if ($_POST['motivazione']){
                 $motivazione = $_POST['motivazione'];
                 $utente =unserialize($session->readValue('utente'));

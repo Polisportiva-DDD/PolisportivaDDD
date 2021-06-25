@@ -5,6 +5,26 @@
 class FPersistentManager
 {
 
+    private static $instance = null;
+
+
+    private function __construct()
+    {
+
+    }
+
+    public static function getInstance()
+    {
+        if (self::$instance == null)
+        {
+            self::$instance = new FPersistentManager();
+        }
+        return self::$instance;
+    }
+
+
+
+
     public function store($obj) {
         $Eclass = get_class($obj);
         $Fclass = str_replace("E", "F", $Eclass);

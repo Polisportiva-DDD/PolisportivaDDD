@@ -35,7 +35,7 @@ class CGruppo
         $session = new USession();
         $session->startSession();
         if(CUtente::isLogged()){
-            $pm = new FPersistentManager();
+            $pm = FPersistentManager::getInstance();
             $isAmministratore = $session->readValue('isAmministratore');
             $campi = $pm->loadList("FCampo");
             $view = new VGruppo();
@@ -69,7 +69,7 @@ class CGruppo
         $session = new USession();
         $session->startSession();
         if(CUtente::isLogged()){
-            $pm = new FPersistentManager();
+            $pm = FPersistentManager::getInstance();
 
             $view = new VGruppo();
             $today = new DateTime("now", new DateTimeZone('Europe/Rome') );
@@ -127,7 +127,7 @@ class CGruppo
         $session->startSession();
         if(CUtente::isLogged()){
 
-            $pm = new FPersistentManager();
+            $pm = FPersistentManager::getInstance();
             $view = new VGruppo();
             $isAmministratore = $session->readValue('isAmministratore');
             $username = $session->readValue('username');
@@ -168,7 +168,7 @@ class CGruppo
         $session->startSession();
         if(CUtente::isLogged()){
 
-            $pm = new FPersistentManager();
+            $pm = FPersistentManager::getInstance();
             $view = new VGruppo();
             $isAmministratore = $session->readValue('isAmministratore');
             if ($_POST){
@@ -196,7 +196,7 @@ class CGruppo
         $session->startSession();
         if(CUtente::isLogged()){
 
-            $pm = new FPersistentManager();
+            $pm = FPersistentManager::getInstance();
             $username = $session->readValue('username');
             if ($_POST){
                 $nomeGruppo = $_POST['nomeGruppo'];
@@ -305,7 +305,7 @@ class CGruppo
         if(CUtente::isLogged()){
 
             $isAmministratore = $session->readValue('isAmministratore');
-            $pm = new FPersistentManager();
+            $pm = FPersistentManager::getInstance();
             $view = new VGruppo();
             $nomeGruppo = null; $adminGruppo = null; $etaMinima = null; $etaMassima = null; $dataGruppo = null; $campo = null; $valutazioneMinima = null;
             if(isset($_POST['nomeGruppo']) && $_POST['nomeGruppo']!=''){
@@ -396,7 +396,7 @@ class CGruppo
 
     private function rimuoviGettone($username, $idCampo): bool{
         if(CUtente::isLogged()){
-            $pm = new FPersistentManager();
+            $pm = FPersistentManager::getInstance();
             $utente = $pm->load($username, "Futente");
             $wallet = $utente->getWallet();
             $campo = $pm->load($idCampo, 'FCampo');
@@ -423,7 +423,7 @@ class CGruppo
     public static function freeHoursFromDate($dataScelta, $idCampoScelto){
         if(CUtente::isLogged()){
             $oreDisponibili= self::$orePossibili;
-            $pm = new FPersistentManager();
+            $pm = FPersistentManager::getInstance();
             //Recupera dal db le ore occupate del campo scelto
             $gruppi = $pm->loadGruppi(null, null, null, null, null, null, null);
             $dataEOreOccupate = array();
@@ -461,7 +461,7 @@ class CGruppo
         if(CUtente::isLogged()){
 
             $isAmministratore = $session->readValue('isAmministratore');
-            $pm = new FPersistentManager();
+            $pm = FPersistentManager::getInstance();
             $view = new VGruppo();
             $gruppiUtente = $pm -> loadGruppiUtente($session->readValue('username'));
             if ($gruppiUtente != null){
@@ -503,7 +503,7 @@ class CGruppo
         if(CUtente::isLogged()){
 
             $username = $session->readValue('username');
-            $pm = new FPersistentManager();
+            $pm = FPersistentManager::getInstance();
             $utente = $pm->load($username, 'FUtente');
             $gruppo = $pm->load($idGruppo, 'FGruppo');
             //Se soddisfa le condizioni

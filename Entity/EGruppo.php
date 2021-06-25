@@ -285,7 +285,7 @@ class EGruppo
 
     public function hasPartecipante($username): bool
     {
-        $pm = new FPersistentManager();
+        $pm = FPersistentManager::getInstance();
         $utente = $pm->load($username, 'FUtente');
         return in_array($utente, $this->partecipanti);
     }
@@ -297,7 +297,7 @@ class EGruppo
      */
     public function verificaCondizioni($utente): bool{
         $etaUtente = $utente->getEta();
-        $pm = new FPersistentManager();
+        $pm = FPersistentManager::getInstance();
         $recensioni = $pm->loadRecensioniUtente($utente->getUsername());
         $val = round($utente->calcolaMediaRecensioni($recensioni));
         $etaMin = $this->etaMinima;

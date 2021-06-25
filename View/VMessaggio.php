@@ -25,4 +25,9 @@ class VMessaggio
         $this -> smarty -> display(dirname(__DIR__)  ."/Smarty/templates/genericError.tpl");
     }
 
+    public function showJSErrorPage($messaggio){
+        $this->smarty->assign('messaggioErrore', $messaggio);
+        $this -> smarty -> display(dirname(__DIR__)  ."/Smarty/templates/jsError.tpl");
+    }
+
 }

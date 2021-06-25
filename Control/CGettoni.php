@@ -22,7 +22,7 @@ class CGettoni
             $view = new VGettoni();
             $isAmministratore = $session->readValue('isAmministratore');
             $username = $session->readValue('username');
-            $pm= new FPersistentManager();
+            $pm= FPersistentManager::getInstance();
             $campi = $pm->loadList('FCampo');
             $resultsCampi = array();
             foreach($campi as $campo){
@@ -76,7 +76,7 @@ class CGettoni
         $session = new USession();
         $session->startSession();
         if(CUtente::isLogged()){
-            $pm= new FPersistentManager();
+            $pm= FPersistentManager::getInstance();
             $username=$session->readValue('username');
             $acqGettoni = $session->readValue('aggiungiCarta');
             if (isset($_POST['nome']) and isset($_POST['cognome']) and isset($_POST['numero']) and isset($_POST['cvc']) and isset($_POST['data'])) {
@@ -107,7 +107,7 @@ class CGettoni
         $session->startSession();
         if(CUtente::isLogged()){
             $view = new VGettoni();
-            $pm= new FPersistentManager();
+            $pm= FPersistentManager::getInstance();
             $isAmministratore = $session->readValue('isAmministratore');
             if(isset($_POST["carta"])  ){
                 $numero=$_POST["carta"];
@@ -165,7 +165,7 @@ class CGettoni
         $session->startSession();
         if(CUtente::isLogged()){
             $username = $session->readValue("username");
-            $pm = new FPersistentManager();
+            $pm = FPersistentManager::getInstance();
             $utente = $pm->load($username, "FUtente");
             $wallet = $utente->getWallet();
             if ($_POST) {
@@ -188,7 +188,7 @@ class CGettoni
         $session->startSession();
         if(CUtente::isLogged()){
             $isAmministratore = $session->readValue('isAmministratore');
-            $pm = new FPersistentManager();
+            $pm = FPersistentManager::getInstance();
             $view = new VCarta();
             $carteUtente = $pm -> loadCarteUtente($session->readValue('username'));
             $results = array();
@@ -213,7 +213,7 @@ class CGettoni
         $session = new USession();
         $session->startSession();
         if(CUtente::isLogged()){
-            $pm = new FPersistentManager();
+            $pm = FPersistentManager::getInstance();
             $numerocarta=$_POST["numeroCarta"];
             $pm->delete($numerocarta,'FCartaDiCredito');
             header('Location: /PolisportivaDDD/Gettoni/visualizzaCarte');

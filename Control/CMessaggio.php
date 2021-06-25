@@ -24,7 +24,9 @@ class CMessaggio
     }
 
     public function jsError(){
-        header('Location: /PolisportivaDDD/Smarty/html/JavaScriptDisabledError.html');
+        $messaggio = 'Per favore attiva javascript per continuare sul nostro sito';
+        $view = new VMessaggio();
+        $view->showJSErrorPage($messaggio);
     }
 
 }

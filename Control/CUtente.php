@@ -30,7 +30,7 @@ class CUtente
             }
             else{
                 $view = new VUtente();
-                $pm = new FPersistentManager();
+                $pm = FPersistentManager::getInstance();
                 if (isset($_POST['searchedUser'])){
                     $searchedUser = $_POST['searchedUser'];
                     $utenti = $pm->loadUtentiFiltered($searchedUser);
@@ -57,7 +57,7 @@ class CUtente
         $session = new USession();
         $session->startSession();
         if(self::isLogged()){
-            $pm = new FPersistentManager();
+            $pm = FPersistentManager::getInstance();
             if (isset($_POST['oggetto']) && isset($_POST['messaggio'])){
                 $oggetto = $_POST['oggetto'];
                 $messaggio = $_POST['messaggio'];
@@ -79,7 +79,7 @@ class CUtente
         $isAmministratore = $session->readValue('isAmministratore');
         $isRegistrato = $session->readValue('isRegistrato');
         $view=new VUtente();
-        $pm = new FPersistentManager();
+        $pm = FPersistentManager::getInstance();
         $campi=$pm->loadList("FCampo");
         $result=array();
         $type = '';
@@ -103,7 +103,7 @@ class CUtente
             $isAmministratore = $session->readValue('isAmministratore');
             $view=new VUtente();
             if(CUtente::isLogged()){
-                $pm = new FPersistentManager();
+                $pm = FPersistentManager::getInstance();
                 $username = $session->readValue('username');
                 $utente=$pm->load($username,"FUtente");
                 $username=$utente->getUsername();
@@ -161,7 +161,7 @@ class CUtente
 
     public function mostraCampo(){
         $view=new VUtente();
-        $pm = new FPersistentManager();
+        $pm = FPersistentManager::getInstance();
         $session = new USession();
         $session->startSession();
         $isAmministratore = $session->readValue('isAmministratore');
@@ -203,7 +203,7 @@ class CUtente
         $session = new USession();
         $session->startSession();
         if(self::isLogged()) {
-            $pm = new FPersistentManager();
+            $pm = FPersistentManager::getInstance();
             $utente = $session->readValue('username');
             $utenteDaRec = $session->readValue('utenteDaRecensire');
 
@@ -250,7 +250,7 @@ class CUtente
     public function verifica() {
         $view = new VUtente();
         $session = new USession();
-        $pm = new FPersistentManager();
+        $pm = FPersistentManager::getInstance();
         if(isset($_POST['username']) && isset($_POST['password'])) {
 
             $esiste = $pm->Login($_POST['username'], md5($_POST['password']));
@@ -307,7 +307,7 @@ class CUtente
      * se questa verifiche non riscontrano problemi, si passa alla store nel db.
      */
     public function verificaRegistrazione() {
-        $pm = new FPersistentManager();
+        $pm = FPersistentManager::getInstance();
         $view = new VUtente();
         $session = new USession();
         $session->startSession();
@@ -375,7 +375,7 @@ class CUtente
     public function utentiBannati(){
         if(self::isLogged()){
             $view = new VAmministratore();
-            $pm = new FPersistentManager();
+            $pm = FPersistentManager::getInstance();
             $utentiBannati=$pm->loadList("FUtenteRegistrato");
             $result=array();
             if($utentiBannati!=null){
@@ -399,7 +399,7 @@ class CUtente
     }
 
     public function rimuoviBan(){
-        $pm = new FPersistentManager();
+        $pm = FPersistentManager::getInstance();
         if(isset($_POST['username'])){
             $pm->updateUtenteRegistrato($_POST['username'],false,"");
             header('Location: /PolisportivaDDD/Utente/utentiBannati');
@@ -418,7 +418,7 @@ class CUtente
         if(self::isLogged()){
             $session = new USession();
             $isAmministratore = $session->readValue('isAmministratore');
-            $pm = new FPersistentManager();
+            $pm = FPersistentManager::getInstance();
             $view = new VUtente();
 
             $utenteDaBannare = $pm->load($username,"FUtente");
