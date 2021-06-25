@@ -77,8 +77,7 @@
 
 
       <label for="file"><h6>Immagine Profilo</h6></label>
-      <input type="file" class="form-control-file" name="file" id="file" accept="image/png, image/jpeg"
-             >
+      <input type="file" class="form-control-file" name="file" id="file" accept="image/png, image/jpeg, image/jpg">
 
 
     </div>
@@ -99,6 +98,10 @@
     {elseif $error=='size'}
       <div>
         <p class="text-center">Attenzione! La dimensione dell'immagine è troppo grande </p>
+      </div>
+    {elseif $error=='errorRegistrazione'}
+      <div>
+        <p class="text-center">Attenzione! Registrazione non andata a buon fine, inserire nuovamente i dati rispettando le specifiche.</p>
       </div>
     {/if}
 

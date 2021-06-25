@@ -363,7 +363,13 @@ class CUtente
 
                         $pm -> store($utente);
                         $pm -> store($utenteRegistrato);
-                        header('Location: /PolisportivaDDD/Utente/home');
+                        if($pm->existUsername($utente->getUsername())){
+                            header('Location: /PolisportivaDDD/Utente/home');
+                        }
+                        else{
+                            $view->showRegistrazioneError('errorRegistrazione');
+                        }
+
                     }
 
                 }
@@ -501,7 +507,7 @@ class CUtente
     {
 
         $ris = null;
-        $max_size = 300000;
+        $max_size = 1000000;
         $size = $_FILES[$nome_file]['size'];
         $type = $_FILES[$nome_file]['type'];
         if ($size > $max_size) {
