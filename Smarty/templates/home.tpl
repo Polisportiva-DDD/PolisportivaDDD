@@ -17,9 +17,21 @@
   <!-- Core theme CSS (includes Bootstrap)-->
   <link href="/PolisportivaDDD/Smarty/css/styles.css" rel="stylesheet" />
 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.css">
+
+
 </head>
 <body>
 
+<!-- START Bootstrap-Cookie-Alert -->
+<div class="alert text-center cookiealert" role="alert">
+  <b>Ti piacciono i cookie?</b> &#x1F36A; Utilizziamo i cookie per assicurarti la migliore esperienza sul nostro sito web.<a href="https://cookiesandyou.com/" target="_blank">Leggi di più</a>
+
+  <button type="button" class="btn btn-primary btn-sm acceptcookies">
+    Accetto
+  </button>
+</div>
+<!-- END Bootstrap-Cookie-Alert -->
 
 <!-- Navigation-->
 {include file="navBar.tpl"}
@@ -103,6 +115,7 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.js"></script>
 
 <!-- Core theme JS-->
 <script src="/PolisportivaDDD/Smarty/js/scripts.js"></script>
