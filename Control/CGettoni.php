@@ -15,6 +15,10 @@ class CGettoni
 
     public function __construct(){}
 
+    /**
+     * Funzione che mostra la pagina per acquistare gettoni
+     * @throws SmartyException
+     */
     public function acquista(){
         $session = new USession();
         $session->startSession();
@@ -54,6 +58,10 @@ class CGettoni
 
     }
 
+    /**
+     * Funzione Che mostra la sezione per aggiungere una carta
+     * @throws SmartyException
+     */
     public function aggiungiCarta(){
         $session = new USession();
         $session->startSession();
@@ -72,6 +80,11 @@ class CGettoni
     }
 
 
+    /**
+     * Funzione che permette di aggiungere una carta all'utente e di salvarla sul db
+     * Se alla pagina di "Aggiungi carta" si era arrivati dalla pagina di "acquista gettoni" allora si viene reidirizzati su "acquista gettoni"
+     * @throws Exception
+     */
     public function confermaAggiungiCarta(){
         $session = new USession();
         $session->startSession();
@@ -102,6 +115,10 @@ class CGettoni
 
     }
 
+    /**
+     * Funzione che mostra la pagina di riepilogo dell'acquisto
+     * @throws SmartyException
+     */
     public function riepilogoAcquisto(){
         $session = new USession();
         $session->startSession();
@@ -160,6 +177,9 @@ class CGettoni
 
     }
 
+    /**
+     *Funzione che aggiunge i gettoni al wallet dell'utente
+     */
     public function paga(){
         $session = new USession();
         $session->startSession();
@@ -192,15 +212,18 @@ class CGettoni
             $view = new VCarta();
             $carteUtente = $pm -> loadCarteUtente($session->readValue('username'));
             $results = array();
-            for ($i=0;$i<count($carteUtente); $i++){
-                $tmp = array(
-                    'numeroCarta' => $carteUtente[$i]->getNumero(),
-                    'titolareCarta' => $carteUtente[$i]->getNomeTitolare(). " " . $carteUtente[$i]->getCognomeTitolare(),
-                    'dataScadenza' => $carteUtente[$i]->getScadenza()->format('d-m-y')
-                );
-                $results[]=$tmp;
-                $session->setValue('numeroCarta',$tmp['numeroCarta']);
+            if($carteUtente!=null){
+                for ($i=0;$i<count($carteUtente); $i++){
+                    $tmp = array(
+                        'numeroCarta' => $carteUtente[$i]->getNumero(),
+                        'titolareCarta' => $carteUtente[$i]->getNomeTitolare(). " " . $carteUtente[$i]->getCognomeTitolare(),
+                        'dataScadenza' => $carteUtente[$i]->getScadenza()->format('d-m-y')
+                    );
+                    $results[]=$tmp;
+                    $session->setValue('numeroCarta',$tmp['numeroCarta']);
+                }
             }
+
             $view -> showLeTueCarte($isAmministratore,$results);
         }
         else{

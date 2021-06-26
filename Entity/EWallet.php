@@ -19,6 +19,7 @@ class EWallet
 
 
     /**
+     * Restituisce la listaCampiWallet
      * @return array
      */
     public function getListaCampiWallet(): array
@@ -27,6 +28,7 @@ class EWallet
     }
 
     /**
+     * Setta l'array listaCampiWallet
      * @param array $listaCampiWallet
      */
     public function setListaCampiWallet(array $listaCampiWallet): void
@@ -37,6 +39,7 @@ class EWallet
 
 
     /**
+     * Restituisce id wallet
      * @return int
      */
     public function getId(): int
@@ -47,6 +50,7 @@ class EWallet
 
 
     /**
+     * setta l'id del wallet
      * @param int $id
      */
     public function setId(int $id): void
@@ -55,8 +59,12 @@ class EWallet
     }
 
 
-
-
+    /**
+     * Funzione che permette di aggiungere gettoni relativamente al campo passato
+     * @param ECampo $campo campo a cui vanno aggiunti i gettoni
+     * @param int $quantita gettoni da aggiungere
+     * @return bool
+     */
     public function aggiungiGettoni(ECampo $campo, int $quantita):bool
     {
         foreach ($this->listaCampiWallet as $valore){
@@ -71,6 +79,12 @@ class EWallet
     }
 
 
+    /**
+     * Funzione che permette di rimuovere gettoni relativamente al campo passato
+     * @param ECampo $campo campo a cui vanno rimossi i gettoni
+     * @param int $quantita gettoni da rimuovere
+     * @return bool
+     */
     public function rimuoviGettoni(ECampo $campo, int $quantita):bool
     {
         foreach ($this->listaCampiWallet as $valore){

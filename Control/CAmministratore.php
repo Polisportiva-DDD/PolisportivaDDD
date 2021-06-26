@@ -86,7 +86,12 @@ class CAmministratore
         }
 
     }
-    //Funzione che mostra la sezione modifica prezzi dei campi
+
+
+    /**
+     * Funzione che mostra la sezione modifica prezzi dei campi
+     * @throws SmartyException
+     */
     public function modificaPrezzi(){
         if(CUtente::isLogged()){
             $view = new VGettoni();
@@ -111,7 +116,11 @@ class CAmministratore
 
     }
 
-    //Funzione che modifica i prezzi dei campi
+
+
+    /**
+     *Funzione che va modificare i prezzi dei campi sul db e poi effettua il reidirizzamento sulla pagina di modifica prezzo
+     */
     public function modifica(){
         if(CUtente::isLogged()){
             $pm = FPersistentManager::getInstance();
@@ -130,7 +139,11 @@ class CAmministratore
 
     }
 
-    //Funzione che mostra la sezione aggiungi gettoni
+
+    /**
+     * Funzione che mostra la sezione aggiungi gettoni
+     * @throws SmartyException
+     */
     public function aggiungiGettoni(){
         if(CUtente::isLogged()){
             $view = new VGettoni();
@@ -155,7 +168,11 @@ class CAmministratore
 
     }
 
-    //Funzione che permette di aggiungere i gettoni gettoni al wallet
+    //
+
+    /**
+     *Funzione che permette di aggiungere i gettoni al wallet e lo memorizza sul db
+     */
     public function aggiungi(){
         $session = new USession();
         $session->startSession();
@@ -203,9 +220,9 @@ class CAmministratore
     }
 
 
-
     /**
-     *Funzione che mostra la pagina in cui si banna un utente
+     * Funzione che mostra la pagina in cui si banna un utente
+     * @throws SmartyException
      */
     public function banna(){
         $session = new USession();
@@ -235,6 +252,9 @@ class CAmministratore
 
     }
 
+    /**
+     *Funzione che permette di bannare un utente
+     */
     public function inviaBan(){
         $session = new USession();
         $session->startSession();

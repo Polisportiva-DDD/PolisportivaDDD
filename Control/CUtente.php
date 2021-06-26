@@ -20,6 +20,13 @@ class CUtente
 
     }
 
+
+    /**
+     * Funzione che mostra il proprio profilo se lo username passatto al metodo è diverso dalla stringa vuota
+     * altrimenti mostra la sezione "ricerca utente"
+     * @param string $username
+     * @throws SmartyException
+     */
     public function utenti($username=""){
         $session = new USession();
         $session->startSession();
@@ -73,6 +80,10 @@ class CUtente
 
     }
 
+    /**
+     * Funzione che si occupa di mostrare la pagina home a seconda se l'utente è loggatto o meno
+     * @throws SmartyException
+     */
     public function home(){
         $session = new USession();
         $session->startSession();
@@ -97,6 +108,11 @@ class CUtente
 
     }
 
+
+    /**
+     * Funzione che si occcupa di mostrare il proprio profilo
+     * @throws SmartyException
+     */
     public function mioProfilo(){
             $session = new USession();
             $session->startSession();
@@ -159,6 +175,10 @@ class CUtente
 
     }
 
+    /**
+     * Funzione che mostra i dettagli del campo selezionato sulla home
+     * @throws SmartyException
+     */
     public function mostraCampo(){
         $view=new VUtente();
         $pm = FPersistentManager::getInstance();
@@ -181,6 +201,11 @@ class CUtente
 
     }
 
+
+    /**
+     * Funzione che mostra la sezione per effettuare una recensione ad un altro utente
+     * @throws SmartyException
+     */
     public function effettuaRecensione(){
         $session = new USession();
         $session->startSession();
@@ -199,6 +224,9 @@ class CUtente
         }
     }
 
+    /**
+     *  Funzione che si occupa di memorizzare la recensione effettuata dall'utente sul db
+     */
     public function recensisci(){
         $session = new USession();
         $session->startSession();
@@ -228,12 +256,21 @@ class CUtente
     }
 
 
-
+    /**
+     * Funzione che mostra la pagine di login con un errore
+     * @param int $error
+     * @throws SmartyException
+     */
     public function loginError($error=-1){
         $view=new VUtente();
         $view->showLoginError($error);
     }
 
+
+    /**
+     * Funzione che mostra la pagina di login
+     * @throws SmartyException
+     */
     public function login (){
         $view=new VUtente();
         $view->showFormLogin();
@@ -243,7 +280,7 @@ class CUtente
 
     /**
      * Funzione che si occupa di verificare l'esistenza di un utente con username e password inseriti nel form di login.
-     * 1) se, dopo la ricerca nel db non si hanno risultati ($utente = null) oppure se l'utente si trova nel db ma ha lo stato false
+     * 1) se, dopo la ricerca nel db non si hanno risultati ($utente = null) oppure se l'utente si trova nel db ma ha è bannato
      *    viene ricaricata la pagina con l'aggiunta dell'errore nel login.
      * 2) se l'utente c'è, avviene il reindirizzamento alla homepage;
      */
@@ -378,6 +415,11 @@ class CUtente
 
 
     }
+
+    /**
+     * Funzione che mostra la sezione degli utenti bannati
+     * @throws SmartyException
+     */
     public function utentiBannati(){
         if(self::isLogged()){
             $view = new VAmministratore();
@@ -404,6 +446,9 @@ class CUtente
 
     }
 
+    /**
+     *Funzione che permette di rimuovere il ban ad un utente selezionato sulla pagina "utenti bannati"
+     */
     public function rimuoviBan(){
         $pm = FPersistentManager::getInstance();
         if(isset($_POST['username'])){
@@ -413,6 +458,10 @@ class CUtente
 
     }
 
+
+    /**
+     *Funzione che permette di effettuare il logout
+     */
     public function logout(){
         $session = new USession();
         $session->startSession();
@@ -420,6 +469,11 @@ class CUtente
         header('Location: /PolisportivaDDD/Utente/home');
     }
 
+    /**
+     * Funzione che permette di visualizzare il profilo di un altro utente registrato passandogli il suo username
+     * @param $username
+     * @throws SmartyException
+     */
     public function visualizzaProfilo($username){
         if(self::isLogged()){
             $session = new USession();
@@ -490,6 +544,10 @@ class CUtente
     }
 
 
+    /**
+     * Funzione che permette di verificare se l'utente è loggato o meno
+     * @return bool
+     */
     static function isLogged() {
         $identificato = false;
         if (isset($_COOKIE['PHPSESSID'])) {
@@ -503,6 +561,12 @@ class CUtente
         return $identificato;
     }
 
+    /**
+     * Funzione che permette di verificare che l'immagine passata in fase di registrazione rispetti i requisiti:
+     * sia di tipo jpg,jpeg,png e che la dimensione sia di 1MB
+     * @param $nome_file
+     * @return string|null
+     */
     static function verificaImmagine($nome_file)
     {
 

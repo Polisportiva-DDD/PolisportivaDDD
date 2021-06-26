@@ -12,9 +12,14 @@ class CFrontController
 
     }
 
+    /**
+     * Funzione che in base al path passato richiama la relativa classe control
+     * @param $path
+     * @return mixed
+     * @throws SmartyException
+     */
     public function run($path){
-        //setcookie('testcookie','hello',time()+3600);
-       // if(isset($_COOKIE['testcookie'])){
+
 
             $real_controller=null;
             $resource = explode('/', $path);
@@ -50,12 +55,6 @@ class CFrontController
                $c= new CUtente();
                $c->home();
             }
-
-       // }else{
-        //    print ("COOKIE NON ABILITATI");
-        //    $c=new CUtente();
-       //     $c->home();
-       // }
 
 
     }
