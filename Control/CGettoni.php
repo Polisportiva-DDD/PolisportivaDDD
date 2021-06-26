@@ -109,9 +109,7 @@ class CGettoni
                     header('Location: /PolisportivaDDD/Gettoni/visualizzaCarte');
                 }
             }
-            else{
-                //che faccio se non è settato?
-            }
+
         }else{
             header('Location: /PolisportivaDDD/Utente/home');
         }
@@ -246,9 +244,10 @@ class CGettoni
         $session = new USession();
         $session->startSession();
         if(CUtente::isLogged()){
+            $username=$session->readValue('username');
             $pm = FPersistentManager::getInstance();
             $numerocarta=$_POST["numeroCarta"];
-            $pm->delete($numerocarta,'FCartaDiCredito');
+            $pm->deleteCarta($numerocarta,$username);
             header('Location: /PolisportivaDDD/Gettoni/visualizzaCarte');
         }
         else{

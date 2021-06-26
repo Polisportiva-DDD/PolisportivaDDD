@@ -62,6 +62,11 @@ class FPersistentManager
         return $Fclass::delete($id);
     }
 
+
+    public function deleteCarta($numeroCarta, $username) {
+        return FCartaDiCredito::delete($numeroCarta,$username);
+    }
+
     /**
      * Carica l'oggetto dal DB, riconoscendone la classe di appartenenza
      * @param $id

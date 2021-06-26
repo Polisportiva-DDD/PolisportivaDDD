@@ -1,5 +1,5 @@
 <?php
-
+require_once (dirname(__DIR__)  .'/Utility/autoload.php');
 
 class FCartaDiCredito
 {
@@ -109,14 +109,25 @@ class FCartaDiCredito
      * @param $numero
      * @return int
      */
-    public static function exist($numero): int
+    public static function exist($numero)
     {
 
-        $sql="SELECT * FROM ".static::$tablePossessoCarta." WHERE numero='".$numero."';";
+        $sql="SELECT * FROM ".static::$tablePossessoCarta." WHERE carta='".$numero."';";
         $db=FDatabase::getInstance();
         $result=$db->exist($sql);
-        if($result!=null) return 1;
-        else return 0;
+        if(!is_null($result)) {
+            print($result);
+            if($result){
+                return 1;
+            }
+            else{
+                return 0;
+            }
+
+        }
+        else{
+            return null;
+        }
 
     }
 
@@ -125,17 +136,27 @@ class FCartaDiCredito
      * @param string $numeroCarta
      * @return bool
      */
-    public static function delete(string $numeroCarta): bool
+    public static function delete(string $numeroCarta,string $username): bool
     {
-        try{
-            $sql = "DELETE FROM " . static::$tableName . " WHERE numero=" . $numeroCarta;
+
+           // $sql = "DELETE FROM " . static::$tableName . " WHERE numero=" . $numeroCarta;
+            $sql = "DELETE FROM " . static::$tablePossessoCarta . " WHERE carta='" . $numeroCarta. "' AND utente="."'$username'" ;
             $db=FDatabase::getInstance();
-            if($db->delete($sql)) return true;
-            else return false;
-        }
-        catch(Exception $e){
-            echo ("Error");
-        }
+            $r=$db->delete($sql);
+            if($r){
+                if(static::exist($numeroCarta)==0){
+                    $sql = "DELETE FROM " . static::$tableName . " WHERE numero=" . $numeroCarta;
+                    $db->delete($sql);
+                    return true;
+                }
+                return true;
+            }
+            else{
+                return false;
+
+            }
+
+
     }
 
     /**
