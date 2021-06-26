@@ -1,26 +1,28 @@
 <?php
-/* Smarty version 3.1.39, created on 2021-06-18 21:59:24
+/* Smarty version 3.1.39, created on 2021-06-26 12:17:56
   from 'C:\xampp\htdocs\PolisportivaDDD\Smarty\templates\SegnalazioniAmministratore.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_60ccfb1c602216_65036720',
+  'unifunc' => 'content_60d6fed467d175_85986738',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '2fda14f361c19f5f29023f98d54f7526e8d39e6b' => 
     array (
       0 => 'C:\\xampp\\htdocs\\PolisportivaDDD\\Smarty\\templates\\SegnalazioniAmministratore.tpl',
-      1 => 1623955227,
+      1 => 1624524696,
       2 => 'file',
     ),
   ),
   'includes' => 
   array (
+    'file:navbar2.tpl' => 1,
+    'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_60ccfb1c602216_65036720 (Smarty_Internal_Template $_smarty_tpl) {
+function content_60d6fed467d175_85986738 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="it">
 <head>
@@ -37,44 +39,9 @@ function content_60ccfb1c602216_65036720 (Smarty_Internal_Template $_smarty_tpl)
 </head>
 <body>
 <!-- Navigation-->
-<div class="container mb-2 mt-2" dir="rtl" >
-  <div class="table-responsive" >
-    <table>
-      <tr >
-        <th scope="col" class="padTh"><a href="/PolisportivaDDD/Utente/logout">  <button type="submit" class="btn btn-primary">Logout</button></a></th>
-        <th scope="col" class="padTh"><a href="/PolisportivaDDD/Utente/mioProfilo"><button type="submit" class="btn btn-secondary" >Profilo</button></a></th>
-        <form method="post" action="/PolisportivaDDD/Utente/Utenti">
-          <th scope="col" class="padTh"><button type="submit" class="btn btn-outline-dark"><span class="fas fa-search"></span></button></th>
-          <th scope="col" class="padTh"  dir="ltr"><input type="text" placeholder="Cerca" name="searchedUser"></th>
-        </form>
-      </tr>
-    </table>
-  </div>
-</div>
+<?php $_smarty_tpl->_subTemplateRender("file:navbar2.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+?>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container">
-
-
-    <a class="navbar-brand" href="/PolisportivaDDD/Utente/home">Polisportiva DDD</a>
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item"><a class="nav-link" href="/PolisportivaDDD/Utente/home">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="/PolisportivaDDD/Gruppo/gruppi">Gruppi</a></li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" id="navbarDropdownGestione" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Gestione</a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownGestione">
-            <a class="dropdown-item" href="/PolisportivaDDD/Utente/utentiBannati">Utenti Bannati</a>
-            <a class="dropdown-item" href="/PolisportivaDDD/Amministratore/segnalazioni">Segnalazioni</a>
-            <a class="dropdown-item" href="/PolisportivaDDD/Amministratore/modificaPrezzi">Modifica prezzi</a>
-          </div>
-        </li>
-
-      </ul>
-    </div>
-  </div>
-</nav>
 <section class="py-5">
   <div class="container">
     <!-- Page heading-->
@@ -117,9 +84,8 @@ for ($__section_nr_0_iteration = 1, $_smarty_tpl->tpl_vars['__smarty_section_nr'
   </div>
 </section>
 
-<footer class="py-5 bg-dark">
-  <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Polisportiva DDD 2021</p></div>
-</footer>
+<?php $_smarty_tpl->_subTemplateRender("file:footer.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+?>
 
 
 </body>

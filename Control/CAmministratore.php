@@ -28,6 +28,8 @@ class CAmministratore
      * @throws SmartyException
      */
     public function segnalazioni($id=-1){
+        $session = new USession();
+        $session->startSession();
         if(CUtente::isLogged()){
             $view = new VAmministratore();
             $pm = FPersistentManager::getInstance();
@@ -57,8 +59,6 @@ class CAmministratore
                 $oggetto = $segnalazione->getOggetto();
                 $messaggio = $segnalazione->getMessaggio();
                 $pic64=base64_encode($utente->getImmagine());
-                $session = new USession();
-                $session->startSession();
                 $session->setValue('emailUtenteSegnalazione', $utente->getEmail());
                 $session->setValue('oggettoSegnalazione', $oggetto);
                 $session->setValue('messaggioSegnalazione', $messaggio);
@@ -83,6 +83,7 @@ class CAmministratore
         $session = new USession();
         $session->startSession();
         if(CUtente::isLogged()){
+
             $emailUtente = $session->readValue('emailUtenteSegnalazione');
             $oggetto = $session->readValue('oggettoSegnalazione');
             $messaggio = $session->readValue('messaggioSegnalazione');
@@ -109,17 +110,20 @@ class CAmministratore
                     $mail->Subject = 'Risposta segnalazione PolisportivaDDD';
                     $mail->Body = "Ciao, la risposta alla tua segnalazione con oggetto: $oggetto è la seguente: $risposta";
                     $mail->AltBody = "Ciao, la risposta alla tua segnalazione con oggetto: $oggetto è la seguente: $risposta";
+
+                    $session->deleteValue('emailUtenteSegnalazione');
+                    $session->deleteValue('oggettoSegnalazione');
+                    $session->deleteValue('messaggioSegnalazione');
+                    $pm->delete($session->readValue('idSegnalazione'), 'FTicketAssistenza');
+                    $session->deleteValue('idSegnalazione');
+                    header('Location: /PolisportivaDDD/Utente/home');
+
                     $mail->send();
                 } catch (Exception $e) {
                     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
                 }
 
-                $session->deleteValue('emailUtenteSegnalazione');
-                $session->deleteValue('oggettoSegnalazione');
-                $session->deleteValue('messaggioSegnalazione');
-                $pm->delete($session->readValue('idSegnalazione'), 'FTicketAssistenza');
-                $session->deleteValue('idSegnalazione');
-                header('Location: /PolisportivaDDD/Utente/home');
+
             }
         }else{
             header('Location: /PolisportivaDDD/Utente/home');
