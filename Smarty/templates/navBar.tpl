@@ -1,3 +1,6 @@
+<noscript>
+    <META HTTP-EQUIV="Refresh" CONTENT="0;URL=/PolisportivaDDD/Messaggio/jsError">
+</noscript>
 {if $isRegistrato}
     <div class="container mb-2 mt-2" dir="rtl" >
         <div class="table-responsive" >
