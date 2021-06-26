@@ -3,6 +3,9 @@
 require_once (dirname(__DIR__)  .'/Utility/USession.php');
 require_once (dirname(__DIR__)  .'/Utility/StartSmarty.php');
 require_once (dirname(__DIR__)  .'/Utility/autoload.php');
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+require dirname(__DIR__) .'/Utility/vendor/autoload.php';
 
 /**
  * Classe control per tutto ciò che riguarda l'Amministratore
@@ -59,6 +62,7 @@ class CAmministratore
                 $session->setValue('emailUtenteSegnalazione', $utente->getEmail());
                 $session->setValue('oggettoSegnalazione', $oggetto);
                 $session->setValue('messaggioSegnalazione', $messaggio);
+                $session->setValue('idSegnalazione', $id);
 
                 $view->showAmministratoreResponse($userAutore, $nome, $cognome, $eta, $oggetto, $messaggio,$pic64);
 
@@ -75,30 +79,47 @@ class CAmministratore
      * all'utente che ha fatto la segnalazione
      */
     public function rispondiSegnalazione(){
+        $pm = FPersistentManager::getInstance();
         $session = new USession();
         $session->startSession();
         if(CUtente::isLogged()){
             $emailUtente = $session->readValue('emailUtenteSegnalazione');
             $oggetto = $session->readValue('oggettoSegnalazione');
             $messaggio = $session->readValue('messaggioSegnalazione');
-            $emailPolisportiva = '';
-            $headers = 'From:' . $emailPolisportiva;
             if (isset($_POST['risposta'])){
                 $risposta = $_POST['risposta'];
+                $mail = new PHPMailer(true);
+
+                try {
+                    $mail->SMTPDebug = 2;
+                    $mail->isSMTP();
+                    $mail->Host = 'outlook.office365.com;';
+                    $mail->SMTPAuth = true;
+                    $mail->Username = 'polisportivaddd@outlook.it';
+                    $mail->Password = 'polisportivaUnivaq';
+                    $mail->SMTPSecure = 'tls';
+                    $mail->Port = 587;
+
+                    $mail->setFrom('polisportivaddd@outlook.it', 'polisportivaddd@outlook.it');
+
+                    $mail->addAddress($emailUtente);
 
 
-                //Invio della mail all'utente con la risposta
-                print_r(mail($emailUtente, 'Risposta segnalazione',
-                    'La ringraziamo per la sua segnalazione con oggetto: ' . $oggetto . '\ne 
-            messaggio' . $messaggio . ', di seguito la risposta:' .
-                    $risposta, $headers));
+                    $mail->isHTML(true);
+                    $mail->Subject = 'Risposta segnalazione PolisportivaDDD';
+                    $mail->Body = "Ciao, la risposta alla tua segnalazione con oggetto: $oggetto è la seguente: $risposta";
+                    $mail->AltBody = "Ciao, la risposta alla tua segnalazione con oggetto: $oggetto è la seguente: $risposta";
+                    $mail->send();
+                } catch (Exception $e) {
+                    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                }
 
                 $session->deleteValue('emailUtenteSegnalazione');
                 $session->deleteValue('oggettoSegnalazione');
                 $session->deleteValue('messaggioSegnalazione');
-
-
-
+                $pm->delete($session->readValue('idSegnalazione'), 'FTicketAssistenza');
+                $session->deleteValue('idSegnalazione');
+                header('Location: /PolisportivaDDD/Utente/home');
             }
         }else{
             header('Location: /PolisportivaDDD/Utente/home');
