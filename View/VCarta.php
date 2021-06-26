@@ -29,6 +29,8 @@ class VCarta
 
 
     /**
+     * Funzione che mostra la pagina in cui inserire una nuova carta di credito
+     * @param bool $isAmministratore indica se si è amministratori o no
      * @throws SmartyException
      */
     public function showAggiungiCarta(bool $isAmministratore){

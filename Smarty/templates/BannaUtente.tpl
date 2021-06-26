@@ -34,7 +34,7 @@
 			<h6 class="mb-2">Username: {$username}</h6>
 			<h6 class="mb-2">Nome: {$nome}</h6>
 			<h6 class="mb-2">Cognome: {$cognome}</h6>
-			<h6 class="mb-2">Età: {$eta}</h6>
+			<h6 class="mb-2">Età: {$eta} anni</h6>
 			<h6 class="mb-2">Valutazione media:
           {for $start=1 to $valutazioneMedia}
             <span class="fa fa-star checkedStar"></span>

@@ -34,10 +34,19 @@ class VAmministratore{
         $this -> smarty -> display(dirname(__DIR__)  ."/Smarty/templates/SegnalazioniAmministratore.tpl");
     }
 
+
     /**
+     * Funzione che mostra il tpl per bannare uno specifico utente
+     * @param string $username username dell'utente da bannatre
+     * @param string $nome nome dell'utente da bannare
+     * @param string $cognome cognome dell'utente da bannare
+     * @param int $eta eta dell'utente da bannare
+     * @param string $valutazioneMedia valutazione media dell'utente da bananre
+     * @param $pic64
+     * @param $type
      * @throws SmartyException
      */
-    public function showBannaUtente(string $username, string $nome, string $cognome, int $eta, string $valutazioneMedia, $pic64, $type){
+    public function showBannaUtente(string $username, string $nome, string $cognome, int $eta, int $valutazioneMedia, $pic64, $type){
         $this -> smarty -> assign('nome',$nome);
         $this -> smarty -> assign('cognome',$cognome);
         $this -> smarty -> assign('username',$username);
@@ -48,7 +57,16 @@ class VAmministratore{
         $this->smarty->display(dirname(__DIR__) ."/Smarty/templates/bannaUtente.tpl");
     }
 
+
     /**
+     * Funzione che mostra il tpl in cui si risponde ad una segnalazione
+     * @param string $username username dell'utente che ha effettuato la segnalazione
+     * @param string $nome nome dell'utente che ha effettuato la segnalazione
+     * @param string $cognome cognome  dell'utente che ha effettuato la segnalazione
+     * @param int $eta eta dell'utente che ha effettuato la segnalazione
+     * @param string $oggetto oggetto della segnalazione
+     * @param string $messaggio messaggio riguardante la segnalazione
+     * @param $pic64
      * @throws SmartyException
      */
     public function showAmministratoreResponse(string $username, string $nome, string $cognome, int $eta, string $oggetto, string $messaggio, $pic64){
