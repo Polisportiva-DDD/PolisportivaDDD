@@ -6,13 +6,28 @@
 
 class FCampo
 {
-
+    /**
+     * Tabella con la quale opera.
+     * @var string
+     */
     private static $tableName = "campo";
+
+    /**
+     * Valori della tabella.
+     * @var string
+     */
     private static $values="(:nome, :numeroMinimo,:numeroMassimo,:descrizione,:prezzo,:id, :discriminante, :immagine)";
 
-
+    /**
+     * FCampo constructor.
+     */
     public function __construct() {}
 
+    /**
+     * Questo metodo lega gli attributi della Carta di Credito da inserire con i parametri della INSERT
+     * @param $stmt
+     * @param ECampo $campo
+     */
     public static function bind($stmt, ECampo $campo){
         $stmt->bindValue(':nome', $campo->getNome(), PDO::PARAM_STR);
         $stmt->bindValue(':numeroMinimo', $campo->getNumeroMinimo(), PDO::PARAM_INT);
@@ -23,7 +38,11 @@ class FCampo
         $stmt->bindValue(":immagine", $campo->getImmagine(), PDO::PARAM_STR);
     }
 
-
+    /**
+     * Carica sul db il campo.
+     * @param ECampo $campo
+     * @return string|null
+     */
     public static function store(ECampo $campo): ?string
     {
         $sql="INSERT INTO " . static::$tableName . " VALUES " . static::$values;
@@ -33,7 +52,11 @@ class FCampo
         else return null;
     }
 
-    //Carica tutti i campi presenti
+
+    /**
+     * Carica dal db tutti i campi presenti.
+     * @return array
+     */
     public static function loadList(): array
     {
         try {
@@ -53,6 +76,11 @@ class FCampo
         }
     }
 
+    /**
+     * Carica dal db il campo dato l'id.
+     * @param int $idCampo
+     * @return mixed|null
+     */
     public static function load(int $idCampo)
     {
         try {
@@ -69,6 +97,12 @@ class FCampo
         }
     }
 
+    /**
+     * Aggiorna il prezzo del campo sul db.
+     * @param float $prezzo
+     * @param int $idCampo
+     * @return bool
+     */
     public static function update(float $prezzo, int $idCampo): bool{
         try {
             $sql = "UPDATE " . static::$tableName . " SET prezzo=" . $prezzo . " WHERE id=" . $idCampo;
@@ -83,6 +117,11 @@ class FCampo
 
     }
 
+    /**
+     * Elimina un campo dal db.
+     * @param int $idCampo
+     * @return bool
+     */
     public static function delete(int $idCampo): bool
     {
         $sql = "DELETE FROM " . static::$tableName . " WHERE id=" . $idCampo;

@@ -5,9 +5,21 @@
 
 class FTicketAssistenza
 {
+    /**
+     * Tabella con la quale opera.
+     * @var string
+     */
     private static $tables="ticketassistenza";
+
+    /**
+     * Valori della tabella
+     * @var string
+     */
     private static $values="(:id,:autore,:messaggio,:oggetto,:data)";
-    
+
+    /**
+     * FTicketAssistenza constructor.
+     */
     public function __construct(){}
 
     /**
@@ -24,6 +36,7 @@ class FTicketAssistenza
         $stmt->bindValue(':data', $ticket->getData()->format('Y-m-d'), PDO::PARAM_STR);
 
     }
+
   /**
      * 
      *  restituisce il nome della tabella sul DB per la costruzione delle Query
@@ -45,7 +58,11 @@ class FTicketAssistenza
         return static::$values;
     }
 
-
+    /**
+     * Carica sul db il ticket.
+     * @param ETicketAssistenza $ticket
+     * @return string|null
+     */
     public static function store(ETicketAssistenza  $ticket): ?string
     {
         $sql="INSERT INTO ".static::getTables()." VALUES ".static::getValues();
@@ -57,13 +74,11 @@ class FTicketAssistenza
 
 
     /**
-     * Carica il ticket in base all'id passato
-     * @param int $id del ticket
-     * @return ETicketAssistenza ETicketAssistenza
+     * Carica il ticket presente nel db in base all'id passatogli.
+     * @param int $id
+     * @return ETicketAssistenza|null
      * @throws Exception
      */
-
-
     public static function load(int $id): ?ETicketAssistenza
     {
         $sql="SELECT * FROM ".static::getTables()." WHERE id='".$id."';";
@@ -76,13 +91,12 @@ class FTicketAssistenza
         else return null;
     }
 
+
     /**
-     * Carica tutti i ticket
-     * @return array array<ETicketAssistenza>
+     * Carica tutti i ticket presenti sul db.
+     * @return array|null
      * @throws Exception
      */
-
-
     public static function loadList(): ?array
     {
         $sql="SELECT * FROM ".static::getTables();
@@ -117,15 +131,6 @@ class FTicketAssistenza
     }
 
 
-
-     
-
-    
-
-
-
-   
-    
     
 }
 

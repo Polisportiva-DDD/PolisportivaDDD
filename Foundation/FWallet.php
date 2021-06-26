@@ -5,17 +5,38 @@
 
 class FWallet
 {
+    /**
+     * tabella con la quale opera
+     * @var string
+     */
     private static $tableName="wallet";
+
+    /**
+     * valori della tabella
+     * @var string
+     */
     private static $values="(:id)";
 
-    
+    /**
+     * FWallet constructor.
+     */
     public function __construct(){}
 
+    /**
+     * Questo metodo lega gli attributi del Wallet da inserire con i parametri della INSERT
+     * @param $stmt
+     * @param EWallet $wallet
+     */
     public static function bind($stmt, EWallet $wallet)
     {
         $stmt->bindValue(':id',null, PDO::PARAM_INT);
     }
 
+    /**
+     * Carica il wallet sul db.
+     * @param EWallet $wallet
+     * @return false|string
+     */
     public static function store(EWallet $wallet){
         $sql="INSERT INTO ".static::$tableName." VALUES ".static::$values;
         $db=FDatabase::getInstance();
@@ -35,6 +56,11 @@ class FWallet
 
     }
 
+    /**
+     * Carica il wallet dal db in base all'id passatogli.
+     * @param $id
+     * @return EWallet|false
+     */
     public static function load($id){
         $campiWallet=FCampiWallet::load($id);
         $wallet=new EWallet($campiWallet,$id);
@@ -44,6 +70,11 @@ class FWallet
         else return $wallet;
     }
 
+    /**
+     *
+     * @param EWallet $wallet
+     * @return bool
+     */
     public static function update(EWallet $wallet): bool
     {
 

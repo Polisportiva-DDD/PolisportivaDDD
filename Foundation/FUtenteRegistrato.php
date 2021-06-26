@@ -5,9 +5,21 @@
 
 class FUtenteRegistrato
 {
+    /**
+     * tabella con la quale opera.
+     * @var string
+     */
     private static $tables="utenteregistrato";
+
+    /**
+     * valori della tabella.
+     * @var string
+     */
     private static $values="(:username,:bannato,:motivazione)";
-    
+
+    /**
+     * FUtenteRegistrato constructor.
+     */
     public function __construct(){}
 
     /**
@@ -44,7 +56,11 @@ class FUtenteRegistrato
         return static::$values;
     }
 
-
+    /**
+     * Carica sul db l'utente in base all'user passatogli.
+     * @param $user
+     * @return string|null
+     */
     public static function store($user): ?string
     {
         $sql="INSERT INTO ".static::getTables()." VALUES ".static::getValues();
@@ -56,15 +72,15 @@ class FUtenteRegistrato
  
     
 
-    /**
-     * Carica l'utente in base all'username passato
-     * @param string $username dell'utente
-     * @return EUtenteRegistrato Utente
-     */
 
 
     //SERVE?????????????????????????????????????????????????????????????
 
+    /**
+     * Carica dal db un utente in base all'username passatogli.
+     * @param string $username
+     * @return EUtenteRegistrato|null
+     */
     public static function load(string $username): ?EUtenteRegistrato
     {
         $sql="SELECT * FROM ".static::getTables()." WHERE username='".$username."';";
@@ -83,7 +99,7 @@ class FUtenteRegistrato
 
 
     /**
-     * Carica tutti gli utenti bannati
+     * Carica tutti gli utenti bannati dal db.
      * @return array|null
      */
     public static function loadList(): ?array

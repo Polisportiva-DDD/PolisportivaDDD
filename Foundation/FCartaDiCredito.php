@@ -55,8 +55,12 @@ class FCartaDiCredito
     }
 
 
-
-
+    /**
+     * Carica sul db la carta di credito e la inserisce nelle carte dell'utente.
+     * @param ECartadiCredito $carta
+     * @param $username
+     * @return bool
+     */
     public static function store(ECartadiCredito $carta,$username): bool
     {
         try{
@@ -100,6 +104,11 @@ class FCartaDiCredito
 
     }
 
+    /**
+     * Verifica l'esistenza di una carta sul db passatogli il numero.
+     * @param $numero
+     * @return int
+     */
     public static function exist($numero): int
     {
 
@@ -175,6 +184,11 @@ class FCartaDiCredito
 
     }
 
+    /**
+     * Carica tutte le carte dell'utente non scadute in base all'username passatogli per parametro
+     * @param string $username
+     * @return array|null
+     */
     public static function loadCarteNonScadute(string $username): ?array
     {
         $data=(new DateTime('now'))->format('Y-m-d');
