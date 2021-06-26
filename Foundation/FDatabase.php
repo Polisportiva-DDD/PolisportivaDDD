@@ -89,7 +89,17 @@ class FDatabase
     }
 
 
-    public function store3($query,$classe,$valuesAssociazione): ?string
+    /**
+     * Il metodo store3 viene usato per memorizzare i valori sulle tabelle nate dalle associazioni
+     * $query sarà la query da eseguire
+     * $classe classe da richiamare per eseguire il metodo bindAssociazione
+     * $valuesAssociazione un array contenente i dati da memorizzare sul db
+     * @param $query
+     * @param $classe
+     * @param $valuesAssociazione
+     * @return string|null
+     */
+    public function store3($query, $classe, $valuesAssociazione): ?string
     {
         try{
             $this->db->beginTransaction();  //Disattiva la modalità autocommit e quindi le  modifiche apportate al database tramite l'istanza dell'oggetto PDO non vengono salvate fino a quando non si termina la transazione chiamando PDO :: commit () . La chiamata a PDO :: rollBack ()
@@ -108,40 +118,6 @@ class FDatabase
         }
 
     }
-
-
-/*
-    public function store2(EWallet $wallet,$table,$value){
-        try {
-            $this->db->beginTransaction();  //Disattiva la modalità autocommit e quindi le  modifiche apportate al database tramite l'istanza dell'oggetto PDO non vengono salvate fino a quando non si termina la transazione chiamando PDO :: commit () . La chiamata a PDO :: rollBack ()
-            $idWallet = $wallet->getId();
-            $arrG = $wallet->getGettoni();
-            foreach ($arrG as $chiave => $valore) {
-                $sql = "INSERT INTO " . $table . " VALUES " . $value;
-                $stmt = $this->db->prepare($sql);
-                $stmt->bindValue(':idCampo', $chiave, PDO::PARAM_INT);
-                $stmt->bindValue(':idWallet', $idWallet, PDO::PARAM_INT);
-                $stmt->bindValue(':gettoni', $valore, PDO::PARAM_INT);
-                $stmt->execute();
-
-            }
-            $this->db->commit(); //Effettua la transizione
-            $this->closeDbConnection();
-            return true;
-        }
-        catch(PDOException $e){
-            echo "Errore: ".$e->getMessage();
-            $this->db->rollBack();//Rolls back a transaction
-            return false;
-        }
-    }
-
-*/
-
-
-
-
-
 
 
 
