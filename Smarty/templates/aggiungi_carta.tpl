@@ -49,6 +49,12 @@
       <div class="col-md-5 offset-md-5 ">
       <button class="btn btn-lg btn-primary mt-3 " type="submit">Aggiungi</button>
       </div>
+      {if $errore=='1'}
+      <div >
+        <br>
+        <p class="text-center" > Inserisci i dati della carta correttamente </p>
+      </div>
+      {/if}
 
     </form>
 

@@ -288,6 +288,7 @@
 	  * @param ECartadiCredito $carta
 	  * @return bool
 	  */
+	 /*
 	public function aggiungiCarta(ECartadiCredito $carta):bool
 	{
 		try
@@ -306,7 +307,7 @@
 			return false;
 		}
 
-    }
+    }*/
 
 	 /**
 	  * Rimuove la carta di credito passata come parametro alla lista delle carte di credito dell'utente.
@@ -314,6 +315,7 @@
 	  * @param ECartadiCredito $carta
 	  * @return bool
 	  */
+	 /*
 	public function rimuoviCarta(ECartadiCredito $carta):bool
 	{
 		try
@@ -334,7 +336,7 @@
 			return false;
 		}
 
-	}
+	}*/
 
 }
 

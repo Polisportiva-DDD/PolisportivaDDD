@@ -92,22 +92,46 @@ class CGettoni
         $session = new USession();
         $session->startSession();
         if(CUtente::isLogged()){
+            $view = new VCarta();
             $pm= FPersistentManager::getInstance();
             $username=$session->readValue('username');
             $acqGettoni = $session->readValue('aggiungiCarta');
+            $isAmministratore = $session->readValue('isAmministratore');
             if (isset($_POST['nome']) and isset($_POST['cognome']) and isset($_POST['numero']) and isset($_POST['cvc']) and isset($_POST['data'])) {
                 $nome=$_POST['nome'];
                 $cognome=$_POST['cognome'];
                 $numero=$_POST['numero'];
                 $cvc=$_POST['cvc'];
                 $data=new DateTime($_POST['data']);
+                $c=$pm->load($numero,"FCartaDiCredito");
                 $carta=new ECartadiCredito($numero,$nome,$cognome,$cvc,$data);
-                $pm->store2($carta,$username);
-                if ($acqGettoni == 1) {
-                    header('Location: /PolisportivaDDD/Gettoni/acquista');
-                } else {
-                    header('Location: /PolisportivaDDD/Gettoni/visualizzaCarte');
+
+                if($c!=null and !empty($c)){
+                    if($c!=$carta){
+                        //print("Dati carta non corretti");
+
+                        $view->showAggiungiCarta($isAmministratore,1);
+
+                    }
+                    else{
+                        $pm->store2($carta,$username);
+                        if ($acqGettoni == 1) {
+                            header('Location: /PolisportivaDDD/Gettoni/acquista');
+                        } else {
+                            header('Location: /PolisportivaDDD/Gettoni/visualizzaCarte');
+                        }
+                    }
                 }
+                else{
+                    $pm->store2($carta,$username);
+                    if ($acqGettoni == 1) {
+                        header('Location: /PolisportivaDDD/Gettoni/acquista');
+                    } else {
+                        header('Location: /PolisportivaDDD/Gettoni/visualizzaCarte');
+                    }
+                }
+
+
             }
 
         }else{

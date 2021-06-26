@@ -33,8 +33,9 @@ class VCarta
      * @param bool $isAmministratore indica se si è amministratori o no
      * @throws SmartyException
      */
-    public function showAggiungiCarta(bool $isAmministratore){
+    public function showAggiungiCarta(bool $isAmministratore,int $errore=-1){
         $this->smarty->assign("isAmministratore", $isAmministratore);
+        $this->smarty->assign("errore", $errore);
         $this -> smarty -> display(dirname(__DIR__)  ."/Smarty/templates/aggiungi_carta.tpl");
     }
 }
