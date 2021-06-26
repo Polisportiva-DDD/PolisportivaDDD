@@ -278,7 +278,7 @@ class CGruppo
 
     /**
      * Funzione necessaria all'invio di email a tutti gli invitati al gruppo che si sta creando
-     * @param strin $mittente mittente della mail, ovvero l'admin del gruppo
+     * @param string $mittente mittente della mail, ovvero l'admin del gruppo
      * @param string[] $arrayEmail lista di mail degli invitati al gruppo
      * @param int $idGruppo id del gruppo che si sta creando
      */
