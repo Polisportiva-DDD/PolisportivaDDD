@@ -1,11 +1,21 @@
 <?php
 
 
+/**
+ * Class CMessaggio necessaria per la visualizzazione di messaggi interni all'applicazione
+ */
 class CMessaggio
 {
 
+    /**
+     * CMessaggio constructor.
+     */
     public function __construct(){}
 
+    /**
+     * Funzione che mostra un generico errore e poi reindirizza alla home dopo 5 secondi
+     * @throws SmartyException
+     */
     public function genericError(){
         $session = new USession();
         $session->startSession();
@@ -23,6 +33,10 @@ class CMessaggio
 
     }
 
+    /**
+     * Funzione per la visualizzazione di un errore se javascript non è attivato
+     * @throws SmartyException
+     */
     public function jsError(){
         $messaggio = 'Per favore attiva javascript per continuare sul nostro sito';
         $view = new VMessaggio();

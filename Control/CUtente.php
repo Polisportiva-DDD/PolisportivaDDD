@@ -4,6 +4,10 @@
 //require_once '../Utility/StartSmarty.php';
 require_once (dirname(__DIR__)  .'/Utility/StartSmarty.php');
 require_once (dirname(__DIR__)  .'/Utility/autoload.php');
+
+/**
+ * Class CUtente
+ */
 class CUtente
 {
     /**
@@ -11,6 +15,9 @@ class CUtente
      */
     public function __construct(){}
 
+    /**
+     * @throws SmartyException
+     */
     public function informazioni(){
         if(self::isLogged()){
             $view = new VUtente();
@@ -62,6 +69,9 @@ class CUtente
     }
 
 
+    /**
+     *Funzione necessaria alla creazione e all'invio di una segnalazione
+     */
     public function inviaSegnalazione(){
         $session = new USession();
         $session->startSession();

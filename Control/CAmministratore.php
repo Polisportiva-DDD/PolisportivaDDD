@@ -3,12 +3,27 @@
 require_once (dirname(__DIR__)  .'/Utility/USession.php');
 require_once (dirname(__DIR__)  .'/Utility/StartSmarty.php');
 require_once (dirname(__DIR__)  .'/Utility/autoload.php');
+
+/**
+ * Classe control per tutto ciò che riguarda l'Amministratore
+ * Class CAmministratore
+ */
 class CAmministratore
 {
 
+    /**
+     * Costruttore vuoto
+     * CAmministratore constructor.
+     */
     public function __construct(){}
 
 
+    /**
+     * Funzione che ottiene tutte le segnalazioni dal DB oppure solamente quella specificata dal parametro id, chiamando
+     * infine la view per mostrarla.
+     * @param int $id id della segnalazione
+     * @throws SmartyException
+     */
     public function segnalazioni($id=-1){
         if(CUtente::isLogged()){
             $view = new VAmministratore();
@@ -55,6 +70,10 @@ class CAmministratore
     }
 
 
+    /**
+     * Funzione che gestisce la risposta a una particolare segnalazione da parte dell'amministratore. Manda una mail
+     * all'utente che ha fatto la segnalazione
+     */
     public function rispondiSegnalazione(){
         $session = new USession();
         $session->startSession();
@@ -195,6 +214,10 @@ class CAmministratore
 
     }
 
+    /**
+     * Funzione che elimina il gruppo specificato
+     * @param int $id id del gruppo da eliminare
+     */
     public function eliminaGruppo($id=-1){
         $session = new USession();
         $session->startSession();

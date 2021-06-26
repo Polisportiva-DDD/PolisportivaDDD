@@ -9,9 +9,17 @@ class FCampiWallet
 
     private static $tableName="campiwallet";
     private static $values="(:idCampo,:idWallet,:gettoni)";
-    
+
+    /**
+     * FCampiWallet constructor.
+     */
     public function __construct(){}
 
+    /**
+     * Questo metodo lega gli attributi del campoWallet da inserire con i parametri della INSERT
+     * @param $stmt
+     * @param $valuesAssociazione
+     */
     public static function bindAssociazione($stmt, $valuesAssociazione)
     {
         $stmt->bindValue(':idCampo', $valuesAssociazione[1], PDO::PARAM_INT);
@@ -19,7 +27,13 @@ class FCampiWallet
         $stmt->bindValue(':gettoni', $valuesAssociazione[2], PDO::PARAM_INT);
     }
 
-    public static function store(array $campiWallet,$id): bool
+    /**
+     * Memorizza sul db i campiWallet legati all'id del wallet passati come parametro
+     * @param array $campiWallet array dei CampiWallet
+     * @param int $id id del wallet
+     * @return bool
+     */
+    public static function store(array $campiWallet, $id): bool
     {
         $sql="INSERT INTO ".static::$tableName." VALUES ".static::$values;
         $idwallet=$id;

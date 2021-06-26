@@ -9,15 +9,28 @@ class FGruppo
     private static $tablePartecipanti = "partecipazionegruppo";
     private static $values="(:id,:admin,:idCampo,:nome,:etaMinima,:etaMassima,:votoMinimo,:descrizione, :dataEOra)";
 
+    /**
+     * FGruppo constructor.
+     */
     public function __construct(){}
 
-    public static function bindAssociazione($stmt,$valuesAssociazione){
+    /**
+     * Questo metodo lega gli attributi dell'associazione partecipazioneGruppo da inserire con i parametri della INSERT
+     * @param $stmt
+     * @param $valuesAssociazione
+     */
+    public static function bindAssociazione($stmt, $valuesAssociazione){
 
         $stmt->bindValue(':idGruppo', $valuesAssociazione[0] , PDO::PARAM_INT);
         $stmt->bindValue(':utente', $valuesAssociazione[1] , PDO::PARAM_STR);
 
     }
 
+    /**
+     * Questo metodo lega gli attributi del gruppo da inserire con i parametri della INSERT
+     * @param $stmt
+     * @param EGruppo $gruppo
+     */
     public static function bind($stmt, EGruppo $gruppo){
         $stmt->bindValue(':id', null,  PDO::PARAM_INT);
         $stmt->bindValue(':admin', $gruppo->getAdmin()->getUsername(), PDO::PARAM_STR);
@@ -31,6 +44,11 @@ class FGruppo
     }
 
 
+    /**
+     * Memorizza il gruppo passato per parametro su DB
+     * @param EGruppo $gruppo
+     * @return string|null
+     */
     public static function store(EGruppo $gruppo): ?string
     {
         try {
@@ -46,6 +64,11 @@ class FGruppo
         }
     }
 
+    /**
+     * Cancella il gruppo specificato dall'id dal DB
+     * @param int $idGruppo
+     * @return bool
+     */
     public static function delete(int $idGruppo): bool
     {
         try{
@@ -64,6 +87,11 @@ class FGruppo
                                 int $etaMassima, float $votoMinimo, string $descrizione,
                                 DateTime $dataEOra, array $partecipanti,
                                 Utente $admin, Campo $campo)
+     */
+    /**
+     * Carica il gruppo specificato dall'id
+     * @param int $idGruppo
+     * @return EGruppo|null
      */
     public static function load(int $idGruppo): ?EGruppo
     {
@@ -91,6 +119,10 @@ class FGruppo
         }
     }
 
+    /**
+     * Carica i gruppi scaduti dal DB
+     * @return array
+     */
     public static function loadGruppiScaduti()
     {
         $data=(new DateTime("now"))->format('Y-m-d H:i:s');
@@ -121,6 +153,11 @@ class FGruppo
         }
     }
 
+    /**
+     * Carica i partecipanti del gruppo specificato dall'id passato come parametro
+     * @param int $idGruppo
+     * @return array
+     */
     public static function loadPartecipanti(int $idGruppo): array
     {
         try {
@@ -141,6 +178,17 @@ class FGruppo
     }
 
 
+    /**
+     * Carica i gruppi filtrati dai parametri, se un parametro è null allora non lo considera come filtro
+     * @param string|null $nomeGruppo
+     * @param string|null $admin
+     * @param string|null $data
+     * @param string|null $tipoCampo
+     * @param int|null $etaMin
+     * @param int|null $etaMax
+     * @param float|null $valMin
+     * @return array
+     */
     public static function loadGruppi(?string $nomeGruppo, ?string $admin, ?string $data, ?string $tipoCampo,
                                       ?int $etaMin, ?int $etaMax, ?float $valMin): array
     {
@@ -212,6 +260,12 @@ class FGruppo
         }
     }
 
+    /**
+     * Aggiunge un partecipante alla tabella della partecipazioneGruppo
+     * @param String $username
+     * @param int $idGruppo
+     * @return bool
+     */
     public static function addPartecipante(String $username, int $idGruppo ): bool
     {
         try {
@@ -228,6 +282,11 @@ class FGruppo
         }
     }
 
+    /**
+     * Carica solamente una colonna della tabella Gruppo
+     * @param $field
+     * @return array|null
+     */
     public static function loadField($field): ?array
     {
         $sql = "SELECT " . $field . " FROM " . static::$tableName;
@@ -236,6 +295,11 @@ class FGruppo
         return $rows;
     }
 
+    /**
+     * Carica tutti i gruppi dell'utente
+     * @param string $username
+     * @return array|null
+     */
     public static function loadGruppiUtente(string $username): ?array
     {
         $sql="SELECT idGruppo FROM " . static::$tablePartecipanti . " WHERE utente='" . $username . "';";

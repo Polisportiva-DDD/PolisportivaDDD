@@ -131,7 +131,11 @@ class FCampo
     }
 
 
-
+    /**
+     * Funzione che prende in ingresso la riga restituita dalla load e costruisce l'oggetto ECampo corretto
+     * @param array $row
+     * @return mixed|null
+     */
     private static function buildCampo(array $row){
         if ($row){
             $class = $row['discriminante'];

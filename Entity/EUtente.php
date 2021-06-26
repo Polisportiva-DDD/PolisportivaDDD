@@ -14,14 +14,20 @@
 	private  $wallet ;
 
 
-
-
-
-
-
-	  public function __construct(String $username,String $nome,
-								  String $cognome,String $email,
-								  String $password, DateTime $dataDiNascita,String $immagine,EWallet $wallet){
+	 /**
+	  * EUtente constructor.
+	  * @param String $username
+	  * @param String $nome
+	  * @param String $cognome
+	  * @param String $email
+	  * @param String $password
+	  * @param DateTime $dataDiNascita
+	  * @param String $immagine
+	  * @param EWallet $wallet
+	  */
+	 public function __construct(String $username, String $nome,
+								 String $cognome, String $email,
+								 String $password, DateTime $dataDiNascita, String $immagine, EWallet $wallet){
 		$this->username=$username;
         $this->nome=$nome;
         $this->cognome=$cognome;
@@ -207,7 +213,11 @@
 		 $this->mediaRecensioni=$m;
 	}
 
-     public function calcolaMediaRecensioni(array $recensioni):float{
+	 /**
+	  * @param array $recensioni
+	  * @return float
+	  */
+	 public function calcolaMediaRecensioni(array $recensioni):float{
 		 $totale=0;
 		 $c=0;
          if($recensioni!=null) {
@@ -226,13 +236,22 @@
 		}
 	}
 
-	public function getEta(): int
+	 /**
+	  * Restituisce l'età dell'utente
+	  * @return int
+	  */
+	 public function getEta(): int
 	{
 		$data=$this->dataDiNascita;
 		return  ((new DateTime('now'))->diff($data))->y;
 	}
 
-	public function rimuoviGruppo(int $id):bool{
+	 /**
+	  * Rimuove un gruppo dall'array dei suoi gruppi
+	  * @param int $id
+	  * @return bool
+	  */
+	 public function rimuoviGruppo(int $id):bool{
      	foreach($this->listaGruppi as $chiave => $valore){
      		if($id==$valore->getId()){
 				unset($this->listaGruppi[$chiave]);
@@ -242,7 +261,12 @@
      	return false;
 	}
 
-	public function aggiungiGruppo(EGruppo $gruppo):bool{
+	 /**
+	  * Aggiunge un gruppo alla lista dei gruppi dell'utente
+	  * @param EGruppo $gruppo gruppo da aggiungere
+	  * @return bool true se l'operazione è andata a buon fine, false altrimenti
+	  */
+	 public function aggiungiGruppo(EGruppo $gruppo):bool{
 		try{
 			if ($gruppo != null){
 				array_push($this->listaGruppi, $gruppo);
@@ -312,96 +336,6 @@
 
 	}
 
-
-
-
-	 /**
-	  * Aggiunge la recensione passata come parametro alla lista delle recensioni dell'utente. Restituisce true se
-	  * l'operazione è andata a buon fine, false altrimenti.
-	  * @return bool
-	  *//*
-	 public function aggiungiRecensione(Recensione $recensione): bool{
-
-		 try{
-			 if ($recensione != null){
-				 array_push($this->recensioni, $recensione);
-				 return true;
-			 }
-			 else{
-				 return false;
-			 }
-		 }
-		 catch (Exception $exception){
-			 //Gestione dell'eccezione
-			 return false;
-		 }
-	 }
-*/
-	 /**
-	  * Rimuove la recensione passata come parametro alla lista delle recensioni dell'utente. Restituisce true se
-	  * l'operazione è andata a buon fine, false altrimenti.
-	  * @return bool
-	  */
-	 /*
-	 public function rimuoviRecensione(int $idRecensione): bool{
-		 $offset = 0;
-		 $found = false;
-		 try{
-			 foreach($this->recensioni as $recensione)
-			 {
-				 if($recensione->getId == $idRecensione) {
-					 //rimuovi la recensione trovata
-					 array_splice($this->recensioni, $offset, 1);
-				 }
-				 $offset++;
-			 }
-			 return $found;
-		 }
-		 catch(Exception $exception){
-			 echo("Server error");
-			 return false;
-		 }
-	 }
-*/
 }
-
-/*$r1=new Recensione(1,2.4,"Natale","ciao",new DateTime("2011-01-01T15:03:01.012345Z"));
-$r2=new Recensione(1,4.4,"Natale","ciao",new DateTime("2011-01-01T15:03:01.012345Z"));
-$r3=4;
-$arr=array($r1,$r2,$r3);
-
-$carta1 = new CartadiCredito("0000111122223333","Giorgio","Di Nunzio","222",new DateTime('now'));
-$carta2 = new CartadiCredito("0000111122224444","luca","bo","333",new DateTime('now'));
-$carta3 = new CartadiCredito("0000111122225555","lorenzo","forse","444",new DateTime('now'));
-$carta4 = new CartadiCredito("0000111122226666","franco","ma si","555",new DateTime('now'));
-
-$u=new Utente("lor","lorenzo","Diella","ccc","pass",new DateTime("2012-01-01T15:03:01.012345Z"),$arr);
-$arr=array($u);
-$c=new Campo("c5", 5,6,"Ciao",1.5);
-$g1 = new EGruppo("Ciao",1,10,11,"forse",new DateTime('now'),$arr,$u,$c);
-$g2 = new EGruppo("izo",1,10,11,"si",new DateTime('now'),$arr,$u,$c);
-$g3 = new EGruppo("Giorgio",1,10,11,"no",new DateTime('now'),$arr,$u,$c);
-$g4 = new EGruppo("Franco",1,10,11,"dino",new DateTime('now'),$arr,$u,$c);
-
-$u->aggiungiGruppo($g4);
-//print(count($u->getGruppo()));
-$g=array($g1,$g4,$g3);
-$u->setListaGruppi($g);
-//print(count($u->getGruppo()));
-
-
-$u->aggiungiCarta($carta1);
-$u->aggiungiCarta($carta2);
-$u->aggiungiCarta($carta3);
-$u->aggiungiCarta($carta4);
-$u->rimuoviCarta($carta2);
-//print(count($u->getCartedicredito()));
-
-//$u->setCartedicredito($carta);
-print(count($u->getCartedicredito()));
-*/
-//$w=new EWallet(array(),1);
-//$u=new EUtente("lor","lorenzo","Diella","ccc","pass",new DateTime("2012-01-01T15:03:01.012345Z"),"imm",$w);
-//print_r(FUtente::loadByUsername("lor"));
 
 ?>

@@ -283,6 +283,11 @@ class EGruppo
 
     }
 
+    /**
+     * Controlla se il gruppo ha come partecipante l'utente specificato
+     * @param string $username username dell'utente su cui fare il controllo
+     * @return bool true se è un partecipante, false altrimenti
+     */
     public function hasPartecipante($username): bool
     {
         $pm = FPersistentManager::getInstance();
@@ -312,6 +317,10 @@ class EGruppo
         }
     }
 
+    /**
+     * Restituisce l'oggetto sottoforma di array
+     * @return array
+     */
     public function toArray(): array{
         $objArray = array();
         $objArray["id"] = $this->id;
@@ -327,6 +336,10 @@ class EGruppo
         return $objArray;
     }
 
+    /**
+     * Restituisce i posti disponibili per il gruppo
+     * @return int
+     */
     public function getPostiDisponibili(): int
     {
         $postiOccupati = count($this->partecipanti);

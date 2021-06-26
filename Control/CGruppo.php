@@ -11,7 +11,6 @@ require dirname(__DIR__) .'/Utility/vendor/autoload.php';
 class CGruppo
 {
 
-    //commento
     /**
      * Ore possibili per la creazione di un gruppo
      * @var string[]
@@ -172,6 +171,11 @@ class CGruppo
 
     }
 
+
+    /**
+     * Funzione che permette la scelta dei dettagli finali del gruppo.
+     * @throws SmartyException
+     */
     public function scegliDettagli(){
         $session = new USession();
         $session->startSession();
@@ -200,6 +204,9 @@ class CGruppo
 
     }
 
+    /**
+     *Funzione che prende le informazioni dalle session e crea il gruppo se tutte le condizioni sono soddisfatte.
+     */
     public function creaGruppo(){
         $session = new USession();
         $session->startSession();
@@ -269,6 +276,12 @@ class CGruppo
 
     }
 
+    /**
+     * Funzione necessaria all'invio di email a tutti gli invitati al gruppo che si sta creando
+     * @param strin $mittente mittente della mail, ovvero l'admin del gruppo
+     * @param string[] $arrayEmail lista di mail degli invitati al gruppo
+     * @param int $idGruppo id del gruppo che si sta creando
+     */
     private static function inviaEmail($mittente, $arrayEmail, $idGruppo){
         //Setup di tutta la mail da inviare
         $mail = new PHPMailer(true);
@@ -305,9 +318,12 @@ class CGruppo
     }
 
 
-
-
-
+    /**
+     * Funzione che recupera e restituisce alla view la lista dei gruppi se l'id non è specificato, se lo è mostra i
+     * dettagli del gruppo specificato
+     * @param int $id
+     * @throws SmartyException
+     */
     public function gruppi($id=-1){
         $session = new USession();
         $session->startSession();
@@ -395,14 +411,12 @@ class CGruppo
     }
 
 
-
-
-
-
-
-
-
-
+    /**
+     * Funzione che serve a rimuovere i gettoni al wallet dell'utente che sta creando il gruppo
+     * @param string $username username dell'utente che sta creando il gruppo
+     * @param int $idCampo id campo specificato
+     * @return bool true se l'operazione è andata a buon fine, false altrimenti
+     */
     private function rimuoviGettone($username, $idCampo): bool{
         if(CUtente::isLogged()){
             $pm = FPersistentManager::getInstance();
