@@ -9,7 +9,11 @@ class EWallet
     private  $id;
     private $listaCampiWallet;
 
-
+    /**
+     * EWallet constructor.
+     * @param array $listaCampiWallet
+     * @param int $id
+     */
     public function __construct(array $listaCampiWallet,int $id=-1)
     {
         $this -> id=$id;

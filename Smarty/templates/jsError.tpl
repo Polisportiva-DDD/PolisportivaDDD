@@ -14,16 +14,6 @@
 
 <body>
 <!-- Navigation-->
-    <div class="container mb-2 mt-2" dir="rtl" >
-        <div class="table-responsive" >
-            <table>
-                <tr >
-                    <th scope="col" class="padTh"><a href="/PolisportivaDDD/Utente/login">  <button type="button" class="btn btn-primary">Login</button></a></th>
-                    <th scope="col" class="padTh"><a href="/PolisportivaDDD/Utente/registrazione"><button type="button" class="btn btn-secondary">Registrati</button></a></th>
-                </tr>
-            </table>
-        </div>
-    </div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="/PolisportivaDDD/Utente/home">Polisportiva DDD</a>
@@ -35,11 +25,11 @@
 
 
 <section class="py-5">
-    <br><br><br><br><br>
-    <h1 class="text-center">Errore</h1>
-    <h2 class="text-center">{$messaggioErrore}</h2>
-    <br><br><br><br>
     <br><br><br><br><br><br><br><br><br>
+    <h2 class="text-center">Errore</h2>
+    <h3 class="text-center">{$messaggioErrore}</h3>
+    <br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br>
 
 </section>
 {include file="footer.tpl"}

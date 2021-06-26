@@ -1,7 +1,16 @@
 <?php
  Interface ECampo{
 
-
+     /**
+      * ECampo constructor.
+      * @param $id
+      * @param $n
+      * @param $nMin
+      * @param $nMax
+      * @param $d
+      * @param $p
+      * @param $immagine
+      */
      public function __construct($id, $n, $nMin, $nMax, $d, $p, $immagine);
 
      /**
@@ -77,8 +86,15 @@
       */
      public function setId(int $id): void;
 
+     /**
+      * Restituisce l'immagine del campo.
+      * @return string
+      */
      public function getImmagine(): string;
 
-
+     /**
+      * Imposta l'immagine del campo.
+      * @param string $immagine
+      */
      public function setImmagine(string $immagine): void;
 }

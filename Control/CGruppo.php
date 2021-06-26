@@ -25,6 +25,9 @@ class CGruppo
                                             '20:00:00',
                                             '22:00:00');
 
+    /**
+     * CGruppo constructor.
+     */
     public function __construct(){}
 
     /**
@@ -62,8 +65,10 @@ class CGruppo
     }
 
 
+
     /**
-     *Funzione che permette la scelta della data per la creazione di un gruppo
+     * Funzione che permette la scelta della data per la creazione di un gruppo
+     * @throws SmartyException
      */
     public function scegliData(){
         $session = new USession();
@@ -93,6 +98,7 @@ class CGruppo
 
     /**
      *Funzione che permette la scelta dell'ora per la data selezionata per la scelta di un gruppo
+     * @throws SmartyException
      */
     public function scegliOra(){
         $session = new USession();
@@ -121,7 +127,10 @@ class CGruppo
     }
 
 
-
+    /**
+     * Funzione che permette la scelta degli invitati durante la creazione di un gruppo.
+     * @throws SmartyException
+     */
     public function scegliInvitati(){
         $session = new USession();
         $session->startSession();
@@ -455,6 +464,10 @@ class CGruppo
 
     }
 
+    /**
+     * Funzione che permette la visualizzazione dei gruppi a cui l'utente è iscritto.
+     * @throws SmartyException
+     */
     public function visualizzaGruppiUtente(){
         $session = new USession();
         $session->startSession();

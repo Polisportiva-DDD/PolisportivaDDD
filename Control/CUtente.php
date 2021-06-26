@@ -6,7 +6,9 @@ require_once (dirname(__DIR__)  .'/Utility/StartSmarty.php');
 require_once (dirname(__DIR__)  .'/Utility/autoload.php');
 class CUtente
 {
-
+    /**
+     * CUtente constructor.
+     */
     public function __construct(){}
 
     public function informazioni(){
@@ -22,7 +24,7 @@ class CUtente
 
 
     /**
-     * Funzione che mostra il proprio profilo se lo username passatto al metodo è diverso dalla stringa vuota
+     * Funzione che mostra il proprio profilo se lo username passato al metodo è diverso dalla stringa vuota
      * altrimenti mostra la sezione "ricerca utente"
      * @param string $username
      * @throws SmartyException
@@ -81,7 +83,7 @@ class CUtente
     }
 
     /**
-     * Funzione che si occupa di mostrare la pagina home a seconda se l'utente è loggatto o meno
+     * Funzione che si occupa di mostrare la pagina home a seconda se l'utente è loggato o meno
      * @throws SmartyException
      */
     public function home(){
@@ -110,7 +112,7 @@ class CUtente
 
 
     /**
-     * Funzione che si occcupa di mostrare il proprio profilo
+     * Funzione che si occupa di mostrare il proprio profilo
      * @throws SmartyException
      */
     public function mioProfilo(){
@@ -334,14 +336,20 @@ class CUtente
         }
     }
 
+    /**
+     * Funzione che mostra la pagina di registrazione.
+     * @throws SmartyException
+     */
     public function registrazione(){
         $view = new VUtente();
         $view->showRegistrazioneUtente();
     }
+
     /**
      * Funzione di supporto che si occupa di verificare i dati inseriti nella form di registrazione per il cliente .
      * In questo metodo avviene la verifica sull'univocità dell'username inserito;
      * se questa verifiche non riscontrano problemi, si passa alla store nel db.
+     * @throws SmartyException
      */
     public function verificaRegistrazione() {
         $pm = FPersistentManager::getInstance();

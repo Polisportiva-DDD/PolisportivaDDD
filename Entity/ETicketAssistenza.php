@@ -27,6 +27,7 @@ class ETicketAssistenza
     }
 
     /**
+     * Restituisce l'autore del ticket di assistenza.
      * @return string
      */
     public function getAutore(): string
@@ -35,6 +36,7 @@ class ETicketAssistenza
     }
 
     /**
+     * Imposta l'autore del ticket di assistenza.
      * @param string $autore
      */
     public function setAutore(string $autore): void
@@ -43,6 +45,7 @@ class ETicketAssistenza
     }
 
     /**
+     * Restituisce l'id del ticket di assistenza.
      * @return int
      */
     public function getId(): int
@@ -51,6 +54,7 @@ class ETicketAssistenza
     }
 
     /**
+     * Imposta l'id del ticket di assistenza.
      * @param int $id
      */
     public function setId(int $id): void
@@ -59,6 +63,7 @@ class ETicketAssistenza
     }
 
     /**
+     * Restituisce l'oggetto del ticket di assistenza.
      * @return String
      */
     public function getOggetto(): string
@@ -67,6 +72,7 @@ class ETicketAssistenza
     }
 
     /**
+     * Imposta l'oggetto del ticket di assistenza.
      * @param String $oggetto
      */
     public function setOggetto(string $oggetto): void
@@ -75,6 +81,7 @@ class ETicketAssistenza
     }
 
     /**
+     * Restituisce il messaggio del ticket di assistenza.
      * @return String
      */
     public function getMessaggio(): string
@@ -83,6 +90,7 @@ class ETicketAssistenza
     }
 
     /**
+     * Imposta il messaggio del ticket di assistenza.
      * @param String $messaggio
      */
     public function setMessaggio(string $messaggio): void
@@ -91,6 +99,7 @@ class ETicketAssistenza
     }
 
     /**
+     * Restituisce la data del ticket di assistenza.
      * @return DateTime
      */
     public function getData(): DateTime
@@ -99,6 +108,7 @@ class ETicketAssistenza
     }
 
     /**
+     * Imposta la data del ticket di assistenza.
      * @param DateTime $data
      */
     public function setData(DateTime $data): void

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2021-06-25 16:46:59
+/* Smarty version 3.1.39, created on 2021-06-26 09:34:15
   from 'C:\xampp\htdocs\PolisportivaDDD\Smarty\templates\home.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_60d5ec631edb11_69322313',
+  'unifunc' => 'content_60d6d87769b040_94288772',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '83be1c731b413ebcfa15c1138114bcbd1f70b42c' => 
     array (
       0 => 'C:\\xampp\\htdocs\\PolisportivaDDD\\Smarty\\templates\\home.tpl',
-      1 => 1624632229,
+      1 => 1624692842,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_60d5ec631edb11_69322313 (Smarty_Internal_Template $_smarty_tpl) {
+function content_60d6d87769b040_94288772 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="it">
 <head>
@@ -44,21 +44,11 @@ function content_60d5ec631edb11_69322313 (Smarty_Internal_Template $_smarty_tpl)
   <!-- Core theme CSS (includes Bootstrap)-->
   <link href="/PolisportivaDDD/Smarty/css/styles.css" rel="stylesheet" />
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.css">
 
 
 </head>
 <body>
 
-<!-- START Bootstrap-Cookie-Alert -->
-<div class="alert text-center cookiealert" role="alert">
-  <b>Ti piacciono i cookie?</b> &#x1F36A; Utilizziamo i cookie per assicurarti la migliore esperienza sul nostro sito web.<a href="https://cookiesandyou.com/" target="_blank">Leggi di più</a>
-
-  <button type="button" class="btn btn-primary btn-sm acceptcookies">
-    Accetto
-  </button>
-</div>
-<!-- END Bootstrap-Cookie-Alert -->
 
 <!-- Navigation-->
 <?php $_smarty_tpl->_subTemplateRender("file:navBar.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
@@ -160,9 +150,7 @@ for ($__section_nr_0_iteration = 1, $_smarty_tpl->tpl_vars['__smarty_section_nr'
 <?php echo '<script'; ?>
  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"><?php echo '</script'; ?>
 >
-<?php echo '<script'; ?>
- src="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.js"><?php echo '</script'; ?>
->
+
 
 <!-- Core theme JS-->
 <?php echo '<script'; ?>

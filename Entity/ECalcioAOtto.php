@@ -25,6 +25,7 @@ class ECalcioAOtto implements ECampo
 
 
     /**
+     * Restituisce l'id del campo.
      * @return int
      */
     public function getId(): int
@@ -33,6 +34,7 @@ class ECalcioAOtto implements ECampo
     }
 
     /**
+     * Imposta l'id del campo.
      * @param int $id
      */
     public function setId(int $id): void
@@ -121,11 +123,19 @@ class ECalcioAOtto implements ECampo
         $this->prezzo=$p;
     }
 
+    /**
+     * Restituisce l'immagine del campo.
+     * @return string
+     */
     public function getImmagine(): string
     {
         return $this->immagine;
     }
 
+    /**
+     * Imposta l'immagine del campo.
+     * @param string $immagine
+     */
     public function setImmagine(string $immagine): void
     {
         $this->immagine=$immagine;

@@ -29,4 +29,13 @@ class CMessaggio
         $view->showJSErrorPage($messaggio);
     }
 
+    /**
+     * Funzione che si occupa si mostrare la schermata di errore in caso di cookie disattivati.
+     */
+    public function cookieError(){
+        $messaggio = 'Per favore attiva i cookie per continuare sul nostro sito';
+        $view = new VMessaggio();
+        $view->showJSErrorPage($messaggio);
+    }
+
 }

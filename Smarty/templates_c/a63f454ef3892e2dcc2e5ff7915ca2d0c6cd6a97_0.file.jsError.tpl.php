@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.39, created on 2021-06-25 15:38:42
+/* Smarty version 3.1.39, created on 2021-06-26 09:45:46
   from 'C:\xampp\htdocs\PolisportivaDDD\Smarty\templates\jsError.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_60d5dc62159a44_02198006',
+  'unifunc' => 'content_60d6db2aee3295_99484059',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'a63f454ef3892e2dcc2e5ff7915ca2d0c6cd6a97' => 
     array (
       0 => 'C:\\xampp\\htdocs\\PolisportivaDDD\\Smarty\\templates\\jsError.tpl',
-      1 => 1624627880,
+      1 => 1624693546,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_60d5dc62159a44_02198006 (Smarty_Internal_Template $_smarty_tpl) {
+function content_60d6db2aee3295_99484059 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="it">
 <head>
@@ -40,16 +40,6 @@ function content_60d5dc62159a44_02198006 (Smarty_Internal_Template $_smarty_tpl)
 
 <body>
 <!-- Navigation-->
-    <div class="container mb-2 mt-2" dir="rtl" >
-        <div class="table-responsive" >
-            <table>
-                <tr >
-                    <th scope="col" class="padTh"><a href="/PolisportivaDDD/Utente/login">  <button type="button" class="btn btn-primary">Login</button></a></th>
-                    <th scope="col" class="padTh"><a href="/PolisportivaDDD/Utente/registrazione"><button type="button" class="btn btn-secondary">Registrati</button></a></th>
-                </tr>
-            </table>
-        </div>
-    </div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="/PolisportivaDDD/Utente/home">Polisportiva DDD</a>
@@ -61,12 +51,12 @@ function content_60d5dc62159a44_02198006 (Smarty_Internal_Template $_smarty_tpl)
 
 
 <section class="py-5">
-    <br><br><br><br><br>
-    <h1 class="text-center">Errore</h1>
-    <h2 class="text-center"><?php echo $_smarty_tpl->tpl_vars['messaggioErrore']->value;?>
-</h2>
-    <br><br><br><br>
     <br><br><br><br><br><br><br><br><br>
+    <h2 class="text-center">Errore</h2>
+    <h3 class="text-center"><?php echo $_smarty_tpl->tpl_vars['messaggioErrore']->value;?>
+</h3>
+    <br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br>
 
 </section>
 <?php $_smarty_tpl->_subTemplateRender("file:footer.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);

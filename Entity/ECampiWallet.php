@@ -9,7 +9,11 @@ class ECampiWallet
     private  $gettoni;
     private  $campo;
 
-
+    /**
+     * ECampiWallet constructor.
+     * @param $gettoni
+     * @param ECampo $campo
+     */
     public function __construct($gettoni, ECampo $campo)
     {
         $this->gettoni = $gettoni;
@@ -20,6 +24,7 @@ class ECampiWallet
 
 
     /**
+     * Imposta la quantità dei gettoni dei rispettivi campi.
      * @param int $gettoni
      */
     public function setGettoni(int $gettoni): void
@@ -28,6 +33,7 @@ class ECampiWallet
     }
 
     /**
+     * Imposta il campo.
      * @param ECampo $campo
      */
     public function setCampo(ECampo $campo): void
@@ -36,6 +42,7 @@ class ECampiWallet
     }
 
     /**
+     * Restituisce la quantità dei gettoni dei rispettivi campi.
      * @return int
      */
     public function getGettoni(): int
@@ -44,6 +51,7 @@ class ECampiWallet
     }
 
     /**
+     * Restituisce il campo.
      * @return ECampo
      */
     public function getCampo(): ECampo

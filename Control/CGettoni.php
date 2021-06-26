@@ -13,6 +13,9 @@ class CGettoni
     private $sconto2=10/100;
     private $scont3=15/100;
 
+    /**
+     * CGettoni constructor.
+     */
     public function __construct(){}
 
     /**
@@ -82,7 +85,7 @@ class CGettoni
 
     /**
      * Funzione che permette di aggiungere una carta all'utente e di salvarla sul db
-     * Se alla pagina di "Aggiungi carta" si era arrivati dalla pagina di "acquista gettoni" allora si viene reidirizzati su "acquista gettoni"
+     * Se alla pagina di "Aggiungi carta" si era arrivati dalla pagina di "acquista gettoni" allora si viene reindirizzati su "acquista gettoni"
      * @throws Exception
      */
     public function confermaAggiungiCarta(){
@@ -203,6 +206,10 @@ class CGettoni
 
     }
 
+    /**
+     * Funzione che visualizza tutte le carte dell'utente loggato.
+     * @throws SmartyException
+     */
     public function visualizzaCarte(){
         $session = new USession();
         $session->startSession();
@@ -232,6 +239,9 @@ class CGettoni
 
     }
 
+    /**
+     * Funzione che permette di rimuovere una carta selezionata dall'utente.
+     */
     public function rimuoviCarta(){
         $session = new USession();
         $session->startSession();

@@ -11,8 +11,15 @@ class ECartadiCredito
     private  $CVC;
     private  $scadenza;
 
-    //constructors
 
+    /**
+     * ECartadiCredito constructor.
+     * @param string $numero
+     * @param string $nomeTitolare
+     * @param string $cognomeTitolare
+     * @param string $cvc
+     * @param DateTime $scadenza
+     */
     public function __construct(string $numero, string $nomeTitolare, string $cognomeTitolare, string $cvc, DateTime $scadenza)
     {
         $this -> numero = $numero;

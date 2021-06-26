@@ -5,9 +5,15 @@ require_once (dirname(__DIR__)  .'/Utility/StartSmarty.php');
 require_once (dirname(__DIR__)  .'/Utility/autoload.php');
 class CRecensione
 {
-
+    /**
+     * CRecensione constructor.
+     */
     public function __construct(){}
 
+    /**
+     * Funzione che visualizza tutte le recensioni effettuate dall'utente.
+     * @throws SmartyException
+     */
     public function recensioniEffettuate(){
         $session = new USession();
         $session->startSession();
@@ -39,6 +45,10 @@ class CRecensione
 
     }
 
+    /**
+     * Funzione che permette di eliminare una recensione in base all'id.
+     * @param $id
+     */
     public function eliminaRecensione($id){
         if(CUtente::isLogged()){
             $pm = FPersistentManager::getInstance();
