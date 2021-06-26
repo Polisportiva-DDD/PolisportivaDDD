@@ -16,27 +16,20 @@ class FUtente
      * @param EUtente $user l'utente i cui dati devono essere inseriti nel DB
      */
 
-//$stmt->bindValue(':id',NULL, PDO::PARAM_INT); //l'id è posto a NULL poichè viene dato automaticamente dal DBMS (AUTOINCREMENT_ID)
-//$stmt->bindValue(':nome',$md->getFname(), PDO::PARAM_STR);
-//$stmt->bindValue(':type',$md->getType(), PDO::PARAM_STR);
-//$stmt->bindValue(':emailutente', $md->getEmailUte(), PDO::PARAM_STR);
+
 
 
     
     public static function bind(PDOStatement $stmt, EUtente $user){
-       // $path = $_FILES['file']['tmp_name'];
-       // $file=fopen($path,'rb') or die ("Attenzione! Impossibile da aprire!");
         $stmt->bindValue(':username', $user->getUsername(), PDO::PARAM_STR); 
         $stmt->bindValue(':password', $user->getPassword(), PDO::PARAM_STR); //ricorda di "collegare" la giusta variabile al bind
         $stmt->bindValue(':nome', $user->getNome(), PDO::PARAM_STR);
         $stmt->bindValue(':cognome', $user->getCognome(), PDO::PARAM_STR);
         $stmt->bindValue(':dataDiNascita', $user->getDataDiNascita()->format('Y-m-d'), PDO::PARAM_STR);
         $stmt->bindValue(':email', $user->getEmail(), PDO::PARAM_STR);
-        //$stmt->bindValue(':immagine', $user->getImmagine(), PDO::PARAM_STR);
         $stmt->bindValue(':wallet', $user->getWallet()->getId(), PDO::PARAM_INT);
         $stmt->bindValue(':immagine', $user->getImmagine(), PDO::PARAM_LOB);
-       // unset($file);
-        //unlink($path);
+
     }
    /**
      *  restituisce il nome della tabella sul DB per la costruzione delle Query
