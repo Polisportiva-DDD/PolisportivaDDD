@@ -9,7 +9,11 @@ class VRecensione
         $this->smarty = StartSmarty::configuration();
     }
 
+
     /**
+     * Funzione che mostra il tpl per effettuare una recensione
+     * @param $isAmministratore
+     * @param $username
      * @throws SmartyException
      */
     public function showEffettuaRecensioni($isAmministratore, $username){
@@ -19,7 +23,11 @@ class VRecensione
         $this->smarty->display(dirname(__DIR__)  ."/Smarty/templates/effettuaRecensioni.tpl");
     }
 
+
     /**
+     * Funzione che mostra il tpl delle recensioni effettuate
+     * @param $results
+     * @param $isAmministratore
      * @throws SmartyException
      */
     public function showRecensioniEffettuate($results, $isAmministratore){

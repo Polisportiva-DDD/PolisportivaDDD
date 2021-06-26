@@ -18,6 +18,10 @@ class VGruppo
 
 
     /**
+     * Funzione che mostra il tpl scegliData in fase di creazione gruppo
+     * @param $nomeCampo
+     * @param $isAmministratore
+     * @param $tomorrowString
      * @throws SmartyException
      */
     public function showScegliDataPage($nomeCampo, $isAmministratore, $tomorrowString){
@@ -28,7 +32,12 @@ class VGruppo
         $this->smarty->display(dirname(__DIR__)  ."/Smarty/templates/creaGruppo_scegliData.tpl");
     }
 
+
     /**
+     * Funzione che mostra il tpl scegliOra in fase di creazione gruppo
+     * @param $dataScelta
+     * @param $oreDisponibili
+     * @param $isAmministratore
      * @throws SmartyException
      */
     public function showScegliOraPage($dataScelta, $oreDisponibili, $isAmministratore){
@@ -39,7 +48,11 @@ class VGruppo
         $this->smarty->display(dirname(__DIR__)  ."/Smarty/templates/creaGruppo_scegliOra.tpl");
     }
 
+
     /**
+     * Funzione che mostra il tpl delle persone da invitare in fase di creazione gruppo
+     * @param $utenti
+     * @param $isAmministratore
      * @throws SmartyException
      */
     public function showGruppoListaInvitati($utenti , $isAmministratore){
@@ -49,7 +62,20 @@ class VGruppo
         $this->smarty->display(dirname(__DIR__)  ."/Smarty/templates/creaGruppoListaInvitati.tpl");
     }
 
+
     /**
+     * Funzione che mostra il tpl in cui inserire i dettagli del gruppo in fase di creazione gruppo
+     * @param $idGruppo
+     * @param $invitati
+     * @param $admin
+     * @param $campo
+     * @param $dataEOra
+     * @param $postiDisponibili
+     * @param $etaMinima
+     * @param $etaMassima
+     * @param $votoMinimo
+     * @param $descrizione
+     * @param $isAmministratore
      * @throws SmartyException
      */
     public function showDettagliGruppo($idGruppo, $invitati, $admin, $campo, $dataEOra, $postiDisponibili,
@@ -70,7 +96,11 @@ class VGruppo
         $this->smarty->display(dirname(__DIR__) ."/Smarty/templates/dettagliGruppo.tpl");
     }
 
+
     /**
+     * Funzione che mostra il tpl "i_tuoi_Gruppi"
+     * @param $isAmministratore
+     * @param $gruppiDetails
      * @throws SmartyException
      */
     public function showITuoiGruppi($isAmministratore, $gruppiDetails){

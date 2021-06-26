@@ -14,6 +14,7 @@ class VUtente
 
 
     /**
+     * Funzione che mostra il tpl dettagliCampo
      * @throws SmartyException
      */
     public function showDettagliCampo($nomeCampo, $descrizione, $pic64, $type , $isRegistrato, $isAmministratore){
@@ -28,6 +29,7 @@ class VUtente
     }
 
     /**
+     * Funzione che mostra il tpl home
      * @throws SmartyException
      */
     public function showHome($isAmministratore, $isRegistrato, $nomeCampi, $type){
