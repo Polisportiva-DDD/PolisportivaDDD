@@ -29,7 +29,8 @@ class EAmministratore extends EUtente
     }
 
     public function modificaPrezzo(ECampo $campo, float $prezzo): bool{
-        //Da implementare
+        //Da implementare 1123
+
     }
 
     public function RimborsaGruppo(array $partecipanti, ECampo $campo): bool{

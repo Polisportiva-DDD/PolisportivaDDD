@@ -123,7 +123,6 @@ class CAmministratore
                     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
                 }
 
-
             }
         }else{
             header('Location: /PolisportivaDDD/Utente/home');
@@ -291,8 +290,7 @@ class CAmministratore
                 $valutazioneMedia=0;
             }
             $pic64=base64_encode($utente->getImmagine());
-            $type="";
-            $view->showBannaUtente($username, $nome, $cognome, $eta, $valutazioneMedia,$pic64, $type);
+            $view->showBannaUtente($username, $nome, $cognome, $eta, $valutazioneMedia,$pic64);
         }else{
             header("Location: /PolisportivaDDD/Utente/home");
         }

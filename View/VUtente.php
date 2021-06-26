@@ -17,10 +17,9 @@ class VUtente
      * Funzione che mostra il tpl dettagliCampo
      * @throws SmartyException
      */
-    public function showDettagliCampo($nomeCampo, $descrizione, $pic64, $type , $isRegistrato, $isAmministratore){
+    public function showDettagliCampo($nomeCampo, $descrizione, $pic64 , $isRegistrato, $isAmministratore){
         $this->smarty->assign("nomeCampo", $nomeCampo);
         $this->smarty->assign("descrizione", $descrizione);
-        $this->smarty->assign("type", $type);
         $this->smarty->assign("pic64", $pic64);
         $this->smarty->assign("isAmministratore", $isAmministratore);
 
@@ -32,11 +31,10 @@ class VUtente
      * Funzione che mostra il tpl home
      * @throws SmartyException
      */
-    public function showHome($isAmministratore, $isRegistrato, $nomeCampi, $type){
+    public function showHome($isAmministratore, $isRegistrato, $nomeCampi){
         $this->smarty->assign("isAmministratore", $isAmministratore);
         $this->smarty->assign("isRegistrato", $isRegistrato);
         $this->smarty->assign("results", $nomeCampi);
-        $this->smarty->assign("type", $type);
 
         $this->smarty->display(dirname(__DIR__)  ."/Smarty/templates/home.tpl");
 
@@ -53,7 +51,7 @@ class VUtente
      * @param $isAmministratore bool che controlla se è loggato un amministratore
      * @throws SmartyException
      */
-    public function showMioProfilo(string $username,string $nome,string $cognome,int $eta,int $media_recensioni,array $gettoni,array $recensioni,bool $isAmministratore,$pic64, $type){
+    public function showMioProfilo(string $username,string $nome,string $cognome,int $eta,int $media_recensioni,array $gettoni,array $recensioni,bool $isAmministratore,$pic64){
         $this -> smarty -> assign('username',$username);
         $this -> smarty -> assign('nome',$nome);
         $this -> smarty -> assign('cognome',$cognome);
@@ -62,7 +60,6 @@ class VUtente
         $this -> smarty -> assign('results', $gettoni);
         $this -> smarty -> assign("recensioni", $recensioni);
         $this -> smarty -> assign("isAmministratore", $isAmministratore);
-        $this->smarty->assign("type", $type);
         $this->smarty->assign("pic64", $pic64);
 
         $this -> smarty -> display(dirname(__DIR__)  ."/Smarty/templates/MioProfilo.tpl");

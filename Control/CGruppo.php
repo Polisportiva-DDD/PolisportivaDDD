@@ -42,7 +42,6 @@ class CGruppo
             $campi = $pm->loadList("FCampo");
             $view = new VGruppo();
             $results = array();
-            $type = 'image/png';
             foreach($campi as $campo){
                 $c = array();
                 $id = $campo->getId();
@@ -54,7 +53,7 @@ class CGruppo
                 $c['pic64'] = $immagine;
                 $results[] = $c;
             }
-            $view->showScegliCampo($results, $type, $isAmministratore);
+            $view->showScegliCampo($results, $isAmministratore);
         }
         else{
             header('Location: /PolisportivaDDD/Utente/Home');

@@ -1,27 +1,28 @@
 <?php
-/* Smarty version 3.1.39, created on 2021-06-24 10:33:58
+/* Smarty version 3.1.39, created on 2021-06-26 12:37:11
   from 'C:\xampp\htdocs\PolisportivaDDD\Smarty\templates\AmministratoreModificaPrezzo.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_60d443760b5b36_97875335',
+  'unifunc' => 'content_60d70357e94cb2_72143240',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'e634ac39f7984dfbce75d498eb7281364595a829' => 
     array (
       0 => 'C:\\xampp\\htdocs\\PolisportivaDDD\\Smarty\\templates\\AmministratoreModificaPrezzo.tpl',
-      1 => 1624523636,
+      1 => 1624524696,
       2 => 'file',
     ),
   ),
   'includes' => 
   array (
     'file:navbar2.tpl' => 1,
+    'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_60d443760b5b36_97875335 (Smarty_Internal_Template $_smarty_tpl) {
+function content_60d70357e94cb2_72143240 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="it">
     <head>
@@ -126,9 +127,8 @@ for ($_smarty_tpl->tpl_vars['__smarty_section_campi']->value['iteration'] = 1, $
 		</form>
 	</section>
 	</body>
-	<footer class="py-5 bg-dark">
-		<div class="container"><p class="m-0 text-center text-white">Copyright &copy; Polisportiva DDD 2021</p></div>
-	</footer>
+	<?php $_smarty_tpl->_subTemplateRender("file:footer.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+?>
 
 	<?php echo '<script'; ?>
 >

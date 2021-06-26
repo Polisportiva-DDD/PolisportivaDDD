@@ -105,7 +105,6 @@ class CUtente
         $pm = FPersistentManager::getInstance();
         $campi=$pm->loadList("FCampo");
         $result=array();
-        $type = '';
         foreach ($campi as $value){
 
             $nomiCampi=array();
@@ -116,7 +115,7 @@ class CUtente
             $result[]=$nomiCampi;
 
         }
-        $view->showHome($isAmministratore,$isRegistrato,$result, $type);
+        $view->showHome($isAmministratore,$isRegistrato,$result);
 
     }
 
@@ -143,7 +142,6 @@ class CUtente
                 $rec=array();
                 $listCampi=$utente->getWallet()->getListaCampiWallet();
                 $pic64=base64_encode($utente->getImmagine());
-                $type="";
                 if($recensioni!=null){
                     $valutazioneMedia=round($utente->calcolaMediaRecensioni($recensioni));
                     foreach ($recensioni as $valore  ){
@@ -175,7 +173,7 @@ class CUtente
                 }
 
 
-                $view->showMioProfilo($username, $nome, $cognome, $eta, $valutazioneMedia,$result,$rec,$isAmministratore,$pic64, $type);
+                $view->showMioProfilo($username, $nome, $cognome, $eta, $valutazioneMedia,$result,$rec,$isAmministratore,$pic64);
 
             }
             else{
@@ -203,13 +201,10 @@ class CUtente
             $campo=$pm->load($idCampo,"FCampo");
             $nome=$campo->getNome();
             $descrizione=$campo->getDescrizione();
-            $type='image/jpg';
             $pic64=$campo->getImmagine();
-            $view->showDettagliCampo($nome,$descrizione,$pic64, $type,$isRegistrato,$isAmministratore);
+            $view->showDettagliCampo($nome,$descrizione,$pic64,$isRegistrato,$isAmministratore);
         }
-        else{
-            //che faccio?
-        }
+
 
     }
 
@@ -228,8 +223,6 @@ class CUtente
                 $username = $_POST['username'];
                 $session->setValue('utenteDaRecensire', $username);
                 $view->showEffettuaRecensioni($isAmministratore, $username);
-            } else {
-                //che faccio?
             }
         }else{
             header('Location: /PolisportivaDDD/Utente/Home');
@@ -257,9 +250,6 @@ class CUtente
                 $pm->store($recensione);
 
                 header('Location: /PolisportivaDDD/Utente/Utenti/'.$utenteDaRec);
-            }
-            else{
-                //che faccio?
             }
         }else{
             header('Location: /PolisportivaDDD/Utente/home');
@@ -510,7 +500,6 @@ class CUtente
                 $cognome=$utenteDaBannare->getCognome();
                 $eta =  $utenteDaBannare->getEta();
                 $pic64=base64_encode($utenteDaBannare->getImmagine());
-                $type="";
                 $result=array();
                 $recensioni=$pm->loadRecensioniUtente($username);
                 if($recensioni==null){
@@ -540,7 +529,7 @@ class CUtente
                         $arr["quantitaGettoni"]=$value->getGettoni();
                         $wallet[]=$arr;
                     }
-                    $view->showMioProfilo($username, $nome, $cognome, $eta, $valutazioneMedia,$wallet,$result,$isAmministratore,$pic64,$type);
+                    $view->showMioProfilo($username, $nome, $cognome, $eta, $valutazioneMedia,$wallet,$result,$isAmministratore,$pic64);
                 }
                 else{
                     $session->setValue('utente', serialize($utenteDaBannare));
@@ -549,9 +538,7 @@ class CUtente
                 }
 
             }
-            else{
-                //$view->showErrore($username,$isAmministratore );
-            }
+
         }
         else{
             header('Location: /PolisportivaDDD/Utente/home');

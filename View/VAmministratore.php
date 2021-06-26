@@ -46,13 +46,12 @@ class VAmministratore{
      * @param $type
      * @throws SmartyException
      */
-    public function showBannaUtente(string $username, string $nome, string $cognome, int $eta, int $valutazioneMedia, $pic64, $type){
+    public function showBannaUtente(string $username, string $nome, string $cognome, int $eta, int $valutazioneMedia, $pic64){
         $this -> smarty -> assign('nome',$nome);
         $this -> smarty -> assign('cognome',$cognome);
         $this -> smarty -> assign('username',$username);
         $this -> smarty -> assign('eta',$eta);
         $this -> smarty -> assign('valutazioneMedia',$valutazioneMedia);
-        $this->smarty->assign("type", $type);
         $this->smarty->assign("pic64", $pic64);
         $this->smarty->display(dirname(__DIR__) ."/Smarty/templates/bannaUtente.tpl");
     }

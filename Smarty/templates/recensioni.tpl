@@ -24,7 +24,7 @@
       <div class="row rounded border col-md-12 mb-5 py-4">
         <div class="col-lg-12 col-md-12 col-sm-12">
           {if $results[nr].pic64 neq ""}
-          <img src="base64,{$results[nr].pic64}" class="rounded-circle" alt="Immagine utente">
+          <img src="data:;base64,{$results[nr].pic64}" width="57" height="57" class="rounded-circle" alt="Immagine utente">
           {else}
           <img src="https://image-placeholder.com/images/actual-size/57x57.png" class="rounded-circle" alt="Immagine utente">
           {/if}
