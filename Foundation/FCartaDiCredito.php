@@ -104,6 +104,14 @@ class FCartaDiCredito
 
     }
 
+    public static function existCarta($numeroCarta,$username){
+        $sql = "SELECT * FROM " . static::$tablePossessoCarta . " WHERE carta='" . $numeroCarta. "' AND utente="."'$username'" ;
+        $db=FDatabase::getInstance();
+        $result=$db->exist($sql);
+        return $result;
+    }
+
+
     /**
      * Verifica l'esistenza di una carta sul db passatogli il numero.
      * @param $numero

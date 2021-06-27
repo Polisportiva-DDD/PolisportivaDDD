@@ -105,16 +105,28 @@ class CGettoni
                 $data=new DateTime($_POST['data']);
                 //Metti il giorno 1 alla data
                 $data->setDate($data->format('Y'), $data->format('m'), 01);
+                if($pm->existCarta($numero,$username)){
+                    //Hai già questa carta
+                    $view->showAggiungiCarta($isAmministratore,2);
+                }
+                else{
+                    $c=$pm->load($numero,"FCartaDiCredito");
+                    $carta=new ECartadiCredito($numero,$nome,$cognome,$cvc,$data);
 
-                $c=$pm->load($numero,"FCartaDiCredito");
-                $carta=new ECartadiCredito($numero,$nome,$cognome,$cvc,$data);
+                    if($c!=null and !empty($c)){
+                        if($c!=$carta){
 
-                if($c!=null and !empty($c)){
-                    if($c!=$carta){
-                        //print("Dati carta non corretti");
+                            $view->showAggiungiCarta($isAmministratore,1);
 
-                        $view->showAggiungiCarta($isAmministratore,1);
-
+                        }
+                        else{
+                            $pm->store2($carta,$username);
+                            if ($acqGettoni == 1) {
+                                header('Location: /PolisportivaDDD/Gettoni/acquista');
+                            } else {
+                                header('Location: /PolisportivaDDD/Gettoni/carte');
+                            }
+                        }
                     }
                     else{
                         $pm->store2($carta,$username);
@@ -125,14 +137,7 @@ class CGettoni
                         }
                     }
                 }
-                else{
-                    $pm->store2($carta,$username);
-                    if ($acqGettoni == 1) {
-                        header('Location: /PolisportivaDDD/Gettoni/acquista');
-                    } else {
-                        header('Location: /PolisportivaDDD/Gettoni/carte');
-                    }
-                }
+
 
 
             }

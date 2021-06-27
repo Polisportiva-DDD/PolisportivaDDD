@@ -54,6 +54,11 @@
         <br>
         <p class="text-center" > Inserisci i dati della carta correttamente </p>
       </div>
+        {elseif $errore=='2'}
+        <div >
+          <br>
+          <p class="text-center" > Hai già una carta con questo numero </p>
+        </div>
       {/if}
 
     </form>

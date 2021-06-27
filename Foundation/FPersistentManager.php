@@ -168,6 +168,12 @@ class FPersistentManager
         return FAmministratore::exist($username);
     }
 
+    public function existCarta($numeroCarta,$username): bool
+    {
+        return FCartaDiCredito::existCarta($numeroCarta,$username);
+    }
+
+
     /**
      * Chiama FUtenteRegistrato::isBannato
      * @param $username
