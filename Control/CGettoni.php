@@ -103,6 +103,9 @@ class CGettoni
                 $numero=$_POST['numero'];
                 $cvc=$_POST['cvc'];
                 $data=new DateTime($_POST['data']);
+                //Metti il giorno 1 alla data
+                $data->setDate($data->format('Y'), $data->format('m'), 01);
+
                 $c=$pm->load($numero,"FCartaDiCredito");
                 $carta=new ECartadiCredito($numero,$nome,$cognome,$cvc,$data);
 
@@ -118,7 +121,7 @@ class CGettoni
                         if ($acqGettoni == 1) {
                             header('Location: /PolisportivaDDD/Gettoni/acquista');
                         } else {
-                            header('Location: /PolisportivaDDD/Gettoni/visualizzaCarte');
+                            header('Location: /PolisportivaDDD/Gettoni/carte');
                         }
                     }
                 }
@@ -127,7 +130,7 @@ class CGettoni
                     if ($acqGettoni == 1) {
                         header('Location: /PolisportivaDDD/Gettoni/acquista');
                     } else {
-                        header('Location: /PolisportivaDDD/Gettoni/visualizzaCarte');
+                        header('Location: /PolisportivaDDD/Gettoni/carte');
                     }
                 }
 
@@ -272,7 +275,7 @@ class CGettoni
             $pm = FPersistentManager::getInstance();
             $numerocarta=$_POST["numeroCarta"];
             $pm->deleteCarta($numerocarta,$username);
-            header('Location: /PolisportivaDDD/Gettoni/visualizzaCarte');
+            header('Location: /PolisportivaDDD/Gettoni/carte');
         }
         else{
             header('Location: /PolisportivaDDD/Utente/home');
