@@ -37,7 +37,7 @@ class CUtente
      * @throws SmartyException
      */
     public function utenti($username=""){
-        $session = new USession();
+        $session = USession::getInstance();
         $session->startSession();
         if(self::isLogged()){
             $isAmministratore= $session->readValue('isAmministratore');
@@ -73,7 +73,7 @@ class CUtente
      *Funzione necessaria alla creazione e all'invio di una segnalazione
      */
     public function inviaSegnalazione(){
-        $session = new USession();
+        $session = USession::getInstance();
         $session->startSession();
         if(self::isLogged()){
             $pm = FPersistentManager::getInstance();
@@ -97,7 +97,7 @@ class CUtente
      * @throws SmartyException
      */
     public function home(){
-        $session = new USession();
+        $session = USession::getInstance();
         $session->startSession();
         $isAmministratore = $session->readValue('isAmministratore');
         $isRegistrato = $session->readValue('isRegistrato');
@@ -125,7 +125,7 @@ class CUtente
      * @throws SmartyException
      */
     public function mioProfilo(){
-            $session = new USession();
+            $session = USession::getInstance();
             $session->startSession();
             $isAmministratore = $session->readValue('isAmministratore');
             $view=new VUtente();
@@ -192,7 +192,7 @@ class CUtente
     public function mostraCampo(){
         $view=new VUtente();
         $pm = FPersistentManager::getInstance();
-        $session = new USession();
+        $session = USession::getInstance();
         $session->startSession();
         $isAmministratore = $session->readValue('isAmministratore');
         $isRegistrato = $session->readValue('isRegistrato');
@@ -214,7 +214,7 @@ class CUtente
      * @throws SmartyException
      */
     public function effettuaRecensione(){
-        $session = new USession();
+        $session = USession::getInstance();
         $session->startSession();
         if(self::isLogged()) {
             $view = new VRecensione();
@@ -233,7 +233,7 @@ class CUtente
      *  Funzione che si occupa di memorizzare la recensione effettuata dall'utente sul db
      */
     public function recensisci(){
-        $session = new USession();
+        $session = USession::getInstance();
         $session->startSession();
         if(self::isLogged()) {
             $pm = FPersistentManager::getInstance();
@@ -288,7 +288,7 @@ class CUtente
      */
     public function verifica() {
         $view = new VUtente();
-        $session = new USession();
+        $session = USession::getInstance();
         $pm = FPersistentManager::getInstance();
         if(isset($_POST['username']) && isset($_POST['password'])) {
 
@@ -354,7 +354,7 @@ class CUtente
     public function verificaRegistrazione() {
         $pm = FPersistentManager::getInstance();
         $view = new VUtente();
-        $session = new USession();
+        $session = USession::getInstance();
         $session->startSession();
         $session->setValue("isAmministratore",false);
         $session->setValue('isRegistrato',true);
@@ -471,7 +471,7 @@ class CUtente
      *Funzione che permette di effettuare il logout
      */
     public function logout(){
-        $session = new USession();
+        $session = USession::getInstance();
         $session->startSession();
         $session->stopSession();
         header('Location: /PolisportivaDDD/Utente/home');
@@ -484,7 +484,7 @@ class CUtente
      */
     public function visualizzaProfilo($username){
         if(self::isLogged()){
-            $session = new USession();
+            $session = USession::getInstance();
             $isAmministratore = $session->readValue('isAmministratore');
             $pm = FPersistentManager::getInstance();
             $view = new VUtente();

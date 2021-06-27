@@ -205,14 +205,6 @@
 		 $this->dataDiNascita=$d;
 	}
 
-     /**
-      * Imposta la media delle recensioni dell'utente
-      * @param float $m
-      */
-     public function setMediaRecensioni(float $m):void{
-		 $this->mediaRecensioni=$m;
-	}
-
 	 /**
 	  * @param array $recensioni
 	  * @return float

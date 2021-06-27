@@ -23,7 +23,7 @@ class CGettoni
      * @throws SmartyException
      */
     public function acquista(){
-        $session = new USession();
+        $session = USession::getInstance();
         $session->startSession();
         if(CUtente::isLogged()){
             $view = new VGettoni();
@@ -66,7 +66,7 @@ class CGettoni
      * @throws SmartyException
      */
     public function aggiungiCarta(){
-        $session = new USession();
+        $session = USession::getInstance();
         $session->startSession();
         if(CUtente::isLogged()){
             $view = new VCarta();
@@ -89,7 +89,7 @@ class CGettoni
      * @throws Exception
      */
     public function confermaAggiungiCarta(){
-        $session = new USession();
+        $session = USession::getInstance();
         $session->startSession();
         if(CUtente::isLogged()){
             $view = new VCarta();
@@ -103,33 +103,41 @@ class CGettoni
                 $numero=$_POST['numero'];
                 $cvc=$_POST['cvc'];
                 $data=new DateTime($_POST['data']);
-                $c=$pm->load($numero,"FCartaDiCredito");
-                $carta=new ECartadiCredito($numero,$nome,$cognome,$cvc,$data);
+                //Metti il giorno 1 alla data
+                $data->setDate($data->format('Y'), $data->format('m'), 01);
+                if($pm->existCarta($numero,$username)){
+                    //Hai già questa carta
+                    $view->showAggiungiCarta($isAmministratore,2);
+                }
+                else{
+                    $c=$pm->load($numero,"FCartaDiCredito");
+                    $carta=new ECartadiCredito($numero,$nome,$cognome,$cvc,$data);
 
-                if($c!=null and !empty($c)){
-                    if($c!=$carta){
-                        //print("Dati carta non corretti");
+                    if($c!=null and !empty($c)){
+                        if($c!=$carta){
 
-                        $view->showAggiungiCarta($isAmministratore,1);
+                            $view->showAggiungiCarta($isAmministratore,1);
 
+                        }
+                        else{
+                            $pm->store2($carta,$username);
+                            if ($acqGettoni == 1) {
+                                header('Location: /PolisportivaDDD/Gettoni/acquista');
+                            } else {
+                                header('Location: /PolisportivaDDD/Gettoni/carte');
+                            }
+                        }
                     }
                     else{
                         $pm->store2($carta,$username);
                         if ($acqGettoni == 1) {
                             header('Location: /PolisportivaDDD/Gettoni/acquista');
                         } else {
-                            header('Location: /PolisportivaDDD/Gettoni/visualizzaCarte');
+                            header('Location: /PolisportivaDDD/Gettoni/carte');
                         }
                     }
                 }
-                else{
-                    $pm->store2($carta,$username);
-                    if ($acqGettoni == 1) {
-                        header('Location: /PolisportivaDDD/Gettoni/acquista');
-                    } else {
-                        header('Location: /PolisportivaDDD/Gettoni/visualizzaCarte');
-                    }
-                }
+
 
 
             }
@@ -145,7 +153,7 @@ class CGettoni
      * @throws SmartyException
      */
     public function riepilogoAcquisto(){
-        $session = new USession();
+        $session = USession::getInstance();
         $session->startSession();
         if(CUtente::isLogged()){
             $view = new VGettoni();
@@ -206,7 +214,7 @@ class CGettoni
      *Funzione che aggiunge i gettoni al wallet dell'utente
      */
     public function paga(){
-        $session = new USession();
+        $session = USession::getInstance();
         $session->startSession();
         if(CUtente::isLogged()){
             $username = $session->readValue("username");
@@ -232,8 +240,8 @@ class CGettoni
      * Funzione che visualizza tutte le carte dell'utente loggato.
      * @throws SmartyException
      */
-    public function visualizzaCarte(){
-        $session = new USession();
+    public function carte(){
+        $session = USession::getInstance();
         $session->startSession();
         if(CUtente::isLogged()){
             $isAmministratore = $session->readValue('isAmministratore');
@@ -265,14 +273,14 @@ class CGettoni
      * Funzione che permette di rimuovere una carta selezionata dall'utente.
      */
     public function rimuoviCarta(){
-        $session = new USession();
+        $session = USession::getInstance();
         $session->startSession();
         if(CUtente::isLogged()){
             $username=$session->readValue('username');
             $pm = FPersistentManager::getInstance();
             $numerocarta=$_POST["numeroCarta"];
             $pm->deleteCarta($numerocarta,$username);
-            header('Location: /PolisportivaDDD/Gettoni/visualizzaCarte');
+            header('Location: /PolisportivaDDD/Gettoni/carte');
         }
         else{
             header('Location: /PolisportivaDDD/Utente/home');

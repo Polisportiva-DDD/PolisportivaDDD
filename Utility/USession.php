@@ -2,11 +2,30 @@
 
 class USession {
 
+    private static $instance = null;
+
+
     /**
-     * USession constructor.
+     * Costruttore
      */
-    public function __construct() {
+    private function __construct()
+    {
+
     }
+
+    /**
+     * Funzione per ottenere l'istanza della session
+     * @return FPersistentManager|null
+     */
+    public static function getInstance()
+    {
+        if (self::$instance == null)
+        {
+            self::$instance = new USession();
+        }
+        return self::$instance;
+    }
+
 
     /**
      * Funzione che assegna un valore all'array sessione

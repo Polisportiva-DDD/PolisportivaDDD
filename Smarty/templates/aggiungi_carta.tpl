@@ -38,7 +38,7 @@
         <label for="validationDefault03">Nome titolare della carta</label>
         <input class="form-control mb-3" placeholder="Nome titolare" type="text" name="nome" id="validationDefault03" maxlength="25" required>
 
-        <label for="ValidationDefaultData">Data di scadenza</label>
+        <label for="ValidationDefaultData">Data di scadenza (Il giorno inserito sarà settato a 1)</label>
         <input type="date" class="form-control mb-3" id="ValidationDefaultData" name="data" required>
 
         <label for="validationDefault04">Codice di sicurezza</label>
@@ -54,6 +54,11 @@
         <br>
         <p class="text-center" > Inserisci i dati della carta correttamente </p>
       </div>
+        {elseif $errore=='2'}
+        <div >
+          <br>
+          <p class="text-center" > Hai già una carta con questo numero </p>
+        </div>
       {/if}
 
     </form>

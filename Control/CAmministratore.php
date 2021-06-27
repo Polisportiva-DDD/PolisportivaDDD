@@ -28,7 +28,7 @@ class CAmministratore
      * @throws SmartyException
      */
     public function segnalazioni($id=-1){
-        $session = new USession();
+        $session = USession::getInstance();
         $session->startSession();
         if(CUtente::isLogged()){
             $view = new VAmministratore();
@@ -80,7 +80,7 @@ class CAmministratore
      */
     public function rispondiSegnalazione(){
         $pm = FPersistentManager::getInstance();
-        $session = new USession();
+        $session = USession::getInstance();
         $session->startSession();
         if(CUtente::isLogged()){
 
@@ -217,7 +217,7 @@ class CAmministratore
      *Funzione che permette di aggiungere i gettoni al wallet e lo memorizza sul db
      */
     public function aggiungi(){
-        $session = new USession();
+        $session = USession::getInstance();
         $session->startSession();
         if(CUtente::isLogged()){
             $pm= FPersistentManager::getInstance();
@@ -243,7 +243,7 @@ class CAmministratore
      * @param int $id id del gruppo da eliminare
      */
     public function eliminaGruppo($id=-1){
-        $session = new USession();
+        $session = USession::getInstance();
         $session->startSession();
         if(CUtente::isLogged()){
             $pm= FPersistentManager::getInstance();
@@ -272,7 +272,7 @@ class CAmministratore
      * @throws SmartyException
      */
     public function banna(){
-        $session = new USession();
+        $session = USession::getInstance();
         $session->startSession();
         if(CUtente::isLogged()){
             $pm = FPersistentManager::getInstance();
@@ -302,7 +302,7 @@ class CAmministratore
      *Funzione che permette di bannare un utente
      */
     public function inviaBan(){
-        $session = new USession();
+        $session = USession::getInstance();
         $session->startSession();
         if(CUtente::isLogged()){
             $pm = FPersistentManager::getInstance();
