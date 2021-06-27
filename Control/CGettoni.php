@@ -23,7 +23,7 @@ class CGettoni
      * @throws SmartyException
      */
     public function acquista(){
-        $session = new USession();
+        $session = USession::getInstance();
         $session->startSession();
         if(CUtente::isLogged()){
             $view = new VGettoni();
@@ -66,7 +66,7 @@ class CGettoni
      * @throws SmartyException
      */
     public function aggiungiCarta(){
-        $session = new USession();
+        $session = USession::getInstance();
         $session->startSession();
         if(CUtente::isLogged()){
             $view = new VCarta();
@@ -89,7 +89,7 @@ class CGettoni
      * @throws Exception
      */
     public function confermaAggiungiCarta(){
-        $session = new USession();
+        $session = USession::getInstance();
         $session->startSession();
         if(CUtente::isLogged()){
             $view = new VCarta();
@@ -145,7 +145,7 @@ class CGettoni
      * @throws SmartyException
      */
     public function riepilogoAcquisto(){
-        $session = new USession();
+        $session = USession::getInstance();
         $session->startSession();
         if(CUtente::isLogged()){
             $view = new VGettoni();
@@ -206,7 +206,7 @@ class CGettoni
      *Funzione che aggiunge i gettoni al wallet dell'utente
      */
     public function paga(){
-        $session = new USession();
+        $session = USession::getInstance();
         $session->startSession();
         if(CUtente::isLogged()){
             $username = $session->readValue("username");
@@ -232,8 +232,8 @@ class CGettoni
      * Funzione che visualizza tutte le carte dell'utente loggato.
      * @throws SmartyException
      */
-    public function visualizzaCarte(){
-        $session = new USession();
+    public function carte(){
+        $session = USession::getInstance();
         $session->startSession();
         if(CUtente::isLogged()){
             $isAmministratore = $session->readValue('isAmministratore');
@@ -265,7 +265,7 @@ class CGettoni
      * Funzione che permette di rimuovere una carta selezionata dall'utente.
      */
     public function rimuoviCarta(){
-        $session = new USession();
+        $session = USession::getInstance();
         $session->startSession();
         if(CUtente::isLogged()){
             $username=$session->readValue('username');

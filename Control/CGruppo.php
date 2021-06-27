@@ -34,7 +34,7 @@ class CGruppo
      * @throws SmartyException
      */
     public function scegliCampo(){
-        $session = new USession();
+        $session = USession::getInstance();
         $session->startSession();
         if(CUtente::isLogged()){
             $pm = FPersistentManager::getInstance();
@@ -69,7 +69,7 @@ class CGruppo
      * @throws SmartyException
      */
     public function scegliData(){
-        $session = new USession();
+        $session = USession::getInstance();
         $session->startSession();
         if(CUtente::isLogged()){
             $pm = FPersistentManager::getInstance();
@@ -99,7 +99,7 @@ class CGruppo
      * @throws SmartyException
      */
     public function scegliOra(){
-        $session = new USession();
+        $session = USession::getInstance();
         $session->startSession();
         if(CUtente::isLogged()){
 
@@ -130,7 +130,7 @@ class CGruppo
      * @throws SmartyException
      */
     public function scegliInvitati(){
-        $session = new USession();
+        $session = USession::getInstance();
         $session->startSession();
         if(CUtente::isLogged()){
 
@@ -176,7 +176,7 @@ class CGruppo
      * @throws SmartyException
      */
     public function scegliDettagli(){
-        $session = new USession();
+        $session = USession::getInstance();
         $session->startSession();
         if(CUtente::isLogged()){
 
@@ -207,7 +207,7 @@ class CGruppo
      *Funzione che prende le informazioni dalle session e crea il gruppo se tutte le condizioni sono soddisfatte.
      */
     public function creaGruppo(){
-        $session = new USession();
+        $session = USession::getInstance();
         $session->startSession();
         if(CUtente::isLogged()){
 
@@ -324,7 +324,7 @@ class CGruppo
      * @throws SmartyException
      */
     public function gruppi($id=-1){
-        $session = new USession();
+        $session = USession::getInstance();
         $session->startSession();
         if(CUtente::isLogged()){
 
@@ -481,8 +481,8 @@ class CGruppo
      * Funzione che permette la visualizzazione dei gruppi a cui l'utente è iscritto.
      * @throws SmartyException
      */
-    public function visualizzaGruppiUtente(){
-        $session = new USession();
+    public function mieiGruppi(){
+        $session = USession::getInstance();
         $session->startSession();
         if(CUtente::isLogged()){
 
@@ -524,7 +524,7 @@ class CGruppo
      * @return false
      */
     public function partecipa($idGruppo){
-        $session = new USession();
+        $session = USession::getInstance();
         $session->startSession();
         if(CUtente::isLogged()){
 

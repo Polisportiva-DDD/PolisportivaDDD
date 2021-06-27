@@ -17,7 +17,7 @@ class CMessaggio
      * @throws SmartyException
      */
     public function genericError(){
-        $session = new USession();
+        $session = USession::getInstance();
         $session->startSession();
         if(CUtente::isLogged()){
             $messaggio = $session->readValue('messaggioErrore');

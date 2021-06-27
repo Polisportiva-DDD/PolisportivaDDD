@@ -15,7 +15,7 @@ class CRecensione
      * @throws SmartyException
      */
     public function recensioniEffettuate(){
-        $session = new USession();
+        $session = USession::getInstance();
         $session->startSession();
         if(CUtente::isLogged()){
             $pm = FPersistentManager::getInstance();

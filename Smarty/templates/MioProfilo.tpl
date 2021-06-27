@@ -50,8 +50,8 @@
 
       <div class="col-md-4">
         <div class="list-group mb-4">
-          <a class="list-group-item" href="/PolisportivaDDD/Gruppo/visualizzaGruppiUtente">I tuoi gruppi</a>
-          <a class="list-group-item" href="/PolisportivaDDD/Gettoni/visualizzaCarte">Le tue carte</a>
+          <a class="list-group-item" href="/PolisportivaDDD/Gruppo/mieiGruppi">I tuoi gruppi</a>
+          <a class="list-group-item" href="/PolisportivaDDD/Gettoni/carte">Le tue carte</a>
           <a class="list-group-item" href="/PolisportivaDDD/Recensione/recensioniEffettuate">Recensioni Effettuate</a>
         </div>
         <form class="card">
