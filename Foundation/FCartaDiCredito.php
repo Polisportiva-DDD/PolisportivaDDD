@@ -44,7 +44,7 @@ class FCartaDiCredito
     }
 
     /**
-     * Metodo che permette di salvare una Recensione sul db
+     * Metodo che permette di associare una carta di credito ad un utente
      * @param $stmt
      * @param $valuesAssociazione
      */
@@ -107,9 +107,9 @@ class FCartaDiCredito
     /**
      * Verifica l'esistenza di una carta sul db passatogli il numero.
      * @param $numero
-     * @return int
+     * @return int|null
      */
-    public static function exist($numero)
+    public static function exist($numero): ?int
     {
 
         $sql="SELECT * FROM ".static::$tablePossessoCarta." WHERE carta='".$numero."';";
@@ -134,6 +134,7 @@ class FCartaDiCredito
     /**
      * Permette la delete sul db in base al numero della carta di credito
      * @param string $numeroCarta
+     * @param string $username
      * @return bool
      */
     public static function delete(string $numeroCarta,string $username): bool

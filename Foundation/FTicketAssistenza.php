@@ -9,7 +9,7 @@ class FTicketAssistenza
      * Tabella con la quale opera.
      * @var string
      */
-    private static $tables="ticketassistenza";
+    private static $tableName="ticketassistenza";
 
     /**
      * Valori della tabella
@@ -43,9 +43,9 @@ class FTicketAssistenza
      * @return string $tables nome della tabella
      */
 
-    public static function getTables(): string
+    public static function getTableName(): string
     {
-        return static::$tables;
+        return static::$tableName;
     }
 
      /** 
@@ -65,7 +65,7 @@ class FTicketAssistenza
      */
     public static function store(ETicketAssistenza  $ticket): ?string
     {
-        $sql="INSERT INTO ".static::getTables()." VALUES ".static::getValues();
+        $sql="INSERT INTO ".static::getTableName()." VALUES ".static::getValues();
         $db=FDatabase::getInstance();
         $id=$db->store($sql,$ticket);
         if($id) return $id;
@@ -81,7 +81,7 @@ class FTicketAssistenza
      */
     public static function load(int $id): ?ETicketAssistenza
     {
-        $sql="SELECT * FROM ".static::getTables()." WHERE id='".$id."';";
+        $sql="SELECT * FROM ".static::getTableName()." WHERE id='".$id."';";
         $db=FDatabase::getInstance();
         $result=$db->loadSingle($sql);
         if($result!=null){
@@ -99,7 +99,7 @@ class FTicketAssistenza
      */
     public static function loadList(): ?array
     {
-        $sql="SELECT * FROM ".static::getTables();
+        $sql="SELECT * FROM ".static::getTableName();
         $db=FDatabase::getInstance();
         $result=$db->loadMultiple($sql);
         if($result!=null){
@@ -124,7 +124,7 @@ class FTicketAssistenza
 
     public static function delete(int $id): bool
     {
-        $sql="DELETE FROM ".static::getTables()." WHERE id='".$id."';";
+        $sql="DELETE FROM ".static::getTableName()." WHERE id='".$id."';";
         $db=FDatabase::getInstance();
         if($db->delete($sql)) return true;
         else return false;

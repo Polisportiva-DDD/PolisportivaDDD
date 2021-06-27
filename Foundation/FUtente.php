@@ -5,9 +5,21 @@
 
 class FUtente
 {
+    /**
+     * tabella con la quale opera
+     * @var string
+     */
     private static $tableName="utente";
+
+    /**
+     * valori della tabella
+     * @var string
+     */
     private static $values="(:username,:nome,:cognome,:email,:password,:dataDiNascita,:immagine,:wallet)";
-    
+
+    /**
+     * FUtente constructor.
+     */
     public function __construct(){}
 
     /**
@@ -162,9 +174,9 @@ class FUtente
         return $utenti;
     }
 
-    public static function loadUtentiFiltered($searcchedUsername): array
+    public static function loadUtentiFiltered($searchedUsername): array
     {
-        $sql="SELECT * FROM ".static::getTableName() . " WHERE username LIKE '%" . $searcchedUsername . "%'";
+        $sql="SELECT * FROM ".static::getTableName() . " WHERE username LIKE '%" . $searchedUsername . "%'";
         $db=FDatabase::getInstance();
         $rows = $db->loadMultiple($sql);
         $utenti =array();

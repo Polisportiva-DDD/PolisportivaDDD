@@ -5,8 +5,22 @@
 
 class FGruppo
 {
+    /**
+     * tabella con la quale opera
+     * @var string
+     */
     private static $tableName="gruppo";
+
+    /**
+     * tabella relazionale tra gruppo e utente
+     * @var string
+     */
     private static $tablePartecipanti = "partecipazionegruppo";
+
+    /**
+     * valori della tabella
+     * @var string
+     */
     private static $values="(:id,:admin,:idCampo,:nome,:etaMinima,:etaMassima,:votoMinimo,:descrizione, :dataEOra)";
 
     /**

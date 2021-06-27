@@ -6,8 +6,16 @@
 class FCampiWallet
 {
 
+    /**
+     * tabella con la quale opera
+     * @var string
+     */
+    private static  $tableName="campiwallet";
 
-    private static $tableName="campiwallet";
+    /**
+     * valori della tabella
+     * @var string
+     */
     private static $values="(:idCampo,:idWallet,:gettoni)";
 
     /**
@@ -33,7 +41,7 @@ class FCampiWallet
      * @param int $id id del wallet
      * @return bool
      */
-    public static function store(array $campiWallet, $id): bool
+    public static function store(array $campiWallet, int $id): bool
     {
         $sql="INSERT INTO ".static::$tableName." VALUES ".static::$values;
         $idwallet=$id;
@@ -55,11 +63,11 @@ class FCampiWallet
 
     /**
      * aggiorna l'intero wallet
-     * @param $id
+     * @param int $id
      * @param array $campiwallet
      * @return bool
      */
-    public static function update($id,array $campiwallet): bool
+    public static function update(int $id,array $campiwallet): bool
     {
 
             $sql1="";
@@ -90,16 +98,10 @@ class FCampiWallet
     }
 
 
-
-
-
- 
-    
-
     /**
      * Carica il wallet dell'utente passando l'id del wallet
      * @param int $id del wallet
-     * @return array  restituisce array di ECampiWallet dell'utente
+     * @return array|null restituisce array di ECampiWallet dell'utente
      */
 
 

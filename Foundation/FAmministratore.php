@@ -4,7 +4,16 @@
 
 class FAmministratore
 {
+    /**
+     * tabella con la quale opera
+     * @var string
+     */
     private static $tableName = "amministratore";
+
+    /**
+     * valori della tabella
+     * @var string
+     */
     private static $values = "(:username)";
 
     /**
