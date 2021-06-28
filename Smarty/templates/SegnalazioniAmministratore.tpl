@@ -18,8 +18,7 @@
   <div class="container">
     <!-- Page heading-->
     <h1>Segnalazioni</h1>
-    <ol class="breadcrumb mb-4 h-100">
-    </ol>
+    <hr>
     {section name=nr loop=$results}
     <form method="post" action="/PolisportivaDDD/amministratore/segnalazioni/{$results[nr].idSegnalazione}">
     <div class="row rounded border col-md-12 mb-5 py-4">
