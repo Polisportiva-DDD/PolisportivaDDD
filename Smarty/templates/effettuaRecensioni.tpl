@@ -44,14 +44,14 @@
                             <div class="control-group form-group">
                                 <div class="controls">
                                     <label>Titolo Recensione:</label>
-                                    <input class="form-control" name="titoloRecensione" type="text" required data-validation-required-message="Please enter your name." />
+                                    <input class="form-control" name="titoloRecensione" maxlength="25" type="text" required data-validation-required-message="Please enter your name." />
                                     <p class="help-block"></p>
                                 </div>
                             </div>
                             
                             <div class="control-group form-group">
                                 <div class="controls"><label>Descrizione: </label>
-                                    <textarea class="form-control" name="testo" rows="10" cols="100" required data-validation-required-message="Please enter your message" maxlength="999" ></textarea>
+                                    <textarea class="form-control" name="testo" rows="10" cols="100" required data-validation-required-message="Please enter your message" maxlength="200" ></textarea>
                                 </div>
                             </div>
                             <div id="success"></div>

@@ -56,7 +56,7 @@
 
           <div>
 
-            <label for="motivazione"></label><textarea type="text" class="form-control" id="motivazione" name="motivazione" rows="5" required></textarea>
+            <label for="motivazione"></label><textarea type="text" class="form-control" id="motivazione" name="motivazione" maxlength="200" rows="5" required></textarea>
           </div>
           <button type="submit" class="btn btn-primary float-right mt-3" onclick="alert('Utente Bandito')">Banna</button>
         </form>
