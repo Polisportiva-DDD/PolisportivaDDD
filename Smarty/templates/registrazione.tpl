@@ -77,7 +77,7 @@
 
 
       <label for="file"><h6>Immagine Profilo</h6></label>
-      <input type="file" class="form-control-file" name="file" id="file" accept="image/png, image/jpeg, image/jpg">
+      <input type="file" class="form-control-file" name="file" id="file" accept="image/png, image/jpeg, image/jpg" required>
 
 
     </div>
