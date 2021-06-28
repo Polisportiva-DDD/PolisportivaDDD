@@ -46,7 +46,6 @@
       </div>
       <div class="d-flex flex-row-reverse my-5" >
         <div class="p-2"><button type="submit" class="btn btn-primary">Crea Gruppo</button></div>
-        <div class="p-2"><a href="#">  <button type="button" class="btn btn-primary">Torna Indietro</button></a></div>
       </div>
     </form>
   </div>

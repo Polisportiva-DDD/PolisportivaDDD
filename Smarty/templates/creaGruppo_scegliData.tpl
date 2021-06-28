@@ -59,7 +59,6 @@
     <div class="d-flex flex-row-reverse my-5">
 
       <div class="p-2">  <button type="submit" class="btn btn-primary">Vai Avanti</button></div>
-      <div class="p-2">  <button type="button" class="btn btn-primary">Torna Indietro</button></div>
 
     </div>
 
