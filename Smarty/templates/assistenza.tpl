@@ -84,11 +84,11 @@
                         <form method="post" action="/PolisportivaDDD/utente/inviaSegnalazione">
                             <div>
                                 <label for="oggetto" class="form-label">Oggetto</label>
-                                <input type="text" class="form-control" id="oggetto" name="oggetto" required>
+                                <input type="text" class="form-control" id="oggetto" name="oggetto" maxlength="25" required>
                             </div>
                             <div>
                                     <label for="messaggio" class="form-label">Messaggio</label>
-                                    <textarea type="text" class="form-control" id="messaggio" name="messaggio" rows="5" required></textarea>
+                                    <textarea type="text" class="form-control" id="messaggio" name="messaggio" rows="5" maxlength="200" required></textarea>
                             </div>
                             <button class="btn btn-primary" id="sendMessageButton" type="submit">Invia ticket</button>
                         </form>
