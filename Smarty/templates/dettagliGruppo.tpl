@@ -54,7 +54,7 @@
           Limite livello: {$votoMinimo}
         </div>
         <div class="col-lg-9 mb-4">
-          Descrizione: {$descrizione}
+          Descrizione:<p>{$descrizione}</p>
         </div>
         <div class="float-right mt-5">
           <a href="/PolisportivaDDD/gruppo/partecipa/{$idGruppo}"><button class="btn btn-primary">Partecipa</button></a>

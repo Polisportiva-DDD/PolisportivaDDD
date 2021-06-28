@@ -23,7 +23,7 @@
       <div class="row mb-3">
         <div class="col-md-3">
           <label for="nomeGruppo" class="form-label">Nome</label>
-          <input type="text" class="form-control" id="nomeGruppo" name="nomeGruppo" required>
+          <input type="text" maxlength="40" class="form-control" id="nomeGruppo" name="nomeGruppo" required>
         </div>
         <div class="col-md-3">
           <label for="etaMinima" class="form-label">Età minima</label>
@@ -41,7 +41,7 @@
       <div class="row">
         <div class="col-md-12">
           <label for="descrizione" class="form-label">Descrizione</label>
-          <textarea type="text" class="form-control" id="descrizione" name="descrizione" rows="5" required></textarea>
+          <textarea type="text" class="form-control" id="descrizione" name="descrizione" rows="5" maxlength="250" required></textarea>
         </div>
       </div>
       <div class="d-flex flex-row-reverse my-5" >
