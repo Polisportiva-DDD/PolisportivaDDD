@@ -46,7 +46,6 @@ class CAmministratore
                     }
                 }
 
-
                 $view->showSegnalazioniAmministratore($listaSegnalazioni);
             }
             else{

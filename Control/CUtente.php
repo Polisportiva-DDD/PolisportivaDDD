@@ -282,7 +282,7 @@ class CUtente
 
     /**
      * Funzione che si occupa di verificare l'esistenza di un utente con username e password inseriti nel form di login.
-     * 1) se, dopo la ricerca nel db non si hanno risultati ($utente = null) oppure se l'utente si trova nel db ma ha è bannato
+     * 1) se, dopo la ricerca nel db non si hanno risultati ($utente = null) oppure se l'utente si trova nel db ma è bannato
      *    viene ricaricata la pagina con l'aggiunta dell'errore nel login.
      * 2) se l'utente c'è, avviene il reindirizzamento alla homepage;
      */
@@ -307,17 +307,12 @@ class CUtente
                         }
                             $username=$utente->getUsername();
                             $session->setValue("username",$username);
+                            //Controlla se l'username è presente nella tabella amministratore
                             if($pm->exist($username)){
                                 $session->setValue("isAmministratore",true);
-                                $session->setValue("isRegistrato",true);
-                            }else{
+                            }
+                            else{
                                 $session->setValue("isAmministratore",false);
-                                if($pm->existUsername($username)){
-                                    $session->setValue("isRegistrato",true);
-                                }
-                                else{
-                                    $session->setValue("isRegistrato",false);
-                                }
                             }
                             $session->setValue("isRegistrato",true);
                             header('Location: /PolisportivaDDD/Utente/Home');
@@ -329,6 +324,7 @@ class CUtente
                 }
 
             }
+            //Questo è il caso username e psw errati
             else{
                 $view->showLoginError(1);
 
@@ -555,13 +551,15 @@ class CUtente
      */
     static function isLogged() {
         $identificato = false;
-        if (isset($_COOKIE['PHPSESSID'])) {
-            if (session_status() == PHP_SESSION_NONE) {
-                session_start();
+        $session = USession::getInstance();
+        if ($session->isSessionSet()){
+            if ($session->isSessionNone()){
+                $session->startSession();
             }
         }
-        if (isset($_SESSION['username'])) {
-            $identificato = true;
+        if ($session->isValueSet('username'))
+        {
+            $identificato=true;
         }
         return $identificato;
     }

@@ -13,15 +13,6 @@
     <link rel="stylesheet" href="/PolisportivaDDD/Smarty/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/PolisportivaDDD/Smarty/css/login.css"/>
 
-    <script>
-      function ready(){
-        if (!navigator.cookieEnabled) {
-          alert('Attenzione! Attivare i cookie per proseguire correttamente la navigazione');
-        }
-      }
-      document.addEventListener("DOMContentLoaded", ready);
-    </script>
-
   </head>
   <body class="text-center">
 

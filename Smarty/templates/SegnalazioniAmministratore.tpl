@@ -36,9 +36,9 @@
         </button>
       </div>
     </div>
+    </form>
     {sectionelse}
     <h2>Nessuna segnalazione presente.</h2>
-    </form>
     {/section}
   </div>
 </section>

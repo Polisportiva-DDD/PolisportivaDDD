@@ -37,7 +37,7 @@ class FWallet
      * @param EWallet $wallet
      * @return false|string
      */
-    public static function store(EWallet $wallet): bool|string
+    public static function store(EWallet $wallet)
     {
         $sql="INSERT INTO ".static::$tableName." VALUES ".static::$values;
         $db=FDatabase::getInstance();

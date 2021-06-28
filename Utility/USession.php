@@ -56,6 +56,19 @@ class USession {
             return false;
     }
 
+
+    /**
+     * Funzione che restituisce true se il valore specificato dalla chiave è settato, false altrimenti
+     * @param $chiave
+     * @return bool
+     */
+    function isValueSet($chiave){
+        if (isset($_SESSION[$chiave]))
+            return true;
+        else
+            return false;
+    }
+
     /**
      *Funzione che esegue il session_start
      */
