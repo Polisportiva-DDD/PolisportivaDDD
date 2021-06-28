@@ -487,8 +487,11 @@ class CUtente
 
             $utenteDaBannare = $pm->load($username,"FUtente");
             $isBannato=false;
-            if(!($pm->exist($username))){
-                $isBannato=$pm->isBannato($username);
+            if(!($pm->exist($username))){ //se non è amministratore
+                $isBannato=$pm->isBannato($username); //controllo se l'utente è bannato
+            }
+            else {
+                $isBannato=true;
             }
 
             if($utenteDaBannare!=null){
