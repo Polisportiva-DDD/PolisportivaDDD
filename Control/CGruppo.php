@@ -389,6 +389,7 @@ class CGruppo
                 foreach($partecipanti as $partecipante){
                     $nomePartecipanti[] = $partecipante->getUsername();
                 }
+                $nomeGruppo = $gruppo->getNome();
                 $admin = $gruppo->getAdmin()->getUsername();
                 $campo = $gruppo->getCampo()->getNome();
                 $dataEOra = $gruppo->getDataEOra()->format('Y-m-d H:i:s');
@@ -399,7 +400,7 @@ class CGruppo
                 $descrizione = $gruppo->getDescrizione();
                 $idGruppo = $gruppo->getId();
 
-                $view->showDettagliGruppo($idGruppo, $nomePartecipanti, $admin, $campo, $dataEOra, $postiDisponibili, $etaMinima, $etaMassima, $votoMinimo, $descrizione, $isAmministratore);
+                $view->showDettagliGruppo($idGruppo, $nomePartecipanti, $nomeGruppo, $admin, $campo, $dataEOra, $postiDisponibili, $etaMinima, $etaMassima, $votoMinimo, $descrizione, $isAmministratore);
 
             }
         }else{
