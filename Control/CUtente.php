@@ -468,6 +468,7 @@ class CUtente
         $session = USession::getInstance();
         $session->startSession();
         $session->stopSession();
+        setcookie("PHPSESSID","");
         header('Location: /PolisportivaDDD/Utente/home');
     }
 
