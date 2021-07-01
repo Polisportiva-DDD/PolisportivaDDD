@@ -59,11 +59,10 @@ class FDatabase
 
     }
      /**
-     * Metodo che permette di memorizzare le informazioni contenute in un oggetto
+     * Metodo che permette di memorizzare le informazioni contenute in un oggetto Entity sul database.
 	 * @param String $query è la query da eseguire
-	 * $classe nome della classe dell'oggetto
 	 * $EOggetto oggetto di $classe va memorizza
-     * Entity sul database.
+     *
      */
 
 
@@ -120,11 +119,11 @@ class FDatabase
     }
 
 
-
-
-
-
-
+    /**
+     * Funzione che passata una query permette di eliminare una riga da una tabella del db
+     * @param $sql
+     * @return bool
+     */
     public function delete($sql): bool
     {
         try{
@@ -142,7 +141,12 @@ class FDatabase
         }
     }
 
-	//chiamata ad esempio per modificare lo stato di un utente (bannato o no)
+
+    /**
+     * Metodo che passata una query in ingresso permette di aggiornare le righe di una tabella del db
+     * @param $sql
+     * @return bool
+     */
     public function update($sql): bool
     {
         try{
@@ -160,8 +164,13 @@ class FDatabase
             return false;
         }
     }
-	
-	//chiamata ad esempio per verificare se esiste già username o email di un'utente
+
+
+    /**
+     * Metodo che passata una query ci restituisce true se la query restituisce uno o più risultati, altrimenti false
+     * @param $sql
+     * @return bool|null
+     */
     public function exist($sql): ?bool
     {
         try{
@@ -184,7 +193,9 @@ class FDatabase
     }
 
 
-
+    /**
+     *Metodo che chiude la connesione con il db
+     */
     public function closeDbConnection(){
         static::$instanza=null;
     }
@@ -194,7 +205,7 @@ class FDatabase
 
 	
 	/**
-     * Metodo usato quando ci si aspetta che la query produca più di un risultato.
+     * Funzione che viene utilizzata per la load quando ci si aspetta che la query produca più di un risultato.
      * 
      * @param String $sql query da eseguire
      */
@@ -219,7 +230,7 @@ class FDatabase
     }
 
        /**
-     * Metodo usato quando ci si aspetta che la query produca un solo risultato
+     * Metodo usato per la load quando ci si aspetta che la query produca un solo risultato
      * 
      * @param $sql String query da eseguire
      */

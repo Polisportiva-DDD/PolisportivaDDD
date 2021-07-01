@@ -160,6 +160,11 @@ class FUtente
         else return false;
     }
 
+    /**
+     * Metodo che permette di caricare tutti gli utenti registrati al sito
+     * @return array array di EUtenti
+     * @throws Exception
+     */
     public static function loadList(): array
     {
         $sql="SELECT * FROM ".static::getTableName();
@@ -174,6 +179,12 @@ class FUtente
         return $utenti;
     }
 
+    /**
+     * Permette di caricare gli utenti filtrati per username
+     * @param $searchedUsername
+     * @return array array di EUtenti
+     * @throws Exception
+     */
     public static function loadUtentiFiltered($searchedUsername): array
     {
         $sql="SELECT * FROM ".static::getTableName() . " WHERE username LIKE '%" . $searchedUsername . "%'";

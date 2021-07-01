@@ -39,7 +39,7 @@
         <input class="form-control mb-3" placeholder="Nome titolare" type="text" name="nome" id="validationDefault03" maxlength="25" required>
 
         <label for="ValidationDefaultData">Data di scadenza (Il giorno inserito sarà settato a 1)</label>
-        <input type="date" class="form-control mb-3" id="ValidationDefaultData" name="data" required>
+        <input type="month" class="form-control mb-3" id="ValidationDefaultData" name="data" required>
 
         <label for="validationDefault04">Codice di sicurezza</label>
         <input class="form-control mb-3" placeholder="CVC" type="text" id="validationDefault04"  name="cvc" minlength="3" maxlength="3" pattern="[0-9]+" title="Inserire solo numeri " required>

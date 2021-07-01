@@ -20,13 +20,7 @@ class EAmministratore extends EUtente
         //Da implementare
     }
 
-    public function eliminaRecensione(ERecensione $recensione): bool{
-        //Da implementare
-    }
 
-    public function eliminaGruppo(EGruppo $gruppo): bool{
-        //Da implementare
-    }
 
     public function modificaPrezzo(ECampo $campo, float $prezzo): bool{
         //Da implementare 1123

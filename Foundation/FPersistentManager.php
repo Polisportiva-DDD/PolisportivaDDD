@@ -63,6 +63,12 @@ class FPersistentManager
     }
 
 
+    /**
+     * Funzione che richiama FCartaDiCredito::delete
+     * @param $numeroCarta
+     * @param $username
+     * @return bool
+     */
     public function deleteCarta($numeroCarta, $username) {
         return FCartaDiCredito::delete($numeroCarta,$username);
     }
@@ -168,7 +174,13 @@ class FPersistentManager
         return FAmministratore::exist($username);
     }
 
-    public function existCarta($numeroCarta,$username): bool
+    /**
+     * Funzione che chiama FCartaDiCredito::existCarta
+     * @param $numeroCarta
+     * @param $username
+     * @return bool
+     */
+    public function existCarta($numeroCarta, $username): bool
     {
         return FCartaDiCredito::existCarta($numeroCarta,$username);
     }

@@ -104,7 +104,13 @@ class FCartaDiCredito
 
     }
 
-    public static function existCarta($numeroCarta,$username){
+    /**
+     * Funzione che permette di verificare se un utente ha già una certa carta
+     * @param $numeroCarta
+     * @param $username
+     * @return bool|null
+     */
+    public static function existCarta($numeroCarta, $username){
         $sql = "SELECT * FROM " . static::$tablePossessoCarta . " WHERE carta='" . $numeroCarta. "' AND utente="."'$username'" ;
         $db=FDatabase::getInstance();
         $result=$db->exist($sql);
