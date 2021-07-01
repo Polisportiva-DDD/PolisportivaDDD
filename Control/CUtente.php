@@ -5,9 +5,7 @@
 require_once (dirname(__DIR__)  .'/Utility/StartSmarty.php');
 require_once (dirname(__DIR__)  .'/Utility/autoload.php');
 
-/**
- * Class CUtente
- */
+
 class CUtente
 {
     /**

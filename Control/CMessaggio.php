@@ -1,9 +1,7 @@
 <?php
 
 
-/**
- * Class CMessaggio necessaria per la visualizzazione di messaggi interni all'applicazione
- */
+
 class CMessaggio
 {
 

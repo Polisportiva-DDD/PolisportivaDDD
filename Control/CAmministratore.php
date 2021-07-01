@@ -7,10 +7,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 require dirname(__DIR__) .'/Utility/vendor/autoload.php';
 
-/**
- * Classe control per tutto ciò che riguarda l'Amministratore
- * Class CAmministratore
- */
+
 class CAmministratore
 {
 
