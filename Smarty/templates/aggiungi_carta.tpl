@@ -30,7 +30,7 @@
         <label for="validationDefault01">Numero della Carta</label>
         <input class="form-control mb-3" placeholder="XXXX XXXX XXXX XXXX" type="text" id="validationDefault01" name="numero" minlength="16" maxlength="16"
                pattern="[0-9]+"
-               title="Inserire solo numeri " required>
+               title="Inserire solo numeri" required>
 
         <label for="validationDefault02">Cognome titolare della carta</label>
         <input class="form-control mb-3" placeholder="Cognome titolare" type="text" id="validationDefault02" name="cognome"  maxlength="25" required>
@@ -38,8 +38,9 @@
         <label for="validationDefault03">Nome titolare della carta</label>
         <input class="form-control mb-3" placeholder="Nome titolare" type="text" name="nome" id="validationDefault03" maxlength="25" required>
 
-        <label for="ValidationDefaultData">Data di scadenza</label>
-        <input type="month" class="form-control mb-3" id="ValidationDefaultData" name="data" placeholder="yyyy-mm" required>
+        <label for="ValidationDefaultData">Data di scadenza (Il giorno sarà settato a 1)</label>
+
+        <input type="date" class="form-control mb-3" id="ValidationDefaultData" name="data" title="Inserire una data valida!" required>
 
         <label for="validationDefault04">Codice di sicurezza</label>
         <input class="form-control mb-3" placeholder="CVC" type="text" id="validationDefault04"  name="cvc" minlength="3" maxlength="3" pattern="[0-9]+" title="Inserire solo numeri " required>
