@@ -25,7 +25,7 @@
           <img src="https://via.placeholder.com/150" class="rounded-circle" alt="Immagine utente">
         </div>
         <div class="col-lg-3 col-md-3 col-sm-12 m-auto text-center">
-          <p>Username: <a href="/PolisportivaDDD/utente/utenti/{$results[nr].username}">{$results[nr].username}</a></p>
+          <p>Username: <a href="/PolisportivaDDD/Utente/Utenti/{$results[nr].username}">{$results[nr].username}</a></p>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-12 m-auto text-center">
           <p>Nome: {$results[nr].nome}</p>

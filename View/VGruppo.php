@@ -78,11 +78,12 @@ class VGruppo
      * @param $isAmministratore
      * @throws SmartyException
      */
-    public function showDettagliGruppo($idGruppo, $invitati, $admin, $campo, $dataEOra, $postiDisponibili,
+    public function showDettagliGruppo($idGruppo, $invitati, $nomeGruppo, $admin, $campo, $dataEOra, $postiDisponibili,
                                        $etaMinima, $etaMassima, $votoMinimo, $descrizione,
                                        $isAmministratore){
         $this->smarty->assign("isAmministratore", $isAmministratore);
         $this->smarty->assign("idGruppo", $idGruppo);
+        $this->smarty->assign('nomeGruppo', $nomeGruppo);
         $this->smarty->assign("invitati", $invitati);
         $this->smarty->assign("admin", $admin);
         $this->smarty->assign("campo", $campo);

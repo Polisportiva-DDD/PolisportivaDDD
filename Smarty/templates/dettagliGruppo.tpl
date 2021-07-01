@@ -18,7 +18,7 @@
   <div class="container">
     <!-- Page Heading/Breadcrumbs-->
     <h1>
-      Nome Gruppo
+      {$nomeGruppo}
     </h1>
     <hr>
     <!-- Content Row-->
