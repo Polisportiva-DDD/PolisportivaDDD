@@ -31,7 +31,7 @@
       <label for="nome"><h6>Nome</h6></label>
       {literal}
         <input class="form-control" placeholder="Nome" name="nome" type="text"  minlength="2" maxlength="25" id="nome"
-               pattern="[a-zA-Z ]{2,25}"
+               pattern="[a-zA-Z' ]{2,25}"
                title="Un nome è composto da lettere minuscole e maiuscole e può contenere spazi; sono consentiti da 2 fino a 25 caratteri."
                required>
       {/literal}
@@ -40,7 +40,7 @@
       <label for="cognome"><h6>Cognome</h6></label>
       {literal}
         <input class="form-control" placeholder="Cognome" name="cognome" minlength="2" maxlength="25" type="text" id="cognome"
-               pattern="[a-zA-Z ]{2,25}"
+               pattern="[a-zA-Z' ]{2,25}"
                title="Un nome è composto da lettere minuscole e maiuscole e può contenere spazi; sono consentiti da 2 fino a 25 caratteri."
                required>
       {/literal}
