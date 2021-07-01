@@ -6,17 +6,15 @@ class ECalcioAUndici implements ECampo
 
     private  $id;
     private  $nome;
-    private  $numeroMinimo;
     private  $numeroMassimo;
     private  $descrizione;
     private  $prezzo;
     private  $immagine;
 
-    public function __construct($id, $n, $nMin, $nMax, $d, $p, $immagine)
+    public function __construct($id, $n, $nMax, $d, $p, $immagine)
     {
         $this->id=$id;
         $this->nome=$n;
-        $this->numeroMinimo=$nMin;
         $this->numeroMassimo=$nMax;
         $this->descrizione=$d;
         $this->prezzo=$p;
@@ -50,13 +48,7 @@ class ECalcioAUndici implements ECampo
         return $this->nome;
     }
 
-    /**
-     * Restituisce il numero minimo di giocatori del campo
-     * @return int
-     */
-    public function getNumeroMinimo():int{
-        return $this->numeroMinimo;
-    }
+
 
     /**
      * Restituisce il numero massimo di giocatori del campo
@@ -91,13 +83,7 @@ class ECalcioAUndici implements ECampo
         $this->nome=$n;
     }
 
-    /**
-     * Imposta il numero minimo di giocatori del campo
-     * @param int $nMin
-     */
-    public function setNumeroMinimo(int $nMin):void{
-        $this->numeroMinimo=$nMin;
-    }
+
 
     /**
      * Imposta il numero massimo di giocatori del campo

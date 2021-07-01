@@ -30,7 +30,6 @@ class FCampo
      */
     public static function bind($stmt, ECampo $campo){
         $stmt->bindValue(':nome', $campo->getNome(), PDO::PARAM_STR);
-        $stmt->bindValue(':numeroMinimo', $campo->getNumeroMinimo(), PDO::PARAM_INT);
         $stmt->bindValue(':numeroMassimo', $campo->getNumeroMassimo(), PDO::PARAM_INT);
         $stmt->bindValue(':descrizione', $campo->getDescrizione(), PDO::PARAM_STR);
         $stmt->bindValue(':prezzo', $campo->getPrezzo(), PDO::PARAM_STR);
@@ -139,7 +138,7 @@ class FCampo
     private static function buildCampo(array $row){
         if ($row){
             $class = $row['discriminante'];
-            $campo = new $class($row['id'], $row['nome'], $row['numeroMinimo'], $row['numeroMassimo'], $row['descrizione'], $row['prezzo'], base64_encode($row['immagine']));
+            $campo = new $class($row['id'], $row['nome'], $row['numeroMassimo'], $row['descrizione'], $row['prezzo'], base64_encode($row['immagine']));
             return $campo;
         }
         else return null;

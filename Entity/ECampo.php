@@ -5,13 +5,12 @@
       * ECampo constructor.
       * @param $id
       * @param $n
-      * @param $nMin
       * @param $nMax
       * @param $d
       * @param $p
       * @param $immagine
       */
-     public function __construct($id, $n, $nMin, $nMax, $d, $p, $immagine);
+     public function __construct($id, $n, $nMax, $d, $p, $immagine);
 
      /**
       * Restituisce il nome del campo
@@ -19,11 +18,6 @@
       */
      public function getNome():String;
 
-     /**
-      * Restituisce il numero minimo di giocatori del campo
-      * @return int
-      */
-     public function getNumeroMinimo():int;
 
      /**
       * Restituisce il numero massimo di giocatori del campo
@@ -56,11 +50,6 @@
       */
      public function setNome(string $n):void;
 
-     /**
-      * Imposta il numero minimo di giocatori del campo
-      * @param int $nMin
-      */
-     public function setNumeroMinimo(int $nMin):void;
 
      /**
       * Imposta il numero massimo di giocatori del campo
