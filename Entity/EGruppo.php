@@ -210,29 +210,6 @@ class EGruppo
 
 
     /**
-     * Aggiunge un partecipante al gruppo
-     * @param EUtente $utente
-     * @return bool
-     */
-    /*
-    public function aggiungiPartecipante(EUtente $utente): bool{
-
-        $numeroMaxPartecipanti = $this->campo->getNumeroMassimo();
-
-        //Se il gruppo è già al completo restituisci false
-        $numeroPartecipanti = count($this->partecipanti);
-
-        if ($numeroPartecipanti == $numeroMaxPartecipanti){
-            return false;
-        }
-
-        else{
-            array_push($this->partecipanti, $utente);
-            return true;
-        }
-    }*/
-
-    /**
      * Restituisce true se il gruppo è al completo, false altrimenti
      * @return bool
      */
@@ -262,26 +239,7 @@ class EGruppo
         return false;
     }
 
-    /**
-     * Controlla se il gruppo rispetta il numero minimo di partecipanti per poter giocare
-     * @return bool
-     */
-    public function isPronto(): bool{
-        try {
-            $numeroMinimo = $this->campo->getNumeroMinimo();
-            $numeroPartecipanti = count($this->partecipanti);
-            if ($numeroPartecipanti >= $numeroMinimo) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-        catch(Exception $e){
-            echo("Server error");
-            return false;
-        }
 
-    }
 
     /**
      * Controlla se il gruppo ha come partecipante l'utente specificato
