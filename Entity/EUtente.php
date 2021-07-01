@@ -274,61 +274,7 @@
 		}
 	}
 
-	 /**
-	  * Aggiunge la carta di credito passata come parametro alla lista delle carte di credito dell'utente.
-	  * Restituisce true se l'operazione è andata a buon fine, false altrimenti.
-	  * @param ECartadiCredito $carta
-	  * @return bool
-	  */
-	 /*
-	public function aggiungiCarta(ECartadiCredito $carta):bool
-	{
-		try
-		{
-			if($carta != null)
-			{
-				array_push($this->cartedicredito,$carta);
-				return true;
-			}
-			else {
-				return false;
-			}
-		}
-		catch (Exception $exception){
-			//Gestione dell'eccezione
-			return false;
-		}
 
-    }*/
-
-	 /**
-	  * Rimuove la carta di credito passata come parametro alla lista delle carte di credito dell'utente.
-	  * Restituisce true se l'operazione è andata a buon fine, false altrimenti.
-	  * @param ECartadiCredito $carta
-	  * @return bool
-	  */
-	 /*
-	public function rimuoviCarta(ECartadiCredito $carta):bool
-	{
-		try
-		{
-			$numero = $carta ->getNumero();
-			foreach($this->cartedicredito as $chiave => $valore)
-			{
-				if($numero==$valore->getNumero())
-				{
-					unset($this->cartedicredito[$chiave]);
-					return true;
-				}
-			}
-			return false;
-		}
-		catch(Exception $exception){
-			//Errore
-			return false;
-		}
-
-	}*/
 
 }
 

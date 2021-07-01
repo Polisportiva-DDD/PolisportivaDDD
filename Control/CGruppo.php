@@ -138,6 +138,7 @@ class CGruppo
             $view = new VGruppo();
             $isAmministratore = $session->readValue('isAmministratore');
             $username = $session->readValue('username');
+           // print ($username);
             $results = array();
             if (isset($_POST['ora'])){
                 $oraScelta = $_POST['ora'];
@@ -145,22 +146,24 @@ class CGruppo
             }
             $utenti = $pm->loadList('FUtente');
             foreach($utenti as $utente){
-                if($utente->getUsername() != $username){
+                //print ($username);
+                if(strcmp($utente->getUsername(), $username)!=0){
                 //Array contentente i dati per la view
                 $u = array();
                 //Username dell'utente
-                $username= $utente->getUsername();
+                $username1= $utente->getUsername();
                 //Recensioni dell'utente
-                $recensioniUtente = $pm->loadRecensioniUtente($username);
+                $recensioniUtente = $pm->loadRecensioniUtente($username1);
                 if(!$recensioniUtente){
                     $recensioniUtente=array();
                 }
                 //Assegno all'array i dati
-                $u['username']=$username;
+                $u['username']=$username1;
                 $u['eta']=$utente->getEta();
                 $u['valutazione'] = round($utente->calcolaMediaRecensioni($recensioniUtente));
                 //Metto nell'array results per la view l'array appena creato.
-                $results[] = $u;}
+                $results[] = $u;
+                }
             }
             $view->showGruppoListaInvitati($results, $isAmministratore);
         }
