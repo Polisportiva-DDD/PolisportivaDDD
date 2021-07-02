@@ -24,7 +24,7 @@ Il resto della documentazione si trova all'interno della cartella "Documentazion
 il Documento di Progetto in formati docx e pdf, gli UML di Control, Foundation e Entity nella sottocartella UML e infine
 le bozze delle schermate realizzate in fase di progettazione.
 
-###Utenti
+### Utenti
 Per effettuare il login senza quindi dover fare la registrazione, forniamo alcuni account già esistenti:
 
            USERNAME                                                   PASSWORD
@@ -34,6 +34,6 @@ Per effettuare il login senza quindi dover fare la registrazione, forniamo alcun
            Fox02                                                      Pass1
            Ahri                                                       Pass1
 
-##Sito Online
+## Sito Online
 Per la pubblicazione del sito su un server pubblico abbiamo utilizzato Altervista, per accedervi digitare la seguente
 URL: http://polisportivaddd.altervista.org/
