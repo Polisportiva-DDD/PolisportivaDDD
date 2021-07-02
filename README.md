@@ -2,7 +2,9 @@
 Progetto d'esame per un sito riguardante la gestione di una polisportiva
 
 ## Installazione
-Per testare il progetto è necessario scaricare il file sql contenente il database caricato nei file
+Decomprimere l'archivio e spostare la cartella ottenuta sotto htdocs
+Verificare che i diritti di accesso alla cartella siano impostati in modo tale da permettere  la scrittura a tutti gli utenti
+Per testare il progetto è necessario prendere il file sql contenente il database caricato nei file
 del progetto (nella cartella "testing") e inserirlo in MySQL.
 Per l'inserimento creare un DB chiamato 'progettoweb' e importare il file scaricato per la creazione delle tabelle.
 ### Accesso al DB
@@ -15,8 +17,10 @@ Password per ogni account: "Pass1"
 
 ## Cron jobs
 È stato necessario scrivere un Cron Job per l'eliminazione dei gruppi scaduti.
-Quest'ultimo è presente in scriptCron.php.
-Deve essere eseguito ogni 2 ore dalle 8 alle 18, per ogni giorno.
+Quest'ultimo è presente in scriptCron.php. Per eseguirlo sulla propria macchina, ad esempio, per Windows, Utilità
+di pianificazione è il meccanismo che permette di programmare l'esecuzione di ogni genere di attività. Per avviare
+l'utilità basta andare sul cmd, digitare taskschd.msc e creare una nuova attività. In particolare lo script deve essere 
+eseguito ogni 2 ore dalle 8 alle 18, per ogni giorno.
 
 ## Documentazione
 La documentazione delle classi, generata attraverso phpDocumentor si può trovare all'interno della cartella .phpdoc
