@@ -33,6 +33,7 @@ Per effettuare il login senza quindi dover fare la registrazione, forniamo alcun
            lorediel                                                   Pass1
            Fox02                                                      Pass1
            Ahri                                                       Pass1
+           lorenzodiella                                              Pass1       
 
 ## Sito Online
 Per la pubblicazione del sito su un server pubblico abbiamo utilizzato Altervista, per accedervi digitare la seguente
