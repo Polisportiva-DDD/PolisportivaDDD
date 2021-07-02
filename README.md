@@ -9,6 +9,9 @@ Per l'inserimento creare un DB chiamato 'progettoweb' e importare il file scaric
 L'accesso al DB viene eseguito con username: 'root' e password: ''.
 Se si vogliono modificare le credenziali di accesso con quelle della propria macchina locale modificare
 il file config.php nella cartella Foundation.
+Per testare con degli utenti già esistenti utilizzare uno tra i seguenti username: "lorediel", "Urwen99", "Ahri", "Fox02"
+Account admin: "lorenzodiella"
+Password per ogni account: "Pass1"
 
 ## Cron jobs
 È stato necessario scrivere un Cron Job per l'eliminazione dei gruppi scaduti.
