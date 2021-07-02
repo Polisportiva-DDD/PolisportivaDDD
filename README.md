@@ -16,3 +16,16 @@ Quest'ultimo è presente in scriptCron.php.
 Deve essere eseguito ogni 2 ore dalle 8 alle 18, per ogni giorno.
 
 
+###Utenti
+Per effettuare il login senza quindi dover fare la registrazione, forniamo alcuni account già esistenti:
+
+           USERNAME                                                   PASSWORD
+         
+           Urwen99                                                    Pass1
+           lorediel                                                   Pass1
+           Fox02                                                      Pass1
+           Ahri                                                       Pass1
+
+##Sito Online
+Per la pubblicazione del sito su un server pubblico abbiamo utilizzato Altervista, per accedervi digitare la seguente
+URL: http://polisportivaddd.altervista.org/
