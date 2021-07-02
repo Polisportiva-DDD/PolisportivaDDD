@@ -34,8 +34,10 @@
           Rispondi
         </button>
       </div>
+
     </div>
     </form>
+      <br><br>
     {sectionelse}
     <h2>Nessuna segnalazione presente.</h2>
     {/section}

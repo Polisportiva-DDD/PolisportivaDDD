@@ -54,6 +54,7 @@ class CUtente
                         $u['username'] = $utente->getUsername();
                         $u['nome'] = $utente->getNome();
                         $u['cognome'] = $utente->getCognome();
+                        $u['pic64'] = base64_encode($utente->getImmagine());
                         $risultatiRicerca[] = $u;
                     }
                     $view->showRicercaUtente($risultatiRicerca, $isAmministratore);

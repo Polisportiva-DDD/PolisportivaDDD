@@ -22,7 +22,11 @@
     {section name=nr loop=$results}
       <div class="row rounded border mb-5 py-4">
         <div class="col-lg-3 col-md-3 text-center">
-          <img src="https://via.placeholder.com/150" class="rounded-circle" alt="Immagine utente">
+          {if $results[nr].pic64 neq ""}
+            <img src="data:;base64,{$results[nr].pic64}" class="rounded-circle" width="150" height="150" alt="Immagine utente">
+          {else}
+            <img src="https://via.placeholder.com/150" class="rounded-circle" alt="Immagine utente">
+          {/if}
         </div>
         <div class="col-lg-3 col-md-3 col-sm-12 m-auto text-center">
           <p>Username: <a href="/PolisportivaDDD/Utente/Utenti/{$results[nr].username}">{$results[nr].username}</a></p>

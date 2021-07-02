@@ -30,7 +30,11 @@
         <div class="card h-80">
           <h6 class="card-header">{$utenti[nr].username}</h6>
           <div class="card-body text-center">
-            <img src="https://via.placeholder.com/75" class="rounded-circle" alt="Immagine utente">
+            {if $utenti[nr].pic64 neq ""}
+              <img src="data:;base64,{$utenti[nr].pic64}" class="rounded-circle" width="150" height="150" alt="Immagine utente">
+            {else}
+              <img src="https://via.placeholder.com/150" class="rounded-circle" alt="Immagine utente">
+            {/if}
           </div>
           <ul class="list-group list-group-flush">
             <li class="list-group-item">Età: {$utenti[nr].eta}</li>

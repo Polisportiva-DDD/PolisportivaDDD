@@ -138,7 +138,6 @@ class CGruppo
             $view = new VGruppo();
             $isAmministratore = $session->readValue('isAmministratore');
             $username = $session->readValue('username');
-           // print ($username);
             $results = array();
             if (isset($_POST['ora'])){
                 $oraScelta = $_POST['ora'];
@@ -146,21 +145,23 @@ class CGruppo
             }
             $utenti = $pm->loadList('FUtente');
             foreach($utenti as $utente){
-                //print ($username);
+
                 if(strcmp($utente->getUsername(), $username)!=0){
                 //Array contentente i dati per la view
                 $u = array();
                 //Username dell'utente
-                $username1= $utente->getUsername();
+                $usernameDaInvitare= $utente->getUsername();
                 //Recensioni dell'utente
-                $recensioniUtente = $pm->loadRecensioniUtente($username1);
+                $recensioniUtente = $pm->loadRecensioniUtente($usernameDaInvitare);
                 if(!$recensioniUtente){
                     $recensioniUtente=array();
                 }
                 //Assegno all'array i dati
-                $u['username']=$username1;
+                $u['username']=$usernameDaInvitare;
                 $u['eta']=$utente->getEta();
+                $u['pic64'] = base64_encode($utente->getImmagine());
                 $u['valutazione'] = round($utente->calcolaMediaRecensioni($recensioniUtente));
+
                 //Metto nell'array results per la view l'array appena creato.
                 $results[] = $u;
                 }
@@ -215,7 +216,7 @@ class CGruppo
         if(CUtente::isLogged()){
 
             $pm = FPersistentManager::getInstance();
-            $username = $session->readValue('username');
+            $adminUsername = $session->readValue('username');
             if ($_POST){
                 $nomeGruppo = $_POST['nomeGruppo'];
                 $etaMinima = $_POST['etaMinima'];
@@ -236,11 +237,11 @@ class CGruppo
             $dataEOra = DateTime::createFromFormat('Y-m-d H:i:s', $dataString . $ora);
 
 
-            $adminUsername = $session->readValue('username');
-            $admin = $pm->load('username', 'FUtente');
+
+
             $admin = $pm->load($adminUsername, 'FUtente');
             $campo = $pm->load($idCampo, 'FCampo');
-            $abbastanzaGettoni = self::rimuoviGettone($username, $idCampo);
+            $abbastanzaGettoni = self::rimuoviGettone($adminUsername, $idCampo);
             if ($abbastanzaGettoni){
                 $gruppo = new EGruppo(null, $nomeGruppo, $etaMinima, $etaMassima, $valutazioneMinima, $descrizione, $dataEOra, array(), $admin, $campo);
                 $idGruppoCreato = $pm->store($gruppo);
@@ -260,7 +261,7 @@ class CGruppo
                 $session->deleteValue('invitati');
                 $session->deleteValue('idCampo');
                 header('Location: /PolisportivaDDD/Utente/home');
-                self::inviaEmail($username, $arrayEmail, $idGruppoCreato);
+                self::inviaEmail($adminUsername, $arrayEmail, $idGruppoCreato);
             }
             else{
                 $session->deleteValue('oraScelta');
@@ -386,25 +387,28 @@ class CGruppo
             }
             else{
 
-                $gruppo = $pm->load($id, 'FGruppo');
-                $partecipanti = $gruppo->getPartecipanti();
-                $nomePartecipanti = array();
-                foreach($partecipanti as $partecipante){
-                    $nomePartecipanti[] = $partecipante->getUsername();
+                if($gruppo = $pm->load($id, 'FGruppo')) {
+                    $partecipanti = $gruppo->getPartecipanti();
+                    $nomePartecipanti = array();
+                    foreach ($partecipanti as $partecipante) {
+                        $nomePartecipanti[] = $partecipante->getUsername();
+                    }
+                    $nomeGruppo = $gruppo->getNome();
+                    $admin = $gruppo->getAdmin()->getUsername();
+                    $campo = $gruppo->getCampo()->getNome();
+                    $dataEOra = $gruppo->getDataEOra()->format('Y-m-d H:i:s');
+                    $postiDisponibili = $gruppo->getPostiDisponibili();
+                    $etaMinima = $gruppo->getEtaMinima();
+                    $etaMassima = $gruppo->getEtaMassima();
+                    $votoMinimo = $gruppo->getVotoMinimo();
+                    $descrizione = $gruppo->getDescrizione();
+                    $idGruppo = $gruppo->getId();
+
+                    $view->showDettagliGruppo($idGruppo, $nomePartecipanti, $nomeGruppo, $admin, $campo, $dataEOra, $postiDisponibili, $etaMinima, $etaMassima, $votoMinimo, $descrizione, $isAmministratore);
                 }
-                $nomeGruppo = $gruppo->getNome();
-                $admin = $gruppo->getAdmin()->getUsername();
-                $campo = $gruppo->getCampo()->getNome();
-                $dataEOra = $gruppo->getDataEOra()->format('Y-m-d H:i:s');
-                $postiDisponibili = $gruppo->getPostiDisponibili();
-                $etaMinima = $gruppo->getEtaMinima();
-                $etaMassima = $gruppo->getEtaMassima();
-                $votoMinimo = $gruppo->getVotoMinimo();
-                $descrizione = $gruppo->getDescrizione();
-                $idGruppo = $gruppo->getId();
-
-                $view->showDettagliGruppo($idGruppo, $nomePartecipanti, $nomeGruppo, $admin, $campo, $dataEOra, $postiDisponibili, $etaMinima, $etaMassima, $votoMinimo, $descrizione, $isAmministratore);
-
+                else{
+                    header('Location: /PolisportivaDDD/Utente/home');
+                }
             }
         }else{
             header('Location: /PolisportivaDDD/Utente/home');
@@ -421,7 +425,7 @@ class CGruppo
      * @return bool true se l'operazione è andata a buon fine, false altrimenti
      */
     private function rimuoviGettone($username, $idCampo): bool{
-        if(CUtente::isLogged()){
+
             $pm = FPersistentManager::getInstance();
             $utente = $pm->load($username, "Futente");
             $wallet = $utente->getWallet();
@@ -431,10 +435,7 @@ class CGruppo
                 $result = $pm->update($wallet);
             }
             return $result;
-        }
-        else{
-            header('Location: /PolisportivaDDD/Utente/home');
-        }
+
 
     }
 
@@ -536,12 +537,12 @@ class CGruppo
             $pm = FPersistentManager::getInstance();
             $utente = $pm->load($username, 'FUtente');
             $gruppo = $pm->load($idGruppo, 'FGruppo');
-            //Se soddisfa le condizioni
-            if ($gruppo->verificaCondizioni($utente)){
+            //Se non è già un partecipante
+            if(!($gruppo->hasPartecipante($username))){
                 //Se il gruppo non è pieno
                 if(!($gruppo->isPieno())){
-                    //Se non è già un partecipante
-                    if(!($gruppo->hasPartecipante($username))){
+                    //Se soddisfa le condizioni
+                    if ($gruppo->verificaCondizioni($utente)){
                         //Se ha abbastanza gettoni per quel campo
                         if(self::rimuoviGettone($username, $gruppo->getCampo()->getId())){
                             $pm->addPartecipanteGruppo($username, $idGruppo);
@@ -554,7 +555,7 @@ class CGruppo
                         }
                     }
                     else{
-                        $messaggio = 'Siamo spiacenti, è già un partecipante di questo gruppo';
+                        $messaggio = 'Siamo spiacenti, non soddisfa i requisiti per partecipare al gruppo';
                         $session->setValue('messaggioErrore', $messaggio);
                         header("Location: /PolisportivaDDD/messaggio/genericError");
                     }
@@ -566,7 +567,7 @@ class CGruppo
                 }
             }
             else{
-                $messaggio = 'Siamo spiacenti, non soddisfa i requisiti per partecipare al gruppo';
+                $messaggio = 'Siamo spiacenti, è già un partecipante di questo gruppo';
                 $session->setValue('messaggioErrore', $messaggio);
                 header("Location: /PolisportivaDDD/messaggio/genericError");
             }
