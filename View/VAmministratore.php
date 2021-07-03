@@ -53,7 +53,7 @@ class VAmministratore{
         $this -> smarty -> assign('eta',$eta);
         $this -> smarty -> assign('valutazioneMedia',$valutazioneMedia);
         $this->smarty->assign("pic64", $pic64);
-        $this->smarty->display(dirname(__DIR__) ."/Smarty/templates/bannaUtente.tpl");
+        $this->smarty->display(dirname(__DIR__) ."/Smarty/templates/BannaUtente.tpl");
     }
 
 
