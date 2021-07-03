@@ -84,6 +84,7 @@ class FCartaDiCredito
                 }
             }
             else{
+                //Se esiste già una carta con quel numero salvala solo nella tabella associazione
                 $db=FDatabase::getInstance();
                 $sql = "INSERT INTO ". static::$tablePossessoCarta . " VALUES (:carta, :utente) " ;
                 $valuesAssociazione=array($carta->getNumero(),$username);
