@@ -270,7 +270,7 @@ class CGruppo
                 $session->deleteValue('idCampo');
                 $messaggio = 'Siamo spiacenti, non ha un gettone per il campo da lei scelto';
                 $session->setValue('messaggioErrore', $messaggio);
-                header("Location: /PolisportivaDDD/messaggio/genericError");
+                header("Location: /PolisportivaDDD/Messaggio/genericError");
             }
         }else{
             header('Location: /PolisportivaDDD/Utente/home');

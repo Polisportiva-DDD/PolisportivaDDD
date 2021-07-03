@@ -167,7 +167,7 @@ class CGettoni
                     foreach($_POST as $chiave => $idCampo){
                         $campi[$chiave] = $idCampo;
                     }
-                    $carta=$pm->load($numero,"FCartadiCredito");
+                    $carta=$pm->load($numero,"FCartaDiCredito");
                     $nomeTitolare=$carta->getNomeTitolare();
                     $carta->getCognomeTitolare();
                     $scadenza=$carta->getScadenza()->format("Y-m-d");
