@@ -291,6 +291,7 @@ class CGruppo
 
         try {
             $mail->SMTPDebug = 3;
+            $mail->isSMTP();
             $mail->Host = 'smtp.libero.it;';
             $mail->SMTPAuth = true;
             $mail->Username = 'polisportivaddd@libero.it';
