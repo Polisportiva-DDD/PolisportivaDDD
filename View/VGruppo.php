@@ -59,7 +59,7 @@ class VGruppo
         $this->smarty->assign("utenti", $utenti);
         $this->smarty->assign("isAmministratore", $isAmministratore);
 
-        $this->smarty->display(dirname(__DIR__)  ."/Smarty/templates/creaGruppoListaInvitati.tpl");
+        $this->smarty->display(dirname(__DIR__)  ."/Smarty/templates/CreaGruppoListaInvitati.tpl");
     }
 
 

@@ -44,7 +44,7 @@ class VGettoni
         $this -> smarty -> assign('results',$campi);
         $this -> smarty -> assign('carta',$carte);
         $this -> smarty -> assign('isAmministratore',$isAmministratore);
-        $this->smarty->display(dirname(__DIR__)  ."/Smarty/templates/acquistaGettoni.tpl");
+        $this->smarty->display(dirname(__DIR__)  ."/Smarty/templates/AcquistaGettoni.tpl");
     }
 
     /**
