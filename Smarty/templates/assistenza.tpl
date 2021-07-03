@@ -81,7 +81,7 @@
                 <div class="row">
                     <div class="col-lg-8 mb-4">
                         <h3>Invia ticket d'assistenza</h3>
-                        <form method="post" action="/PolisportivaDDD/utente/inviaSegnalazione">
+                        <form method="post" action="/PolisportivaDDD/Utente/inviaSegnalazione">
                             <div>
                                 <label for="oggetto" class="form-label">Oggetto</label>
                                 <input type="text" class="form-control" id="oggetto" name="oggetto" maxlength="25" required>
