@@ -68,7 +68,7 @@
                         </p>
                         <p>
                             Email:
-                            <a href="mailto:name@example.com">polisportiva@example.com</a>
+                            <a href="mailto:name@example.com">polisportivaddd@outlook.it</a>
                         </p>
                         <p>
                             Giorni
