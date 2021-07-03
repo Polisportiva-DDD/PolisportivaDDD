@@ -20,7 +20,7 @@
     <h1>Segnalazioni</h1>
     <hr>
     {section name=nr loop=$results}
-    <form method="post" action="/PolisportivaDDD/amministratore/segnalazioni/{$results[nr].idSegnalazione}">
+    <form method="post" action="/PolisportivaDDD/Amministratore/segnalazioni/{$results[nr].idSegnalazione}">
     <div class="row rounded border col-md-12 mb-5 py-4">
       <div class="col-lg-3 col-md-3 col-sm-12 m-auto">
         <p>Username: {$results[nr].username}</p>
