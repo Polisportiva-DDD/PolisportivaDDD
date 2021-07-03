@@ -455,7 +455,7 @@ class CUtente
     public function rimuoviBan(){
         $pm = FPersistentManager::getInstance();
         if(isset($_POST['username'])){
-            $pm->updateUtenteRegistrato($_POST['username'],false,"");
+            $pm->updateUtenteRegistrato($_POST['username'],0,"");
             header('Location: /PolisportivaDDD/Utente/utentiBannati');
         }
 
