@@ -319,4 +319,12 @@ class CAmministratore
 
     }
 
+    public function scriptCron(){
+        $pm=FPersistentManager::getInstance();
+        $gruppi=$pm->loadGruppiScaduti();
+        foreach ($gruppi as $gruppo){
+            $pm->delete($gruppo->getId(),"FGruppo");
+        }
+    }
+
 }
