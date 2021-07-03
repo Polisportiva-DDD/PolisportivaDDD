@@ -45,7 +45,7 @@
     </div>
     <div class="row mt-2 mb-2">
         <div class="col-md-12">
-            <form method="post" action="/PolisportivaDDD/amministratore/rispondiSegnalazione">
+            <form method="post" action="/PolisportivaDDD/Amministratore/rispondiSegnalazione">
                 <h4>Rispondi</h4>
                 <textarea name="risposta" class="form-control" required></textarea>
             <button type="submit" class="btn btn-primary float-right mt-3">Rispondi</button>
