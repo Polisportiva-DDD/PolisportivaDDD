@@ -291,6 +291,7 @@ class CUtente
         $pm = FPersistentManager::getInstance();
         if(isset($_POST['username']) && isset($_POST['password'])) {
 
+            //Se esiste un username con questo username e con questa psw (criptata)
             $esiste = $pm->Login($_POST['username'], md5($_POST['password']));
             if ($esiste==1) {
                 if($pm->isBannato($_POST['username'])){
@@ -350,11 +351,8 @@ class CUtente
         $pm = FPersistentManager::getInstance();
         $view = new VUtente();
         $session = USession::getInstance();
-        $session->startSession();
-        $session->setValue("isAmministratore",false);
-        $session->setValue('isRegistrato',true);
         if (isset($_POST['username']) and isset($_POST['nome']) and isset($_POST['cognome']) and isset($_POST['email']) and isset($_POST['password']) and isset($_POST['data']) and isset($_FILES['file'])){
-            $session->setValue("username",$_POST['username']);
+
             $username = $_POST['username'];
             $nome = $_POST['nome'];
             $cognome = $_POST['cognome'];
@@ -403,6 +401,10 @@ class CUtente
 
                         $pm -> store($utente);
                         $pm -> store($utenteRegistrato);
+                        $session->startSession();
+                        $session->setValue("username",$_POST['username']);
+                        $session->setValue("isAmministratore",false);
+                        $session->setValue('isRegistrato',true);
                         if($pm->existUsername($utente->getUsername())){
                             header('Location: /PolisportivaDDD/Utente/home');
                         }
@@ -555,7 +557,9 @@ class CUtente
     static function isLogged() {
         $identificato = false;
         $session = USession::getInstance();
+        //Se c'è il cookie PHPSESSID
         if ($session->isSessionSet()){
+            //Se la sessione non esiste
             if ($session->isSessionNone()){
                 $session->startSession();
             }
