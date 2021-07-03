@@ -88,16 +88,15 @@ class CAmministratore
                 $mail = new PHPMailer(true);
 
                 try {
-                    $mail->SMTPDebug = 2;
-                    $mail->isSMTP();
-                    $mail->Host = 'outlook.office365.com;';
+                    $mail->SMTPDebug = 3;
+                    $mail->Host = 'smtp.libero.it;';
                     $mail->SMTPAuth = true;
-                    $mail->Username = 'polisportivaddd@outlook.it';
-                    $mail->Password = 'polisportivaUnivaq';
+                    $mail->Username = 'polisportivaddd@libero.it';
+                    $mail->Password = 'Polisportiva1.';
                     $mail->SMTPSecure = 'tls';
                     $mail->Port = 587;
 
-                    $mail->setFrom('polisportivaddd@outlook.it', 'polisportivaddd@outlook.it');
+                    $mail->setFrom('polisportivaddd@libero.it', 'polisportivaddd@libero.it');
 
                     $mail->addAddress($emailUtente);
 
