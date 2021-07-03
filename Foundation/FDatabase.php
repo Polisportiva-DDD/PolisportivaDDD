@@ -87,6 +87,7 @@ class FDatabase
 
     /**
      * Il metodo store3 viene usato per memorizzare i valori sulle tabelle nate dalle associazioni
+     * E' necessario perchè non possiamo prenderci la FClasse visto che non esiste
      * $query sarà la query da eseguire
      * $classe classe da richiamare per eseguire il metodo bindAssociazione
      * $valuesAssociazione un array contenente i dati da memorizzare sul db
@@ -150,6 +151,7 @@ class FDatabase
              $this->db->beginTransaction();
               $stmt=$this->db->prepare($sql);
               $stmt->execute();
+              //Quando faccio update wallet ho 4 query da eseguire in una sola volta, per questo serve closeCursor
               $stmt->closeCursor();
               $this->db->commit();
               $this->closeDbConnection();
@@ -213,6 +215,7 @@ class FDatabase
             $this->db->beginTransaction();
             $stmt=$this->db->prepare($sql);
             $stmt->execute();
+            //Setta la modalità di ritorno per la quale ogni riga come un array associativo dove la chiave è il nome della colonna.
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             while($row=$stmt->fetch()){
                 $rows[]=$row;

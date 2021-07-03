@@ -44,6 +44,8 @@ class FWallet
         $id=$db->store($sql,$wallet);
         if($id!=null){
 
+            //Dal momento che questo metodo viene fatto solo quando un utente si registra dobbiamo anche salvare
+            //Nella tabella campiwallet per i gettoni, e per ogni campowallet anche l'id del wallet
             if(FCampiWallet::store($wallet->getListaCampiWallet(),$id)==true){
                 return $id;
             }

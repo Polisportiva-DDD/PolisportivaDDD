@@ -551,25 +551,25 @@ class CGruppo
                         else{
                             $messaggio = 'Siamo spiacenti, non ha un gettone per questo campo';
                             $session->setValue('messaggioErrore', $messaggio);
-                            header("Location: /PolisportivaDDD/messaggio/genericError");
+                            header("Location: /PolisportivaDDD/Messaggio/genericError");
                         }
                     }
                     else{
                         $messaggio = 'Siamo spiacenti, non soddisfa i requisiti per partecipare al gruppo';
                         $session->setValue('messaggioErrore', $messaggio);
-                        header("Location: /PolisportivaDDD/messaggio/genericError");
+                        header("Location: /PolisportivaDDD/Messaggio/genericError");
                     }
                 }
                 else{
                     $messaggio = 'Siamo spiacenti, il gruppo è già pieno';
                     $session->setValue('messaggioErrore', $messaggio);
-                    header("Location: /PolisportivaDDD/messaggio/genericError");
+                    header("Location: /PolisportivaDDD/Messaggio/genericError");
                 }
             }
             else{
                 $messaggio = 'Siamo spiacenti, è già un partecipante di questo gruppo';
                 $session->setValue('messaggioErrore', $messaggio);
-                header("Location: /PolisportivaDDD/messaggio/genericError");
+                header("Location: /PolisportivaDDD/Messaggio/genericError");
             }
         }else{
             header('Location: /PolisportivaDDD/Utente/home');
