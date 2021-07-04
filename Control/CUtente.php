@@ -361,23 +361,9 @@ class CUtente
             $data=(DateTime::createFromFormat('Y-m-d',$data));
             $nomeFile="file";
             $ris=static::verificaImmagine($nomeFile);
-
-            $eta = ((new DateTime('now'))->diff($data))->y;
-
-            // verifico che tutti i campi siano stati compilati
-            if (!$nome || !$cognome || !$email || !$data || !$username || !$password ){
-                $view->showRegistrazioneError("campi");
-            }
-
-            // verifico che il campo età sia numerico, non sia inferiore di 10 e maggiore di 99
-            elseif ($eta < 10 || $eta > 99) {
-                $view -> showRegistrazioneError("eta");
-            }
-
-            elseif($ris=="size"){
+            if($ris=="size"){
                 $view->showRegistrazioneError("size");
             }
-
             elseif($ris=="type"){
                 $view->showRegistrazioneError("type");
             }
