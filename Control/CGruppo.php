@@ -111,12 +111,14 @@ class CGruppo
                 $date = strtotime($dataScelta);
                 //Metto il timestamp nell'array session
                 $session->setValue('dataScelta', $date);
+                //Ore disponibili per la data scelta
+                $idCampoScelto = $session->readValue('idCampo');
+                $oreDisponibili = self::freeHoursFromDate($dataScelta, $idCampoScelto);
+                $view->showScegliOraPage($dataScelta, $oreDisponibili, $isAmministratore);
             }
-            //Ore disponibili per la data scelta
-            $idCampoScelto = $session->readValue('idCampo');
-            $oreDisponibili = self::freeHoursFromDate($dataScelta, $idCampoScelto);
 
-            $view->showScegliOraPage($dataScelta, $oreDisponibili, $isAmministratore);
+
+
         }else{
             header('Location: /PolisportivaDDD/Utente/Home');
         }
@@ -141,31 +143,32 @@ class CGruppo
             if (isset($_POST['ora'])){
                 $oraScelta = $_POST['ora'];
                 $session->setValue('oraScelta', $oraScelta);
-            }
-            $utenti = $pm->loadList('FUtente');
-            foreach($utenti as $utente){
+                $utenti = $pm->loadList('FUtente');
+                foreach($utenti as $utente){
 
-                if(strcmp($utente->getUsername(), $username)!=0){
-                //Array contentente i dati per la view
-                $u = array();
-                //Username dell'utente
-                $usernameDaInvitare= $utente->getUsername();
-                //Recensioni dell'utente
-                $recensioniUtente = $pm->loadRecensioniUtente($usernameDaInvitare);
-                if(!$recensioniUtente){
-                    $recensioniUtente=array();
-                }
-                //Assegno all'array i dati
-                $u['username']=$usernameDaInvitare;
-                $u['eta']=$utente->getEta();
-                $u['pic64'] = base64_encode($utente->getImmagine());
-                $u['valutazione'] = round($utente->calcolaMediaRecensioni($recensioniUtente));
+                    if(strcmp($utente->getUsername(), $username)!=0){
+                        //Array contentente i dati per la view
+                        $u = array();
+                        //Username dell'utente
+                        $usernameDaInvitare= $utente->getUsername();
+                        //Recensioni dell'utente
+                        $recensioniUtente = $pm->loadRecensioniUtente($usernameDaInvitare);
+                        if(!$recensioniUtente){
+                            $recensioniUtente=array();
+                        }
+                        //Assegno all'array i dati
+                        $u['username']=$usernameDaInvitare;
+                        $u['eta']=$utente->getEta();
+                        $u['pic64'] = base64_encode($utente->getImmagine());
+                        $u['valutazione'] = round($utente->calcolaMediaRecensioni($recensioniUtente));
 
-                //Metto nell'array results per la view l'array appena creato.
-                $results[] = $u;
+                        //Metto nell'array results per la view l'array appena creato.
+                        $results[] = $u;
+                    }
                 }
+                $view->showGruppoListaInvitati($results, $isAmministratore);
             }
-            $view->showGruppoListaInvitati($results, $isAmministratore);
+
         }
         else{
             header('Location: /PolisportivaDDD/Utente/Home');
@@ -192,13 +195,14 @@ class CGruppo
                     $invitati[] = $username;
                 }
                 $session->setValue('invitati', $invitati);
+                $campi = $pm->loadList('FCampo');
+                $nomiCampi=array();
+                foreach($campi as $campo){
+                    $nomiCampi[] = $campo->getNome();
+                }
+                $view->showCreaGruppoDettagliFinali($nomiCampi, $isAmministratore);
             }
-            $campi = $pm->loadList('FCampo');
-            $nomiCampi=array();
-            foreach($campi as $campo){
-                $nomiCampi[] = $campo->getNome();
-            }
-            $view->showCreaGruppoDettagliFinali($nomiCampi, $isAmministratore);
+
         }else{
             header('Location: /PolisportivaDDD/Utente/Home');
         }
