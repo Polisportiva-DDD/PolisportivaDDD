@@ -103,15 +103,8 @@ class CGettoni
                 $numero=$_POST['numero'];
                 $cvc=$_POST['cvc'];
                 $data=new DateTime($_POST['data']);
-
                 //Metti il giorno 1 alla data
                 $data->setDate($data->format('Y'), $data->format('m'), 01);
-
-                // verifico che tutti i campi siano stati compilati
-                if (!$nome || !$cognome || !$numero || !$cvc || !($_POST['data'])){
-                    $view->showAggiungiCarta($isAmministratore,1);
-                }
-
                 if($pm->existCarta($numero,$username)){
                     //Hai già questa carta
                     $view->showAggiungiCarta($isAmministratore,2);

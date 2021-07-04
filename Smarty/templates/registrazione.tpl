@@ -99,14 +99,6 @@
       <div>
         <p class="text-center">Attenzione! La dimensione dell'immagine è troppo grande </p>
       </div>
-    {elseif $error=='eta'}
-      <div>
-        <p class="text-center">Attenzione! Hai inserito un'età errata </p>
-      </div>
-    {elseif $error=='campi'}
-      <div>
-        <p class="text-center">Attenzione! Devi inserire tutti i campi </p>
-      </div>
     {elseif $error=='errorRegistrazione'}
       <div>
         <p class="text-center">Attenzione! Registrazione non andata a buon fine, inserire nuovamente i dati rispettando le specifiche.</p>
