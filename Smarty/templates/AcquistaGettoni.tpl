@@ -13,7 +13,7 @@
 
     <body>
 	<!-- Navigation-->
-	{include file="navbar2.tpl"}
+	{include file="navbarUA.tpl"}
 
 
 

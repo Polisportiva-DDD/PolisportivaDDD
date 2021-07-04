@@ -290,7 +290,6 @@ class CUtente
         $session = USession::getInstance();
         $pm = FPersistentManager::getInstance();
         if(isset($_POST['username']) && isset($_POST['password'])) {
-
             //Se esiste un username con questo username e con questa psw (criptata)
             $esiste = $pm->Login($_POST['username'], md5($_POST['password']));
             if ($esiste==1) {
@@ -362,9 +361,24 @@ class CUtente
             $data=(DateTime::createFromFormat('Y-m-d',$data));
             $nomeFile="file";
             $ris=static::verificaImmagine($nomeFile);
-            if($ris=="size"){
+
+            $eta = ((new DateTime('now'))->diff($data))->y;
+
+            // verifico che tutti i campi siano stati compilati
+            if (!$nome || !$cognome || !$email || !$data || !$username || !$password || !$ris){
+                $view->showRegistrazioneError("campi");
+            }
+
+
+            // verifico che il campo età sia numerico, non sia inferiore di 1 e maggiore di 120
+            elseif ($eta < 1 || $eta > 120) {
+                $view -> showRegistrazioneError("eta");
+            }
+
+            elseif($ris=="size"){
                 $view->showRegistrazioneError("size");
             }
+
             elseif($ris=="type"){
                 $view->showRegistrazioneError("type");
             }
