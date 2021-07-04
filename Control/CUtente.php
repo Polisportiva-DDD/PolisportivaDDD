@@ -468,9 +468,8 @@ class CUtente
      *Funzione che permette di rimuovere il ban ad un utente selezionato sulla pagina "utenti bannati"
      */
     public function rimuoviBan(){
-        $pm = FPersistentManager::getInstance();
         if(isset($_POST['username'])){
-            $pm->updateUtenteRegistrato($_POST['username'],0,"");
+            EAmministratore::sbanna($_POST['username']);
             header('Location: /PolisportivaDDD/Utente/utentiBannati');
         }
 

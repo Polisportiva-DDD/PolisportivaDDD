@@ -49,7 +49,6 @@ class CGruppo
                 $immagine = $campo->getImmagine();
                 $c["idCampo"] = $id;
                 $c["nome"] = $nome;
-                $c["immagine"] = $immagine;
                 $c['pic64'] = $immagine;
                 $results[] = $c;
             }

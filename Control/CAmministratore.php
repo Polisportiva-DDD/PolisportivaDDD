@@ -162,11 +162,10 @@ class CAmministratore
      */
     public function modifica(){
         if(CUtente::isLogged()){
-            $pm = FPersistentManager::getInstance();
             if ($_POST){
                 foreach($_POST as $chiave => $prezzo){
                     if($prezzo>0){
-                        $pm->updateCampo($prezzo,$chiave);
+                        EAmministratore::modificaPrezzo($prezzo,$chiave);
                     }
                 }
                 header('Location: /PolisportivaDDD/Amministratore/modificaPrezzi');
@@ -303,12 +302,11 @@ class CAmministratore
         $session = USession::getInstance();
         $session->startSession();
         if(CUtente::isLogged()){
-            $pm = FPersistentManager::getInstance();
             if ($_POST['motivazione']){
                 $motivazione = $_POST['motivazione'];
                 $utente =unserialize($session->readValue('utente'));
                 $username=$utente->getUsername();
-                $pm->updateUtenteRegistrato($username,true,$motivazione);
+                EAmministratore::banna($username,$motivazione);
                 header('Location: /PolisportivaDDD/Utente/home');
 
             }
