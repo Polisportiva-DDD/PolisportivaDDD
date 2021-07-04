@@ -365,37 +365,12 @@ class CUtente
             $eta = ((new DateTime('now'))->diff($data))->y;
 
             // verifico che tutti i campi siano stati compilati
-            if (!$nome || !$cognome || !$email || !$data || !$username || !$password || !$ris){
+            if (!$nome || !$cognome || !$email || !$data || !$username || !$password ){
                 $view->showRegistrazioneError("campi");
             }
 
-            // verifico che il nome non contenga caratteri nocivi
-            elseif (!preg_match("/^[a-zA-Z' ]{2,25}$/",$nome)) {
-                $view->showRegistrazioneError('errorRegistrazione');
-            }
-
-            // verifico che il cognome non contenga caratteri nocivi
-            elseif (!preg_match("/^[a-zA-Z' ]{2,25}$/",$cognome)) {
-                $view->showRegistrazioneError('errorRegistrazione');
-            }
-
-            // verifico che lo username non contenga caratteri nocivi
-            elseif (!preg_match("/^[a-zA-Z]{1}[A-Za-z0-9_.-]{2,19}$/",$username)) {
-                $view->showRegistrazioneError('errorRegistrazione');
-            }
-
-            // verifico se un indirizzo email è valido
-            elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $view->showRegistrazioneError('errorRegistrazione');
-            }
-
-            // verifico che la password non contenga caratteri nocivi
-            elseif (!preg_match("/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/",$password)) {
-                $view->showRegistrazioneError('errorRegistrazione');
-            }
-
-            // verifico che il campo età sia numerico, non sia inferiore di 1 e maggiore di 120
-            elseif ($eta < 1 || $eta > 120) {
+            // verifico che il campo età sia numerico, non sia inferiore di 10 e maggiore di 99
+            elseif ($eta < 10 || $eta > 99) {
                 $view -> showRegistrazioneError("eta");
             }
 
