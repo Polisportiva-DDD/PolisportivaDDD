@@ -312,7 +312,7 @@ class CGruppo
             $mail->isHTML(true);
             $mail->Subject = 'Invito a gruppo PolisportivaDDD!';
             $mail->Body = "Ciao! l'utente $mittente ti ha invitato a partecipare al suo gruppo, clicca
-                            <a href='http://".$_SERVER["SERVER_NAME"]."PolisportivaDDD/Gruppo/Gruppi/$idGruppo'>QUI</a>
+                            <a href='http://".$_SERVER["SERVER_NAME"]."/PolisportivaDDD/Gruppo/Gruppi/$idGruppo'>QUI</a>
                             per avere ulteriori informazioni e partecipare!";
             $mail->AltBody = "Ciao! l'utente $mittente ti ha invitato a partecipare al suo gruppo, clicca su
             http://".$_SERVER["SERVER_NAME"]."localhost/PolisportivaDDD/Gruppo/Gruppi/$idGruppo

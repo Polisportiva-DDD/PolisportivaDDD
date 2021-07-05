@@ -105,20 +105,24 @@ class CGettoni
                 $data=new DateTime($_POST['data']);
                 //Metti il giorno 1 alla data
                 $data->setDate($data->format('Y'), $data->format('m'), 01);
+                //Se la carta esiste già ed è già assegnata all'utente che la sta inserendo
                 if($pm->existCarta($numero,$username)){
                     //Hai già questa carta
                     $view->showAggiungiCarta($isAmministratore,2);
                 }
                 else{
+                    //Prova a caricare la carta dal db
                     $c=$pm->load($numero,"FCartaDiCredito");
                     $carta=new ECartadiCredito($numero,$nome,$cognome,$cvc,$data);
-
+                    //Se la carta non è null allora confrontala con la carta appena creata, se sono diverse significa che
+                    //hai provato a inserire una carta con lo stesso numero ma dati diversi, dà errore
                     if($c!=null and !empty($c)){
                         if($c!=$carta){
 
                             $view->showAggiungiCarta($isAmministratore,1);
 
                         }
+                        //Se le carte sono uguali salva solo su possessocarta
                         else{
                             $pm->store2($carta,$username);
                             if ($acqGettoni == 1) {
@@ -128,6 +132,7 @@ class CGettoni
                             }
                         }
                     }
+                    //Se è null allora salva la carta E possessocarta
                     else{
                         $pm->store2($carta,$username);
                         if ($acqGettoni == 1) {

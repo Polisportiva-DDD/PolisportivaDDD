@@ -104,8 +104,8 @@ class CAmministratore
 
                     $mail->isHTML(true);
                     $mail->Subject = 'Risposta segnalazione PolisportivaDDD';
-                    $mail->Body = "Ciao, la risposta alla tua segnalazione con oggetto: $oggetto è la seguente: $risposta";
-                    $mail->AltBody = "Ciao, la risposta alla tua segnalazione con oggetto: $oggetto è la seguente: $risposta";
+                    $mail->Body = "Ciao, la risposta alla tua segnalazione con oggetto: $oggetto e' la seguente: $risposta";
+                    $mail->AltBody = "Ciao, la risposta alla tua segnalazione con oggetto: $oggetto e' la seguente: $risposta";
 
                     $session->deleteValue('emailUtenteSegnalazione');
                     $session->deleteValue('oggettoSegnalazione');
