@@ -1,28 +1,28 @@
 <?php
-/* Smarty version 3.1.39, created on 2021-07-04 13:18:40
+/* Smarty version 3.1.39, created on 2021-07-04 20:40:09
   from 'C:\xampp\htdocs\PolisportivaDDD\Smarty\templates\AcquistaGettoni.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.39',
-  'unifunc' => 'content_60e19910af7141_18538516',
+  'unifunc' => 'content_60e20089dbbc82_98358662',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '55e0191c61836d7ed557adbce2b180a01fd681c0' => 
     array (
       0 => 'C:\\xampp\\htdocs\\PolisportivaDDD\\Smarty\\templates\\AcquistaGettoni.tpl',
-      1 => 1625397518,
+      1 => 1625423866,
       2 => 'file',
     ),
   ),
   'includes' => 
   array (
-    'file:navbarUA.tpl' => 1,
+    'file:navBarUA.tpl' => 1,
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_60e19910af7141_18538516 (Smarty_Internal_Template $_smarty_tpl) {
+function content_60e20089dbbc82_98358662 (Smarty_Internal_Template $_smarty_tpl) {
 ?><html lang="it">
     <head>
         <meta charset="utf-8" />
@@ -42,7 +42,7 @@ function content_60e19910af7141_18538516 (Smarty_Internal_Template $_smarty_tpl)
 
     <body>
 	<!-- Navigation-->
-	<?php $_smarty_tpl->_subTemplateRender("file:navbarUA.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+	<?php $_smarty_tpl->_subTemplateRender("file:navBarUA.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
 
