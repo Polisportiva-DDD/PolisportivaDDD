@@ -368,11 +368,15 @@ class CUtente
                 $view->showRegistrazioneError("type");
             }
             else{
-
+                //Prendo il path dall'array superglobale dei file
                 $path = $_FILES[$nomeFile]['tmp_name'];
+                //Apro il file il lettura binaria (rb), altrimenti fermati
                 $file=fopen($path,'rb') or die ("Attenzione! Impossibile da aprire!");
+                //leggi il file
                 $immagine=fread($file,filesize($path));
+                //togli il file dalla ram
                 unset($file);
+                //Cancella il nome del file
                 unlink($path);
 
                 $verUsername = $pm->existUsername($username);
