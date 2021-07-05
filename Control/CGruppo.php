@@ -189,11 +189,12 @@ class CGruppo
             $pm = FPersistentManager::getInstance();
             $view = new VGruppo();
             $isAmministratore = $session->readValue('isAmministratore');
-            if ($_POST){
-                $invitati = array();
-                foreach($_POST as $username){
+            $invitati = array();
+            if ($_POST) {
+                foreach ($_POST as $username) {
                     $invitati[] = $username;
                 }
+            }
                 $session->setValue('invitati', $invitati);
                 $campi = $pm->loadList('FCampo');
                 $nomiCampi=array();
@@ -202,8 +203,7 @@ class CGruppo
                 }
                 $view->showCreaGruppoDettagliFinali($nomiCampi, $isAmministratore);
             }
-
-        }else{
+        else{
             header('Location: /PolisportivaDDD/Utente/Home');
         }
 
