@@ -90,14 +90,14 @@ class CAmministratore
                 try {
                     $mail->SMTPDebug = 3;
                     $mail->isSMTP();
-                    $mail->Host = 'smtp.libero.it;';
+                    $mail->Host = 'outlook.office365.com';
                     $mail->SMTPAuth = true;
-                    $mail->Username = 'polisportivaddd@libero.it';
-                    $mail->Password = 'Polisportiva1.';
+                    $mail->Username = 'polisportivaddd@outlook.it';
+                    $mail->Password = 'polisportivaUnivaq';
                     $mail->SMTPSecure = 'tls';
                     $mail->Port = 587;
 
-                    $mail->setFrom('polisportivaddd@libero.it', 'polisportivaddd@libero.it');
+                    $mail->setFrom('polisportivaddd@outlook.it', 'polisportivaddd@outlook.it');
 
                     $mail->addAddress($emailUtente);
 
